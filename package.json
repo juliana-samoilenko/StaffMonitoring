@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
   "dependencies": {
     "http-server": "^0.12.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }
