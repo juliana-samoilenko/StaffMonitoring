@@ -96,7 +96,32 @@ html {
       padding-left: 85px;
     }
 
-    
+    .list_body {
+      @include flex-row;
+      justify-content: flex-start;
+      .workers {
+        height: 220px;
+        overflow-y: auto;
+        .worker {
+          padding-left: 40px;
+          padding-bottom: 30px;
+        }
+        .btn-open-edit {
+          @include button-reset;
+          width: 15px;
+          height: 15px;
+          margin: 0px 20px;
+          background-image: url(./img/pencil.svg);
+        }
+        .btn-open-edit:hover {
+          background-image: url(./img/pencil-hover.svg);
+        }
+        .btn-open-edit:active {
+          background-image: url(./img/pencil-active.svg);
+        }
+      }
+      
+    }
   }
 }
 
