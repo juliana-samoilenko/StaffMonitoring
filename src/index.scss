@@ -63,16 +63,41 @@ html {
   }
 
   .employees {
-    display: flex;
-    flex-direction: column;
+    @include flex-col;
   }
 }
 
 .employees {
   .list {
     background-color: #ddd;
-    border: 1px solid rgb(173, 173, 173);
+    border: 1px solid #a7a7a7;
     width: 300px;
     height: 300px;
+    .list_header {
+      @include flex-row;
+      margin-bottom: 15px;
+      justify-content: space-between;
+      align-items: center;
+      .btn-close-list {
+        @include button-reset;
+        width: 25px;
+        height: 25px;
+      }
+      .btn-close-list:hover {
+        background-color: #fa5543;
+      }
+      .btn-close-list:active {
+        color: #ffffff;
+      }
+    }
+    
+    .list_header h2 {
+      padding-top: 5px;
+      padding-left: 85px;
+    }
+
+    
   }
 }
+
+
