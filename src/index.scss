@@ -23,9 +23,22 @@ html, body {
   }
 
   .btn-open-list {
-    font-size: 20px;
-    width: 40px;
-    height: 40px;
+    @include button-reset;
+    background-color: #ddd;
+    background-image: url(/img/worker.svg);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    border-radius: 1px 5px 5px 1px;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+  }
+  .btn-open-list:hover {
+    background-color: rgb(238, 238, 238);
+  }
+  .btn-open-list:active {
+    background-image: url(/img/worker-active.svg);
   }
 }
 
