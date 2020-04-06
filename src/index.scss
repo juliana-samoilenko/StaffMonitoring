@@ -3,12 +3,12 @@ html, body {
   padding: 0;
 }
 
-.btn-reset {
+@mixin button-reset {
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 1px 5px 5px 1px;
-  background-color: #ddd;
+  outline: none;
+  cursor: pointer;
 }
 
 .workplace {
