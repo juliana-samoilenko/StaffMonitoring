@@ -111,11 +111,11 @@ html {
         height: 200px;
         overflow-y: auto;
         .worker {
-          padding-left: 50px;
+          padding-left: 40px;
           
           .row-alone-employ {
             @include flex-row;
-            width: 200px;
+            width: 220px;
             justify-content: space-between;
           }
         }
