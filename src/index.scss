@@ -75,7 +75,7 @@ html {
     height: 300px;
     .list_header {
       @include flex-row;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       justify-content: space-between;
       align-items: center;
       .btn-close-list {
@@ -98,13 +98,14 @@ html {
 
     .list_body {
       @include flex-row;
+      margin-bottom: 15px;
       justify-content: flex-start;
       .workers {
-        height: 220px;
+        height: 200px;
         overflow-y: auto;
         .worker {
           padding-left: 40px;
-          padding-bottom: 30px;
+          padding-bottom: 20px;
         }
         .btn-open-edit {
           @include button-reset;
