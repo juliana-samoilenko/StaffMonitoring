@@ -120,8 +120,27 @@ html {
           background-image: url(./img/pencil-active.svg);
         }
       }
-      
     }
+    .list_footer{
+      @include flex-row;
+      justify-content: center;
+      .btn-open-add {
+        @include button-reset;
+        width: 25px;
+        height: 25px;
+        background-image: url(./img/plus-hover.svg);
+        border-radius: 50%;
+      }
+      .btn-open-add:hover {
+        transform: rotate(90deg);
+        transition: 1s;
+        box-shadow: 0 0 0 2px white, 0 0 0 4px #3A2F28;
+      }
+      .btn-open-add:active {
+        box-shadow: none;
+      }
+    }
+    
   }
 }
 
