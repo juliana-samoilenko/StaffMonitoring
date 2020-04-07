@@ -104,12 +104,15 @@ html {
       @include flex-row;
       margin-bottom: 15px;
       justify-content: flex-start;
+      .workers > .worker:not(:nth-last-child(-1n+1)) {
+        padding-bottom: 20px;
+      }
       .workers {
         height: 200px;
         overflow-y: auto;
         .worker {
           padding-left: 50px;
-          padding-bottom: 20px;
+          
           .row-alone-employ {
             @include flex-row;
             width: 200px;
