@@ -3,6 +3,14 @@ html, body {
   padding: 0;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
 @mixin button-reset {
   margin: 0;
   padding: 0;
