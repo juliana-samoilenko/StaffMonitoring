@@ -25,7 +25,7 @@ html, body {
   .btn-open-list {
     @include button-reset;
     background-color: #ddd;
-    background-image: url(/img/worker.svg);
+    background-image: url(/img/worker.min.svg);
     background-position: center;
     background-size: 80%;
     background-repeat: no-repeat;
