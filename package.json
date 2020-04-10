@@ -18,10 +18,10 @@
     "url": "https://github.com/Lyashka/StaffMonitoring/issues"
   },
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
-  "dependencies": {
-    "http-server": "^0.12.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-imagemin": "^4.0.1",
+    "sass": "^1.26.3"
   }
 }
