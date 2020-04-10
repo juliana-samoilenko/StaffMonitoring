@@ -50,10 +50,18 @@ html {
   &:active {
     background-image: url(/img/worker-active.min.svg);
   }
+
+  .employees {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-
-
-
-
-
+.employees {
+  .list {
+    background-color: #ddd;
+    border: 1px solid rgb(173, 173, 173);
+    width: 300px;
+    height: 300px;
+  }
+}
