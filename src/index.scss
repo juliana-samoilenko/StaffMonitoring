@@ -123,7 +123,7 @@ html {
   padding-left: 40px;
 }
 
-.row-alone-employ {
+.row-alone-employee {
   @include flex-row;
   width: 220px;
   justify-content: space-between;
@@ -162,7 +162,7 @@ html {
   transition: 1s;
   box-shadow: 0 0 0 2px white, 0 0 0 4px #3A2F28;
   }
-  
+
   &:active {
   box-shadow: none;
   }
