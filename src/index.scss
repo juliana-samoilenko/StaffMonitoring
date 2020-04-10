@@ -16,14 +16,24 @@ html {
   margin: 0;
   padding: 0;
   border: none;
+  background-color: transparent;
   outline: none;
   cursor: pointer;
 }
 
-.workplace {
-  margin: 10px;
+@mixin flex-row {
   display: flex;
   flex-direction: row;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.workplace {
+  @include flex-row;
+  margin: 10px;
 }
 
 .plan {
