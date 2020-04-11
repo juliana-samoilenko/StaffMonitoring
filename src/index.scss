@@ -176,3 +176,10 @@ html {
   width: 300px;
   height: 300px;
 }
+
+.add-employee_header {
+  @include flex-row;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  align-items: center;
+}
