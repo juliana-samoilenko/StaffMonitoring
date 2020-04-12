@@ -90,6 +90,45 @@
         <div class="add-employee_header">
           <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
         </div>
+
+        <div class="add-employee_body">
+          <form action="" method="GET">
+
+            <div class="form_name">
+              <label>ФИО:
+                <input type="text" placeholder="Иванов И.И." autofocus>
+              </label>
+            </div>
+
+            <div class="form_position">
+              <label>Должность:
+                <input type="text" placeholder="Техник">
+              </label>
+            </div>
+
+            <div class="form_track">
+              <label>Путь:
+                <select name="track">
+                  <option>Выберите путь работника</option>
+                  <option value="1">1</option> 
+                  <option value="2">2</option> 
+                  <option value="3">3</option> 
+                </select> 
+              </label>
+            </div>
+
+            <div class="form_zone">
+              <p>Доступные зоны:</p>
+                <input type="checkbox" name="zone1">Цех 1<Br>
+                <input type="checkbox" name="zone2">Высотные работы<Br> 
+                <input type="checkbox" name="zone3">Цех 2<Br> 
+            </div>
+          </form>
+        </div>
+
+        <div class="add-employee_footer">
+          <button type="button" class="btn-add-employee" title="Добавить работника"> Добавить работника</button>
+        </div>
       </div>
     </div>
     </div>
