@@ -183,3 +183,9 @@ html {
   margin-bottom: 20px;
   align-items: center;
 }
+
+.add-employee_body {
+  @include flex-row;
+  margin-bottom: 15px;
+  justify-content: flex-start;
+}
