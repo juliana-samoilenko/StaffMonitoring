@@ -180,12 +180,29 @@ html {
 .add-employee_header {
   @include flex-row;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
 .add-employee_body {
-  @include flex-row;
+  @include flex-col;
+  height: 200px;
   margin-bottom: 15px;
   justify-content: flex-start;
+  align-items: center;
+}
+
+.form_name, .form_position, .form_track, .form-zone {
+  @include flex-row;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.field-input-data {
+  width: 150px;
+}
+
+.form_zone {
+  height: 60px;
+  overflow-y: auto;
 }
