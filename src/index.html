@@ -95,40 +95,38 @@
           <form action="" method="GET">
 
             <div class="form_name">
-              <label>ФИО:
-                <input type="text" placeholder="Иванов И.И." autofocus>
-              </label>
+              <p>ФИО:</p>
+              <input type="text" placeholder="Иванов И.И." class="field-input-data" autofocus>
             </div>
 
             <div class="form_position">
-              <label>Должность:
-                <input type="text" placeholder="Техник">
-              </label>
+              <p>Должность:</p>
+                <input type="text" placeholder="Техник" class="field-input-data">
             </div>
 
             <div class="form_track">
-              <label>Путь:
-                <select name="track">
-                  <option>Выберите путь работника</option>
-                  <option value="1">1</option> 
-                  <option value="2">2</option> 
-                  <option value="3">3</option> 
-                </select> 
-              </label>
+              <p>Путь:</p>
+              <select name="track" class="field-input-data">
+                <option >Выберите путь</option>
+                <option value="1">1</option> 
+                <option value="2">2</option> 
+                <option value="3">3</option> 
+              </select>
             </div>
 
+            <p>Доступные зоны:</p>
             <div class="form_zone">
-              <p>Доступные зоны:</p>
-                <input type="checkbox" name="zone1">Цех 1<Br>
-                <input type="checkbox" name="zone2">Высотные работы<Br> 
-                <input type="checkbox" name="zone3">Цех 2<Br> 
+                <p><input type="checkbox" name="zone1">Цех 1</p>
+                <p><input type="checkbox" name="zone2">Высотные работы</p> 
+                <p><input type="checkbox" name="zone3">Цех 2</p>
             </div>
-          </form>
+          
         </div>
 
         <div class="add-employee_footer">
           <button type="button" class="btn-add-employee" title="Добавить работника"> Добавить работника</button>
         </div>
+      </form>
       </div>
     </div>
     </div>
