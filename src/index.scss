@@ -192,6 +192,10 @@ html {
   align-items: center;
 }
 
+.form-style {
+  width: 250px;
+}
+
 .form_name, .form_position, .form_track, .form-zone {
   @include flex-row;
   justify-content: space-between;
