@@ -86,8 +86,51 @@
           <button type="button" class="btn-open-add" title="Добавить работника"></button>
         </div>
       </div>
+
+      <div class="add-employee">
+
+        <div class="add-employee_header">
+          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
+        </div>
+
+        <div class="add-employee_body">
+          <form action="" method="GET" class="form-style">
+
+            <div class="form_name">
+              <p>ФИО:</p>
+              <input type="text" placeholder="Иванов И.И." class="field-input-data" autofocus required>
+            </div>
+
+            <div class="form_position">
+              <p>Должность:</p>
+              <input type="text" placeholder="Техник" class="field-input-data" required>
+            </div>
+
+            <div class="form_track">
+              <p>Путь:</p>
+              <select name="track" class="field-input-data" required>
+                <option>Выберите путь</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+
+            <p>Доступные зоны:</p>
+            <div class="form_zone">
+              <p><input type="checkbox" name="zone1">Цех 1</p>
+              <p><input type="checkbox" name="zone2">Высотные работы</p>
+              <p><input type="checkbox" name="zone3">Цех 2</p>
+              <!--<p><input type="checkbox" name="zone3">Цех 5</p>-->
+            </div>
+        </div>
+
+        <div class="add-employee_footer">
+          <button type="button" class="btn-add-employee" title="Добавить работника">Добавить работника</button>
+        </div>
+        </form>
+      </div>
     </div>
-  </div>
   </div>
 </body>
 
