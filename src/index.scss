@@ -134,14 +134,14 @@ html {
   width: 15px;
   height: 15px;
   margin-right: 20px;
-  background-image: url(./img/pencil.svg);
+  background-image: url(./img/pencil.min.svg);
 
   &:hover {
-  background-image: url(./img/pencil-hover.svg);
+  background-image: url(./img/pencil-hover.min.svg);
   }
 
   &:active {
-  background-image: url(./img/pencil-active.svg);
+  background-image: url(./img/pencil-active.min.svg);
   }
 }
 
@@ -154,7 +154,7 @@ html {
   @include button-reset;
   width: 25px;
   height: 25px;
-  background-image: url(./img/plus-hover.svg);
+  background-image: url(./img/plus.min.svg);
   border-radius: 50%;
 
   &:hover {
