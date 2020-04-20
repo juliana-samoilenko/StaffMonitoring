@@ -35,6 +35,12 @@ html {
   flex-direction: column;
 }
 
+@mixin form-element {
+  @include flex-row;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
 .workplace {
   @include flex-row;
   margin: 10px;
@@ -196,10 +202,8 @@ html {
   width: 250px;
 }
 
-.form_name, .form_position, .form_track, .form-zone {
-  @include flex-row;
-  justify-content: space-between;
-  padding-bottom: 20px;
+.form_name, .form_position, .form_track {
+  @include form-element;
 }
 
 .field-input-data {
@@ -207,6 +211,7 @@ html {
 }
 
 .form_zone {
+  @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
