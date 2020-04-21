@@ -112,7 +112,7 @@ html {
 
 .list_body {
   @include flex-row;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   justify-content: flex-start;
 }
 
@@ -198,6 +198,28 @@ html {
   align-items: center;
 }
 
+.edit-employee {
+  background-color: #ddd;
+  border-right: 1px solid #a7a7a7;
+  border-bottom: 1px solid #a7a7a7;
+  border-left: 1px solid #a7a7a7;;
+  width: 300px;
+  height: 300px;
+}
+
+.edit-employee_header {
+  @include flex-row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.edit-employee_body {
+  @include flex-col;
+  height: 180px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .form-style {
   width: 250px;
 }
@@ -206,11 +228,28 @@ html {
   @include form-element;
 }
 
+.form_name_edit, .form_position_edit, .form_track_edit {
+  @include flex-row;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
 .field-input-data {
   width: 150px;
 }
 
+.field-input-data-edit {
+  width: 150px;
+  height: 20px;
+}
+
 .form_zone {
+  @include flex-col;
+  height: 60px;
+  overflow-y: auto;
+}
+
+.form_zone_edit {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
@@ -238,5 +277,73 @@ html {
   &:active {
     color: #000;
     box-shadow: 0px -3px 0 #000 inset;
+  }
+}
+
+.edit-employee_footer {
+  @include flex-col;
+  margin-left: 50px;
+  width: 200px;
+  justify-content: center;
+}
+
+.group-edit-btn {
+  @include flex-row;
+  justify-content: space-around;
+  height: 30px;
+}
+
+.question-style {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.btn-rm-yes {
+  @include button-reset;
+  padding: 5px;
+  box-shadow: 0px -30px 0 #00881d80 inset;
+
+  &:hover {
+    box-shadow: 0px -30px 0 #00881d inset;
+  }
+  &:active {
+    color: #fff;
+  }
+}
+
+.btn-rm-no {
+  @include button-reset;
+  padding: 5px;
+  box-shadow: 0px -30px 0 #fa3b2680 inset;
+
+  &:hover {
+    box-shadow: 0px -30px 0 #fa3b26 inset;
+  }
+  &:active {
+    color: #fff;
+  }
+}
+
+.btn-save-change {
+  @include button-reset;
+  height: 30px;
+  margin-bottom: 5px;
+  &:hover {
+    background-color: #41ae55;
+  }
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.btn-rm-emp {
+  @include button-reset;
+  height: 30px;
+
+  &:hover {
+    background-color: #fa5543;
+  }
+  &:active {
+    color: #ffffff;
   }
 }
