@@ -256,7 +256,7 @@ html {
   align-items: center;
 }
 
-.edit-employee {
+.panel-edit-employee {
   background-color: #ddd;
   border-right: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
@@ -265,20 +265,20 @@ html {
   height: 300px;
 }
 
-.edit-employee_header {
+.panel-edit-employee__header {
   @include flex-row;
   justify-content: flex-end;
   align-items: center;
 }
 
-.edit-employee_body {
+.panel-edit-employee__body {
   @include flex-col;
   height: 180px;
   justify-content: flex-start;
   align-items: center;
 }
 
-.panel-add-employee__form {
+.panel-add-employee__form, .panel-edit-employee__form {
   width: 250px;
 }
 
@@ -286,17 +286,19 @@ html {
   @include form-element;
 }
 
-.form_name_edit, .form_position_edit, .form_track_edit {
+.form-edit__name, .form-edit__position, .form-edit__track {
   @include flex-row;
   justify-content: space-between;
   padding-bottom: 10px;
 }
 
-.add-container-name__input, .add-container-position__input, .add-container-track__input {
+.add-container-name__input, .add-container-position__input, 
+.add-container-track__select {
   width: 150px;
 }
 
-.field-input-data-edit {
+.edit-container-name__input, .edit-container-position__input, 
+.edit-container-track__select {
   width: 150px;
   height: 20px;
 }
@@ -307,7 +309,7 @@ html {
   overflow-y: auto;
 }
 
-.form_zone_edit {
+.form-edit__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
@@ -338,20 +340,20 @@ html {
   }
 }
 
-.edit-employee_footer {
+.panel-edit-employee__footer {
   @include flex-col;
   margin-left: 50px;
   width: 200px;
   justify-content: center;
 }
 
-.group-edit-btn {
+.edit-footer__group-edit-btn {
   @include flex-row;
   justify-content: space-around;
   height: 30px;
 }
 
-.question-style {
+.edit-footer__question {
   margin-bottom: 10px;
   text-align: center;
 }
