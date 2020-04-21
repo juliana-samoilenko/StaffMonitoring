@@ -34,7 +34,7 @@
 
           <div class="panel-employees__header list-header">
             <h2 class="panel-header__text">Список сотрудников</h2>
-            <button class="panel-header__btn-close" type="button" title="Закрыть">&#10006;</button>
+            <button class="btn-close" type="button" title="Закрыть">&#10006;</button>
           </div>
 
           <div class="panel-employees__body list-employees">
@@ -72,28 +72,28 @@
           </div>
         </div>
 
-        <!--<div class="add-employee">
+        <div class="panel-add-employee">
 
-        <div class="add-employee_header">
-          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
+        <div class="panel-add-employee__header">
+          <button class="btn-close" type="button" title="Закрыть">&#10006;</button>
         </div>
 
-        <div class="add-employee_body">
-          <form action="" name="add-emp" method="GET" class="form-style">
+        <div class="panel-add-employee__body">
+          <form class="panel-add-employee__form form-add" action="" name="add-emp" method="GET">
 
-            <div class="form_name">
-              <label for="add-name">ФИО:</label>
-              <input type="text" id="add-name" placeholder="Иванов И.И." class="field-input-data" autofocus required>
+            <div class="form-add__name add-container-name">
+              <label class="add-container-name__label" for="add-name">ФИО:</label>
+              <input class="add-container-name__input" type="text" id="add-name" placeholder="Иванов И.И." autofocus required>
             </div>
 
-            <div class="form_position">
-              <label for="add-position">Должность:</label>
-              <input type="text" id="add-position" placeholder="Техник" class="field-input-data" required>
+            <div class="form-add__position add-container-position">
+              <label class="add-container-position__label" for="add-position">Должность:</label>
+              <input class="add-container-position__input" type="text" id="add-position" placeholder="Техник"  required>
             </div>
 
-            <div class="form_track">
-              <label for="add-track">Путь:</label>
-              <select id="add-track" class="field-input-data" required>
+            <div class="form-add__track add-container-track">
+              <label class="add-container-track__label" for="add-track">Путь:</label>
+              <select class="add-container-track__input" id="add-track"  required>
                 <option>Выберите путь</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -102,8 +102,8 @@
             </div>
 
             <label>Доступные зоны:</label>
-            <div class="form_zone">
-              <div class="building-zone">
+            <div class="form-add__zone">
+              <div class="zone-container">
                 <input type="checkbox" id="zone1">
                 <label for="zone1">Цех 1</label>
               </div>
@@ -125,14 +125,14 @@
             </div>
         </div>
 
-        <div class="add-employee_footer">
-          <button type="button" class="btn-add-employee" title="Добавить работника">Добавить работника</button>
+        <div class="panel-add-employee__footer add-footer">
+          <button type="button" class="add-footer__btn-add-employee" title="Добавить работника">Добавить работника</button>
         </div>
         </form>
       </div>
     </section>
 
-      <div class="edit-employee">
+      <!--<div class="edit-employee">
 
         <div class="edit-employee_header">
           <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>

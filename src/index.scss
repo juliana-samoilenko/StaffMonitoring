@@ -154,7 +154,7 @@ html {
   font-weight: 700;
 }
 
-.panel-header__btn-close {
+.btn-close {
   @include button-reset;
   width: 25px;
   height: 25px;
@@ -232,7 +232,7 @@ html {
   }
 }
 
-.add-employee {
+.panel-add-employee {
   background-color: #ddd;
   border-right: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
@@ -241,14 +241,14 @@ html {
   height: 300px;
 }
 
-.add-employee_header {
+.panel-add-employee__header {
   @include flex-row;
   justify-content: flex-end;
   margin-bottom: 10px;
   align-items: center;
 }
 
-.add-employee_body {
+.panel-add-employee__body {
   @include flex-col;
   height: 200px;
   margin-bottom: 15px;
@@ -278,11 +278,11 @@ html {
   align-items: center;
 }
 
-.form-style {
+.panel-add-employee__form {
   width: 250px;
 }
 
-.form_name, .form_position, .form_track {
+.form-add__name, .form-add__position, .form-add__track {
   @include form-element;
 }
 
@@ -292,7 +292,7 @@ html {
   padding-bottom: 10px;
 }
 
-.field-input-data {
+.add-container-name__input, .add-container-position__input, .add-container-track__input {
   width: 150px;
 }
 
@@ -301,7 +301,7 @@ html {
   height: 20px;
 }
 
-.form_zone {
+.form-add__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
@@ -313,14 +313,14 @@ html {
   overflow-y: auto;
 }
 
-.add-employee_footer {
+.panel-add-employee__footer {
   @include flex-row;
   height: 30px;
   justify-content: center;
   align-items: center;
 }
 
-.btn-add-employee {
+.add-footer__btn-add-employee {
   @include button-reset;
   height: 30px;
   color: #000;
