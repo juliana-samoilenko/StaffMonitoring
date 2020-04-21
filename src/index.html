@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
   <script type="text/javascript" src="/app.js"></script>
 </head>
+
 <body>
   <div class="workplace">
     <div class="plan"></div>
@@ -84,8 +86,68 @@
           <button type="button" class="btn-open-add" title="Добавить работника"></button>
         </div>
       </div>
+
+      <div class="add-employee">
+
+        <div class="add-employee_header">
+          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
+        </div>
+
+        <div class="add-employee_body">
+          <form action="" name="add-emp" method="GET" class="form-style">
+
+            <div class="form_name">
+              <label for="add-name">ФИО:</label>
+              <input type="text" id="add-name" placeholder="Иванов И.И." class="field-input-data" autofocus required>
+            </div>
+
+            <div class="form_position">
+              <label for="add-position">Должность:</label>
+              <input type="text" id="add-position" placeholder="Техник" class="field-input-data" required>
+            </div>
+
+            <div class="form_track">
+              <label for="add-track">Путь:</label>
+              <select id="add-track" class="field-input-data" required>
+                <option>Выберите путь</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+
+            <label>Доступные зоны:</label>
+            <div class="form_zone">
+              <div class="building-zone">
+                <input type="checkbox" id="zone1">
+                <label for="zone1">Цех 1</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="zone2">
+                <label for="zone2">Высотные работы</label>
+              </div>
+              
+              <div>
+                <input type="checkbox" id="zone3">
+                <label for="zone3">Цех 2</label>
+              </div>
+
+              <!--<div>
+                <input type="checkbox" id="zone4">
+                <label for="zone4">Цех 3</label>
+              </div>-->
+            </div>
+        </div>
+
+        <div class="add-employee_footer">
+          <button type="button" class="btn-add-employee" title="Добавить работника">Добавить работника</button>
+        </div>
+        </form>
+      </div>
     </section>
     </div>
   </div>
 </body>
+
 </html>
