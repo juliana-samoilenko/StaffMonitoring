@@ -12,10 +12,6 @@ html {
   box-sizing: inherit;
 }
 
-.bolder-text {
-  font-weight: 700;
-}
-
 @mixin button-reset {
   margin: 0;
   padding: 0;
@@ -132,32 +128,33 @@ html {
   &:active {
     background-image: url(/img/worker-active.min.svg);
   }
-
-  .employees {
-    @include flex-col;
-  }
 }
 
-.list {
+.employee-information-panel {
+  @include flex-col;
+}
+
+.panel-employees {
   background-color: #ddd;
   border: 1px solid #a7a7a7;
   width: 300px;
   height: 300px;
 }
 
-.list_header {
+.panel-employees__header {
   @include flex-row;
   margin-bottom: 20px;
   justify-content: space-between;
   align-items: center;
 }
 
-.list_header h2 {
+.panel-header__text {
   padding-top: 5px;
   padding-left: 85px;
+  font-weight: 700;
 }
 
-.btn-close-list {
+.panel-header__btn-close {
   @include button-reset;
   width: 25px;
   height: 25px;
@@ -171,32 +168,32 @@ html {
   }
 }
 
-.list_body {
+.panel-employees__body {
   @include flex-row;
   margin-bottom: 10px;
   justify-content: flex-start;
 }
 
-.workers > .worker:not(:nth-last-child(-1n+1)) {
+.list-employees__container > .employee:not(:nth-last-child(-1n+1)) {
   padding-bottom: 20px;
 }
 
-.workers {
+.list-employees__container {
   height: 205px;
   overflow-y: auto;
 }
 
-.worker {
+.employee {
   padding-left: 40px;
 }
 
-.row-alone-employee {
+.employee__container {
   @include flex-row;
   width: 220px;
   justify-content: space-between;
 }
 
-.btn-open-edit {
+.employee__btn-open-edit {
   @include button-reset;
   width: 15px;
   height: 15px;
@@ -212,12 +209,12 @@ html {
   }
 }
 
-.list_footer {
+.panel-employees__footer {
   @include flex-row;
   justify-content: center;
 }
 
-.btn-open-add {
+.list-footer__btn-open-add {
   @include button-reset;
   width: 25px;
   height: 25px;
