@@ -41,12 +41,15 @@ html {
   padding-bottom: 20px;
 }
 
-.workplace {
-  @include flex-row;
-  margin: 10px;
+.container {
+  margin: 12px 10px;
 }
 
-.plan {
+.work-display {
+  @include flex-row;
+}
+
+.work-display__plan {
   @include flex-row;
   padding: 20px 0px 0px 0px;
   justify-content: center;
@@ -70,7 +73,7 @@ html {
   height: 80px;
 }
 
-.notification_header {
+.notification__header {
   @include flex-row;
   padding: 5px 10px;
   justify-content: space-between;
@@ -80,12 +83,12 @@ html {
   border-top-right-radius: 3px;
 }
 
-.img-notification {
+.header-notification__img {
   height: 20px;
   width: 20px;
 }
 
-.btn-close-notification {
+.header-notification__btn-close {
   @include button-reset;
   color: #a0a0a0d2;
 
@@ -98,7 +101,7 @@ html {
   }
 }
 
-.notification_body {
+.notification__text {
   @include flex-row;
   height: 50px;
   padding: 5px;
@@ -110,7 +113,7 @@ html {
   border-bottom-right-radius: 3px;
 }
 
-.btn-open-list {
+.work-display__btn-open-list {
   @include button-reset;
   background-color: #ddd;
   background-image: url(/img/worker.min.svg);
@@ -243,7 +246,7 @@ html {
 
 .add-employee_header {
   @include flex-row;
-  justify-cogntent: flex-end;
+  justify-content: flex-end;
   margin-bottom: 10px;
   align-items: center;
 }

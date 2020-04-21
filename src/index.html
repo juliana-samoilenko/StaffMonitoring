@@ -10,25 +10,26 @@
 </head>
 
 <body>
-  <div class="workplace">
-    <div class="plan">
-      <article class="notification-list">
+  <div class="container">
+    <div class="work-display">
+      <div class="work-display__plan">
 
-        <div class="notification">
-          <div class="notification_header">
-            <img src="/img/warning.min.svg" class="img-notification">
-            <p>Внимание!</p>
-            <button type="button" class="btn-close-notification" title="Закрыть">&#10006;</button>
+        <article class="notification-list">
+          <div class="notification">
+            <div class="notification__header header-notification">
+              <img class="header-notification__img" src="/img/warning.min.svg" arial-role="presentation">
+              <p class="header-notification__text">Внимание!</p>
+              <button class="header-notification__btn-close" type="button" title="Закрыть">&#10006;</button>
+            </div>
+            <div class="notification__text">
+              {Notification text}
+            </div>
           </div>
-          <div class="notification_body">
-            {Notification text}
-          </div>
-        </div>
+        </article>
 
-      </article>
-    </div>
-    <!--<button type="button" class="btn-open-list" title="Список сотрудников"></button>-->
-    <section class="employees">
+      </div>
+      <button class="work-display__btn-open-list" type="button" title="Список сотрудников"></button>
+      <!--<section class="employees">
       <div class="list">
 
         <div class="list_header">
@@ -102,7 +103,7 @@
         </div>
       </div>
 
-      <!--<div class="add-employee">
+      <div class="add-employee">
 
         <div class="add-employee_header">
           <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
@@ -160,7 +161,7 @@
         </div>
         </form>
       </div>
-    </section>-->
+    </section>
 
       <div class="edit-employee">
 
@@ -196,22 +197,22 @@
               <p><input type="checkbox" name="zone1">Цех 1</p>
               <p><input type="checkbox" name="zone2" checked>Высотные работы</p>
               <p><input type="checkbox" name="zone3">Цех 2</p>
-              <!--<p><input type="checkbox" name="zone3">Цех 5</p>-->
+              <p><input type="checkbox" name="zone3">Цех 5</p>
             </div>
         </div>
 
         <div class="edit-employee_footer">
-          <!--Следующий комментарий для "модального окна" 1ч-->
-          <!--<p class="question-style">Вы уверены, что хотите удалить сотрудника?</p>-->
+          Следующий комментарий для "модального окна" 1ч
+          <p class="question-style">Вы уверены, что хотите удалить сотрудника?</p>
           <div class="group-edit-btn">
 
-            <!--Следующий комментарий для "модального окна" 2ч-->
-            <!--<button type="button" title="Да" class="btn-rm-yes">
+            Следующий комментарий для "модального окна" 2ч
+            <button type="button" title="Да" class="btn-rm-yes">
               Да
             </button>
             <button type="button" title="Нет" class="btn-rm-no">
               Нет
-            </button>-->
+            </button>
 
             <button type="button" class="btn-save-change" title="Сохранить изменения">
               Сохранить изменения
@@ -222,8 +223,9 @@
           </div>
         </div>
         </form>
-      </div>
+      </div>-->
     </div>
+  </div>
   </div>
 </body>
 
