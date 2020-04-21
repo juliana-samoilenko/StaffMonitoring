@@ -245,11 +245,12 @@ html {
 
 .form_zone {
   @include flex-col;
-  height: 20px;
+  height: 60px;
   overflow-y: auto;
 }
 
 .form_zone_edit {
+  @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
