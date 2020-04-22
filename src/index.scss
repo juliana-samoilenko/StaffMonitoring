@@ -61,15 +61,18 @@ html {
   width: 250px;
 }
 
-.notification {
+.notification-list__notification {
   @include flex-col;
-  background-color: #ffffffa6;
-  text-align: center;
   margin-bottom: 20px;
   min-height: 80px;
 }
 
-.notification-header {
+.notification {
+  background-color: #ffffffa6;
+  text-align: center;
+}
+
+.notification__header {
   @include flex-row;
   padding: 5px 10px;
   justify-content: space-between;
@@ -79,12 +82,14 @@ html {
   border-top-right-radius: 3px;
 }
 
-.notification-header__img {
+.notification__img {
   height: 20px;
   width: 20px;
 }
 
-.notification-header__btn-close {
+.notification__text {}
+
+.notification__btn-close {
   @include button-reset;
   color: #a0a0a0d2;
 
@@ -97,7 +102,7 @@ html {
   }
 }
 
-.notification__text {
+.notification__message {
   @include flex-row;
   min-height: 50px;
   padding: 5px;
