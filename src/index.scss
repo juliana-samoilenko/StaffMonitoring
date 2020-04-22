@@ -34,7 +34,7 @@ html {
 @mixin form-element {
   @include flex-row;
   justify-content: space-between;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .btn-close {
@@ -170,8 +170,8 @@ html {
 .list-header {}
 
 .list-header__text {
-  padding-top: 5px;
-  padding-left: 85px;
+  margin-top: 5px;
+  margin-left: 85px;
   font-weight: 700;
 }
 
@@ -184,11 +184,11 @@ html {
 }
 
 .employee {
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .employee:last-of-type {
-  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .employees-list__container {
@@ -197,7 +197,8 @@ html {
 }
 
 .employees-list__item {
-  padding-left: 40px;
+  margin-left: 40px;
+  list-style-type: none;
 }
 
 .employee {}
@@ -328,7 +329,7 @@ html {
 .edit-form__name, .edit-form__position, .edit-form__track {
   @include flex-row;
   justify-content: space-between;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .name-edit-container {}
