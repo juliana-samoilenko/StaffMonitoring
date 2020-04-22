@@ -37,6 +37,20 @@ html {
   padding-bottom: 20px;
 }
 
+.btn-close {
+  @include button-reset;
+  width: 25px;
+  height: 25px;
+
+  &:hover {
+  background-color: #fa5543;
+  }
+
+  &:active {
+  color: #ffffff;
+  }
+}
+
 .container {
   margin: 12px 10px;
 }
@@ -139,64 +153,62 @@ html {
   @include flex-col;
 }
 
-.panel-employees {
+.employees-panel {
   background-color: #ddd;
   border: 1px solid #a7a7a7;
   width: 300px;
   height: 300px;
 }
 
-.panel-employees__header {
+.employees-panel__header {
   @include flex-row;
   margin-bottom: 20px;
   justify-content: space-between;
   align-items: center;
 }
 
-.panel-header__text {
+.list-header {}
+
+.list-header__text {
   padding-top: 5px;
   padding-left: 85px;
   font-weight: 700;
 }
 
-.btn-close {
-  @include button-reset;
-  width: 25px;
-  height: 25px;
+.list-header__btn-close {}
 
-  &:hover {
-  background-color: #fa5543;
-  }
-
-  &:active {
-  color: #ffffff;
-  }
-}
-
-.panel-employees__body {
+.employees-panel__body {
   @include flex-row;
   margin-bottom: 10px;
   justify-content: flex-start;
 }
 
-.list-employees__container > .employee:not(:nth-last-child(-1n+1)) {
+.employee {
   padding-bottom: 20px;
 }
 
-.list-employees__container {
+.employee:last-of-type {
+  padding-bottom: 0px;
+}
+
+.employees-list__container {
   height: 205px;
   overflow-y: auto;
 }
 
-.employee {
+.employees-list__item {
   padding-left: 40px;
 }
+
+.employee {}
 
 .employee__container {
   @include flex-row;
   width: 220px;
   justify-content: space-between;
 }
+
+.employee__name {}
 
 .employee__btn-open-edit {
   @include button-reset;
@@ -214,12 +226,14 @@ html {
   }
 }
 
-.panel-employees__footer {
+.employees-panel__footer {
   @include flex-row;
   justify-content: center;
 }
 
-.list-footer__btn-open-add {
+.footer-list {}
+
+.footer-list__btn-open-add {
   @include button-reset;
   width: 25px;
   height: 25px;
