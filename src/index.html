@@ -10,219 +10,204 @@
 </head>
 
 <body>
-  <div class="workplace">
-    <div class="plan">
-      <article class="notification-list">
-
-        <div class="notification">
-          <div class="notification_header">
-            <img src="/img/warning.min.svg" class="img-notification">
-            <p>Внимание!</p>
-            <button type="button" class="btn-close-notification" title="Закрыть">&#10006;</button>
-          </div>
-          <div class="notification_body">
-            {Notification text}
-          </div>
+  <div class="container">
+    <div class="work-display">
+      <div class="work-display__plan">
+        
+        <div class="notification-list">
+          <article class="notification-list__notification notification">
+            <header class="notification__header">
+              <img class="notification__img" src="/img/warning.min.svg" arial-role="presentation">
+              <p class="notification__text">Внимание!</p>
+              <button class="notification__button-close" type="button" title="Закрыть">&#10006;</button>
+            </header>
+            <div class="notification__message">
+              {Notification text}
+            </div>
+          </article>
         </div>
 
-      </article>
-    </div>
-    <!--<button type="button" class="btn-open-list" title="Список сотрудников"></button>-->
-    <section class="employees">
-      <div class="list">
-
-        <div class="list_header">
-          <h2 class="bolder-text">Список сотрудников</h2>
-          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
-        </div>
-
-        <div class="list_body">
-          <ul class="workers">
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>1) Самойленко Ю.П.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>2) Цветков Ю.П.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>3) Мансуров О.У.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>4) Шаталов В.С.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>5) Сорберов Л.Ю.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>6) Юсупов Д.П.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>7) Яшин З.В.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-            <ol class="worker">
-              <div class="row-alone-employee">
-                <span>8) Альбов Н.М.</span>
-                <button type="button" class="btn-open-edit" title="Редактировать">
-                </button>
-              </div>
-            </ol>
-          </ul>
-        </div>
-
-        <div class="list_footer">
-          <button type="button" class="btn-open-add" title="Добавить работника"></button>
-        </div>
       </div>
+      <!--<button class="work-display__button-open-list" type="button" title="Список сотрудников"></button>-->
+      <section class="employee-information-panel">
+        <div class="employees-panel">
 
-      <!--<div class="add-employee">
+          <header class="employees-panel__header list-header">
+            <h2 class="list-header__text">Список сотрудников</h2>
+            <button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
+          </header>
 
-        <div class="add-employee_header">
-          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
-        </div>
+          <div class="employees-panel__body employees-list">
+            <ul class="employees-list__container">
 
-        <div class="add-employee_body">
-          <form action="" name="add-emp" method="GET" class="form-style">
+              <li class="employees-list__item employee">
+                <div class="employee__container">
+                  <span class="employee__name">1) Самойленко Ю.П.</span>
+                  <button class="employee__button-open-edit" type="button" title="Редактировать">
+                  </button>
+                </div>
+              </li>
 
-            <div class="form_name">
-              <label for="add-name">ФИО:</label>
-              <input type="text" id="add-name" placeholder="Иванов И.И." class="field-input-data" autofocus required>
-            </div>
+              <li class="employees-list__item employee">
+                <div class="employee__container">
+                  <span class="employee__name">2) Вагутин Р.С.</span>
+                  <button class="employee__button-open-edit" type="button" title="Редактировать">
+                  </button>
+                </div>
+              </li>
 
-            <div class="form_position">
-              <label for="add-position">Должность:</label>
-              <input type="text" id="add-position" placeholder="Техник" class="field-input-data" required>
-            </div>
+              <li class="employees-list__item employee">
+                <div class="employee__container">
+                  <span class="employee__name">3) Чёртов К.Н.</span>
+                  <button class="employee__button-open-edit" type="button" title="Редактировать">
+                  </button>
+                </div>
+              </li>
 
-            <div class="form_track">
-              <label for="add-track">Путь:</label>
-              <select id="add-track" class="field-input-data" required>
-                <option>Выберите путь</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-
-            <label>Доступные зоны:</label>
-            <div class="form_zone">
-              <div class="building-zone">
-                <input type="checkbox" id="zone1">
-                <label for="zone1">Цех 1</label>
-              </div>
-
-              <div>
-                <input type="checkbox" id="zone2">
-                <label for="zone2">Высотные работы</label>
-              </div>
-              
-              <div>
-                <input type="checkbox" id="zone3">
-                <label for="zone3">Цех 2</label>
-              </div>
-
-              <div>
-                <input type="checkbox" id="zone4">
-                <label for="zone4">Цех 3</label>
-              </div>
-            </div>
-        </div>
-
-        <div class="add-employee_footer">
-          <button type="button" class="btn-add-employee" title="Добавить работника">Добавить работника</button>
-        </div>
-        </form>
-      </div>
-    </section>-->
-
-      <div class="edit-employee">
-
-        <div class="edit-employee_header">
-          <button type="button" class="btn-close-list" title="Закрыть">&#10006;</button>
-        </div>
-
-        <div class="edit-employee_body">
-          <form action="" name="edit-emp" method="GET" class="form-style">
-
-            <div class="form_name_edit">
-              <p>ФИО:</p>
-              <input type="text" value="{Name_emp}" class="field-input-data-edit" autofocus required>
-            </div>
-
-            <div class="form_position_edit">
-              <p>Должность:</p>
-              <input type="text" value="{Position_emp}" class="field-input-data-edit" required>
-            </div>
-
-            <div class="form_track_edit">
-              <p>Путь:</p>
-              <select name="track" class="field-input-data-edit" required>
-                <option>Выберите путь</option>
-                <option value="Нет пути" selected>Нет пути</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-
-            <p>Доступные зоны:</p>
-            <div class="form_zone_edit">
-              <p><input type="checkbox" name="zone1">Цех 1</p>
-              <p><input type="checkbox" name="zone2" checked>Высотные работы</p>
-              <p><input type="checkbox" name="zone3">Цех 2</p>
-              <!--<p><input type="checkbox" name="zone3">Цех 5</p>-->
-            </div>
-        </div>
-
-        <div class="edit-employee_footer">
-          <!--Следующий комментарий для "модального окна" 1ч-->
-          <!--<p class="question-style">Вы уверены, что хотите удалить сотрудника?</p>-->
-          <div class="group-edit-btn">
-
-            <!--Следующий комментарий для "модального окна" 2ч-->
-            <!--<button type="button" title="Да" class="btn-rm-yes">
-              Да
-            </button>
-            <button type="button" title="Нет" class="btn-rm-no">
-              Нет
-            </button>-->
-
-            <button type="button" class="btn-save-change" title="Сохранить изменения">
-              Сохранить изменения
-            </button>
-            <button type="button" class="btn-rm-emp" title="Удалить сотрудника">
-              Удалить сотрудника
-            </button>
+            </ul>
           </div>
+
+          <footer class="employees-panel__footer footer-list">
+            <button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>
+          </footer>
         </div>
-        </form>
-      </div>
+
+        <!--<div class="employee-add-panel">
+
+          <header class="employee-add-panel__header">
+            <button class="employee-add-panel__button button-close" type="button" title="Закрыть">&#10006;</button>
+          </header>
+
+          <div class="employee-add-panel__body">
+            <form class="employee-add-panel__form add-employee-form" action="" name="add-emp" method="GET">
+
+              <div class="add-employee-form__name add-name-container">
+                <label class="add-name-container__label" for="add-name">ФИО:</label>
+                <input class="add-name-container__input" type="text" id="add-name" placeholder="Иванов И.И." autofocus
+                  required>
+              </div>
+
+              <div class="add-employee-form__position add-position-container">
+                <label class="add-position-container__label" for="add-position">Должность:</label>
+                <input class="add-position-container__input" type="text" id="add-position" placeholder="Техник"
+                  required>
+              </div>
+
+              <div class="add-employee-form__track add-track-container">
+                <label class="add-track-container__label" for="add-track">Путь:</label>
+                <select class="add-track-container__select" id="add-track" required>
+                  <option>Выберите путь</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+
+              <label>Доступные зоны:</label>
+              <div class="add-employee-form__zone">
+                <div class="add-zone-container">
+                  <input type="checkbox" id="zone1">
+                  <label for="zone1">Цех 1</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone2">
+                  <label for="zone2">Высотные работы</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone3">
+                  <label for="zone3">Цех 2</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone4">
+                  <label for="zone4">Цех 3</label>
+                </div>
+              </div>
+          </div>
+
+          <footer class="employee-add-panel__footer footer-add">
+            <button type="button" class="footer-add__button-add-employee" title="Добавить работника">Добавить сотрудника</button>
+            </footer>
+          </form>
+        </div>-->
+
+        <div class="employee-edit-panel">
+
+          <header class="employee-edit-panel__header">
+            <button type="button" class="employee-edit-panel__button button-close" title="Закрыть">&#10006;</button>
+          </header>
+
+          <div class="employee-edit-panel__body">
+            <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
+
+              <div class="edit-employee-form__name edit-name-container">
+                <label class="edit-name-container__label" for="add-name">ФИО:</label>
+                <input class="edit-name-container__input" type="text" value="{Name_emp}" autofocus required>
+              </div>
+
+              <div class="edit-employee-form__position edit-positision-container">
+                <label class="edit-positision-container__label" for="edit-name">Должность:</label>
+                <input class="edit-positision-container__input" type="text" value="{Position_emp}" required>
+              </div>
+
+              <div class="edit-employee-form__track edit-track-container">
+                <label class="edit-track-container__label" for="edit-track">Путь:</label>
+                <select name="track" class="edit-track-container__select" required>
+                  <option>Выберите путь</option>
+                  <option value="Нет пути" selected>Нет пути</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <label>Доступные зоны:</label>
+              <div class="edit-employee-form__zone">
+                <div class="edit-zone-container">
+                  <input type="checkbox" id="zone1">
+                  <label for="zone1">Цех 1</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone2">
+                  <label for="zone2">Высотные работы</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone3">
+                  <label for="zone3">Цех 2</label>
+                </div>
+
+                <div>
+                  <input type="checkbox" id="zone4">
+                  <label for="zone4">Цех 3</label>
+                </div>
+              </div>
+          </div>
+          <div class="employee-edit-panel__footer footer-edit">
+            <!--Следующий комментарий для "модального окна" 1ч-->
+            <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
+            <footer class="footer-edit__edit-button-group">
+
+              <!--Следующий комментарий для "модального окна" 2ч-->
+              <button class="button button-remove-yes" type="button" title="Да">
+                Да
+              </button>
+              <button class="button button-remove-no" type="button" title="Нет">
+                Нет
+              </button>
+
+              <!--<button class="button button-save-change" type="button" title="Сохранить изменения">
+                Сохранить изменения
+              </button>
+              <button class="button button-remove-emp" type="button" title="Удалить сотрудника">
+                Удалить сотрудника
+              </button>-->
+            </footer>
+          </form>
+        </div>
+      </section>
     </div>
   </div>
 </body>

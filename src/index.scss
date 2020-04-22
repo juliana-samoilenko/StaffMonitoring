@@ -12,10 +12,6 @@ html {
   box-sizing: inherit;
 }
 
-.bolder-text {
-  font-weight: 700;
-}
-
 @mixin button-reset {
   margin: 0;
   padding: 0;
@@ -38,15 +34,32 @@ html {
 @mixin form-element {
   @include flex-row;
   justify-content: space-between;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.workplace {
+.button-close {
+  @include button-reset;
+  width: 25px;
+  height: 25px;
+
+  &:hover {
+  background-color: #fa5543;
+  }
+
+  &:active {
+  color: #ffffff;
+  }
+}
+
+.container {
+  margin: 12px 10px;
+}
+
+.work-display {
   @include flex-row;
-  margin: 10px;
 }
 
-.plan {
+.work-display__plan {
   @include flex-row;
   padding: 20px 0px 0px 0px;
   justify-content: center;
@@ -62,15 +75,18 @@ html {
   width: 250px;
 }
 
-.notification {
+.notification-list__notification {
   @include flex-col;
-  background-color: #ffffffa6;
-  text-align: center;
   margin-bottom: 20px;
-  height: 80px;
+  min-height: 80px;
 }
 
-.notification_header {
+.notification {
+  background-color: #ffffffa6;
+  text-align: center;
+}
+
+.notification__header {
   @include flex-row;
   padding: 5px 10px;
   justify-content: space-between;
@@ -80,12 +96,14 @@ html {
   border-top-right-radius: 3px;
 }
 
-.img-notification {
+.notification__img {
   height: 20px;
   width: 20px;
 }
 
-.btn-close-notification {
+.notification__text {}
+
+.notification__button-close {
   @include button-reset;
   color: #a0a0a0d2;
 
@@ -98,9 +116,9 @@ html {
   }
 }
 
-.notification_body {
+.notification__message {
   @include flex-row;
-  height: 50px;
+  min-height: 50px;
   padding: 5px;
   justify-content: center;
   border-left: 1px solid #a7a7a7;
@@ -110,7 +128,7 @@ html {
   border-bottom-right-radius: 3px;
 }
 
-.btn-open-list {
+.work-display__button-open-list {
   @include button-reset;
   background-color: #ddd;
   background-image: url(/img/worker.min.svg);
@@ -129,71 +147,71 @@ html {
   &:active {
     background-image: url(/img/worker-active.min.svg);
   }
-
-  .employees {
-    @include flex-col;
-  }
 }
 
-.list {
+.employee-information-panel {
+  @include flex-col;
+}
+
+.employees-panel {
   background-color: #ddd;
   border: 1px solid #a7a7a7;
   width: 300px;
   height: 300px;
 }
 
-.list_header {
+.employees-panel__header {
   @include flex-row;
   margin-bottom: 20px;
   justify-content: space-between;
   align-items: center;
 }
 
-.list_header h2 {
-  padding-top: 5px;
-  padding-left: 85px;
+.list-header {}
+
+.list-header__text {
+  margin-top: 5px;
+  margin-left: 85px;
+  font-weight: 700;
 }
 
-.btn-close-list {
-  @include button-reset;
-  width: 25px;
-  height: 25px;
+.list-header__button-close {}
 
-  &:hover {
-  background-color: #fa5543;
-  }
-
-  &:active {
-  color: #ffffff;
-  }
-}
-
-.list_body {
+.employees-panel__body {
   @include flex-row;
   margin-bottom: 10px;
   justify-content: flex-start;
 }
 
-.workers > .worker:not(:nth-last-child(-1n+1)) {
-  padding-bottom: 20px;
+.employee {
+  margin-bottom: 20px;
 }
 
-.workers {
+.employee:last-of-type {
+  margin-bottom: 0px;
+}
+
+.employees-list__container {
   height: 205px;
   overflow-y: auto;
 }
 
-.worker {
-  padding-left: 40px;
+.employees-list__item {
+  margin-left: 40px;
+  list-style-type: none;
 }
 
-.row-alone-employee {
+.employee {}
+
+.employee__container {
   @include flex-row;
   width: 220px;
   justify-content: space-between;
 }
 
-.btn-open-edit {
+.employee__name {}
+
+.employee__button-open-edit {
   @include button-reset;
   width: 15px;
   height: 15px;
@@ -209,12 +227,14 @@ html {
   }
 }
 
-.list_footer {
+.employees-panel__footer {
   @include flex-row;
   justify-content: center;
 }
 
-.btn-open-add {
+.footer-list {}
+
+.footer-list__button-open-add {
   @include button-reset;
   width: 25px;
   height: 25px;
@@ -232,7 +252,7 @@ html {
   }
 }
 
-.add-employee {
+.employee-add-panel {
   background-color: #ddd;
   border-right: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
@@ -241,14 +261,16 @@ html {
   height: 300px;
 }
 
-.add-employee_header {
+.employee-add-panel__header {
   @include flex-row;
-  justify-cogntent: flex-end;
+  justify-content: flex-end;
   margin-bottom: 10px;
   align-items: center;
 }
 
-.add-employee_body {
+.employee-add-panel__button {}
+
+.employee-add-panel__body {
   @include flex-col;
   height: 200px;
   margin-bottom: 15px;
@@ -256,7 +278,7 @@ html {
   align-items: center;
 }
 
-.edit-employee {
+.employee-edit-panel {
   background-color: #ddd;
   border-right: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
@@ -265,62 +287,100 @@ html {
   height: 300px;
 }
 
-.edit-employee_header {
+.employee-edit-panel__header {
   @include flex-row;
   justify-content: flex-end;
   align-items: center;
 }
 
-.edit-employee_body {
+.employee-edit-panel__button {}
+
+.employee-edit-panel__body {
   @include flex-col;
   height: 180px;
   justify-content: flex-start;
   align-items: center;
 }
 
-.form-style {
+.employee-add-panel__form, .employee-edit-panel__form {
   width: 250px;
 }
 
-.form_name, .form_position, .form_track {
+.add-employee-form {}
+
+.edit-employee-form {}
+
+.add-employee-form__name, .add-employee-form__position, .add-employee-form__track {
   @include form-element;
 }
 
-.form_name_edit, .form_position_edit, .form_track_edit {
+.add-name-container {}
+
+.add-name-container__label {}
+
+.add-position-container {}
+
+.add-position-container__label {}
+
+.add-track-container {}
+
+.add-track-container__label {}
+
+.edit-employee-form__name, .edit-employee-form__position, .edit-employee-form__track {
   @include flex-row;
   justify-content: space-between;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.field-input-data {
+.edit-name-container {}
+
+.edit-name-container__label {}
+
+.edit-positision-container {}
+
+.edit-positision-container__label {}
+
+.edit-track-container {}
+
+.edit-track-container__label {}
+
+.add-name-container__input, .add-position-container__input, 
+.add-track-container__select {
   width: 150px;
 }
 
-.field-input-data-edit {
+.edit-name-container__input, .edit-positision-container__input, 
+.edit-track-container__select {
   width: 150px;
   height: 20px;
 }
 
-.form_zone {
+.add-employee-form__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
 
-.form_zone_edit {
+.add-zone-container {}
+
+.edit-employee-form__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
 
-.add-employee_footer {
+.edit-zone-container {}
+
+.employee-add-panel__footer {
   @include flex-row;
   height: 30px;
   justify-content: center;
   align-items: center;
 }
 
-.btn-add-employee {
+.footer-add {}
+
+.footer-add__button-add-employee {
   @include button-reset;
   height: 30px;
   color: #000;
@@ -338,26 +398,31 @@ html {
   }
 }
 
-.edit-employee_footer {
+.employee-edit-panel__footer {
   @include flex-col;
   margin-left: 50px;
   width: 200px;
   justify-content: center;
 }
 
-.group-edit-btn {
+.footer-edit {}
+
+.footer-edit__question {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.footer-edit__edit-button-group {
   @include flex-row;
   justify-content: space-around;
   height: 30px;
 }
 
-.question-style {
-  margin-bottom: 10px;
-  text-align: center;
+.button {
+  @include button-reset;
 }
 
-.btn-rm-yes {
-  @include button-reset;
+.button-remove-yes {
   padding: 5px;
   box-shadow: 0px -30px 0 #00881d80 inset;
 
@@ -369,8 +434,7 @@ html {
   }
 }
 
-.btn-rm-no {
-  @include button-reset;
+.button-remove-no {
   padding: 5px;
   box-shadow: 0px -30px 0 #fa3b2680 inset;
 
@@ -382,8 +446,7 @@ html {
   }
 }
 
-.btn-save-change {
-  @include button-reset;
+.button-save-change {
   height: 30px;
   margin-bottom: 5px;
   &:hover {
@@ -394,8 +457,7 @@ html {
   }
 }
 
-.btn-rm-emp {
-  @include button-reset;
+.button-remove-emp {
   height: 30px;
 
   &:hover {
