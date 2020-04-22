@@ -72,7 +72,7 @@
           </footer>
         </div>
 
-        <div class="employee-add-panel">
+        <!--<div class="employee-add-panel">
 
           <header class="employee-add-panel__header">
             <button class="employee-add-panel__btn btn-close" type="button" title="Закрыть">&#10006;</button>
@@ -131,30 +131,30 @@
             <button type="button" class="footer-add__btn-add-employee" title="Добавить работника">Добавить сотрудника</button>
             </footer>
           </form>
-        </div>
+        </div>-->
 
-        <!--<div class="panel-edit-employee">
+        <div class="employee-edit-panel">
 
-          <header class="panel-edit-employee__header">
-            <button type="button" class="btn-close" title="Закрыть">&#10006;</button>
+          <header class="employee-edit-panel__header">
+            <button type="button" class="employee-edit-panel__btn btn-close" title="Закрыть">&#10006;</button>
           </header>
 
-          <div class="panel-edit-employee__body">
-            <form class="panel-edit-employee__form form-edit" action="" name="edit-emp" method="GET">
+          <div class="employee-edit-panel__body">
+            <form class="employee-edit-panel__form edit-form" action="" name="edit-emp" method="GET">
 
-              <div class="form-edit__name edit-container-name">
-                <label class="edit-container-name__label" for="add-name">ФИО:</label>
-                <input class="edit-container-name__input" type="text" value="{Name_emp}" autofocus required>
+              <div class="edit-form__name name-edit-container">
+                <label class="name-edit-container__label" for="add-name">ФИО:</label>
+                <input class="name-edit-container__input" type="text" value="{Name_emp}" autofocus required>
               </div>
 
-              <div class="form-edit__position edit-container-position">
-                <label class="edit-container-position__label" for="edit-name">Должность:</label>
-                <input class="edit-container-position__input" type="text" value="{Position_emp}" required>
+              <div class="edit-form__position position-edit-container">
+                <label class="position-edit-container__label" for="edit-name">Должность:</label>
+                <input class="position-edit-container__input" type="text" value="{Position_emp}" required>
               </div>
 
-              <div class="form-edit__track edit-container-track">
-                <label class="edit-container-track__label" for="edit-track">Путь:</label>
-                <select name="track" class="edit-container-track__select" required>
+              <div class="edit-form__track track-edit-container">
+                <label class="track-edit-container__label" for="edit-track">Путь:</label>
+                <select name="track" class="track-edit-container__select" required>
                   <option>Выберите путь</option>
                   <option value="Нет пути" selected>Нет пути</option>
                   <option value="1">1</option>
@@ -163,8 +163,8 @@
               </div>
 
               <label>Доступные зоны:</label>
-              <div class="form-edit__zone">
-                <div class="edit-zone-container">
+              <div class="edit-form__zone">
+                <div class="zone-edit-container">
                   <input type="checkbox" id="zone1">
                   <label for="zone1">Цех 1</label>
                 </div>
@@ -185,28 +185,28 @@
                 </div>
               </div>
           </div>
-          <div class="panel-edit-employee__footer edit-footer">
-            Следующий комментарий для "модального окна" 1ч
-            <p class="edit-footer__question">Вы уверены, что хотите удалить сотрудника?</p>
-            <footer class="edit-footer__group-edit-btn">
+          <div class="employee-edit-panel__footer footer-edit">
+            <!--Следующий комментарий для "модального окна" 1ч-->
+            <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
+            <footer class="footer-edit__edit-btn-group btn-group">
 
-              Следующий комментарий для "модального окна" 2ч
-              <button type="button" title="Да" class="btn-rm-yes">
+              <!--Следующий комментарий для "модального окна" 2ч-->
+              <button class="btn-group__btn-rm-yes" type="button" title="Да">
                 Да
               </button>
-              <button type="button" title="Нет" class="btn-rm-no">
+              <button class="btn-group__btn-rm-no" type="button" title="Нет">
                 Нет
               </button>
 
-              <button class="btn-save-change" type="button" title="Сохранить изменения">
+              <!--<button class="btn-group__btn-save-change" type="button" title="Сохранить изменения">
                 Сохранить изменения
               </button>
-              <button class="btn-rm-emp" type="button" title="Удалить сотрудника">
+              <button class="btn-group__btn-rm-emp" type="button" title="Удалить сотрудника">
                 Удалить сотрудника
-              </button>
+              </button>-->
             </footer>
           </form>
-        </div>-->
+        </div>
       </section>
     </div>
   </div>
