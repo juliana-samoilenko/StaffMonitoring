@@ -306,70 +306,70 @@ html {
   width: 250px;
 }
 
-.add-form {}
+.add-employee-form {}
 
-.edit-form {}
+.edit-employee-form {}
 
-.add-form__name, .add-form__position, .add-form__track {
+.add-employee-form__name, .add-employee-form__position, .add-employee-form__track {
   @include form-element;
 }
 
-.name-add-container {}
+.add-name-container {}
 
-.name-add-container__label {}
+.add-name-container__label {}
 
-.position-add-container {}
+.add-position-container {}
 
-.position-add-container__label {}
+.add-position-container__label {}
 
-.track-add-container {}
+.add-track-container {}
 
-.track-add-container__label {}
+.add-track-container__label {}
 
-.edit-form__name, .edit-form__position, .edit-form__track {
+.edit-employee-form__name, .edit-employee-form__position, .edit-employee-form__track {
   @include flex-row;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.name-edit-container {}
+.edit-name-container {}
 
-.name-edit-container__label {}
+.edit-name-container__label {}
 
-.position-edit-container {}
+.edit-positision-container {}
 
-.position-edit-container__label {}
+.edit-positision-container__label {}
 
-.track-edit-container {}
+.edit-track-container {}
 
-.track-edit-container__label {}
+.edit-track-container__label {}
 
-.name-add-container__input, .position-add-container__input, 
-.track-add-container__select {
+.add-name-container__input, .add-position-container__input, 
+.add-track-container__select {
   width: 150px;
 }
 
-.name-edit-container__input, .position-edit-container__input, 
-.track-edit-container__select {
+.edit-name-container__input, .edit-positision-container__input, 
+.edit-track-container__select {
   width: 150px;
   height: 20px;
 }
 
-.add-form__zone {
+.add-employee-form__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
 
-.zone-add-container {}
+.add-zone-container {}
 
-.edit-form__zone {
+.edit-employee-form__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
 
-.zone-edit-container {}
+.edit-zone-container {}
 
 .employee-add-panel__footer {
   @include flex-row;
@@ -418,10 +418,11 @@ html {
   height: 30px;
 }
 
-.btn-group {}
-
-.btn-group__btn-rm-yes {
+.btn {
   @include button-reset;
+}
+
+.btn-remove-yes {
   padding: 5px;
   box-shadow: 0px -30px 0 #00881d80 inset;
 
@@ -433,8 +434,7 @@ html {
   }
 }
 
-.btn-group__btn-rm-no {
-  @include button-reset;
+.btn-remove-no {
   padding: 5px;
   box-shadow: 0px -30px 0 #fa3b2680 inset;
 
@@ -446,8 +446,7 @@ html {
   }
 }
 
-.btn-group__btn-save-change {
-  @include button-reset;
+.btn-save-change {
   height: 30px;
   margin-bottom: 5px;
   &:hover {
@@ -458,8 +457,7 @@ html {
   }
 }
 
-.btn-group__btn-rm-emp {
-  @include button-reset;
+.btn-remove-emp {
   height: 30px;
 
   &:hover {
