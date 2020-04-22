@@ -251,7 +251,7 @@ html {
   }
 }
 
-.panel-add-employee {
+.employee-add-panel {
   background-color: #ddd;
   border-right: 1px solid #a7a7a7;
   border-bottom: 1px solid #a7a7a7;
@@ -260,14 +260,16 @@ html {
   height: 300px;
 }
 
-.panel-add-employee__header {
+.employee-add-panel__header {
   @include flex-row;
   justify-content: flex-end;
   margin-bottom: 10px;
   align-items: center;
 }
 
-.panel-add-employee__body {
+.employee-add-panel__btn {}
+
+.employee-add-panel__body {
   @include flex-col;
   height: 200px;
   margin-bottom: 15px;
@@ -297,11 +299,13 @@ html {
   align-items: center;
 }
 
-.panel-add-employee__form, .panel-edit-employee__form {
+.employee-add-panel__form, .panel-edit-employee__form {
   width: 250px;
 }
 
-.form-add__name, .form-add__position, .form-add__track {
+.add-form {}
+
+.add-form__name, .add-form__position, .add-form__track {
   @include form-element;
 }
 
@@ -311,8 +315,20 @@ html {
   padding-bottom: 10px;
 }
 
-.add-container-name__input, .add-container-position__input, 
-.add-container-track__select {
+.name-add-container {}
+
+.name-add-container__label {}
+
+.position-add-container {}
+
+.position-add-container__label {}
+
+.track-add-container {}
+
+.track-add-container__label {}
+
+.name-add-container__input, .position-add-container__input, 
+.track-add-container__select {
   width: 150px;
 }
 
@@ -322,11 +338,13 @@ html {
   height: 20px;
 }
 
-.form-add__zone {
+.add-form__zone {
   @include flex-col;
   height: 60px;
   overflow-y: auto;
 }
+
+.zone-add-container {}
 
 .form-edit__zone {
   @include flex-col;
@@ -334,14 +352,16 @@ html {
   overflow-y: auto;
 }
 
-.panel-add-employee__footer {
+.employee-add-panel__footer {
   @include flex-row;
   height: 30px;
   justify-content: center;
   align-items: center;
 }
 
-.add-footer__btn-add-employee {
+.footer-add {}
+
+.footer-add__btn-add-employee {
   @include button-reset;
   height: 30px;
   color: #000;
