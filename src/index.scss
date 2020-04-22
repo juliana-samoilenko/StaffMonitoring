@@ -37,7 +37,7 @@ html {
   margin-bottom: 20px;
 }
 
-.btn-close {
+.button-close {
   @include button-reset;
   width: 25px;
   height: 25px;
@@ -103,7 +103,7 @@ html {
 
 .notification__text {}
 
-.notification__btn-close {
+.notification__button-close {
   @include button-reset;
   color: #a0a0a0d2;
 
@@ -128,7 +128,7 @@ html {
   border-bottom-right-radius: 3px;
 }
 
-.work-display__btn-open-list {
+.work-display__button-open-list {
   @include button-reset;
   background-color: #ddd;
   background-image: url(/img/worker.min.svg);
@@ -175,7 +175,7 @@ html {
   font-weight: 700;
 }
 
-.list-header__btn-close {}
+.list-header__button-close {}
 
 .employees-panel__body {
   @include flex-row;
@@ -211,7 +211,7 @@ html {
 
 .employee__name {}
 
-.employee__btn-open-edit {
+.employee__button-open-edit {
   @include button-reset;
   width: 15px;
   height: 15px;
@@ -234,7 +234,7 @@ html {
 
 .footer-list {}
 
-.footer-list__btn-open-add {
+.footer-list__button-open-add {
   @include button-reset;
   width: 25px;
   height: 25px;
@@ -268,7 +268,7 @@ html {
   align-items: center;
 }
 
-.employee-add-panel__btn {}
+.employee-add-panel__button {}
 
 .employee-add-panel__body {
   @include flex-col;
@@ -293,7 +293,7 @@ html {
   align-items: center;
 }
 
-.employee-edit-panel__btn {}
+.employee-edit-panel__button {}
 
 .employee-edit-panel__body {
   @include flex-col;
@@ -380,7 +380,7 @@ html {
 
 .footer-add {}
 
-.footer-add__btn-add-employee {
+.footer-add__button-add-employee {
   @include button-reset;
   height: 30px;
   color: #000;
@@ -412,17 +412,17 @@ html {
   text-align: center;
 }
 
-.footer-edit__edit-btn-group {
+.footer-edit__edit-button-group {
   @include flex-row;
   justify-content: space-around;
   height: 30px;
 }
 
-.btn {
+.button {
   @include button-reset;
 }
 
-.btn-remove-yes {
+.button-remove-yes {
   padding: 5px;
   box-shadow: 0px -30px 0 #00881d80 inset;
 
@@ -434,7 +434,7 @@ html {
   }
 }
 
-.btn-remove-no {
+.button-remove-no {
   padding: 5px;
   box-shadow: 0px -30px 0 #fa3b2680 inset;
 
@@ -446,7 +446,7 @@ html {
   }
 }
 
-.btn-save-change {
+.button-save-change {
   height: 30px;
   margin-bottom: 5px;
   &:hover {
@@ -457,7 +457,7 @@ html {
   }
 }
 
-.btn-remove-emp {
+.button-remove-emp {
   height: 30px;
 
   &:hover {
