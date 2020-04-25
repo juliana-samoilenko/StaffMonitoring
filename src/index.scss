@@ -61,12 +61,9 @@ html {
 
 .work-display__plan {
   @include flex-row;
-  padding: 20px 0px 0px 0px;
   justify-content: center;
   align-self: start;
-  background-color: #ddd;
-  width: 1100px;
-  height: 600px;
+  border: 1px solid black;
 }
 
 .notification-list {
