@@ -67,7 +67,10 @@ html {
 }
 
 .notification-list {
-  @include flex-col;
+  position: absolute;
+  z-index: 100;
+  top: 50px;
+  left: 425px;
   text-align: center;
   width: 250px;
 }
