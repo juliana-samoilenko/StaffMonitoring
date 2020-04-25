@@ -18,7 +18,9 @@
     "url": "https://github.com/Lyashka/StaffMonitoring/issues"
   },
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
-  "dependencies": {},
+  "dependencies": {
+    "two.js": "^0.7.0-stable.1"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-imagemin": "^4.0.1",
