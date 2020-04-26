@@ -1,12 +1,7 @@
 import '/index.scss';
+import Two from 'two.js';
 
-const WIDTH_CANVAS = 1040;
-const HEIGHT_CANVAS = 598;
-const COLOR_CANVAS = '#fff';
-const CANVAS = document.querySelector(".work-display__plan");
-const CONTEXT = CANVAS.getContext('2d');
+var elem = document.getElementById('work-display__plan');
+var two = new Two({width: 1045, height: 600, domElement: elem});
 
-CANVAS.width = WIDTH_CANVAS;
-CANVAS.height = HEIGHT_CANVAS;
-CONTEXT.fillStyle = COLOR_CANVAS;
-CONTEXT.fillRect(0, 0, CANVAS.width, CANVAS.height);
+two.update();
