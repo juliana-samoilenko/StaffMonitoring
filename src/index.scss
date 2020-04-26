@@ -59,7 +59,7 @@ html {
   @include flex-row;
 }
 
-.work-display__plan {
+#work-display__plan {
   @include flex-row;
   justify-content: center;
   align-self: start;

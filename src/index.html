@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Staff Monitoring</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <script type="text/javascript" src="/app.js"></script>
 </head>
 
 <body>
   <div class="container">
     <div class="work-display">
-      <canvas class="work-display__plan"></canvas>
+      <canvas id="work-display__plan"></canvas>
 
         <!--<div class="notification-list">
           <article class="notification-list__notification notification">
@@ -207,8 +208,19 @@
       </section>
     </div>
   </div>
+<script>
+  var elem = document.getElementById('circle');
+    var params = { width: 500, height: 500};
+    var two = new Two(params).appendTo(elem);
 
-<script type="text/javascript" src="/app.js"></script>
+    var circle = two.makeCircle(two.width/2, two.width/2, 100);
+    circle.fill = "#881111";
+    circle.noStroke();
+
+
+    two.update();
+</script>
+
 </body>
 
 </html>
