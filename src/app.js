@@ -1,8 +1,8 @@
 import '/index.scss';
-import 'two.js';
+import Two from 'two.js';
 
 var elem = document.getElementById('work-display__plan');
-var two = new Two({ width: 1040, height: 598 }).appendTo(elem);
+var two = new Two({ width: 1040, height: 598, domElement: elem });
 var circle = two.makeCircle(72, 100, 50);
 var rect = two.makeRectangle(213, 100, 100, 100);
 
