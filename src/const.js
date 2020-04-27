@@ -1,7 +1,9 @@
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
-export const WALL_COLOR = '#000';
+export const WALL_COLOR = '#000000';
+export const DOOR_COLOR = '#A63600';
 export const INTERNAL_WALL_THICKNESS = 5;
+export const DOOR_THICKNESS = 5;
 export const EXTERNAL_WALL_THICKNESS = 15;
 
 export const ELEMENTS_BUILDING = {
@@ -22,4 +24,11 @@ export const ELEMENTS_BUILDING = {
     { xStart: 660, yStart: 190, xEnd: 660, yEnd: 400, thickness: INTERNAL_WALL_THICKNESS, color: WALL_COLOR },
     { xStart: 660, yStart: 470, xEnd: 660, yEnd: 600, thickness: INTERNAL_WALL_THICKNESS, color: WALL_COLOR },
   ],
+
+  doors: [
+    { xStart: 570, yStart: 189, xEnd: 635, yEnd: 235, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
+    { xStart: 930, yStart: 189, xEnd: 995, yEnd: 235, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
+    { xStart: 329, yStart: 400, xEnd: 375, yEnd: 335, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
+    { xStart: 659, yStart: 470, xEnd: 615, yEnd: 535, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
+  ]
 };
