@@ -11,4 +11,12 @@ export default class Door {
     this.thickness = thickness;
     this.color = color;
   }
+
+  drawDoor() {
+    let door = PLAN.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    door.linewidth = this.thickness;
+    door.stroke = this.color;
+
+    PLAN.update();
+  }
 }
