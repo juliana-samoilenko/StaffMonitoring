@@ -11,4 +11,12 @@ export default class Wall {
     this.thickness = thickness;
     this.color = color;
   }
+
+  drawWall() {
+    let wall = PLAN.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    wall.linewidth = this.thickness;
+    wall.fill = this.color;
+
+    PLAN.update();
+  }
 }
