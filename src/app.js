@@ -1,7 +1,14 @@
 import '/index.scss';
 import Two from 'two.js';
+import Wall from './Wall.js';
 
-var elem = document.getElementById('work-display__plan');
-var two = new Two({width: 1045, height: 600, domElement: elem});
+import {
+  WIDTH_CANVAS,
+  HEIGHT_CANVAS,
+  ELEMENTS_BUILDING
+} from '/const.js';
 
-two.update();
+export const CANVAS = document.getElementById('work-display__plan');
+export const PLAN = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: CANVAS});
+
+PLAN.update();
