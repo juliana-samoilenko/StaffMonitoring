@@ -13,16 +13,16 @@ export let canvas = document.querySelector('.js-building-canvas');
 export let plan = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvas});
 
 ELEMENTS_BUILDING.walls.forEach((item) => {
-  let wall = new Wall(item.xStart, item.yStart, 
-                      item.xEnd, item.yEnd, 
-                      item.thickness, item.color);
+  let wall = new Wall({ xStart: item.xStart, yStart: item.yStart, 
+                        xEnd: item.xEnd, yEnd: item.yEnd, 
+                        thickness: item.thickness, color: item.color} );
   wall.drawWall();
 })
 
 ELEMENTS_BUILDING.doors.forEach((item) => {
-  let door = new Door(item.xStart, item.yStart, 
-                      item.xEnd, item.yEnd, 
-                      item.thickness, item.color);
+  let door = new Door({ xStart: item.xStart, yStart: item.yStart, 
+                        xEnd: item.xEnd, yEnd: item.yEnd, 
+                        thickness: item.thickness, color: item.color} );
   door.drawDoor();
 })
 

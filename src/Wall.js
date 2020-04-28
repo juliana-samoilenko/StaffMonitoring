@@ -3,7 +3,7 @@ import {
 } from './app.js';
 
 export default class Wall {
-  constructor(xStart, yStart, xEnd, yEnd, thickness, color) {
+  constructor( { xStart, yStart, xEnd, yEnd, thickness, color } ) {
     this.xStart = xStart;
     this.yStart = yStart;
     this.xEnd = xEnd;
