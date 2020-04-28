@@ -9,7 +9,7 @@ import {
 } from '/const.js';
 import Door from './Door.js';
 
-export const CANVAS = document.querySelector('.work-display__plan');
+export const CANVAS = document.querySelector('.js-building-canvas');
 export const PLAN = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: CANVAS});
 
 ELEMENTS_BUILDING.walls.forEach((item) => {
