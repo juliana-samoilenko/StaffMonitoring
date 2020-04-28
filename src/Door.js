@@ -1,5 +1,5 @@
 import {
-  PLAN
+  plan
 } from './app.js';
 
 export default class Door {
@@ -13,10 +13,10 @@ export default class Door {
   }
 
   drawDoor() {
-    let door = PLAN.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    let door = plan.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
     door.linewidth = this.thickness;
     door.stroke = this.color;
 
-    PLAN.update();
+    plan.update();
   }
 }

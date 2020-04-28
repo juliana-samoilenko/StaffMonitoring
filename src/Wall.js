@@ -1,5 +1,5 @@
 import {
-  PLAN
+  plan
 } from './app.js';
 
 export default class Wall {
@@ -13,10 +13,10 @@ export default class Wall {
   }
 
   drawWall() {
-    let wall = PLAN.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    let wall = plan.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
     wall.linewidth = this.thickness;
     wall.fill = this.color;
 
-    PLAN.update();
+    plan.update();
   }
 }
