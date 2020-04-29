@@ -1,8 +1,6 @@
-import {
-  plan
-} from './app.js';
+import DrawableLine from './DrawableLine.js';
 
-export default class Door {
+export default class Door extends DrawableLine {
   constructor( { xStart, yStart, xEnd, yEnd, thickness, color } ) {
     this.xStart = xStart;
     this.yStart = yStart;
