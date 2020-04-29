@@ -9,8 +9,8 @@ import {
 } from '/const.js';
 import Door from './Door.js';
 
-export let canvas = document.querySelector('.js-building-canvas');
-export let plan = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvas});
+export const canvas = document.querySelector('.js-building-canvas');
+export const plan = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvas});
 
 ELEMENTS_BUILDING.walls.forEach((item) => {
   let wall = new Wall({ xStart: item.xStart, yStart: item.yStart, 
