@@ -9,31 +9,27 @@ import {
   ELEMENTS_BUILDING,
 } from '/const.js';
 
-export const element = document.querySelector('.js-building-canvas');
-export const canvas = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: element});
+const element = document.querySelector('.js-building-canvas');
+const canvas = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: element});
+const buildingObjectsByTypes = {
+  wall: Wall,
+  door: Door,
+};
 
-ELEMENTS_BUILDING.walls.forEach((item) => {
-  let wall = new Wall({
-    xStart: item.xStart, 
-    yStart: item.yStart,                 
-    xEnd: item.xEnd, 
-    yEnd: item.yEnd, 
-    thickness: item.thickness, 
-    color: item.color
-  }, canvas);
+[...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors].forEach((item) => {
+  const Drawable = buildingObjectsByTypes[item.type];
+  let nameProperties = [];
+  for (let key in item) {
+    if (key !== "type") {
+      nameProperties.push(key);
+    }
+  }
+  let properties = new Object();
+  for (let property of nameProperties) {
+    properties[property] = item[property];
+  }
 
-  wall.draw();
+  let drawableObject = new Drawable(properties, canvas);
+  drawableObject.draw();
 });
 
-ELEMENTS_BUILDING.doors.forEach((item) => {
-  let door = new Door({
-    xStart: item.xStart,
-    yStart: item.yStart, 
-    xEnd: item.xEnd,
-    yEnd: item.yEnd, 
-    thickness: item.thickness, 
-    color: item.color
-  }, canvas);
-
-  door.draw();
-})
