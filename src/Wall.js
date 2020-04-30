@@ -1,11 +1,3 @@
-import Drawable from './Drawable.js';
+import DrawableLine from './Drawable.js';
 
-export default class Wall extends Drawable {
-  constructor( xStart, yStart, xEnd, yEnd, thickness, color ) {
-    super( xStart, yStart, xEnd, yEnd, thickness, color )
-  }
-
-  draw() {
-    super.drawLine();
-  }
-}
+export default class Wall extends DrawableLine {}
