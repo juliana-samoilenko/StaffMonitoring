@@ -1,9 +1,9 @@
-export const WALL_COLOR = '#000000';
-export const DOOR_COLOR = '#A63600';
-export const ZONE_COLOR = '#FFD173';
-export const INTERNAL_WALL_THICKNESS = 5;
-export const DOOR_THICKNESS = 5;
-export const EXTERNAL_WALL_THICKNESS = 15;
+const WALL_COLOR = '#000000';
+const DOOR_COLOR = '#A63600';
+const ZONE_COLOR = '#FFD173';
+const INTERNAL_WALL_THICKNESS = 5;
+const DOOR_THICKNESS = 5;
+const EXTERNAL_WALL_THICKNESS = 15;
 
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
