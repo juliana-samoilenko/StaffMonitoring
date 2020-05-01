@@ -1,4 +1,4 @@
-export default class DrawableLine {
+export class DrawableLine {
   constructor({ xStart, yStart, xEnd, yEnd, thickness, color }, canvas) {
     this.xStart = xStart;
     this.yStart = yStart;
