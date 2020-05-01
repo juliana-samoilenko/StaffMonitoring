@@ -18,18 +18,17 @@ const buildingObjectsByTypes = {
 
 [...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors].forEach((item) => {
   const Drawable = buildingObjectsByTypes[item.type];
-  let nameProperties = [];
+  let propertiesForRendering = [];
   for (let key in item) {
     if (key !== "type") {
-      nameProperties.push(key);
+      propertiesForRendering.push(key);
     }
   }
-  let properties = new Object();
-  for (let property of nameProperties) {
-    properties[property] = item[property];
+  let objectProperties = new Object();
+  for (let property of propertiesForRendering) {
+    objectProperties[property] = item[property];
   }
 
-  let drawableObject = new Drawable(properties, canvas);
+  let drawableObject = new Drawable(objectProperties, canvas);
   drawableObject.draw();
 });
-
