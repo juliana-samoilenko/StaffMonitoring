@@ -45,3 +45,27 @@ export class DrawableRectangle {
     rectangle.noStroke();
   }
 }
+
+export class DrawableCircle {
+  constructor({ id, name, xCurrent, yCurrent, radius, color }, canvas) {
+    this.id = id;
+    this.name = name;
+    this.xCenter = xCurrent;
+    this.yCenter = yCurrent;
+    this.radius = radius;
+    this.color = color;
+    this.canvas = canvas;
+  }
+
+  draw() {
+    this._makeCircle();
+    this.canvas.update();
+  }
+
+  _makeCircle() {
+    const circle = this.canvas.makeCircle(this.xCenter, this.yCenter, this.radius);
+    circle.id = this.id;
+    circle.fill = this.color;
+    circle.noStroke();
+  }
+}
