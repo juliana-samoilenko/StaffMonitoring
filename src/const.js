@@ -1,6 +1,8 @@
 const WALL_COLOR = '#000000';
 const DOOR_COLOR = '#A63600';
 const ZONE_COLOR = '#FFD173';
+const EMPLOYEE_COLOR = '#3A19A4';
+const EMPLOYEE_RADIUS = 15;
 const INTERNAL_WALL_THICKNESS = 5;
 const DOOR_THICKNESS = 5;
 const EXTERNAL_WALL_THICKNESS = 15;
@@ -39,5 +41,11 @@ export const ELEMENTS_BUILDING = {
     { type: "zone", id: 2, name: 'Цех 1', xCenter: 920, yCenter: 98, width: 235, height: 180, color: ZONE_COLOR },
     { type: "zone", id: 3, name: 'Высокое напряжение', xCenter: 168, yCenter: 258, width: 319, height: 130, color: ZONE_COLOR },
     { type: "zone", id: 4, name: 'Спец оборудование', xCenter: 922, yCenter: 532, width: 230, height: 120, color: ZONE_COLOR }
+  ],
+
+  employees: [
+    { type: "employee", id: 1, name: 'Петров С.М.', xCurrent: 415, yCurrent: 560, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
+    { type: "employee", id: 2, name: 'Петров С.М.', xCurrent: 550, yCurrent: 560, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
+    { type: "employee", id: 3, name: 'Петров С.М.', xCurrent: 750, yCurrent: 250, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
   ]
 };
