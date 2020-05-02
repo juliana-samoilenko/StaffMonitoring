@@ -15,7 +15,7 @@ export class DrawableLine {
   }
 
   _makeLine() {
-    let line = this.canvas.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    const line = this.canvas.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
     line.linewidth = this.thickness;
     line.stroke = this.color;
   }
@@ -39,7 +39,7 @@ export class DrawableRectangle {
   }
 
   _makeRectangle() {
-    let rectangle = this.canvas.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
+    const rectangle = this.canvas.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
     rectangle.fill = this.color;
     rectangle.id = this.id;
     rectangle.noStroke();
