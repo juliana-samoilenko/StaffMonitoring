@@ -3,7 +3,7 @@ import Two from 'two.js';
 import {Wall} from './Wall.js';
 import {Door} from './Door.js';
 import {Zone} from './Zone.js';
-import {Employee} from './Employee';
+import {Employee} from './Employee.js';
 
 import {
   WIDTH_CANVAS,
