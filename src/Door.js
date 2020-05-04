@@ -1,3 +1,3 @@
 import {DrawableLine} from './Drawable.js';
 
-export default class Door extends DrawableLine {}
+export class Door extends DrawableLine {}

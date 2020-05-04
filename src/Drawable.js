@@ -1,28 +1,28 @@
 export class DrawableLine {
-  constructor({ xStart, yStart, xEnd, yEnd, thickness, color }, canvas) {
+  constructor({ xStart, yStart, xEnd, yEnd, thickness, color }, two) {
     this.xStart = xStart;
     this.yStart = yStart;
     this.xEnd = xEnd;
     this.yEnd = yEnd;
     this.thickness = thickness;
     this.color = color;
-    this.canvas = canvas;
+    this.two = two;
   }
 
   draw() {
     this._makeLine();
-    this.canvas.update();
+    this.two.update();
   }
 
   _makeLine() {
-    let line = this.canvas.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
+    const line = this.two.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
     line.linewidth = this.thickness;
     line.stroke = this.color;
   }
 }
 
 export class DrawableRectangle {
-  constructor({ id, name, xCenter, yCenter, width, height, color }, canvas) {
+  constructor({ id, name, xCenter, yCenter, width, height, color }, two) {
     this.id = id;
     this.name = name;
     this.xCenter = xCenter;
@@ -30,18 +30,42 @@ export class DrawableRectangle {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.canvas = canvas;
+    this.two = two;
   }
 
   draw() {
     this._makeRectangle();
-    this.canvas.update();
+    this.two.update();
   }
 
   _makeRectangle() {
-    let rectangle = this.canvas.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
+    const rectangle = this.two.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
     rectangle.fill = this.color;
     rectangle.id = this.id;
     rectangle.noStroke();
+  }
+}
+
+export class DrawableCircle {
+  constructor({ id, name, xCurrent, yCurrent, radius, color }, two) {
+    this.id = id;
+    this.name = name;
+    this.xCenter = xCurrent;
+    this.yCenter = yCurrent;
+    this.radius = radius;
+    this.color = color;
+    this.two = two;
+  }
+
+  draw() {
+    this._makeCircle();
+    this.two.update();
+  }
+
+  _makeCircle() {
+    const circle = this.two.makeCircle(this.xCenter, this.yCenter, this.radius);
+    circle.id = this.id;
+    circle.fill = this.color;
+    circle.noStroke();
   }
 }
