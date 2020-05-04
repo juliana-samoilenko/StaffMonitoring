@@ -6,15 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Staff Monitoring</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-  <script type="text/javascript" src="/app.js"></script>
 </head>
 
 <body>
   <div class="container">
     <div class="work-display">
-      <div class="work-display__plan">
-        
-        <div class="notification-list">
+      <canvas class="work-display__plan js-building-canvas"></canvas>
+
+        <!--<div class="notification-list">
           <article class="notification-list__notification notification">
             <header class="notification__header">
               <img class="notification__img" src="/img/warning.min.svg" arial-role="presentation">
@@ -25,9 +24,7 @@
               {Notification text}
             </div>
           </article>
-        </div>
-
-      </div>
+        </div>-->
       <!--<button class="work-display__button-open-list" type="button" title="Список сотрудников"></button>-->
       <section class="employee-information-panel">
         <div class="employees-panel">
@@ -210,6 +207,8 @@
       </section>
     </div>
   </div>
+
+<script type="text/javascript" src="/app.js"></script>
 </body>
 
 </html>
