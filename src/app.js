@@ -2,6 +2,7 @@ import '/index.scss';
 import Two from 'two.js';
 import Wall from './Wall.js';
 import Door from './Door.js';
+import Zone from './Zone.js';
 
 import {
   WIDTH_CANVAS,
@@ -10,26 +11,17 @@ import {
 } from '/const.js';
 
 const element = document.querySelector('.js-building-canvas');
-const canvas = new Two({width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: element});
+const canvas = new Two( { width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: element } );
 const buildingObjectsByTypes = {
   wall: Wall,
   door: Door,
+  zone: Zone,
 };
 
-[...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors].forEach((item) => {
-  const Drawable = buildingObjectsByTypes[item.type];
-  let nameProperties = [];
-  for (let key in item) {
-    if (key !== "type") {
-      nameProperties.push(key);
-    }
-  }
-  let properties = new Object();
-  for (let property of nameProperties) {
-    properties[property] = item[property];
-  }
+[...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors, ...ELEMENTS_BUILDING.zones].forEach((buildingObjectConfigWithType) => {
+  const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
+  const Drawable = buildingObjectsByTypes[buildingObjectType];
 
-  let drawableObject = new Drawable(properties, canvas);
+  const drawableObject = new Drawable(buildingObjectConfig, canvas);
   drawableObject.draw();
 });
-

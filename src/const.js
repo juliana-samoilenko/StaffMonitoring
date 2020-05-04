@@ -1,10 +1,12 @@
+const WALL_COLOR = '#000000';
+const DOOR_COLOR = '#A63600';
+const ZONE_COLOR = '#FFD173';
+const INTERNAL_WALL_THICKNESS = 5;
+const DOOR_THICKNESS = 5;
+const EXTERNAL_WALL_THICKNESS = 15;
+
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
-export const WALL_COLOR = '#000000';
-export const DOOR_COLOR = '#A63600';
-export const INTERNAL_WALL_THICKNESS = 5;
-export const DOOR_THICKNESS = 5;
-export const EXTERNAL_WALL_THICKNESS = 15;
 
 export const ELEMENTS_BUILDING = {
   walls: [
@@ -30,5 +32,12 @@ export const ELEMENTS_BUILDING = {
     { type: "door", xStart: 930, yStart: 189, xEnd: 995, yEnd: 235, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
     { type: "door", xStart: 329, yStart: 400, xEnd: 375, yEnd: 335, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
     { type: "door", xStart: 659, yStart: 470, xEnd: 615, yEnd: 535, thickness: DOOR_THICKNESS, color: DOOR_COLOR },
+  ], 
+
+  zones: [
+    { type: "zone", id: 1, name: 'Высотные работы', xCenter: 108, yCenter: 58, width: 200, height: 100, color: ZONE_COLOR },
+    { type: "zone", id: 2, name: 'Цех 1', xCenter: 920, yCenter: 98, width: 235, height: 180, color: ZONE_COLOR },
+    { type: "zone", id: 3, name: 'Высокое напряжение', xCenter: 168, yCenter: 258, width: 319, height: 130, color: ZONE_COLOR },
+    { type: "zone", id: 4, name: 'Спец оборудование', xCenter: 922, yCenter: 532, width: 230, height: 120, color: ZONE_COLOR }
   ]
 };
