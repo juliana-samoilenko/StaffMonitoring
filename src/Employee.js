@@ -1,3 +1,3 @@
 import {DrawableCircle} from './Drawable.js';
 
-export default class Employee extends DrawableCircle {}
+export class Employee extends DrawableCircle {}

@@ -1,9 +1,9 @@
 import '/index.scss';
 import Two from 'two.js';
-import Wall from './Wall.js';
-import Door from './Door.js';
-import Zone from './Zone.js';
-import Employee from './Employee';
+import {Wall} from './Wall.js';
+import {Door} from './Door.js';
+import {Zone} from './Zone.js';
+import {Employee} from './Employee';
 
 import {
   WIDTH_CANVAS,
@@ -17,7 +17,7 @@ const buildingObjectsByTypes = {
   wall: Wall,
   door: Door,
   zone: Zone,
-  employee: Employee,
+  employee: Employee
 };
 
 [...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors, ...ELEMENTS_BUILDING.zones, ...ELEMENTS_BUILDING.employees].forEach((buildingObjectConfigWithType) => {

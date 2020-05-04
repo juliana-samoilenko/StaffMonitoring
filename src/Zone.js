@@ -1,6 +1,6 @@
 import {DrawableRectangle} from './Drawable.js';
 
-export default class Zone extends DrawableRectangle {
+export class Zone extends DrawableRectangle {
   draw() {
     this._writeZoneName();
     super.draw();
