@@ -55,17 +55,19 @@ export class DrawableCircle {
     this.radius = radius;
     this.color = color;
     this.two = two;
+    this.drawPoint;
   }
 
   draw() {
     this._makeCircle();
+    this.two.add(this.drawPoint);
     this.two.update();
   }
 
   _makeCircle() {
-    const circle = this.two.makeCircle(this.xCenter, this.yCenter, this.radius);
-    circle.id = this.id;
-    circle.fill = this.color;
-    circle.noStroke();
+    this.drawPoint = this.two.makeCircle(this.xCenter, this.yCenter, this.radius);
+    this.drawPoint.id = this.id;
+    this.drawPoint.fill = this.color;
+    this.drawPoint.noStroke();
   }
 }
