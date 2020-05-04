@@ -2,12 +2,13 @@ import {DrawableRectangle} from './Drawable.js';
 
 export class Zone extends DrawableRectangle {
   draw() {
-    this._writeZoneName();
     super.draw();
+    this._writeText();
   }
 
-  _writeZoneName() {
+  _writeText() {
     let text = this.canvas.makeText(this.name, this.xCenter, this.yCenter);
     text.size = 14;
+    this.canvas.update();
   }
 }
