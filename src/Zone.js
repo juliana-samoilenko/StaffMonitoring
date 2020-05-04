@@ -7,8 +7,8 @@ export class Zone extends DrawableRectangle {
   }
 
   _writeText() {
-    let text = this.canvas.makeText(this.name, this.xCenter, this.yCenter);
+    let text = this.two.makeText(this.name, this.xCenter, this.yCenter);
     text.size = 14;
-    this.canvas.update();
+    this.two.update();
   }
 }

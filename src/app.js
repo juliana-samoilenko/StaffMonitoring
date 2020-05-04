@@ -11,8 +11,8 @@ import {
   ELEMENTS_BUILDING,
 } from '/const.js';
 
-const element = document.querySelector('.js-building-canvas');
-const canvas = new Two( { width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: element } );
+const canvasElement = document.querySelector('.js-building-canvas');
+const two = new Two( { width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement } );
 const buildingObjectsByTypes = {
   wall: Wall,
   door: Door,
@@ -24,6 +24,6 @@ const buildingObjectsByTypes = {
   const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
   const Drawable = buildingObjectsByTypes[buildingObjectType];
 
-  const drawableObject = new Drawable(buildingObjectConfig, canvas);
+  const drawableObject = new Drawable(buildingObjectConfig, two);
   drawableObject.draw();
 });
