@@ -1,4 +1,4 @@
-import {DrawableRectangle} from './Drawable.js';
+import {DrawableRectangle} from './Drawable/DrawableRectangle';
 
 export class Zone extends DrawableRectangle {
   draw() {
