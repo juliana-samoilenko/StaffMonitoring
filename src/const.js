@@ -51,7 +51,7 @@ export const ELEMENTS_BUILDING = {
 };
 
 export const EMPLOYEE_TRACKS = [
-  { id: 1, points: [[100, 100], [200, 200], [300, 300]], employeeCurrentPointIndex: null },
-  { id: 2, points: [[100, 200], [100, 300], [100, 400]], employeeCurrentPointIndex: null },
-  { id: 3, points: [[700, 100], [700, 200], [700, 300]], employeeCurrentPointIndex: null }
+  { id: 1, points: [[100, 100], [200, 200], [300, 300]]},
+  { id: 2, points: [[100, 200], [100, 300], [100, 400]]},
+  { id: 3, points: [[700, 100], [700, 200], [700, 300]]}
 ];
