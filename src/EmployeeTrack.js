@@ -1,14 +1,14 @@
 export class EmployeeTrack {
   constructor({ id, points }) {
     this.id = id;
-    this.points = points;
+    this._points = points;
   }
 
   getPoint(index) {
-    return this.points[index];
+    return this._points[index];
   }
 
   getLength() {
-    return this.points.length;
+    return this._points.length;
   }
 }
