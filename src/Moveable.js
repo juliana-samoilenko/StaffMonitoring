@@ -25,6 +25,6 @@ export const Moveable = superClass => class Moveable extends superClass {
   }
 
   _getIndexNextPoint() {
-    return (this._currentPointIndex + 1) % this.track.getLengthTrack();
+    return (this._currentPointIndex + 1) % this.track.getLength();
   }
 }

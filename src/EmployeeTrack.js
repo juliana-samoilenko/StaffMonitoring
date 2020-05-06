@@ -8,7 +8,7 @@ export class EmployeeTrack {
     return this.points[index];
   }
 
-  getLengthTrack() {
+  getLength() {
     return this.points.length;
   }
 }
