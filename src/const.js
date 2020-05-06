@@ -44,8 +44,14 @@ export const ELEMENTS_BUILDING = {
   ],
 
   employees: [
-    { type: "employee", id: 1, name: 'Петров С.М.', xCurrent: 415, yCurrent: 560, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
-    { type: "employee", id: 2, name: 'Петров С.М.', xCurrent: 550, yCurrent: 560, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
-    { type: "employee", id: 3, name: 'Петров С.М.', xCurrent: 750, yCurrent: 250, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
+    { type: "employee", id: 1, name: 'Петров С.М.', xCurrent: 415, yCurrent: 560, track: null, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
+    { type: "employee", id: 2, name: 'Петров С.М.', xCurrent: 550, yCurrent: 560, track: null, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
+    { type: "employee", id: 3, name: 'Петров С.М.', xCurrent: 750, yCurrent: 250, track: null, radius: EMPLOYEE_RADIUS, color: EMPLOYEE_COLOR },
   ]
 };
+
+export const EMPLOYEE_TRACKS = [
+  { id: 1, points: [[100, 100], [200, 200], [300, 300]]},
+  { id: 2, points: [[100, 200], [100, 300], [100, 400]]},
+  { id: 3, points: [[700, 100], [700, 200], [700, 300]]}
+];
