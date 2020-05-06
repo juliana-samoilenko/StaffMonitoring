@@ -3,11 +3,13 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
+    "extends": [
+      "airbnb-base",
+      "import",
+    ],
+    "plugins": [
+      "import"
+    ],
     "rules": {
     }
 };
