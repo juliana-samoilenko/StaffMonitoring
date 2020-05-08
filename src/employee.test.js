@@ -65,4 +65,19 @@ describe('Emloyee class, check logic', function() {
       expect(employee.yCenter).toEqual(500);
     });
   });
+
+  describe('Add track', function() {
+    it('Check track length', () => {
+      //Arrange
+      const track = new EmployeeTrack( { id: 1, points: [{x: 50, y: 50}, {x: 50, y: 100}, {x: 100, y: 100}, {x: 100, y: 150}, {x: 100, y: 100}, {x: 50, y: 100}]} );
+      const employee = new Employee({
+        id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track: track}, two )
+
+      //Act
+      const trackLength = employee.track.getLength();
+
+      //Assert
+      expect(trackLength).toEqual(6);
+    });
+  });
 });
