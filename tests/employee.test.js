@@ -1,5 +1,5 @@
-import {Employee} from './Employee';
-import {EmployeeTrack} from './EmployeeTrack';
+import {Employee} from '../src/Employee';
+import {EmployeeTrack} from '../src/EmployeeTrack';
 
 const two = {};
 
@@ -82,7 +82,7 @@ describe('Emloyee class, check logic', function() {
   });
 
   describe('Add track', function() {
-    it('Check to change current point index', () => {
+    it('Check to change _currentPointIndex', () => {
       //Arrange
       const track = new EmployeeTrack( { id: 1, points: [{x: 60, y: 100}, {x: 700, y: 600}]} );
       const employee = new Employee({
