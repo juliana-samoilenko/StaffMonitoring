@@ -32,4 +32,20 @@ describe('Emloyee class, check logic', function() {
       expect(employee.track._points).toEqual([{x: 50, y: 50}, {x: 50, y: 100}]);
     });
   });
+
+  describe('Add current coordinates to employee', function() {
+    it('When coordinates are added to an employee, they are saved in the employee object', () => {
+      //Arrange
+      const x = 300;
+      const y = 400;
+
+      //Act
+      const employee = new Employee({
+        id: 1, name: 'Петров С.М.', xCurrent: x, yCurrent: y, radius: 15, color: '#3A19A4', track: {}}, two );
+
+      //Assert
+      expect(employee.xCenter).toEqual(300);
+      expect(employee.yCenter).toEqual(400);
+    });
+  });
 });
