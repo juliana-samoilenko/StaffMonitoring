@@ -80,4 +80,21 @@ describe('Emloyee class, check logic', function() {
       expect(trackLength).toEqual(6);
     });
   });
+
+  describe('Add track', function() {
+    it('Check to change current point index', () => {
+      //Arrange
+      const track = new EmployeeTrack( { id: 1, points: [{x: 60, y: 100}, {x: 700, y: 600}]} );
+      const employee = new Employee({
+        id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track: track}, two );
+
+      //Act
+      const { x: xNext, y: yNext } = employee.getNextPoint();
+
+      //Assert
+      expect(xNext).toEqual(700);
+      expect(yNext).toEqual(600);
+      expect(employee._currentPointIndex).toEqual(1);
+    });
+  });
 });
