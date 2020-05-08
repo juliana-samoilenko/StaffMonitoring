@@ -31,9 +31,9 @@ export class Employee extends Moveable(DrawableCircle) {
   }
 
   move(x, y) {
-    this.clear();
+    //this.clear();
     this.xCenter = x;
     this.yCenter = y;
-    super.draw();
+    //super.draw();
   }
 }

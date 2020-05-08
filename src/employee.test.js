@@ -48,4 +48,21 @@ describe('Emloyee class, check logic', function() {
       expect(employee.yCenter).toEqual(400);
     });
   });
+
+  describe('Add move to employee', function() {
+    it('When using move(x, y) method, the values of the starting point are changed to x and y', () => {
+      //Arrange
+      const employee = new Employee({
+        id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track: {}}, two );
+      const x = 300; 
+      const y = 500;
+
+      //Act
+      employee.move(x, y);
+
+      //Assert
+      expect(employee.xCenter).toEqual(300);
+      expect(employee.yCenter).toEqual(500);
+    });
+  });
 });
