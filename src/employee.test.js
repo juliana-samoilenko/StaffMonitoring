@@ -26,14 +26,45 @@ describe('Emloyee class, check logic', () => {
 
   describe('Add track', () => {
     it('When adding a track to an employee, it is saved in the employee property', () => {
-      // Act
+      // Arrange
       const point1 = { x: 600, y: 50 };
       const point2 = { x: 50, y: 100 };
-      const track = new EmployeeTrack({ id: 1, points: [point1, point2] });
+
+      // Act
+      const track = new EmployeeTrack({
+        id: 1,
+        points: [point1, point2],
+      });
 
       // Assert
       expect(track.getPoint(0)).toEqual({ x: point1.x, y: point1.y });
       expect(track.getPoint(1)).toEqual({ x: point2.x, y: point2.y });
+    });
+
+    it('When next point received for the first time, check that _currentPointIndex is changed to 1', () => {
+      // Arrange
+      const two = {};
+      const track = new EmployeeTrack({
+        id: 1,
+        points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
+      });
+      const employee = new Employee({
+        id: 1,
+        name: 'Петров С.М.',
+        xCurrent: 50,
+        yCurrent: 50,
+        radius: 15,
+        color: '#3A19A4',
+        track,
+      }, two);
+
+      // Act
+      const { x: xNext, y: yNext } = employee.getNextPoint();
+
+      // Assert
+      expect(xNext).toEqual(700);
+      expect(yNext).toEqual(600);
+      expect(employee._currentPointIndex).toEqual(1);
     });
   });
 
@@ -95,25 +126,6 @@ describe('Emloyee class, check logic', () => {
 
       // Assert
       expect(trackLength).toEqual(points.length);
-    });
-  });
-
-  describe('Add track', () => {
-    it('When next point received for the first time, check that _currentPointIndex is changed to 1', () => {
-      // Arrange
-      const two = {};
-      const track = new EmployeeTrack({ id: 1, points: [{ x: 60, y: 100 }, { x: 700, y: 600 }] });
-      const employee = new Employee({
-        id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track,
-      }, two);
-
-      // Act
-      const { x: xNext, y: yNext } = employee.getNextPoint();
-
-      // Assert
-      expect(xNext).toEqual(700);
-      expect(yNext).toEqual(600);
-      expect(employee._currentPointIndex).toEqual(1);
     });
   });
 });
