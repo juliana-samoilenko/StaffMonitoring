@@ -3,10 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": [
-      "airbnb-base",
-      "import",
-    ],
+    "extends": ["airbnb-base"],
     "plugins": [
       "import"
     ],
