@@ -1,7 +1,7 @@
 import { Employee } from './Employee';
 import { EmployeeTrack } from './EmployeeTrack';
 
-describe('Emloyee class, check logic', () => {
+describe('Emloyee class', () => {
   describe('Add empty track', () => {
     it('When adding a empty track to an employee, it is saved in the employee property', () => {
       // Arrange
