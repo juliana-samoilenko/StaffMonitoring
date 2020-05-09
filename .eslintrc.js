@@ -3,9 +3,6 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "transform": {
-      '^.+\\.ts?$': 'ts-jest',
-    },
     "extends": [
       "airbnb-base",
       "import",
