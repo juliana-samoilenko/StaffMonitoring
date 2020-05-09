@@ -77,12 +77,18 @@ describe('Emloyee class, check logic', () => {
 
       // Act
       const employee = new Employee({
-        id: 1, name: 'Петров С.М.', xCurrent: x, yCurrent: y, radius: 15, color: '#3A19A4', track: {},
+        id: 1,
+        name: 'Петров С.М.',
+        xCurrent: x,
+        yCurrent: y,
+        radius: 15,
+        color: '#3A19A4',
+        track: {},
       }, two);
 
       // Assert
-      expect(employee.xCenter).toEqual(300);
-      expect(employee.yCenter).toEqual(400);
+      expect(employee.xCenter).toEqual(x);
+      expect(employee.yCenter).toEqual(y);
     });
   });
 
@@ -110,8 +116,8 @@ describe('Emloyee class, check logic', () => {
       employee.move(x, y);
 
       // Assert
-      expect(employee.xCenter).toEqual(300);
-      expect(employee.yCenter).toEqual(500);
+      expect(employee.xCenter).toEqual(x);
+      expect(employee.yCenter).toEqual(y);
     });
   });
 
@@ -119,7 +125,10 @@ describe('Emloyee class, check logic', () => {
     it('Check track length', () => {
       // Arrange
       const points = [{ x: 50, y: 50 }, { x: 50, y: 100 }, { x: 100, y: 100 }];
-      const track = new EmployeeTrack({ id: 1, points });
+      const track = new EmployeeTrack({
+        id: 1,
+        points,
+      });
 
       // Act
       const trackLength = track.getLength();
