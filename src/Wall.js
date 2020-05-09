@@ -1,3 +1,3 @@
-import {DrawableLine} from './Drawable/DrawableLine';
+import { DrawableLine } from './Drawable/DrawableLine';
 
 export class Wall extends DrawableLine {}

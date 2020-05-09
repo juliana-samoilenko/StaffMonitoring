@@ -9,5 +9,8 @@ module.exports = {
       "import"
     ],
     "rules": {
+      "class-methods-use-this": "off",
+      "no-underscore-dangle": "off",
+      "import/prefer-default-export": "off",
     }
 };

@@ -1,5 +1,7 @@
 export class DrawableLine {
-  constructor({ xStart, yStart, xEnd, yEnd, thickness, color }, two) {
+  constructor({
+    xStart, yStart, xEnd, yEnd, thickness, color,
+  }, two) {
     this.xStart = xStart;
     this.yStart = yStart;
     this.xEnd = xEnd;
