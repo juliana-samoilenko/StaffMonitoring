@@ -1,5 +1,5 @@
-import {Employee} from '../src/Employee';
-import {EmployeeTrack} from '../src/EmployeeTrack';
+import {Employee} from './Employee';
+import {EmployeeTrack} from './EmployeeTrack';
 
 const two = {};
 
