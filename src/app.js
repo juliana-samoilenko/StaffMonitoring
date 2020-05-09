@@ -1,16 +1,16 @@
 import './index.scss';
 import Two from 'two.js';
-import { Wall } from './Wall.js';
-import { Door } from './Door.js';
-import { Zone } from './Zone.js';
-import { Employee } from './Employee.js';
-import { EmployeeTrack } from './EmployeeTrack.js';
+import { Wall } from './Wall';
+import { Door } from './Door';
+import { Zone } from './Zone';
+import { Employee } from './Employee';
+import { EmployeeTrack } from './EmployeeTrack';
 
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
   ELEMENTS_BUILDING,
-} from './const.js';
+} from './const';
 
 const canvasElement = document.querySelector('.js-building-canvas');
 const two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement });
