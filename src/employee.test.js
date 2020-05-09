@@ -120,4 +120,30 @@ describe('Emloyee class', () => {
       expect(employee.yCenter).toEqual(y);
     });
   });
+
+  describe('Check work clear() method', () => {
+    it('When using move() method must call the internal clear() method; remove() method is inside clear() method', () => {
+      // Arrange
+      const two = {
+        remove: jest.fn(),
+      };
+
+      const employee = new Employee({
+        id: 1,
+        name: 'Петров С.М.',
+        xCurrent: 50,
+        yCurrent: 50,
+        radius: 15,
+        color: '#3A19A4',
+        track: {},
+      }, two);
+      employee.draw = jest.fn();
+
+      // Act
+      employee.move();
+
+      // Assert
+      expect(two.remove).toHaveBeenCalledTimes(1);
+    });
+  });
 });
