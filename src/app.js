@@ -21,7 +21,9 @@ const buildingObjectsByTypes = {
   employee: Employee,
 };
 
-[...ELEMENTS_BUILDING.walls, ...ELEMENTS_BUILDING.doors, ...ELEMENTS_BUILDING.zones].forEach((buildingObjectConfigWithType) => {
+const elementForDrawing = Object.values(ELEMENTS_BUILDING).flat();
+
+elementForDrawing.forEach((buildingObjectConfigWithType) => {
   const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
   const Drawable = buildingObjectsByTypes[buildingObjectType];
 
@@ -29,17 +31,20 @@ const buildingObjectsByTypes = {
   drawableObject.draw();
 });
 
-const track1 = new EmployeeTrack({ id: 1, points: [{ x: 50, y: 50 }, { x: 50, y: 100 }, { x: 100, y: 100 }, { x: 100, y: 150 }, { x: 100, y: 100 }, { x: 50, y: 100 }] });
+const points1 = [{ x: 50, y: 50 }, { x: 50, y: 100 }, { x: 100, y: 100 }];
+const track1 = new EmployeeTrack({ id: 1, points: points1 });
 const employee1 = new Employee({
   id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track: track1,
 }, two);
 
-const track2 = new EmployeeTrack({ id: 1, points: [{ x: 200, y: 200 }, { x: 200, y: 250 }, { x: 250, y: 250 }, { x: 250, y: 200 }] });
+const points2 = [{ x: 200, y: 200 }, { x: 200, y: 250 }, { x: 250, y: 250 }, { x: 250, y: 200 }];
+const track2 = new EmployeeTrack({ id: 1, points: points2 });
 const employee2 = new Employee({
   id: 2, name: 'Петров С.М.', xCurrent: 200, yCurrent: 200, radius: 15, color: '#3A19A4', track: track2,
 }, two);
 
-const track3 = new EmployeeTrack({ id: 1, points: [{ x: 400, y: 400 }, { x: 500, y: 500 }, { x: 300, y: 500 }] });
+const points3 = [{ x: 400, y: 400 }, { x: 500, y: 500 }, { x: 300, y: 500 }];
+const track3 = new EmployeeTrack({ id: 1, points: points3 });
 const employee3 = new Employee({
   id: 3, name: 'Кожемяка В.С.', xCurrent: 500, yCurrent: 500, radius: 15, color: '#3A19A4', track: track3,
 }, two);
