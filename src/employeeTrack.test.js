@@ -1,4 +1,3 @@
-
 import { EmployeeTrack } from './EmployeeTrack';
 
 describe('EmloyeeTrack class', () => {
