@@ -146,4 +146,36 @@ describe('Emloyee class', () => {
       expect(two.remove).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Check work moveAlong() method', () => {
+    it('When used moveAlong() method, then move() method called n time after n seconds ', () => {
+      // Arrange
+      const two = {};
+      const n = 2;
+
+      const track = new EmployeeTrack({
+        id: 1,
+        points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
+      });
+
+      const employee = new Employee({
+        id: 1,
+        name: 'Петров С.М.',
+        xCurrent: 50,
+        yCurrent: 50,
+        radius: 15,
+        color: '#3A19A4',
+        track,
+      }, two);
+      employee.move = jest.fn();
+      jest.useFakeTimers();
+
+      // Act
+      employee.moveAlong();
+      jest.advanceTimersByTime(n * 1000);
+
+      // Assert
+      expect(employee.move).toHaveBeenCalledTimes(n);
+    });
+  });
 });
