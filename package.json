@@ -27,8 +27,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "canvas": "^2.6.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-import-resolver-parcel": "^1.10.4",
     "eslint-plugin-import": "^2.20.1",
     "jest": "^26.0.1",
     "parcel-bundler": "^1.12.4",
