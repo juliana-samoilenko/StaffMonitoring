@@ -1,5 +1,7 @@
 export class DrawableRectangle {
-  constructor({ id, name, xCenter, yCenter, width, height, color }, two) {
+  constructor({
+    id, name, xCenter, yCenter, width, height, color,
+  }, two) {
     this.id = id;
     this.name = name;
     this.xCenter = xCenter;

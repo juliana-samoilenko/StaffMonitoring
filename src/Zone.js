@@ -1,4 +1,4 @@
-import {DrawableRectangle} from './Drawable/DrawableRectangle';
+import { DrawableRectangle } from './Drawable/DrawableRectangle';
 
 export class Zone extends DrawableRectangle {
   draw() {
@@ -7,7 +7,7 @@ export class Zone extends DrawableRectangle {
   }
 
   _writeText() {
-    let text = this.two.makeText(this.name, this.xCenter, this.yCenter);
+    const text = this.two.makeText(this.name, this.xCenter, this.yCenter);
     text.size = 14;
     this.two.update();
   }

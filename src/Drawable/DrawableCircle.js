@@ -1,5 +1,7 @@
 export class DrawableCircle {
-  constructor({ id, name, xCurrent, yCurrent, radius, color }, two) {
+  constructor({
+    id, name, xCurrent, yCurrent, radius, color,
+  }, two) {
     this.id = id;
     this.name = name;
     this.xCenter = xCurrent;
@@ -7,7 +9,7 @@ export class DrawableCircle {
     this.radius = radius;
     this.color = color;
     this.two = two;
-    this.drawPoint;
+    this.drawPoint = null;
   }
 
   draw() {
