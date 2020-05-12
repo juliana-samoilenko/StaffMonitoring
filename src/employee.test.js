@@ -148,14 +148,19 @@ describe('Emloyee class', () => {
   });
 
   describe('Check work moveAlong() method', () => {
-    it('When used moveAlong() method, then move() method called n time after n seconds ', () => {
+    it('numberOfEmployeeMoves(=1) minutes later, when used moveAlong() method, employee will be in point2', () => {
       // Arrange
-      const two = {};
-      const numberOfEmployeeMoves = 2;
+      const two = {
+        remove: jest.fn(),
+      };
+      const numberOfEmployeeMoves = 1;
 
+      const point1 = { x: 60, y: 100 };
+      const point2 = { x: 700, y: 600 };
+      const point3 = { x: 500, y: 100 };
       const track = new EmployeeTrack({
         id: 1,
-        points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
+        points: [point1, point2, point3],
       });
 
       const employee = new Employee({
@@ -167,7 +172,7 @@ describe('Emloyee class', () => {
         color: '#3A19A4',
         track,
       }, two);
-      employee.move = jest.fn();
+      employee.draw = jest.fn();
       jest.useFakeTimers();
 
       // Act
@@ -175,7 +180,8 @@ describe('Emloyee class', () => {
       jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert
-      expect(employee.move).toHaveBeenCalledTimes(numberOfEmployeeMoves);
+      expect(employee.xCenter).toEqual(point2.x);
+      expect(employee.yCenter).toEqual(point2.y);
     });
   });
 });
