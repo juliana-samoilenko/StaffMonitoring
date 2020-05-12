@@ -183,5 +183,41 @@ describe('Emloyee class', () => {
       expect(employee.xCenter).toEqual(point2.x);
       expect(employee.yCenter).toEqual(point2.y);
     });
+
+    it('numberOfEmployeeMoves(=3) minutes later, when used moveAlong() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
+      // Arrange
+      const two = {
+        remove: jest.fn(),
+      };
+      const numberOfEmployeeMoves = 3;
+
+      const point1 = { x: 60, y: 100 };
+      const point2 = { x: 700, y: 600 };
+      const point3 = { x: 500, y: 100 };
+      const track = new EmployeeTrack({
+        id: 1,
+        points: [point1, point2, point3],
+      });
+
+      const employee = new Employee({
+        id: 1,
+        name: 'Петров С.М.',
+        xCurrent: 50,
+        yCurrent: 50,
+        radius: 15,
+        color: '#3A19A4',
+        track,
+      }, two);
+      employee.draw = jest.fn();
+      jest.useFakeTimers();
+
+      // Act
+      employee.moveAlong();
+      jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
+
+      // Assert
+      expect(employee.xCenter).toEqual(point1.x);
+      expect(employee.yCenter).toEqual(point1.y);
+    });
   });
 });
