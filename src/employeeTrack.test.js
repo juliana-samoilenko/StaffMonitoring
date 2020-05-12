@@ -16,5 +16,21 @@ describe('EmloyeeTrack class', () => {
       // Assert
       expect(trackLength).toEqual(points.length);
     });
+
+    it('When adding a track to an employee, it is saved in the employee property', () => {
+      // Arrange
+      const point1 = { x: 600, y: 50 };
+      const point2 = { x: 50, y: 100 };
+
+      // Act
+      const track = new EmployeeTrack({
+        id: 1,
+        points: [point1, point2],
+      });
+
+      // Assert
+      expect(track.getPoint(0)).toEqual({ x: point1.x, y: point1.y });
+      expect(track.getPoint(1)).toEqual({ x: point2.x, y: point2.y });
+    });
   });
 });
