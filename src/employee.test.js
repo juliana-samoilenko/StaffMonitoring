@@ -151,7 +151,7 @@ describe('Emloyee class', () => {
     it('When used moveAlong() method, then move() method called n time after n seconds ', () => {
       // Arrange
       const two = {};
-      const n = 2;
+      const numberOfEmployeeMoves = 2;
 
       const track = new EmployeeTrack({
         id: 1,
@@ -172,10 +172,10 @@ describe('Emloyee class', () => {
 
       // Act
       employee.moveAlong();
-      jest.advanceTimersByTime(n * 1000);
+      jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert
-      expect(employee.move).toHaveBeenCalledTimes(n);
+      expect(employee.move).toHaveBeenCalledTimes(numberOfEmployeeMoves);
     });
   });
 });
