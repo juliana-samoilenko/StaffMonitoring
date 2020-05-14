@@ -5,12 +5,15 @@ import { Door } from './Door';
 import { Zone } from './Zone';
 import { Employee } from './Employee';
 import { EmployeeTrack } from './EmployeeTrack';
+import { renderApp } from './renderApp';
 
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
   ELEMENTS_BUILDING,
 } from './const';
+
+renderApp();
 
 const canvasElement = document.querySelector('.js-building-canvas');
 const two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement });
