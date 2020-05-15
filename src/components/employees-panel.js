@@ -1,5 +1,4 @@
-export const createEmployeesPanelTemplate = (employeesList) => 
-`<section class="employee-information-panel">
+export const createEmployeesPanelTemplate = (employeesList) => `<section class="employee-information-panel">
 <div class="employees-panel">
 
   <header class="employees-panel__header list-header">
@@ -19,8 +18,7 @@ export const createEmployeesPanelTemplate = (employeesList) =>
 </div>
 </section>`;
 
-export const createEmployeeListItemTemplate = (employees) => 
-`<li class="employees-list__item employee">
+export const createEmployeeListItemTemplate = (employees) => `<li class="employees-list__item employee">
 <div class="employee__container">
   <span class="employee__name">${employees.id}) ${employees.name}</span>
   <button class="employee__button-open-edit" type="button" title="Редактировать">
