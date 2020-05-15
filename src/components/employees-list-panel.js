@@ -1,4 +1,4 @@
-export const createEmployeesPanelTemplate = (employeesList) => `<section class="employee-information-panel">
+export const createEmployeesListPanelTemplate = (employeesList) => `<section class="employee-information-panel js-employee-information-panel">
 <div class="employees-panel">
 
   <header class="employees-panel__header list-header">
