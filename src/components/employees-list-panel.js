@@ -26,6 +26,5 @@ export const createEmployeeListItemTemplate = (employees) => `<li class="employe
 </div>
 </li>`;
 
-export const createTemplateForOpenEmployeeListButton = () => 
-`<button class="button button-open-list" type="button" title="Список сотрудников">
+export const createTemplateForOpenEmployeeListButton = () => `<button class="button button-open-list" type="button" title="Список сотрудников">
 </button>`;
