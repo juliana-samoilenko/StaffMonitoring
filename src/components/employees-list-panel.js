@@ -1,7 +1,8 @@
 export const createTemplateForEmployeesListPanel = (employeesList) => {
   const employeeListItemTemplates = employeesList.map(e => createTemplateForEmployeeListItem(e)).join('');
 
-  return `<section class="employee-information-panel js-employee-information-panel">
+  return `
+  <section class="employee-information-panel js-employee-information-panel">
   <div class="employees-panel">
   
     <header class="employees-panel__header list-header">
@@ -19,22 +20,32 @@ export const createTemplateForEmployeesListPanel = (employeesList) => {
       ${createTemlateForAddEmployeeButton()}
     </footer>
   </div>
-  </section>`;
+  </section>
+  `;
 }
 
-const createTemplateForEmployeeListItem = (employees) => `<li class="employees-list__item employee">
-<div class="employee__container">
-  <span class="employee__name">${employees.id}) ${employees.name}</span>
-  ${createTemplateForEmployeeEditButton()}
-</div>
+const createTemplateForEmployeeListItem = (employees) => `
+<li class="employees-list__item employee">
+  <div class="employee__container">
+    <span class="employee__name">${employees.id}) ${employees.name}</span>
+    ${createTemplateForEmployeeEditButton()}
+  </div>
 </li>`;
 
-const createTemplateForCloseEmployeeListButton = () => `<button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>`;
+const createTemplateForCloseEmployeeListButton = () => `
+<button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
+`;
 
-const createTemlateForAddEmployeeButton = () => `<button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>`;
+const createTemlateForAddEmployeeButton = () => `
+<button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>
+`;
 
-const createTemplateForEmployeeEditButton = () => `<button class="employee__button-open-edit" type="button" title="Редактировать">
-</button>`;
+const createTemplateForEmployeeEditButton = () => `
+<button class="employee__button-open-edit" type="button" title="Редактировать">
+</button>
+`;
 
-export const createTemplateForOpenEmployeeListButton = () => `<button class="button button-open-list" type="button" title="Список сотрудников">
-</button>`;
+export const createTemplateForOpenEmployeeListButton = () => `
+<button class="button button-open-list" type="button" title="Список сотрудников">
+</button>
+`;
