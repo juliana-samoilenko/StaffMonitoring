@@ -48,6 +48,6 @@ export const createEmployeeAddFormTemplate = (tracksList, zonesList) => `<form c
 export const createTracksList = (tracks) => `<option value="${tracks.id}">${tracks.id}</option>`;
 
 export const createZonesList = (zones) => `<div>
-  <input type="checkbox" id=zone"${zones.id}">
-  <label for="zone"${zones.id}">${zones.name}</label>
+  <input type="checkbox" id="zone${zones.id}">
+  <label for="zone${zones.id}">${zones.name}</label>
 </div>`;
