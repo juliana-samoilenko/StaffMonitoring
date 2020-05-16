@@ -2,6 +2,7 @@ import { createCanvasTemplate } from './components/canvas';
 import { createNotificationListTemplate} from './components/notification';
 import { createTemplateForOpenEmployeeListButton, createTemplateForEmployeesListPanel } from './components/employees-list-panel';
 import { createAddEmployeePanelTemplate, createEmployeeAddFormTemplate, createTracksList, createZonesList } from './components/add-employee-panel';
+import { createEditEmployeePanelTemplate } from './components/edit-employee-panel';
 
 export const renderApp = () => {
   const rootContainer = document.querySelector('.js-work-display');
@@ -16,10 +17,23 @@ export const renderApp = () => {
   render(rootContainer, createTemplateForEmployeesListPanel(employeesList), 'beforeend');
 
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
-  const freeTracks = [{ id: 1, points: [{}, {}]}, { id: 2, points: [{}, {}]}, { id: 4, points: [{}, {}]}];
+  const freeTracks = [{ id: 1, points: [{}, {}]}, { id: 3, points: [{}, {}]}, { id: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
 
-  render(employeePanel, createAddEmployeePanelTemplate(freeTracks, zones), 'beforeend');
+  /*render(employeePanel, createAddEmployeePanelTemplate(freeTracks, zones), 'beforeend');*/
+
+  const employee = {
+    id: 1,
+    trackId: 2,
+    name: 'Пиратов В.К.',
+    position: 'engineer',
+    accessibleZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
+  };
+  const freeZones = [ 
+    { id: 2, name: 'Высотные работы' }, 
+    { id: 3, name: 'Цех 2' } 
+  ];
+  render(employeePanel, createEditEmployeePanelTemplate(employee, freeTracks, freeZones), 'beforeend');
 }
 
 const render = (container, template, position) => {
