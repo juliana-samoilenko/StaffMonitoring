@@ -1,7 +1,6 @@
 import { createCanvasTemplate } from './components/canvas';
 import { createNotificationListTemplate} from './components/notification';
-import { createButtonOpenListTemplate } from './components/button-open-list-employees';
-import { createEmployeesListPanelTemplate, createEmployeeListItemTemplate } from './components/employees-list-panel';
+import { createTemplateForOpenEmployeeListButton, createEmployeesListPanelTemplate, createEmployeeListItemTemplate } from './components/employees-list-panel';
 import { createAddEmployeePanelTemplate, createEmployeeAddFormTemplate, createTracksList, createZonesList } from './components/add-employee';
 
 export const renderApp = () => {
@@ -11,7 +10,7 @@ export const renderApp = () => {
   const violationInformation = [{ name: 'Миронов И.А', zone: 'Цех 1' }, { name: 'Петухов В.П.', zone: 'Высотные работы' }, { name: 'Лукин В.Р', zone: 'Цех 1' }];
   
   render(rootContainer, createNotificationListTemplate(violationInformation), 'beforeend');
-  render(rootContainer, createButtonOpenListTemplate(), 'beforeend');
+  render(rootContainer, createTemplateForOpenEmployeeListButton(), 'beforeend');
 
   /*const employeesList = [{ id: 1, name: 'Пиратов В.К.' }, { id:  2, name: 'Шиханов П.А.'}, { id: 3, name: 'Терёхин У.Л.' }];
   const employeeListItemTemplates = employeesList.map(e => createEmployeeListItemTemplate(e)).join('');
