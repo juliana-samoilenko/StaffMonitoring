@@ -25,14 +25,16 @@ export const createTemplateForEmployeesListPanel = (employeesList) => {
 const createTemplateForEmployeeListItem = (employees) => `<li class="employees-list__item employee">
 <div class="employee__container">
   <span class="employee__name">${employees.id}) ${employees.name}</span>
-  <button class="employee__button-open-edit" type="button" title="Редактировать">
-  </button>
+  ${createTemplateForEmployeeEditButton()}
 </div>
 </li>`;
 
 const createTemplateForCloseEmployeeListButton = () => `<button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>`;
 
 const createTemlateForAddEmployeeButton = () => `<button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>`;
+
+const createTemplateForEmployeeEditButton = () => `<button class="employee__button-open-edit" type="button" title="Редактировать">
+</button>`;
 
 export const createTemplateForOpenEmployeeListButton = () => `<button class="button button-open-list" type="button" title="Список сотрудников">
 </button>`;
