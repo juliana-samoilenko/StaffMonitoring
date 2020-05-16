@@ -1,7 +1,10 @@
-export const createNotificationListTemplate = (content) => 
-`<div class="notification-list">${content}</div>`;
+export const createNotificationListTemplate = (violationInformation) => {
+  const notificationItemTemplates = violationInformation.map(e => createNotificationItemTemplate(e)).join('');
 
-export const createNotificationItemTemplate = (violation) => 
+  return `<div class="notification-list">${notificationItemTemplates}</div>`;
+}
+
+const createNotificationItemTemplate = (violation) => 
 `<article class="notification-list__notification notification">
   <header class="notification__header">
     <img class="notification__img" src="/img/warning.min.svg" arial-role="presentation">
@@ -12,4 +15,3 @@ export const createNotificationItemTemplate = (violation) =>
     ${violation.name} зашёл в зону ${violation.zone}
   </div>
 </article>`;
-
