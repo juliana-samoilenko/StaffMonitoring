@@ -5,6 +5,7 @@ import { Door } from './Canvas/Door';
 import { DrawableZone } from './Canvas/DrawableZone';
 import { DrawableEmployee } from './Canvas/DrawableEmployee';
 import { EmployeeTrack } from './Canvas/EmployeeTrack';
+import { EmployeeEntity } from './Core/entity/EmployeeEntity';
 import { renderApp } from './renderApp';
 
 import {
@@ -36,20 +37,38 @@ elementForDrawing.forEach((buildingObjectConfigWithType) => {
 
 const points1 = [{ x: 50, y: 50 }, { x: 50, y: 100 }, { x: 100, y: 100 }];
 const track1 = new EmployeeTrack({ id: 1, points: points1 });
+const employeeEntity1 = new EmployeeEntity({ id: 1, name: 'Петров С.М.', position: 'engineer', zones: [1, 2] });
 const employee1 = new DrawableEmployee({
-  id: 1, name: 'Петров С.М.', xCurrent: 50, yCurrent: 50, radius: 15, color: '#3A19A4', track: track1,
+  employee: employeeEntity1,
+  xCurrent: 50,
+  yCurrent: 50,
+  radius: 15,
+  color: '#3A19A4',
+  track: track1,
 }, two);
 
 const points2 = [{ x: 200, y: 200 }, { x: 200, y: 250 }, { x: 250, y: 250 }, { x: 250, y: 200 }];
 const track2 = new EmployeeTrack({ id: 1, points: points2 });
+const employeeEntity2 = new EmployeeEntity({ id: 2, name: 'Щербаков Д.Д.', position: 'working', zones: [2, 4] });
 const employee2 = new DrawableEmployee({
-  id: 2, name: 'Петров С.М.', xCurrent: 200, yCurrent: 200, radius: 15, color: '#3A19A4', track: track2,
+  employee: employeeEntity2,
+  xCurrent: 200,
+  yCurrent: 200,
+  radius: 15,
+  color: '#3A19A4',
+  track: track2,
 }, two);
 
 const points3 = [{ x: 400, y: 400 }, { x: 500, y: 500 }, { x: 300, y: 500 }];
 const track3 = new EmployeeTrack({ id: 1, points: points3 });
+const employeeEntity3 = new EmployeeEntity({ id: 3, name: 'Пугало Р.К.', position: 'programmer', zones: [1, 3, 4] });
 const employee3 = new DrawableEmployee({
-  id: 3, name: 'Кожемяка В.С.', xCurrent: 500, yCurrent: 500, radius: 15, color: '#3A19A4', track: track3,
+  employee: employeeEntity3,
+  xCurrent: 500,
+  yCurrent: 500,
+  radius: 15,
+  color: '#3A19A4',
+  track: track3,
 }, two);
 
 [employee1, employee2, employee3].forEach((employee) => {
