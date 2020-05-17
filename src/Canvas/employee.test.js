@@ -1,4 +1,4 @@
-import { Employee } from './Employee';
+import { DrawableEmployee } from './DrawableEmployee';
 import { EmployeeTrack } from './EmployeeTrack';
 
 describe('Emloyee class', () => {
@@ -9,7 +9,7 @@ describe('Emloyee class', () => {
       const track = new EmployeeTrack({ id: 2, points: [] });
 
       // Act
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,
@@ -32,7 +32,7 @@ describe('Emloyee class', () => {
         id: 1,
         points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
       });
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,
@@ -60,7 +60,7 @@ describe('Emloyee class', () => {
       const y = 400;
 
       // Act
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: x,
@@ -83,7 +83,7 @@ describe('Emloyee class', () => {
         remove: jest.fn(),
       };
 
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,
@@ -112,7 +112,7 @@ describe('Emloyee class', () => {
         remove: jest.fn(),
       };
 
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,
@@ -147,7 +147,7 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,
@@ -183,7 +183,7 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employee = new Employee({
+      const employee = new DrawableEmployee({
         id: 1,
         name: 'Петров С.М.',
         xCurrent: 50,

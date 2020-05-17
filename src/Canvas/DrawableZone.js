@@ -1,6 +1,6 @@
 import { DrawableRectangle } from './Drawable/DrawableRectangle';
 
-export class Zone extends DrawableRectangle {
+export class DrawableZone extends DrawableRectangle {
   draw() {
     super.draw();
     this._writeText();

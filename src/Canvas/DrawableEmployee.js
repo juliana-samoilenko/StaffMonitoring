@@ -1,7 +1,7 @@
 import { DrawableCircle } from './Drawable/DrawableCircle';
 import { Moveable } from './Moveable';
 
-export class Employee extends Moveable(DrawableCircle) {
+export class DrawableEmployee extends Moveable(DrawableCircle) {
   constructor({
     id,
     name,
