@@ -47,7 +47,7 @@ const createTemplateForQuestionRemoveEmployee = () => `
 <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
 `;
 
-export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZones) => {
+export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZones, isAwaitingConfirmation) => {
   const listOfFreeTraks = freeTracks.map(e => createTemplateForCurrentFreeTrackOption(e)).join('');
   const currentPermittedZones = employee.accessibleZones.map(e => createTemplateForCurrentPermittedZoneCheckbox(e)).join('');
   const unpermittedZones = freeZones.map(e => createTemplateForCurrentUnpermittedZoneCheckbox(e)).join('');
@@ -81,19 +81,7 @@ export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZone
         </div>
         </div>
     <div class="employee-edit-panel__footer footer-edit">
-
-        ${createTemplateForQuestionRemoveEmployee()}
-
-      <footer class="footer-edit__edit-button-group">
-      
-        ${createTemplateForAcceptRemovalButton()}
-        ${createTemplateForRejectRemovalButton()}
-        
-      <!--  
-        ${createTemplateForButtonSaveChanges()}
-        ${createTemplateForButtonRemoveEmployee()}
-      -->
-      </footer>
+        ${createTemplateFooterForFormEditEmployee(isAwaitingConfirmation)}
     </div> 
   </form>
   `;
@@ -110,3 +98,22 @@ export const createEditEmployeePanelTemplate = (form) => `
     ${form}
   </div>
 `;
+
+const createTemplateForFooterWithSaveChangesOrRemoveEmployee = () => `
+<footer class="footer-edit__edit-button-group"> 
+  ${createTemplateForButtonSaveChanges()}
+  ${createTemplateForButtonRemoveEmployee()}
+</footer>
+`;
+
+const createTemplateForFooterWithAcceptOrRejectRemoveEmployee = () => `
+  ${createTemplateForQuestionRemoveEmployee()}
+  <footer class="footer-edit__edit-button-group">
+    ${createTemplateForAcceptRemovalButton()}
+    ${createTemplateForRejectRemovalButton()}
+  </footer>
+`;
+
+const createTemplateFooterForFormEditEmployee = (isAwaitingConfirmation) => {
+  return isAwaitingConfirmation ? createTemplateForFooterWithAcceptOrRejectRemoveEmployee() : createTemplateForFooterWithSaveChangesOrRemoveEmployee();
+}

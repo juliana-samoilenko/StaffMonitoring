@@ -2,7 +2,7 @@ import { createCanvasTemplate } from './components/canvas';
 import { createNotificationListTemplate} from './components/notification';
 import { createTemplateForOpenEmployeeListButton, createTemplateForEmployeesListPanel } from './components/employees-list-panel';
 import { createAddEmployeePanelTemplate, createTemplateOfAddEmployeeForm } from './components/add-employee-panel';
-import { createEditEmployeePanelTemplate, createTemplateOfEditEmployeeForm } from './components/edit-employee-panel';
+import { createEditEmployeePanelTemplate, createTemplateForEditEmployeeForm } from './components/edit-employee-panel';
 
 export const renderApp = () => {
   const rootContainer = document.querySelector('.js-work-display');
@@ -34,7 +34,7 @@ export const renderApp = () => {
     { id: 2, name: 'Высотные работы' }, 
     { id: 3, name: 'Цех 2' } 
   ];
-  const formEditEmloyee = createTemplateOfEditEmployeeForm(employee, freeTracks, freeZones);
+  const formEditEmloyee = createTemplateForEditEmployeeForm(employee, freeTracks, freeZones, true);
 
   render(employeePanel, createEditEmployeePanelTemplate(formEditEmloyee), 'beforeend');
 }
