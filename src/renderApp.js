@@ -17,7 +17,7 @@ export const renderApp = () => {
   render(rootContainer, createTemplateForEmployeesListPanel(employeesList), 'beforeend');
 
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
-  const freeTracks = [{ id: 1, points: [{}, {}]}, { id: 3, points: [{}, {}]}, { id: 4, points: [{}, {}]}];
+  const freeTracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
   /*const formAddEmployee = createTemplateOfAddEmployeeForm(freeTracks, zones);
 

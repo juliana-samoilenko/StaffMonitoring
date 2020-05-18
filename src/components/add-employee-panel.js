@@ -1,4 +1,4 @@
-const createTemplateForCloseButtonOfEmployeeAddPanel = () => `
+const createTemplateForCloseButton = () => `
 <button class="employee-add-panel__button button-close" type="button" title="Закрыть">&#10006;</button>
 `;
 
@@ -6,20 +6,20 @@ const createTemplateForAddEmployeeButton = () => `
 <button type="button" class="footer-add__button-add-employee" title="Добавить работника">Добавить сотрудника</button>
 `;
 
-const createTracksList = (tracks) => `
-<option value="${tracks.id}">${tracks.id}</option>
+const createTrackOptionTemplate = (track) => `
+<option value="${track.name}">${track.name}</option>
 `;
 
-const createZonesList = (zones) => `
+const createZoneCheckboxTemplate = (zone) => `
 <div>
-  <input type="checkbox" id="zone${zones.id}">
-  <label for="zone${zones.id}">${zones.name}</label>
+  <input type="checkbox" id="zone${zone.id}">
+  <label for="zone${zone.id}">${zone.name}</label>
 </div>
 `;
 
-export const createTemplateOfAddEmployeeForm = (freeTracks, zones) => {
-  const listOfFreeTraks = freeTracks.map((e) => createTracksList(e)).join('');
-  const zonesList = zones.map((e) => createZonesList(e)).join('');
+export const createTemplateForAddEmployeeForm = (freeTracks, zones) => {
+  const freeTracksTemplate = freeTracks.map((e) => createTrackOptionTemplate(e)).join('');
+  const zonesTemplate = zones.map((e) => createZoneCheckboxTemplate(e)).join('');
 
   return `
   <form class="employee-add-panel__form add-employee-form" action="" name="add-emp" method="GET">
@@ -40,14 +40,14 @@ export const createTemplateOfAddEmployeeForm = (freeTracks, zones) => {
         <label class="add-track-container__label" for="add-track">Путь:</label>
         <select class="add-track-container__select" id="add-track" required>
           <option class="js-add-tracks">Выберите путь</option>
-          ${listOfFreeTraks}
+          ${freeTracksTemplate}
         </select>
       </div>
       
       <label>Доступные зоны:</label>
       <div class="add-employee-form__zone">
         <div class="add-zone-container">
-          ${zonesList}
+          ${zonesTemplate}
         </div>
       </div>
       </form>
@@ -57,7 +57,7 @@ export const createTemplateOfAddEmployeeForm = (freeTracks, zones) => {
 export const createAddEmployeePanelTemplate = (form) => `
   <div class="employee-add-panel">
     <header class="employee-add-panel__header">
-      ${createTemplateForCloseButtonOfEmployeeAddPanel()}
+      ${createTemplateForCloseButton()}
     </header>
   
     <div class="employee-add-panel__body">
