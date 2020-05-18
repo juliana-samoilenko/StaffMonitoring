@@ -1,53 +1,53 @@
-const createFreeTracksTemplates = (track) => `
+const createTemplateForCurrentFreeTrackOption = (track) => `
 <option value="${track.id}">${track.id}</option>
 `;
 
-const createTemplateOfPermittedZones = (zone) => `
+const createTemplateForCurrentPermittedZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
   <input type="checkbox" id="${zone.id}" checked>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
-const createTemplateOfUnpermittedZones = (zone) => `
+const createTemplateForCurrentUnpermittedZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
   <input type="checkbox" id="${zone.id}">
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
-const createTemplateOfButtonSaveChanges = () => `
+const createTemplateForButtonSaveChanges = () => `
 <button class="button button-save-change" type="button" title="Сохранить изменения">
   Сохранить изменения
 </button>
 `;
 
-const createTemplateOfButtonRemoveEmployee = () => `
+const createTemplateForButtonRemoveEmployee = () => `
 <button class="button button-remove-emp" type="button" title="Удалить сотрудника">
   Удалить сотрудника
 </button>
 `;
 
-const createTemplateOfButtonRemoveYes = () => `
+const createTemplateForAcceptRemovalButton = () => `
 <button class="button button-remove-yes" type="button" title="Да">
   Да
 </button>
 `;
 
-const createTemplateOfButtonRemoveNo = () =>`
+const createTemplateForRejectRemovalButton = () =>`
 <button class="button button-remove-no" type="button" title="Нет">
   Нет
 </button>
 `;
 
-const createTemplateOfQuestionRemoveEmployee = () => `
+const createTemplateForQuestionRemoveEmployee = () => `
 <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
 `;
 
-export const createTemplateOfEditEmployeeForm = (employee, freeTracks, freeZones) => {
-  const listOfFreeTraks = freeTracks.map(e => createFreeTracksTemplates(e)).join('');
-  const currentPermittedZones = employee.accessibleZones.map(e => createTemplateOfPermittedZones(e)).join('');
-  const unpermittedZones = freeZones.map(e => createTemplateOfUnpermittedZones(e)).join('');
+export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZones) => {
+  const listOfFreeTraks = freeTracks.map(e => createTemplateForCurrentFreeTrackOption(e)).join('');
+  const currentPermittedZones = employee.accessibleZones.map(e => createTemplateForCurrentPermittedZoneCheckbox(e)).join('');
+  const unpermittedZones = freeZones.map(e => createTemplateForCurrentUnpermittedZoneCheckbox(e)).join('');
 
   return `
   <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
@@ -79,16 +79,16 @@ export const createTemplateOfEditEmployeeForm = (employee, freeTracks, freeZones
         </div>
     <div class="employee-edit-panel__footer footer-edit">
 
-        ${createTemplateOfQuestionRemoveEmployee()}
+        ${createTemplateForQuestionRemoveEmployee()}
 
       <footer class="footer-edit__edit-button-group">
       
-        ${createTemplateOfButtonRemoveYes()}
-        ${createTemplateOfButtonRemoveNo()}
+        ${createTemplateForAcceptRemovalButton()}
+        ${createTemplateForRejectRemovalButton()}
         
       <!--  
-        ${createTemplateOfButtonSaveChanges()}
-        ${createTemplateOfButtonRemoveEmployee()}
+        ${createTemplateForButtonSaveChanges()}
+        ${createTemplateForButtonRemoveEmployee()}
       -->
       </footer>
     </div> 
