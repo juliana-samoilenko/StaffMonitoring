@@ -16,6 +16,9 @@ const createTemplateForCurrentUnpermittedZoneCheckbox = (zone) => `
 </div>
 `;
 
+const createTemplateForCloseButton = () => `
+<button type="button" class="employee-edit-panel__button button-close" title="Закрыть">&#10006;</button>`;
+
 const createTemplateForButtonSaveChanges = () => `
 <button class="button button-save-change" type="button" title="Сохранить изменения">
   Сохранить изменения
@@ -100,7 +103,7 @@ export const createEditEmployeePanelTemplate = (form) => `
   <div class="employee-edit-panel">
   
   <header class="employee-edit-panel__header">
-    <button type="button" class="employee-edit-panel__button button-close" title="Закрыть">&#10006;</button>
+    ${createTemplateForCloseButton}
   </header>
   
   <div class="employee-edit-panel__body">
