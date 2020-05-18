@@ -50,7 +50,7 @@ const createTemplateForQuestionRemoveEmployee = () => `
 
 export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZones, isAwaitingConfirmation) => {
   const listOfFreeTraks = freeTracks.map(e => createTemplateForCurrentFreeTrackOption(e)).join('');
-  const currentPermittedZones = employee.accessibleZones.map(e => createTemplateForCurrentPermittedZoneCheckbox(e)).join('');
+  const currentPermittedZones = employee.permittedZones.map(e => createTemplateForCurrentPermittedZoneCheckbox(e)).join('');
   const unpermittedZones = freeZones.map(e => createTemplateForCurrentUnpermittedZoneCheckbox(e)).join('');
 
   return `
