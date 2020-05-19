@@ -25,6 +25,11 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.name = employee.name;
   }
 
+  draw() {
+    super.draw();
+    super.update();
+  }
+
   clear() {
     this.two.remove(this.drawPoint);
   }

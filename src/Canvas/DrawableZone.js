@@ -23,11 +23,11 @@ export class DrawableZone extends DrawableRectangle {
   draw() {
     super.draw();
     this._writeText();
+    super.update();
   }
 
   _writeText() {
     const text = this.two.makeText(this.name, this.xCenter, this.yCenter);
     text.size = 14;
-    this.two.update();
   }
 }

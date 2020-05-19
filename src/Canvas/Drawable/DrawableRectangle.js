@@ -16,12 +16,15 @@ export class DrawableRectangle {
 
   draw() {
     this._makeRectangle();
-    this.two.update();
   }
 
   _makeRectangle() {
     const rectangle = this.two.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
     rectangle.fill = this.color;
     rectangle.noStroke();
+  }
+
+  update() {
+    this.two.update();
   }
 }
