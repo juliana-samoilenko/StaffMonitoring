@@ -17,9 +17,9 @@ const createZoneCheckboxTemplate = (zone) => `
 </div>
 `;
 
-export const createTemplateForAddEmployeeForm = (freeTracks, zones) => {
-  const freeTracksTemplate = freeTracks.map((e) => createTrackOptionTemplate(e)).join('');
-  const zonesTemplate = zones.map((e) => createZoneCheckboxTemplate(e)).join('');
+export const createTemplateForAddEmployeeForm = (tracks, zones) => {
+  const trackList = tracks.map((e) => createTrackOptionTemplate(e)).join('');
+  const zonesList = zones.map((e) => createZoneCheckboxTemplate(e)).join('');
 
   return `
   <form class="employee-add-panel__form add-employee-form" action="" name="add-emp" method="GET">
@@ -40,14 +40,14 @@ export const createTemplateForAddEmployeeForm = (freeTracks, zones) => {
         <label class="add-track-container__label" for="add-track">Путь:</label>
         <select class="add-track-container__select" id="add-track" required>
           <option class="js-add-tracks">Выберите путь</option>
-          ${freeTracksTemplate}
+          ${trackList}
         </select>
       </div>
       
       <label>Доступные зоны:</label>
       <div class="add-employee-form__zone">
         <div class="add-zone-container">
-          ${zonesTemplate}
+          ${zonesList}
         </div>
       </div>
       </form>

@@ -1,15 +1,8 @@
-const createTemplateForCurrentFreeTrackOption = (track) => `
+const createTemplateForTrackOption = (track) => `
 <option value="${track.id}">${track.id}</option>
 `;
 
-const createTemplateForCurrentPermittedZoneCheckbox = (zone) => `
-<div class="edit-zone-container">
-  <input type="checkbox" id="${zone.id}" checked>
-  <label for="${zone.id}">${zone.name}</label>
-</div>
-`;
-
-const createTemplateForCurrentUnpermittedZoneCheckbox = (zone) => `
+const createTemplateForZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
   <input type="checkbox" id="${zone.id}">
   <label for="${zone.id}">${zone.name}</label>
@@ -48,10 +41,9 @@ const createTemplateForQuestionRemoveEmployee = () => `
 <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
 `;
 
-export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZones, isAwaitingConfirmation) => {
-  const listOfFreeTraks = freeTracks.map(e => createTemplateForCurrentFreeTrackOption(e)).join('');
-  const currentPermittedZones = employee.permittedZones.map(e => createTemplateForCurrentPermittedZoneCheckbox(e)).join('');
-  const unpermittedZones = freeZones.map(e => createTemplateForCurrentUnpermittedZoneCheckbox(e)).join('');
+export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isAwaitingConfirmation) => {
+  const trackList = tracks.map(e => createTemplateForTrackOption(e)).join('');
+  const zonesList = zones.map(e => createTemplateForZoneCheckbox(e)).join('');
 
   return `
   <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
@@ -71,14 +63,13 @@ export const createTemplateForEditEmployeeForm = (employee, freeTracks, freeZone
       <select name="track" class="edit-track-container__select" required>
         <option>${employee.trackId}</option>
         <option value="Нет пути">Нет пути</option>
-        ${listOfFreeTraks}
+        ${trackList}
       </select>
     </div>
     
       <label>Доступные зоны:</label>
         <div class="edit-employee-form__zone">
-          ${currentPermittedZones}
-          ${unpermittedZones}
+          ${zonesList}
         </div>
         </div>
     <div class="employee-edit-panel__footer footer-edit">

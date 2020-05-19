@@ -17,9 +17,9 @@ export const renderApp = () => {
   render(rootContainer, createTemplateForEmployeesPanel(employeesList), 'beforeend');
 
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
-  const freeTracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
+  const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
-  /*const formAddEmployee = createTemplateForAddEmployeeForm(freeTracks, zones);
+  /*const formAddEmployee = createTemplateForAddEmployeeForm(tracks, zones);
 
   render(employeePanel, createAddEmployeePanelTemplate(formAddEmployee), 'beforeend');*/
 
@@ -30,11 +30,7 @@ export const renderApp = () => {
     position: 'engineer',
     permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
   };
-  const freeZones = [ 
-    { id: 2, name: 'Высотные работы' }, 
-    { id: 3, name: 'Цех 2' } 
-  ];
-  const formEditEmloyee = createTemplateForEditEmployeeForm(employee, freeTracks, freeZones, true);
+  const formEditEmloyee = createTemplateForEditEmployeeForm(employee, tracks, zones, true);
 
   render(employeePanel, createEditEmployeePanelTemplate(formEditEmloyee), 'beforeend');
 }
