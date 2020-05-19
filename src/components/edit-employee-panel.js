@@ -31,7 +31,7 @@ const createTemplateForAcceptRemovalButton = () => `
 </button>
 `;
 
-const createTemplateForRejectRemovalButton = () =>`
+const createTemplateForRejectRemovalButton = () => `
 <button class="button button-remove-no" type="button" title="Нет">
   Нет
 </button>
@@ -41,9 +41,29 @@ const createTemplateForRemoveEmployeeConfirmationMessage = () => `
 <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
 `;
 
+const removalConfirmationButtons = () => `
+<footer class="footer-edit__edit-button-group"> 
+  ${createTemplateForButtonSaveChanges()}
+  ${createTemplateForButtonRemoveEmployee()}
+</footer>
+`;
+
+const defaultActionButtons = () => `
+  ${createTemplateForRemoveEmployeeConfirmationMessage()}
+  <footer class="footer-edit__edit-button-group">
+    ${createTemplateForAcceptRemovalButton()}
+    ${createTemplateForRejectRemovalButton()}
+  </footer>
+`;
+
+// eslint-disable-next-line arrow-body-style
+const createTemplateForFormFooter = (isChecked) => {
+  return isChecked ? defaultActionButtons() : removalConfirmationButtons();
+};
+
 export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isChecked) => {
-  const trackList = tracks.map(e => createTemplateForTrackOption(e)).join('');
-  const zonesList = zones.map(e => createTemplateForZoneCheckbox(e)).join('');
+  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
+  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
 
   return `
   <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
@@ -77,7 +97,7 @@ export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isChe
     </div> 
   </form>
   `;
-}
+};
 
 export const createEditEmployeePanelTemplate = (form) => `
   <div class="employee-edit-panel">
@@ -89,22 +109,3 @@ export const createEditEmployeePanelTemplate = (form) => `
     ${form}
   </div>
 `;
-
-const removalConfirmationButtons = () => `
-<footer class="footer-edit__edit-button-group"> 
-  ${createTemplateForButtonSaveChanges()}
-  ${createTemplateForButtonRemoveEmployee()}
-</footer>
-`;
-
-const defaultActionButtons = () => `
-  ${createTemplateForRemoveEmployeeConfirmationMessage()}
-  <footer class="footer-edit__edit-button-group">
-    ${createTemplateForAcceptRemovalButton()}
-    ${createTemplateForRejectRemovalButton()}
-  </footer>
-`;
-
-const createTemplateForFormFooter = (isChecked) => {
-  return isChecked ? defaultActionButtons() : removalConfirmationButtons();
-}
