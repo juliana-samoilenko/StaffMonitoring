@@ -6,11 +6,11 @@ const createTemplateForAddEmployeeButton = () => `
 <button type="button" class="footer-add__button-add-employee" title="Добавить работника">Добавить сотрудника</button>
 `;
 
-const createTrackOptionTemplate = (track) => `
+const createTemplateForTrackOption = (track) => `
 <option value="${track.name}">${track.name}</option>
 `;
 
-const createZoneCheckboxTemplate = (zone) => `
+const createTemplateForZoneCheckbox = (zone) => `
 <div>
   <input type="checkbox" id="zone${zone.id}">
   <label for="zone${zone.id}">${zone.name}</label>
@@ -18,8 +18,8 @@ const createZoneCheckboxTemplate = (zone) => `
 `;
 
 export const createTemplateForAddEmployeeForm = (tracks, zones) => {
-  const trackList = tracks.map((e) => createTrackOptionTemplate(e)).join('');
-  const zonesList = zones.map((e) => createZoneCheckboxTemplate(e)).join('');
+  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
+  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
 
   return `
   <form class="employee-add-panel__form add-employee-form" action="" name="add-emp" method="GET">

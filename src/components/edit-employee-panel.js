@@ -37,11 +37,11 @@ const createTemplateForRejectRemovalButton = () =>`
 </button>
 `;
 
-const createTemplateForQuestionRemoveEmployee = () => `
+const createTemplateForRemoveEmployeeConfirmationMessage = () => `
 <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
 `;
 
-export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isAwaitingConfirmation) => {
+export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isChecked) => {
   const trackList = tracks.map(e => createTemplateForTrackOption(e)).join('');
   const zonesList = zones.map(e => createTemplateForZoneCheckbox(e)).join('');
 
@@ -73,7 +73,7 @@ export const createTemplateForEditEmployeeForm = (employee, tracks, zones, isAwa
         </div>
         </div>
     <div class="employee-edit-panel__footer footer-edit">
-        ${createTemplateFooterForFormEditEmployee(isAwaitingConfirmation)}
+        ${createTemplateForFormFooter(isChecked)}
     </div> 
   </form>
   `;
@@ -90,21 +90,21 @@ export const createEditEmployeePanelTemplate = (form) => `
   </div>
 `;
 
-const createTemplateForFooterWithSaveChangesOrRemoveEmployee = () => `
+const removalConfirmationButtons = () => `
 <footer class="footer-edit__edit-button-group"> 
   ${createTemplateForButtonSaveChanges()}
   ${createTemplateForButtonRemoveEmployee()}
 </footer>
 `;
 
-const createTemplateForFooterWithAcceptOrRejectRemoveEmployee = () => `
-  ${createTemplateForQuestionRemoveEmployee()}
+const defaultActionButtons = () => `
+  ${createTemplateForRemoveEmployeeConfirmationMessage()}
   <footer class="footer-edit__edit-button-group">
     ${createTemplateForAcceptRemovalButton()}
     ${createTemplateForRejectRemovalButton()}
   </footer>
 `;
 
-const createTemplateFooterForFormEditEmployee = (isAwaitingConfirmation) => {
-  return isAwaitingConfirmation ? createTemplateForFooterWithAcceptOrRejectRemoveEmployee() : createTemplateForFooterWithSaveChangesOrRemoveEmployee();
+const createTemplateForFormFooter = (isChecked) => {
+  return isChecked ? defaultActionButtons() : removalConfirmationButtons();
 }
