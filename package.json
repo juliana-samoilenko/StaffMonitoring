@@ -10,7 +10,9 @@
     "lint:js": "eslint --fix ./src/"
   },
   "jest": {
-    "modulePaths": ["<rootDir>/src"]
+    "modulePaths": [
+      "<rootDir>/src"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,6 @@
     "eslint-plugin-import": "^2.20.1",
     "jest": "^26.0.1",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-imagemin": "^4.0.1",
     "sass": "^1.26.3"
   }
 }

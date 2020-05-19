@@ -37,6 +37,10 @@ html {
   margin-bottom: 20px;
 }
 
+.button {
+  @include button-reset;
+}
+
 .button-close {
   @include button-reset;
   width: 25px;
@@ -128,8 +132,7 @@ html {
   border-bottom-right-radius: 3px;
 }
 
-.work-display__button-open-list {
-  @include button-reset;
+.button-open-list {
   background-color: #ddd;
   background-image: url(/img/worker.min.svg);
   background-position: center;
@@ -416,10 +419,6 @@ html {
   @include flex-row;
   justify-content: space-around;
   height: 30px;
-}
-
-.button {
-  @include button-reset;
 }
 
 .button-remove-yes {
