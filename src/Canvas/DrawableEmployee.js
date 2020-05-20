@@ -27,7 +27,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
 
   draw() {
     super.draw();
-    super.update();
+    this.update();
   }
 
   clear() {
