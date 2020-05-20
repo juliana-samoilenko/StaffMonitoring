@@ -3,11 +3,7 @@ import { Notification } from './components/Notification';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
 import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel } from './components/AddEmployeePanel';
-import { createEditEmployeePanelTemplate, createTemplateForEditEmployeeForm } from './components/edit-employee-panel';
-
-const render = (container, template, position) => {
-  container.insertAdjacentHTML(position, template);
-}
+import { EditEmployeePanel } from './components/EditEmployeePanel';
 
 const renderComponent = (container, template, position = 'beforeend') => {
   container.insertAdjacentHTML(position, template.render());
@@ -32,18 +28,16 @@ export const renderApp = () => {
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
-  
   const addEmployeePanel = new AddEmployeePanel({tracks, zones});
   renderComponent(employeePanel, addEmployeePanel);
 
-  /*const employee = {
+  const employee = {
     id: 1,
     trackId: 2,
     name: 'Пиратов В.К.',
     position: 'engineer',
     permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
   };
-  const formEditEmloyee = createTemplateForEditEmployeeForm(employee, tracks, zones, true);
-
-  render(employeePanel, createEditEmployeePanelTemplate(formEditEmloyee), 'beforeend');*/
+  const editEmployeePanel = new EditEmployeePanel({employee, tracks, zones, isChecked: false});
+  renderComponent(employeePanel, editEmployeePanel);
 }
