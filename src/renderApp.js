@@ -2,7 +2,7 @@ import { Canvas } from './components/Canvas';
 import { Notification } from './components/Notification';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
 import { EmployeeListPanel } from './components/EmployeeListPanel';
-import { createAddEmployeePanelTemplate, createTemplateForAddEmployeeForm } from './components/add-employee-panel';
+import { AddEmployeePanel } from './components/AddEmployeePanel';
 import { createEditEmployeePanelTemplate, createTemplateForEditEmployeeForm } from './components/edit-employee-panel';
 
 const render = (container, template, position) => {
@@ -29,14 +29,14 @@ export const renderApp = () => {
   const employeeListPanel = new EmployeeListPanel(employeesList);
   renderComponent(rootContainer, employeeListPanel);
 
-  /*const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
+  const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
-  const formAddEmployee = createTemplateForAddEmployeeForm(tracks, zones);
+  
+  const addEmployeePanel = new AddEmployeePanel({tracks, zones});
+  renderComponent(employeePanel, addEmployeePanel);
 
-  render(employeePanel, createAddEmployeePanelTemplate(formAddEmployee), 'beforeend');
-
-  const employee = {
+  /*const employee = {
     id: 1,
     trackId: 2,
     name: 'Пиратов В.К.',
