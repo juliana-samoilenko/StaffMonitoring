@@ -19,6 +19,7 @@ describe('Check the rendering DrawableCircle', () => {
       }, two);
 
       circle.draw();
+      circle.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
@@ -34,6 +35,7 @@ describe('Check the rendering DrawableCircle', () => {
       }, two);
 
       circle.draw();
+      circle.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });

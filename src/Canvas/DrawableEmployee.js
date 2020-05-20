@@ -1,10 +1,9 @@
 import { DrawableCircle } from './Drawable/DrawableCircle';
 import { Moveable } from './Moveable';
 
-export class Employee extends Moveable(DrawableCircle) {
+export class DrawableEmployee extends Moveable(DrawableCircle) {
   constructor({
-    id,
-    name,
+    employee,
     xCurrent,
     yCurrent,
     radius,
@@ -14,8 +13,6 @@ export class Employee extends Moveable(DrawableCircle) {
     currentPointIndex,
   }, two) {
     super({
-      id,
-      name,
       xCurrent,
       yCurrent,
       radius,
@@ -24,6 +21,13 @@ export class Employee extends Moveable(DrawableCircle) {
       track,
       currentPointIndex,
     }, two);
+    this.id = employee.id;
+    this.name = employee.name;
+  }
+
+  draw() {
+    super.draw();
+    this.update();
   }
 
   clear() {

@@ -21,6 +21,7 @@ describe('Check the rendering DrawableLine', () => {
       }, two);
 
       line.draw();
+      line.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
@@ -38,6 +39,7 @@ describe('Check the rendering DrawableLine', () => {
       }, two);
   
       line.draw();
+      line.update();
   
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
@@ -63,7 +65,9 @@ describe('Check the rendering DrawableLine', () => {
       }, two);
 
       line1.draw();
+      line1.update();
       line2.draw();
+      line2.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });

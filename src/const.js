@@ -1,3 +1,5 @@
+import { ZoneEntity } from './Core/entity/ZoneEntity';
+
 const WALL_COLOR = '#000000';
 const DOOR_COLOR = '#A63600';
 const ZONE_COLOR = '#FFD173';
@@ -7,6 +9,11 @@ const EXTERNAL_WALL_THICKNESS = 15;
 
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
+
+const zoneEntity1 = new ZoneEntity ({id: 1, name: 'Высотные работы' });
+const zoneEntity2 = new ZoneEntity ({id: 2, name: 'Цех 1'});
+const zoneEntity3 = new ZoneEntity ({id: 3, name: 'Высокое напряжение'});
+const zoneEntity4 = new ZoneEntity ({id: 4, name: 'Спец оборудование'});
 
 export const ELEMENTS_BUILDING = {
   walls: [
@@ -68,16 +75,16 @@ export const ELEMENTS_BUILDING = {
 
   zones: [
     {
-      type: 'zone', id: 1, name: 'Высотные работы', xCenter: 108, yCenter: 58, width: 200, height: 100, color: ZONE_COLOR,
+      type: 'zone', zone: zoneEntity1, xCenter: 108, yCenter: 58, width: 200, height: 100, color: ZONE_COLOR,
     },
     {
-      type: 'zone', id: 2, name: 'Цех 1', xCenter: 920, yCenter: 98, width: 235, height: 180, color: ZONE_COLOR,
+      type: 'zone', zone: zoneEntity2, xCenter: 920, yCenter: 98, width: 235, height: 180, color: ZONE_COLOR,
     },
     {
-      type: 'zone', id: 3, name: 'Высокое напряжение', xCenter: 168, yCenter: 258, width: 319, height: 130, color: ZONE_COLOR,
+      type: 'zone', zone: zoneEntity3, xCenter: 168, yCenter: 258, width: 319, height: 130, color: ZONE_COLOR,
     },
     {
-      type: 'zone', id: 4, name: 'Спец оборудование', xCenter: 922, yCenter: 532, width: 230, height: 120, color: ZONE_COLOR,
+      type: 'zone', zone: zoneEntity4, xCenter: 922, yCenter: 532, width: 230, height: 120, color: ZONE_COLOR,
     },
   ],
 };

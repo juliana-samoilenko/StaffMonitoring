@@ -20,6 +20,7 @@ describe('Check the rendering DrawableRectangle', () => {
       }, two);
 
       circle.draw();
+      circle.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
@@ -36,6 +37,7 @@ describe('Check the rendering DrawableRectangle', () => {
       }, two);
 
       circle.draw();
+      circle.update();
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });

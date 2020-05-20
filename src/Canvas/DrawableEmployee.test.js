@@ -1,5 +1,6 @@
-import { Employee } from './Employee';
+import { DrawableEmployee } from './DrawableEmployee';
 import { EmployeeTrack } from './EmployeeTrack';
+import { EmployeeEntity } from '../Core/entity/EmployeeEntity';
 
 describe('Emloyee class', () => {
   describe('Add empty track', () => {
@@ -7,11 +8,11 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {};
       const track = new EmployeeTrack({ id: 2, points: [] });
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
 
       // Act
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,
@@ -32,9 +33,9 @@ describe('Emloyee class', () => {
         id: 1,
         points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
       });
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,
@@ -58,11 +59,11 @@ describe('Emloyee class', () => {
       const two = {};
       const x = 300;
       const y = 400;
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
 
       // Act
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: x,
         yCurrent: y,
         radius: 15,
@@ -83,9 +84,9 @@ describe('Emloyee class', () => {
         remove: jest.fn(),
       };
 
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,
@@ -112,9 +113,9 @@ describe('Emloyee class', () => {
         remove: jest.fn(),
       };
 
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,
@@ -147,9 +148,9 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,
@@ -183,9 +184,9 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employee = new Employee({
-        id: 1,
-        name: 'Петров С.М.',
+      const employeeEntity = new EmployeeEntity({ id: 1, name: 'Петров С.М.'});
+      const employee = new DrawableEmployee({
+        employee: employeeEntity,
         xCurrent: 50,
         yCurrent: 50,
         radius: 15,

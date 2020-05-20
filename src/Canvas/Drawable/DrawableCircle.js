@@ -1,9 +1,10 @@
 export class DrawableCircle {
   constructor({
-    id, name, xCurrent, yCurrent, radius, color,
+    xCurrent,
+    yCurrent,
+    radius,
+    color,
   }, two) {
-    this.id = id;
-    this.name = name;
     this.xCenter = xCurrent;
     this.yCenter = yCurrent;
     this.radius = radius;
@@ -15,13 +16,15 @@ export class DrawableCircle {
   draw() {
     this._makeCircle();
     this.two.add(this.drawPoint);
-    this.two.update();
   }
 
   _makeCircle() {
     this.drawPoint = this.two.makeCircle(this.xCenter, this.yCenter, this.radius);
-    this.drawPoint.id = this.id;
     this.drawPoint.fill = this.color;
     this.drawPoint.noStroke();
+  }
+
+  update() {
+    this.two.update();
   }
 }

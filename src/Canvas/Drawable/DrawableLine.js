@@ -13,12 +13,15 @@ export class DrawableLine {
 
   draw() {
     this._makeLine();
-    this.two.update();
   }
 
   _makeLine() {
     const line = this.two.makePath(this.xStart, this.yStart, this.xEnd, this.yEnd);
     line.linewidth = this.thickness;
     line.stroke = this.color;
+  }
+
+  update() {
+    this.two.update();
   }
 }
