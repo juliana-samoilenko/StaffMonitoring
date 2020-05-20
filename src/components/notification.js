@@ -14,7 +14,7 @@ const createNotificationItemTemplate = (violation) => `
 </article>
 `;
 
-export const createNotificationListTemplate = (violationInformation) => {
+const createNotificationListTemplate = (violationInformation) => {
   const notificationItemTemplates = violationInformation.map((e) => createNotificationItemTemplate(e)).join('');
 
   return `<div class="notification-list">${notificationItemTemplates}</div>`;

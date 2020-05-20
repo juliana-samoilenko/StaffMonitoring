@@ -11,7 +11,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 </div>
 `;
 
-export const createAddEmployeePanelTemplate = (tracks, zones) => {
+const createAddEmployeePanelTemplate = (tracks, zones) => {
   const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
   const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
 

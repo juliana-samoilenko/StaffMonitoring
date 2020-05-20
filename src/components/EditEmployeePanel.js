@@ -39,7 +39,7 @@ const createTemplateForFormFooter = (isChecked) => {
   return isChecked ? defaultActionButtons() : removalConfirmationButtons();
 };
 
-export const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => {
+const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => {
   const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
   const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
   return `
