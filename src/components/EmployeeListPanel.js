@@ -1,25 +1,15 @@
-const createTemplateForEditEmployeeButton = () => `
-<button class="employee__button-open-edit" type="button" title="Редактировать">
-</button>
-`;
+import { RenderingComponent, createElement } from './RenderingComponent';
 
 const createTemplateForEmployeeListItem = (employees) => `
 <li class="employees-list__item employee">
   <div class="employee__container">
     <span class="employee__name">${employees.id}) ${employees.name}</span>
-    ${createTemplateForEditEmployeeButton()}
+    <button class="employee__button-open-edit" type="button" title="Редактировать">
+    </button>
   </div>
 </li>`;
 
-const createTemplateForCloseButton = () => `
-<button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
-`;
-
-const createTemlateForAddEmployeeButton = () => `
-<button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>
-`;
-
-export const createTemplateForEmployeesPanel = (employeesList) => {
+export const createTemplateForEmployeePanel = (employeesList) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
@@ -28,7 +18,7 @@ export const createTemplateForEmployeesPanel = (employeesList) => {
   
     <header class="employees-panel__header list-header">
       <h2 class="list-header__text">Список сотрудников</h2>
-      ${createTemplateForCloseButton()}
+      <button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
     </header>
   
     <div class="employees-panel__body employees-list">
@@ -38,9 +28,19 @@ export const createTemplateForEmployeesPanel = (employeesList) => {
     </div>
   
     <footer class="employees-panel__footer footer-list">
-      ${createTemlateForAddEmployeeButton()}
+      <button class="footer-list__button-open-add" type="button" title="Добавить сотрудика">
+      </button>
     </footer>
   </div>
   </section>
   `;
 };
+
+export class EmployeeListPanel extends RenderingComponent {
+  getElement() {
+    if (this.element === null) {
+      this.element = createElement(createTemplateForEmployeePanel(this.data));
+    }
+    return this.element;
+  }
+}

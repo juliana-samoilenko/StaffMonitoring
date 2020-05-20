@@ -1,7 +1,7 @@
 import { Canvas } from './components/Canvas';
 import { Notification } from './components/Notification';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
-import { createTemplateForEmployeesPanel } from './components/employees-list-panel';
+import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { createAddEmployeePanelTemplate, createTemplateForAddEmployeeForm } from './components/add-employee-panel';
 import { createEditEmployeePanelTemplate, createTemplateForEditEmployeeForm } from './components/edit-employee-panel';
 
@@ -22,13 +22,14 @@ export const renderApp = () => {
   const notifications = new Notification(violationInformation);
   renderComponent(rootContainer, notifications);
 
-  const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
-  renderComponent(rootContainer, openEmployeeListPanelButton);
+  /*const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
+  renderComponent(rootContainer, openEmployeeListPanelButton);*/
 
-  /*const employeesList = [{ id: 1, name: 'Пиратов В.К.' }, { id:  2, name: 'Шиханов П.А.'}, { id: 3, name: 'Терёхин У.Л.' }];
-  render(rootContainer, createTemplateForEmployeesPanel(employeesList), 'beforeend');
+  const employeesList = [{ id: 1, name: 'Пиратов В.К.' }, { id:  2, name: 'Шиханов П.А.'}, { id: 3, name: 'Терёхин У.Л.' }];
+  const employeeListPanel = new EmployeeListPanel(employeesList);
+  renderComponent(rootContainer, employeeListPanel);
 
-  const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
+  /*const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
   const formAddEmployee = createTemplateForAddEmployeeForm(tracks, zones);
