@@ -1,8 +1,3 @@
-export const createTemplateForOpenEmployeeListButton = () => `
-<button class="button button-open-list" type="button" title="Список сотрудников">
-</button>
-`;
-
 const createTemplateForEditEmployeeButton = () => `
 <button class="employee__button-open-edit" type="button" title="Редактировать">
 </button>
