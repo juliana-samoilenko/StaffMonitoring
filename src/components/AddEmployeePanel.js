@@ -1,4 +1,4 @@
-import { Component, createElement } from './Component';
+import { Component } from './Component';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.name}">${track.name}</option>
@@ -11,9 +11,9 @@ const createTemplateForZoneCheckbox = (zone) => `
 </div>
 `;
 
-const createAddEmployeePanelTemplate = (tracks, zones) => {
-  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
-  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
+export const createAddEmployeePanelTemplate = (data) => {
+  const trackList = data.tracks.map((e) => createTemplateForTrackOption(e)).join('');
+  const zonesList = data.zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
 
   return `
   <div class="employee-add-panel">
@@ -63,10 +63,4 @@ const createAddEmployeePanelTemplate = (tracks, zones) => {
 }
 
 export class AddEmployeePanel extends Component {
-  getElement() {
-    if (this.element === null) {
-      this.element = createElement(createAddEmployeePanelTemplate(this.data.tracks, this.data.zones));
-    }
-    return this.element;
-  }
 }

@@ -1,4 +1,4 @@
-import { Component, createElement } from './Component';
+import { Component } from './Component';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.id}">${track.id}</option>
@@ -39,9 +39,9 @@ const createTemplateForFormFooter = (isChecked) => {
   return isChecked ? defaultActionButtons() : removalConfirmationButtons();
 };
 
-const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => {
-  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
-  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
+export const createEditEmployeePanelTemplate = (data) => {
+  const trackList = data.tracks.map((e) => createTemplateForTrackOption(e)).join('');
+  const zonesList = data.zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
@@ -53,18 +53,18 @@ const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => 
         
       <div class="edit-employee-form__name edit-name-container">
         <label class="edit-name-container__label" for="add-name">ФИО:</label>
-        <input value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
+        <input value="${data.employee.name}" class="edit-name-container__input" type="text" autofocus required>
       </div>
       
       <div class="edit-employee-form__position edit-positision-container">
         <label class="edit-positision-container__label" for="edit-name">Должность:</label>
-        <input class="edit-positision-container__input" type="text" value=${employee.position} required>
+        <input class="edit-positision-container__input" type="text" value=${data.employee.position} required>
       </div>
       
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
         <select name="track" class="edit-track-container__select" required>
-          <option>${employee.trackId}</option>
+          <option>${data.employee.trackId}</option>
           <option value="Нет пути">Нет пути</option>
           ${trackList}
         </select>
@@ -76,7 +76,7 @@ const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => 
           </div>
           </div>
       <div class="employee-edit-panel__footer footer-edit">
-          ${createTemplateForFormFooter(isChecked)}
+          ${createTemplateForFormFooter(data.isChecked)}
       </div> 
     </form>
   </div>
@@ -84,10 +84,4 @@ const createEditEmployeePanelTemplate = (employee, tracks, zones, isChecked) => 
 }
 
 export class EditEmployeePanel extends Component {
-  getElement() {
-    if (this.element === null) {
-      this.element = createElement(createEditEmployeePanelTemplate(this.data.employee, this.data.tracks, this.data.zones, this.data.isChecked));
-    }
-    return this.element;
-  }
 }

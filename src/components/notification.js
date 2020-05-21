@@ -1,4 +1,4 @@
-import { Component, createElement } from './Component';
+import { Component } from './Component';
 import warningSvg from '../img/warning.min.svg';
 
 const createNotificationItemTemplate = (violation) => `
@@ -14,17 +14,11 @@ const createNotificationItemTemplate = (violation) => `
 </article>
 `;
 
-const createNotificationListTemplate = (violationInformation) => {
+export const createNotificationListTemplate = (violationInformation) => {
   const notificationItemTemplates = violationInformation.map((e) => createNotificationItemTemplate(e)).join('');
 
   return `<div class="notification-list">${notificationItemTemplates}</div>`;
 };
 
 export class Notification extends Component {
-  getElement() {
-    if (this.element === null) {
-      this.element = createElement(createNotificationListTemplate(this.data));
-    }
-    return this.element;
-  }
 }

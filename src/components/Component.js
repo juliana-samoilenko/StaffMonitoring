@@ -1,21 +1,24 @@
+const createElement = (template) => {
+  const div = document.createElement('div');
+  div.innerHTML = template.trim();
+
+  return div.firstChild;
+}
+
 export class Component {
   constructor(data) {
     this.element = null;
     this.data = data;
   }
 
-  getElement() {
-    throw new Error('Implement method \'getElement\' in your derived class!');
+  getElement(functionOfCreateTemplate) {
+    if (this.element === null) {
+      this.element = createElement(functionOfCreateTemplate(this.data));
+    }
+    return this.element;
   }
 
-  render() {
-    return this.getElement().outerHTML;
+  render(functionOfCreateTemplate) {
+    return this.getElement(functionOfCreateTemplate).outerHTML;
   }
-}
-
-export const createElement = (template) => {
-  const div = document.createElement('div');
-  div.innerHTML = template.trim();
-
-  return div.firstChild;
 }

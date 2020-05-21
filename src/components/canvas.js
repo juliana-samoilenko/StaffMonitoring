@@ -1,15 +1,10 @@
-import { Component, createElement } from './Component';
+import { Component } from './Component';
 
-const createCanvasTemplate = () =>`
+export const createCanvasTemplate = () =>`
   <canvas class="work-display__plan js-building-canvas">
   </canvas>
 `;
 
 export class Canvas extends Component {
-  getElement() {
-    if (this.element === null) {
-      this.element = createElement(createCanvasTemplate());
-    }
-    return this.element;
-  }
+
 }

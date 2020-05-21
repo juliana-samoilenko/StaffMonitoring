@@ -1,4 +1,4 @@
-import { Component, createElement } from './Component';
+import { Component } from './Component';
 
 const createTemplateForEmployeeListItem = (employees) => `
 <li class="employees-list__item employee">
@@ -9,7 +9,7 @@ const createTemplateForEmployeeListItem = (employees) => `
   </div>
 </li>`;
 
-const createTemplateForEmployeePanel = (employeesList) => {
+export const createTemplateForEmployeePanel = (employeesList) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
@@ -37,10 +37,4 @@ const createTemplateForEmployeePanel = (employeesList) => {
 };
 
 export class EmployeeListPanel extends Component {
-  getElement() {
-    if (this.element === null) {
-      this.element = createElement(createTemplateForEmployeePanel(this.data));
-    }
-    return this.element;
-  }
 }
