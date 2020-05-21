@@ -1,4 +1,4 @@
-import { RenderingComponent, createElement } from './RenderingComponent';
+import { Component, createElement } from './Component';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.name}">${track.name}</option>
@@ -62,7 +62,7 @@ const createAddEmployeePanelTemplate = (tracks, zones) => {
 `;
 }
 
-export class AddEmployeePanel extends RenderingComponent {
+export class AddEmployeePanel extends Component {
   getElement() {
     if (this.element === null) {
       this.element = createElement(createAddEmployeePanelTemplate(this.data.tracks, this.data.zones));

@@ -1,4 +1,4 @@
-import { RenderingComponent, createElement } from './RenderingComponent';
+import { Component, createElement } from './Component';
 
 const createTemplateForEmployeeListItem = (employees) => `
 <li class="employees-list__item employee">
@@ -36,7 +36,7 @@ const createTemplateForEmployeePanel = (employeesList) => {
   `;
 };
 
-export class EmployeeListPanel extends RenderingComponent {
+export class EmployeeListPanel extends Component {
   getElement() {
     if (this.element === null) {
       this.element = createElement(createTemplateForEmployeePanel(this.data));

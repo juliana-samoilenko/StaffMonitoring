@@ -1,4 +1,4 @@
-export class RenderingComponent {
+export class Component {
   constructor(data) {
     this.element = null;
     this.data = data;
