@@ -5,8 +5,8 @@ import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel, createAddEmployeePanelTemplate } from './components/AddEmployeePanel';
 import { EditEmployeePanel, createEditEmployeePanelTemplate } from './components/EditEmployeePanel';
 
-const renderComponent = (container, template, position = 'beforeend') => {
-  container.insertAdjacentHTML(position, template.render());
+const renderComponent = (container, component, position = 'beforeend') => {
+  container.insertAdjacentHTML(position, component.render());
 }
 
 export const renderApp = () => {
