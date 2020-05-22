@@ -3,7 +3,7 @@ export const createElement = (template) => {
   div.innerHTML = template.trim();
 
   return div.firstChild;
-}
+};
 
 export class Component {
   constructor(data) {

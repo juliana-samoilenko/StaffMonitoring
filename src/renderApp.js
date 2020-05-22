@@ -47,7 +47,7 @@ export const renderApp = () => {
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
 
   function openAddPanel() {
-    const addEmployeePanel = new AddEmployeePanel({tracks, zones});
+    const addEmployeePanel = new AddEmployeePanel({ tracks, zones });
     renderComponent(employeePanel, addEmployeePanel);
   }
   
