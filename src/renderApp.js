@@ -1,28 +1,41 @@
-import { createCanvasTemplate } from './components/canvas';
-import { createNotificationListTemplate} from './components/notification';
-import { createTemplateForOpenEmployeeListButton, createTemplateForEmployeesPanel } from './components/employees-list-panel';
-import { createAddEmployeePanelTemplate, createTemplateForAddEmployeeForm } from './components/add-employee-panel';
-import { createEditEmployeePanelTemplate, createTemplateForEditEmployeeForm } from './components/edit-employee-panel';
+import { Canvas } from './components/Canvas';
+import { Notification } from './components/Notification';
+import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
+import { EmployeeListPanel } from './components/EmployeeListPanel';
+import { AddEmployeePanel, createAddEmployeePanelTemplate } from './components/AddEmployeePanel';
+import { EditEmployeePanel, createEditEmployeePanelTemplate } from './components/EditEmployeePanel';
+
+const renderComponent = (container, component, position = 'beforeend') => {
+  container.insertAdjacentHTML(position, component.render());
+}
 
 export const renderApp = () => {
   const rootContainer = document.querySelector('.js-work-display');
-  render(rootContainer, createCanvasTemplate(), 'afterbegin');
+  const canvas = new Canvas();
+  renderComponent(rootContainer, canvas);
 
   const violationInformation = [{ name: 'Миронов И.А', zone: 'Цех 1' }, { name: 'Петухов В.П.', zone: 'Высотные работы' }, { name: 'Лукин В.Р', zone: 'Цех 1' }];
-  
-  render(rootContainer, createNotificationListTemplate(violationInformation), 'beforeend');
-  /*render(rootContainer, createTemplateForOpenEmployeeListButton(), 'beforeend');*/
+  const notifications = new Notification(violationInformation);
+  renderComponent(rootContainer, notifications);
+
+  /*const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
+  renderComponent(rootContainer, openEmployeeListPanelButton);*/
 
   const employeesList = [{ id: 1, name: 'Пиратов В.К.' }, { id:  2, name: 'Шиханов П.А.'}, { id: 3, name: 'Терёхин У.Л.' }];
-  render(rootContainer, createTemplateForEmployeesPanel(employeesList), 'beforeend');
 
-  const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
+  const employeeListPanel = new EmployeeListPanel(employeesList);
+  renderComponent(rootContainer, employeeListPanel);
+
+  function closePanel(e) {
+    const elementForClose = e.currentTarget.parentNode.parentNode;
+    elementForClose.remove();
+  }
+
+  const closeButton = document.querySelectorAll('.js-btn-close');
+  closeButton.forEach(btn => btn.addEventListener('click', closePanel));
+
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
-  /*const formAddEmployee = createTemplateForAddEmployeeForm(tracks, zones);
-
-  render(employeePanel, createAddEmployeePanelTemplate(formAddEmployee), 'beforeend');*/
-
   const employee = {
     id: 1,
     trackId: 2,
@@ -30,11 +43,22 @@ export const renderApp = () => {
     position: 'engineer',
     permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
   };
-  const formEditEmloyee = createTemplateForEditEmployeeForm(employee, tracks, zones, true);
 
-  render(employeePanel, createEditEmployeePanelTemplate(formEditEmloyee), 'beforeend');
-}
+  const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
 
-const render = (container, template, position) => {
-  container.insertAdjacentHTML(position,template);
+  function openAddPanel() {
+    const addEmployeePanel = new AddEmployeePanel({ tracks, zones });
+    renderComponent(employeePanel, addEmployeePanel);
+  }
+  
+  const buttonForOpenAddPanel = document.querySelector('.js-open-add-panel');
+  buttonForOpenAddPanel.addEventListener('click', openAddPanel);
+
+  function openEditPanel() {
+    const editEmployeePanel = new EditEmployeePanel({employee, tracks, zones, isChecked: false});
+    renderComponent(employeePanel, editEmployeePanel);
+  }
+
+  const buttonForOpenEditPanel = document.querySelectorAll('.js-open-edit-panel');
+  buttonForOpenEditPanel.forEach(btn => btn.addEventListener('click', openEditPanel));
 }

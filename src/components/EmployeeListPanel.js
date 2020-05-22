@@ -1,30 +1,16 @@
-export const createTemplateForOpenEmployeeListButton = () => `
-<button class="button button-open-list" type="button" title="Список сотрудников">
-</button>
-`;
-
-const createTemplateForEditEmployeeButton = () => `
-<button class="employee__button-open-edit" type="button" title="Редактировать">
-</button>
-`;
+import { Component } from './Component';
+import { createTemplateForCloseButton } from './CloseButton';
 
 const createTemplateForEmployeeListItem = (employees) => `
 <li class="employees-list__item employee">
   <div class="employee__container">
     <span class="employee__name">${employees.id}) ${employees.name}</span>
-    ${createTemplateForEditEmployeeButton()}
+    <button class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
+    </button>
   </div>
 </li>`;
 
-const createTemplateForCloseButton = () => `
-<button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
-`;
-
-const createTemlateForAddEmployeeButton = () => `
-<button class="footer-list__button-open-add" type="button" title="Добавить сотрудика"></button>
-`;
-
-export const createTemplateForEmployeesPanel = (employeesList) => {
+const createTemplateForEmployeePanel = (employeesList) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
@@ -43,9 +29,16 @@ export const createTemplateForEmployeesPanel = (employeesList) => {
     </div>
   
     <footer class="employees-panel__footer footer-list">
-      ${createTemlateForAddEmployeeButton()}
+      <button class="footer-list__button-open-add js-open-add-panel" type="button" title="Добавить сотрудика">
+      </button>
     </footer>
   </div>
   </section>
   `;
 };
+
+export class EmployeeListPanel extends Component {
+  getTemplate() {
+    return createTemplateForEmployeePanel(this.data);
+  }
+}
