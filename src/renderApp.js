@@ -31,7 +31,7 @@ export const renderApp = () => {
     elementForClose.remove();
   }
 
-  const btnCls = document.querySelectorAll('.button-close');
+  const btnCls = document.querySelectorAll('.js-btn-close');
   btnCls.forEach(btn => btn.addEventListener('click', closePanel));
 
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
@@ -43,7 +43,7 @@ export const renderApp = () => {
     position: 'engineer',
     permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
   };
-  
+
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
 
   function openAddPanel() {
@@ -51,7 +51,7 @@ export const renderApp = () => {
     renderComponent(employeePanel, addEmployeePanel);
   }
   
-  const btnOpenAddPanel = document.querySelector('.footer-list__button-open-add');
+  const btnOpenAddPanel = document.querySelector('.js-open-add-panel');
   btnOpenAddPanel.addEventListener('click', openAddPanel);
 
   function openEditPanel() {
@@ -59,6 +59,6 @@ export const renderApp = () => {
     renderComponent(employeePanel, editEmployeePanel);
   }
 
-  const btnOpenEditPanel = document.querySelectorAll('.employee__button-open-edit');
+  const btnOpenEditPanel = document.querySelectorAll('.js-open-edit-panel');
   btnOpenEditPanel.forEach(btn => btn.addEventListener('click', openEditPanel));
 }
