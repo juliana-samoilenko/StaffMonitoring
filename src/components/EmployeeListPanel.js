@@ -1,4 +1,5 @@
 import { Component } from './Component';
+import { createTemplateForCloseButton } from './CloseButton';
 
 const createTemplateForEmployeeListItem = (employees) => `
 <li class="employees-list__item employee">
@@ -18,7 +19,7 @@ const createTemplateForEmployeePanel = (employeesList) => {
   
     <header class="employees-panel__header list-header">
       <h2 class="list-header__text">Список сотрудников</h2>
-      <button class="list-header__button-close button-close" type="button" title="Закрыть">&#10006;</button>
+      ${createTemplateForCloseButton()}
     </header>
   
     <div class="employees-panel__body employees-list">

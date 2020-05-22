@@ -26,6 +26,14 @@ export const renderApp = () => {
   const employeeListPanel = new EmployeeListPanel(employeesList);
   renderComponent(rootContainer, employeeListPanel);
 
+  function closePanel(e) {
+    const elementForClose = e.currentTarget.parentNode.parentNode;
+    elementForClose.remove();
+  }
+
+  const btnCls = document.querySelectorAll('.button-close');
+  btnCls.forEach(btn => btn.addEventListener('click', closePanel));
+
   const tracks = [{ id: 1, name: 1, points: [{}, {}]}, { id: 3, name: 3, points: [{}, {}]}, { id: 4, name: 4, points: [{}, {}]}];
   const zones = [ { id: 1, name: 'Цех 1' }, { id: 2, name: 'Высотные работы' }, { id: 3, name: 'Цех 2' }, { id: 4, name: 'Напряжение' } ];
   const employee = {
@@ -35,26 +43,12 @@ export const renderApp = () => {
     position: 'engineer',
     permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
   };
+  
   const employeePanel = rootContainer.querySelector('.js-employee-information-panel');
-  /*const addEmployeePanel = new AddEmployeePanel({tracks, zones});
-  renderComponent(employeePanel, addEmployeePanel);*/
-
-  const editEmployeePanel = new EditEmployeePanel({tracks, zones, employee, isCheked: false});
-  renderComponent(employeePanel, editEmployeePanel);
-
-  /*function closeEmploeeList() {
-    const employeePanel = document.querySelector('.employees-panel');
-    employeePanel.remove();
-    const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
-    renderComponent(rootContainer, openEmployeeListPanelButton,createTemplateForOpenEmployeeListButton);
-  }
-
-  const btnCls = document.querySelector('.list-header__button-close');
-  btnCls.addEventListener('click', closeEmploeeList);
 
   function openAddPanel() {
     const addEmployeePanel = new AddEmployeePanel({tracks, zones});
-    renderComponent(employeePanel, addEmployeePanel, createAddEmployeePanelTemplate);
+    renderComponent(employeePanel, addEmployeePanel);
   }
   
   const btnOpenAddPanel = document.querySelector('.footer-list__button-open-add');
@@ -62,10 +56,9 @@ export const renderApp = () => {
 
   function openEditPanel() {
     const editEmployeePanel = new EditEmployeePanel({employee, tracks, zones, isChecked: false});
-    renderComponent(employeePanel, editEmployeePanel, createEditEmployeePanelTemplate);
+    renderComponent(employeePanel, editEmployeePanel);
   }
 
   const btnOpenEditPanel = document.querySelectorAll('.employee__button-open-edit');
-  btnOpenEditPanel.forEach(btn => btn.addEventListener('click', openEditPanel));*/
-
+  btnOpenEditPanel.forEach(btn => btn.addEventListener('click', openEditPanel));
 }

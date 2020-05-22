@@ -1,4 +1,5 @@
 import { Component } from './Component';
+import { createTemplateForCloseButton } from './CloseButton';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.id}">${track.id}</option>
@@ -45,7 +46,7 @@ export const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChec
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
-      <button type="button" class="employee-edit-panel__button button-close" title="Закрыть">&#10006;</button>
+      ${createTemplateForCloseButton()}
     </header>
   
     <div class="employee-edit-panel__body">
