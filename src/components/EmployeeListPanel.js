@@ -9,7 +9,7 @@ const createTemplateForEmployeeListItem = (employees) => `
   </div>
 </li>`;
 
-export const createTemplateForEmployeePanel = (employeesList) => {
+const createTemplateForEmployeePanel = (employeesList) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
@@ -37,4 +37,7 @@ export const createTemplateForEmployeePanel = (employeesList) => {
 };
 
 export class EmployeeListPanel extends Component {
+  getTemplate() {
+    return createTemplateForEmployeePanel(this.data);
+  }
 }

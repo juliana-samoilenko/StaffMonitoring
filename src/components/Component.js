@@ -1,4 +1,4 @@
-const createElement = (template) => {
+export const createElement = (template) => {
   const div = document.createElement('div');
   div.innerHTML = template.trim();
 
@@ -11,14 +11,14 @@ export class Component {
     this.data = data;
   }
 
-  getElement(functionOfCreateTemplate) {
+  getElement() {
     if (this.element === null) {
-      this.element = createElement(functionOfCreateTemplate(this.data));
+      this.element = createElement(this.getTemplate());
     }
     return this.element;
   }
 
-  render(functionOfCreateTemplate) {
-    return this.getElement(functionOfCreateTemplate).outerHTML;
+  render() {
+    return this.getElement().outerHTML;
   }
 }

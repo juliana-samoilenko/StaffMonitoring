@@ -6,4 +6,7 @@ export const createTemplateForOpenEmployeeListButton = () => `
 `;
 
 export class OpenEmployeeListPanelButton extends Component {
+  getTemplate() {
+    return createTemplateForOpenEmployeeListButton(this.data);
+  }
 }

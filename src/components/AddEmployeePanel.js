@@ -63,4 +63,7 @@ export const createAddEmployeePanelTemplate = ({tracks, zones}) => {
 }
 
 export class AddEmployeePanel extends Component {
+  getTemplate() {
+    return createAddEmployeePanelTemplate(this.data);
+  }
 }

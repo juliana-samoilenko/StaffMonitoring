@@ -84,4 +84,7 @@ export const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChec
 }
 
 export class EditEmployeePanel extends Component {
+  getTemplate() {
+    return createEditEmployeePanelTemplate(this.data);
+  }
 }
