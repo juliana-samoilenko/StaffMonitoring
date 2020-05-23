@@ -2,8 +2,8 @@ import { Canvas } from './components/Canvas';
 import { Notification } from './components/Notification';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
 import { EmployeeListPanel } from './components/EmployeeListPanel';
-import { AddEmployeePanel, createAddEmployeePanelTemplate } from './components/AddEmployeePanel';
-import { EditEmployeePanel, createEditEmployeePanelTemplate } from './components/EditEmployeePanel';
+import { AddEmployeePanel } from './components/AddEmployeePanel';
+import { EditEmployeePanel } from './components/EditEmployeePanel';
 
 const renderComponent = (container, component, position = 'beforeend') => {
   container.insertAdjacentHTML(position, component.render());

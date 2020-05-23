@@ -1,6 +1,6 @@
 import { Component } from './Component';
 
-export const createTemplateForOpenEmployeeListButton = () => `
+const createTemplateForOpenEmployeeListButton = () => `
 <button class="button button-open-list" type="button" title="Список сотрудников">
 </button>
 `;
