@@ -11,6 +11,18 @@ export class Component {
     this.data = data;
   }
 
+  rerender() {
+    const oldElement = this.getElement();
+    const container = oldElement.parentElement;
+    
+    this.element = null;
+
+    const newElement = this.getElement();
+    container.replaceChild(newElement, oldElement);
+    
+    this.recoveryEventListeners();
+  }
+
   getElement() {
     if (this.element === null) {
       this.element = createElement(this.getTemplate());
