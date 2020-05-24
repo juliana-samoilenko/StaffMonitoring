@@ -10,7 +10,7 @@ const createTemplateForEmployeeListItem = (employees) => `
   </div>
 </li>`;
 
-const createTemplateForEmployeePanel = (employeesList) => {
+const createTemplateForEmployeePanel = ({ employeesList }) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
