@@ -34,6 +34,10 @@ export class Component {
     this.element = null;
   }
 
+  recoveryEventListeners() {
+    throw new Error('Implement in the derived class');
+  }
+
   getElement() {
     if (this.element === null) {
       this.element = createElement(this.getTemplate());
