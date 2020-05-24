@@ -11,6 +11,13 @@ export class Component {
     this.data = data;
   }
 
+  setState(nextData) {
+    const previousData = this.data;
+    this.data = { ...previousData, ...nextData };
+
+    this.rerender();
+  }
+
   rerender() {
     const oldElement = this.getElement();
     const container = oldElement.parentElement;
