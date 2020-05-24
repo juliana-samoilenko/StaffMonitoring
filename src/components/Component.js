@@ -17,4 +17,12 @@ export class Component {
     }
     return this.element;
   }
+
+  hide() {
+    this.getElement().classList.add('u-hidden');
+  }
+
+  show() {
+    this.getElement().classList.remove('u-hidden');
+  }
 }
