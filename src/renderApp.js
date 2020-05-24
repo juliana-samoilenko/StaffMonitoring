@@ -6,8 +6,22 @@ import { AddEmployeePanel } from './components/AddEmployeePanel';
 import { EditEmployeePanel } from './components/EditEmployeePanel';
 
 const renderComponent = (container, component, position = 'beforeend') => {
-  container.insertAdjacentHTML(position, component.render());
-}
+  switch(position) {
+    case 'afterbegin': {
+      container.prepend(component.getElement());
+      break;
+    }
+
+    case 'beforeend': {
+      container.append(component.getElement());
+      break;
+    }
+
+    default: {
+      throw new Error(`Unknown position given ${position}`);
+    }
+  }
+};
 
 export const renderApp = () => {
   const rootContainer = document.querySelector('.js-work-display');
