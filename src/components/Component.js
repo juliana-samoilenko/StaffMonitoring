@@ -17,8 +17,4 @@ export class Component {
     }
     return this.element;
   }
-
-  render() {
-    return this.getElement().outerHTML;
-  }
 }
