@@ -22,12 +22,16 @@ export class Component {
     const oldElement = this.getElement();
     const container = oldElement.parentElement;
     
-    this.element = null;
+    this.removeElement();
 
     const newElement = this.getElement();
     container.replaceChild(newElement, oldElement);
     
     this.recoveryEventListeners();
+  }
+  
+  removeElement() {
+    this.element = null;
   }
 
   getElement() {
