@@ -39,4 +39,26 @@ export class EmployeeListPanel extends Component {
   getTemplate() {
     return createTemplateForEmployeePanel(this.data);
   }
+
+  setCloseButtonHandler(handler) {
+    this.closeButtonHandler = handler;
+
+    this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
+  }
+
+  setHandlerForOpenButtonAddPanel(handler) {
+    this.openButtonForAddPanel = handler;
+
+    this.getElement().querySelector('.js-open-add-panel').addEventListener('click', handler);
+  }
+
+  setHandlerForOpenButtonEditPanel(handler) {
+    this.openButtonForEditPanel = handler;
+
+    const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
+    
+    editButtons.forEach((button) => {
+      button.addEventListener('click', handler);
+    }) 
+  }
 }

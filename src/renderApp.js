@@ -71,9 +71,39 @@ export const renderApp = () => {
   employeeListPanel.hide();
   renderComponent(employeeInformationPanel, employeeListPanel);
 
+  const addEmployeePanel = new AddEmployeePanel({ tracks, zones });
+  addEmployeePanel.hide();
+  renderComponent(employeeInformationPanel, addEmployeePanel);
+
+  const editEmployeePanel = new EditEmployeePanel({employee, tracks, zones, isChecked: false});
+  editEmployeePanel.hide();
+  renderComponent(employeeInformationPanel, editEmployeePanel);
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
     employeeListPanel.show();
   });
+
+  //handlers for employee list panel
+  employeeListPanel.setCloseButtonHandler(() => {
+    employeeListPanel.hide();
+    openEmployeeListPanelButton.show();
+  });
+
+  employeeListPanel.setHandlerForOpenButtonAddPanel(() => {
+    if (editEmployeePanel.checkComponentShow) {
+      editEmployeePanel.hide();
+    }
+
+    addEmployeePanel.show();
+  });
+
+  employeeListPanel.setHandlerForOpenButtonEditPanel(() => {
+    if (addEmployeePanel.checkComponentShow) {
+      addEmployeePanel.hide();
+    }
+
+    editEmployeePanel.show();
+  })
 }
