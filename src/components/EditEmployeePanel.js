@@ -88,4 +88,8 @@ export class EditEmployeePanel extends Component {
   getTemplate() {
     return createEditEmployeePanelTemplate(this.data);
   }
+
+  setCloseButtonHandler(handler) {
+    this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
+  }
 }
