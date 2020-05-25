@@ -61,4 +61,10 @@ export class EmployeeListPanel extends Component {
       button.addEventListener('click', handler);
     }) 
   }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler);
+    this.setHandlerForOpenButtonAddPanel(this.openButtonForAddPanel);
+    this.setHandlerForOpenButtonEditPanel(this.openButtonForEditPanel);
+  }
 }
