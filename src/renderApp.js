@@ -106,4 +106,14 @@ export const renderApp = () => {
 
     editEmployeePanel.show();
   })
+
+  //handlers for add employee panel
+  addEmployeePanel.setCloseButtonHandler(() => addEmployeePanel.hide());
+
+  addEmployeePanel.setAddEmployeeButtonHandler(() => {
+    const newEmployee = addEmployeePanel.getInformationOfForm();
+    const newEmployeesList = { employeesList: [newEmployee]}
+    addEmployeePanel.clearFormHandler();
+    employeeListPanel.setState(newEmployeesList);
+  });
 }
