@@ -64,20 +64,16 @@ export const renderApp = () => {
   renderComponent(canvasContainer, notifications);
 
   const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
-  openEmployeeListPanelButton.hide();
+  openEmployeeListPanelButton.show();
   renderComponent(employeeInformationPanel, openEmployeeListPanelButton);
 
   const employeeListPanel = new EmployeeListPanel({ employeesList });
-  employeeListPanel.show();
+  employeeListPanel.hide();
   renderComponent(employeeInformationPanel, employeeListPanel);
 
-  setTimeout(() => {
-    employeeListPanel.setState({ employeesList: [
-      { id: 1, name: 'Пиратов В.К.' },
-      { id: 2, name: 'Шиханов П.А.' },
-      { id: 3, name: 'Терёхин У.Л.' },
-      { id: 4, name: 'Уптин В.В.' }
-    ]
-  })
-  }, 3000);
+  //handler for open employee list button
+  openEmployeeListPanelButton.setClickHandler(() => {
+    openEmployeeListPanelButton.hide();
+    employeeListPanel.show();
+  });
 }
