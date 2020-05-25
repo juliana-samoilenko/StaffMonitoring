@@ -5,6 +5,12 @@ import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel } from './components/AddEmployeePanel';
 import { EditEmployeePanel } from './components/EditEmployeePanel';
 
+import {
+  EMPLOYEE_TRACKS,
+  ZONES,
+  EMPLOYEE,
+} from './const';
+
 const renderComponent = (container, component, position = 'beforeend') => {
   switch(position) {
     case 'afterbegin': {
@@ -32,24 +38,11 @@ export const renderApp = () => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeesList = [
-    { id: 1, name: 'Пиратов В.К.' },
-    { id:  2, name: 'Шиханов П.А.'},
-    { id: 3, name: 'Терёхин У.Л.' }
-  ];
-  const tracks = [
-    { id: 1, name: 1, points: [{}, {}]},
-    { id: 3, name: 3, points: [{}, {}]},
-    { id: 4, name: 4, points: [{}, {}]}
-  ];
-  const zones = [
-    { id: 1, name: 'Цех 1' },
-    { id: 2, name: 'Высотные работы' },
-    { id: 3, name: 'Цех 2' },
-    { id: 4, name: 'Напряжение' }
-  ];
+  const employeesList = Object.assign(EMPLOYEE);
+  const tracks = Object.assign(EMPLOYEE_TRACKS);
+  const zones = Object.assign(ZONES);
   const employee = {
-    id: 1,
+    id: 4,
     trackId: 2,
     name: 'Пиратов В.К.',
     position: 'engineer',

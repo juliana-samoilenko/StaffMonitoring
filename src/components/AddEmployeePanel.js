@@ -2,7 +2,7 @@ import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
 const createTemplateForTrackOption = (track) => `
-<option value="${track.name}">${track.name}</option>
+<option value="${track.id}">${track.id}</option>
 `;
 
 const createTemplateForZoneCheckbox = (zone) => `
