@@ -50,7 +50,7 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
     </header>
   
     <div class="employee-edit-panel__body">
-      <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
+      <form class="employee-edit-panel__form edit-employee-form js-edit-employee-form" action="" name="edit-emp" method="GET">
         
       <div class="edit-employee-form__name edit-name-container">
         <label class="edit-name-container__label" for="add-name">ФИО:</label>
@@ -91,5 +91,10 @@ export class EditEmployeePanel extends Component {
 
   setCloseButtonHandler(handler) {
     this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
+  }
+
+  clearFormHandler() {
+    const form = this.getElement().querySelector('.js-edit-employee-form');
+    form.reset();
   }
 }
