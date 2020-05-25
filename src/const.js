@@ -10,10 +10,29 @@ const EXTERNAL_WALL_THICKNESS = 15;
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
 
-const zoneEntity1 = new ZoneEntity ({id: 1, name: 'Высотные работы' });
-const zoneEntity2 = new ZoneEntity ({id: 2, name: 'Цех 1'});
-const zoneEntity3 = new ZoneEntity ({id: 3, name: 'Высокое напряжение'});
-const zoneEntity4 = new ZoneEntity ({id: 4, name: 'Спец оборудование'});
+export const EMPLOYEE_TRACKS = [
+  { id: 1, points: [[100, 100], [200, 200], [300, 300]] },
+  { id: 2, points: [[100, 200], [100, 300], [100, 400]] },
+  { id: 3, points: [[700, 100], [700, 200], [700, 300]] },
+];
+
+export const ZONES = [
+  {id: 1, name: 'Высотные работы' },
+  {id: 2, name: 'Цех 1'},
+  {id: 3, name: 'Высокое напряжение'},
+  {id: 4, name: 'Спец оборудование'}
+];
+
+export const EMPLOYEE = [
+  { id: 1, name: 'Петров С.М.', position: 'engineer', zones: [1, 2] },
+  { id: 2, name: 'Щербаков Д.Д.', position: 'working', zones: [2, 4] },
+  { id: 3, name: 'Пугало Р.К.', position: 'programmer', zones: [1, 3, 4] }
+];
+
+const zoneEntity1 = new ZoneEntity (ZONES[0]);
+const zoneEntity2 = new ZoneEntity (ZONES[1]);
+const zoneEntity3 = new ZoneEntity (ZONES[2]);
+const zoneEntity4 = new ZoneEntity (ZONES[3]);
 
 export const ELEMENTS_BUILDING = {
   walls: [
@@ -88,9 +107,3 @@ export const ELEMENTS_BUILDING = {
     },
   ],
 };
-
-export const EMPLOYEE_TRACKS = [
-  { id: 1, points: [[100, 100], [200, 200], [300, 300]] },
-  { id: 2, points: [[100, 200], [100, 300], [100, 400]] },
-  { id: 3, points: [[700, 100], [700, 200], [700, 300]] },
-];
