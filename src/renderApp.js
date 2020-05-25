@@ -24,7 +24,9 @@ const renderComponent = (container, component, position = 'beforeend') => {
 };
 
 export const renderApp = () => {
-  const rootContainer = document.querySelector('.js-work-display');
+  const canvasContainer = document.querySelector('.display-building');
+  const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
+
   const violationInformation = [
     { name: 'Миронов И.А', zone: 'Цех 1' },
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
@@ -55,19 +57,19 @@ export const renderApp = () => {
   };
   
   const canvas = new Canvas();
-  renderComponent(rootContainer, canvas);
+  renderComponent(canvasContainer, canvas);
 
   const notifications = new Notification({ violationInformation });
   notifications.hide();
-  renderComponent(rootContainer, notifications);
+  renderComponent(canvasContainer, notifications);
 
   const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
   openEmployeeListPanelButton.hide();
-  renderComponent(rootContainer, openEmployeeListPanelButton);
+  renderComponent(employeeInformationPanel, openEmployeeListPanelButton);
 
   const employeeListPanel = new EmployeeListPanel({ employeesList });
   employeeListPanel.show();
-  renderComponent(rootContainer, employeeListPanel);
+  renderComponent(employeeInformationPanel, employeeListPanel);
 
   setTimeout(() => {
     employeeListPanel.setState({ employeesList: [
@@ -78,5 +80,4 @@ export const renderApp = () => {
     ]
   })
   }, 3000);
-
 }

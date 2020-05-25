@@ -14,7 +14,6 @@ const createTemplateForEmployeePanel = ({ employeesList }) => {
   const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
 
   return `
-  <section class="employee-information-panel js-employee-information-panel">
   <div class="employees-panel">
   
     <header class="employees-panel__header list-header">
@@ -33,7 +32,6 @@ const createTemplateForEmployeePanel = ({ employeesList }) => {
       </button>
     </footer>
   </div>
-  </section>
   `;
 };
 
