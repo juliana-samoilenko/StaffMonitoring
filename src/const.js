@@ -11,9 +11,9 @@ export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
 
 export const EMPLOYEE_TRACKS = [
-  { id: 1, points: [[100, 100], [200, 200], [300, 300]] },
-  { id: 2, points: [[100, 200], [100, 300], [100, 400]] },
-  { id: 3, points: [[700, 100], [700, 200], [700, 300]] },
+  { id: 1, name: 1, points: [[100, 100], [200, 200], [300, 300]] },
+  { id: 2, name: 2, points: [[100, 200], [100, 300], [100, 400]] },
+  { id: 3, name: 3, points: [[700, 100], [700, 200], [700, 300]] },
 ];
 
 export const ZONES = [
