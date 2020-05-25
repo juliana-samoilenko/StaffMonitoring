@@ -87,6 +87,13 @@ export const renderApp = () => {
 
   //handlers for employee list panel
   employeeListPanel.setCloseButtonHandler(() => {
+    if (addEmployeePanel.checkComponentShow) {
+      addEmployeePanel.hide();
+    }
+
+    if (editEmployeePanel.checkComponentShow) {
+      editEmployeePanel.hide();
+    }
     employeeListPanel.hide();
     openEmployeeListPanelButton.show();
   });
