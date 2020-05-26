@@ -1,5 +1,5 @@
 import { Canvas } from './components/Canvas';
-import { Notification } from './components/Notification';
+import { NotificationList } from './components/NotificationList';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
 import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel } from './components/AddEmployeePanel';
@@ -25,20 +25,20 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const renderApp = () => {
   const rootContainer = document.querySelector('.js-work-display');
-  const violationInformation = [
+  const violationsList = [
     { name: 'Миронов И.А', zone: 'Цех 1' },
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeesList = [
+  const employeeList = [
     { id: 1, name: 'Пиратов В.К.' },
-    { id:  2, name: 'Шиханов П.А.'},
+    { id: 2, name: 'Шиханов П.А.' },
     { id: 3, name: 'Терёхин У.Л.' }
   ];
   const tracks = [
-    { id: 1, name: 1, points: [{}, {}]},
-    { id: 3, name: 3, points: [{}, {}]},
-    { id: 4, name: 4, points: [{}, {}]}
+    { id: 1, name: 1, points: [ {}, {}] },
+    { id: 3, name: 3, points: [ {}, {}] },
+    { id: 4, name: 4, points: [ {}, {}] }
   ];
   const zones = [
     { id: 1, name: 'Цех 1' },
@@ -57,7 +57,7 @@ export const renderApp = () => {
   const canvas = new Canvas();
   renderComponent(rootContainer, canvas);
 
-  const notifications = new Notification({ violationInformation });
+  const notifications = new NotificationList({ violationsList });
   notifications.hide();
   renderComponent(rootContainer, notifications);
 
@@ -65,12 +65,12 @@ export const renderApp = () => {
   openEmployeeListPanelButton.hide();
   renderComponent(rootContainer, openEmployeeListPanelButton);
 
-  const employeeListPanel = new EmployeeListPanel({ employeesList });
+  const employeeListPanel = new EmployeeListPanel({ employeeList });
   employeeListPanel.show();
   renderComponent(rootContainer, employeeListPanel);
 
   setTimeout(() => {
-    employeeListPanel.setState({ employeesList: [
+    employeeListPanel.setState({ employeeList: [
       { id: 1, name: 'Пиратов В.К.' },
       { id: 2, name: 'Шиханов П.А.' },
       { id: 3, name: 'Терёхин У.Л.' },
