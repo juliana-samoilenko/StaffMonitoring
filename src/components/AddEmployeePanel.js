@@ -89,8 +89,9 @@ export class AddEmployeePanel extends Component {
     return false;
   }
 
-  getInformationOfForm() {
+  getInformationOfForm(nextId) {
     const form = this.getElement().querySelector('.js-add-employee-form');
+
     const permittedZones = [];
     const zones = form.elements.employeeZones;
     zones.forEach(zone => {
@@ -98,8 +99,9 @@ export class AddEmployeePanel extends Component {
         permittedZones.push({ name: zone.value });
       }
     });
+
     return {
-      id: 0,
+      id: nextId,
       trackId: form.employeeTrack.value,
       name: form.employeeName.value,
       position: form.employeePosition.value,

@@ -115,7 +115,8 @@ export const renderApp = () => {
 
   addEmployeePanel.setAddEmployeeButtonHandler(() => {
     if (addEmployeePanel.checkRequiredFields()) {
-      const newEmployee = addEmployeePanel.getInformationOfForm();
+      const nextId = employeeListPanel.getIndexForNextEmployee();
+      const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
       addEmployeePanel.clearFormHandler();
       employeeListPanel.setState(newEmployee);
     }
