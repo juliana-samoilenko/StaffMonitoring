@@ -80,6 +80,15 @@ export class AddEmployeePanel extends Component {
     this.getElement().querySelector('.js-button-add-employee').addEventListener('click', handler);
   }
 
+  checkRequiredFields() {
+    const form = this.getElement().querySelector('.js-add-employee-form');
+    if (form.employeeName.value !== '' && form.employeePosition.value !== '') {
+      return true;
+    }
+
+    return false;
+  }
+
   getInformationOfForm() {
     const form = this.getElement().querySelector('.js-add-employee-form');
     const permittedZones = [];
