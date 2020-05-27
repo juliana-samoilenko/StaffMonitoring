@@ -52,13 +52,12 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
         ${zonesList}
       </div>
     </div>
-    </form>
-
-    </div>
-  
+    
     <footer class="employee-add-panel__footer footer-add">
       <button type="button" class="footer-add__button-add-employee js-button-add-employee" title="Добавить работника">Добавить сотрудника</button>
     </footer>
+    </div>
+    </form>
   </div>
 `;
 }

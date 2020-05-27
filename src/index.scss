@@ -376,6 +376,7 @@ html {
 
 .employee-add-panel__footer {
   @include flex-row;
+  margin-top: 15px;
   height: 30px;
   justify-content: center;
   align-items: center;
