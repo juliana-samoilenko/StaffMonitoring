@@ -27,14 +27,15 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     <form class="employee-add-panel__form add-employee-form js-add-employee-form" action="" name="add-emp" method="GET">
     
     <div class="add-employee-form__name add-name-container">
-      <label class="add-name-container__label" for="add-name">ФИО:</label>
-      <input name="employeeName" class="add-name-container__input" type="text" id="add-name" placeholder="Иванов И.И." autofocus
+      <label class="add-name-container__label" for="add-name">ФИО:<span class="required-field">*</span></label>
+      <input name="employeeName" class="add-name-container__input" type="text" id="add-name" placeholder="Иванов И.И." title="Введите ФИО сотрудника" 
+        autofocus
         required>
     </div>
     
     <div class="add-employee-form__position add-position-container">
-      <label class="add-position-container__label" for="add-position">Должность:</label>
-      <input name="employeePosition" class="add-position-container__input" type="text" id="add-position" placeholder="Техник"
+      <label class="add-position-container__label" for="add-position">Должность:<span class="required-field">*</span></label>
+      <input name="employeePosition" class="add-position-container__input" type="text" id="add-position" placeholder="Техник" title="Введите должность сотрудника"
         required>
     </div>
     
