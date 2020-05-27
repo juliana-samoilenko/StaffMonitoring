@@ -22,7 +22,7 @@ const createTemplateForEmployeePanel = ({ employeesList }) => {
     </header>
   
     <div class="employees-panel__body employees-list">
-      <ul class="employees-list__container js-employees-list__container">
+      <ul class="employees-list__container">
         ${employeeListItemTemplates}
       </ul>
     </div>
