@@ -1,17 +1,17 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
-const createTemplateForEmployeeListItem = (employees) => `
-<li class="employees-list__item employee">
+const createTemplateForEmployeeListItem = (employees, listNumber) => `
+<li class="employees-list__item employee js-employees-list__item">
   <div class="employee__container">
-    <span class="employee__name">${employees.id}) ${employees.name}</span>
+    <span class="employee__name">${listNumber}) ${employees.name}</span>
     <button class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
     </button>
   </div>
 </li>`;
 
 const createTemplateForEmployeePanel = ({ employeesList }) => {
-  const employeeListItemTemplates = employeesList.map((e) => createTemplateForEmployeeListItem(e)).join('');
+  const employeeListItemTemplates = employeesList.map((e, index) => createTemplateForEmployeeListItem(e, index + 1)).join('');
 
   return `
   <div class="employees-panel">
