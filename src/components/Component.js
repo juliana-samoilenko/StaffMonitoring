@@ -12,8 +12,8 @@ export class Component {
   }
 
   setState(nextData) {
-    const previousData = this.data.employeesList;
-    this.data = { employeesList: [...previousData, nextData] };
+    const previousData = this.data.employeeList;
+    this.data = { employeeList: [...previousData, nextData] };
     
     this.rerender();
   }
@@ -53,7 +53,7 @@ export class Component {
     this.getElement().classList.remove('u-hidden');
   }
 
-  checkComponentShow() {
+  isComponentShow() {
     return !this.getElement().classList.contains('u-hidden');
   }
 }

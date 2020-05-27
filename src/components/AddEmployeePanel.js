@@ -109,7 +109,7 @@ export class AddEmployeePanel extends Component {
     };
   }
 
-  clearFormHandler() {
+  clearForm() {
     const form = this.getElement().querySelector('.js-add-employee-form');
     form.reset();
   }

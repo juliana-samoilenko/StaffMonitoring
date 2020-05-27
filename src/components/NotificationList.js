@@ -14,13 +14,13 @@ const createNotificationItemTemplate = (violation) => `
 </article>
 `;
 
-const createNotificationListTemplate = ({ violationInformation }) => {
-  const notificationItemTemplates = violationInformation.map((e) => createNotificationItemTemplate(e)).join('');
+const createNotificationListTemplate = ({ violationsList }) => {
+  const notificationItemTemplates = violationsList.map((e) => createNotificationItemTemplate(e)).join('');
 
   return `<div class="notification-list">${notificationItemTemplates}</div>`;
 };
 
-export class Notification extends Component {
+export class NotificationList extends Component {
   getTemplate() {
     return createNotificationListTemplate(this.data);
   }

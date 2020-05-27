@@ -1,5 +1,5 @@
 import { Canvas } from './components/Canvas';
-import { Notification } from './components/Notification';
+import { NotificationList } from './components/NotificationList';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
 import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel } from './components/AddEmployeePanel';
@@ -33,12 +33,12 @@ export const renderApp = () => {
   const canvasContainer = document.querySelector('.display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
-  const violationInformation = [
+  const violationsList = [
     { name: 'Миронов И.А', zone: 'Цех 1' },
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeesList = Object.assign(EMPLOYEE);
+  const employeeList = Object.assign(EMPLOYEE);
   const tracks = Object.assign(EMPLOYEE_TRACKS);
   const zones = Object.assign(ZONES);
   const employee = {
@@ -52,7 +52,7 @@ export const renderApp = () => {
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
 
-  const notifications = new Notification({ violationInformation });
+  const notifications = new NotificationList({ violationsList });
   notifications.hide();
   renderComponent(canvasContainer, notifications);
 
@@ -60,7 +60,7 @@ export const renderApp = () => {
   openEmployeeListPanelButton.show();
   renderComponent(employeeInformationPanel, openEmployeeListPanelButton);
 
-  const employeeListPanel = new EmployeeListPanel({ employeesList });
+  const employeeListPanel = new EmployeeListPanel({ employeeList });
   employeeListPanel.hide();
   renderComponent(employeeInformationPanel, employeeListPanel);
 
@@ -80,27 +80,27 @@ export const renderApp = () => {
 
   //handlers for employee list panel
   employeeListPanel.setCloseButtonHandler(() => {
-    if (addEmployeePanel.checkComponentShow) {
+    if (addEmployeePanel.isComponentShow) {
       addEmployeePanel.hide();
     }
 
-    if (editEmployeePanel.checkComponentShow) {
+    if (editEmployeePanel.isComponentShow) {
       editEmployeePanel.hide();
     }
     employeeListPanel.hide();
     openEmployeeListPanelButton.show();
   });
 
-  employeeListPanel.setHandlerForOpenButtonAddPanel(() => {
-    if (editEmployeePanel.checkComponentShow) {
+  employeeListPanel.setHandlerForAddPanelOpenButton(() => {
+    if (editEmployeePanel.isComponentShow) {
       editEmployeePanel.hide();
     }
 
     addEmployeePanel.show();
   });
 
-  employeeListPanel.setHandlerForOpenButtonEditPanel(() => {
-    if (addEmployeePanel.checkComponentShow) {
+  employeeListPanel.setHandlerForEditPanelOpenButton(() => {
+    if (addEmployeePanel.isComponentShow) {
       addEmployeePanel.hide();
     }
 
@@ -109,7 +109,7 @@ export const renderApp = () => {
 
   //handlers for add employee panel
   addEmployeePanel.setCloseButtonHandler(() => {
-    addEmployeePanel.clearFormHandler();
+    addEmployeePanel.clearForm();
     addEmployeePanel.hide();
   });
 
@@ -117,14 +117,14 @@ export const renderApp = () => {
     if (addEmployeePanel.checkRequiredFields()) {
       const nextId = employeeListPanel.getIndexForNextEmployee();
       const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
-      addEmployeePanel.clearFormHandler();
+      addEmployeePanel.clearForm();
       employeeListPanel.setState(newEmployee);
     }
   });
 
   //handlers for edit employee panel
   editEmployeePanel.setCloseButtonHandler(() => {
-    editEmployeePanel.clearFormHandler();
+    editEmployeePanel.clearForm();
     editEmployeePanel.hide();
   });
 }

@@ -1,17 +1,17 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
-const createTemplateForEmployeeListItem = (employees, listNumber) => `
+const createTemplateForEmployeeListItem = (employee, listNumber) => `
 <li class="employees-list__item employee js-employees-list__item">
   <div class="employee__container">
-    <span class="employee__name">${listNumber}) ${employees.name}</span>
+    <span class="employee__name">${listNumber}) ${employee.name}</span>
     <button class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
     </button>
   </div>
 </li>`;
 
-const createTemplateForEmployeePanel = ({ employeesList }) => {
-  const employeeListItemTemplates = employeesList.map((e, index) => createTemplateForEmployeeListItem(e, index + 1)).join('');
+const createTemplateForEmployeePanel = ({ employeeList }) => {
+  const employeeListItemTemplates = employeeList.map((e, index) => createTemplateForEmployeeListItem(e, index + 1)).join('');
 
   return `
   <div class="employees-panel">
@@ -46,13 +46,13 @@ export class EmployeeListPanel extends Component {
     this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
   }
 
-  setHandlerForOpenButtonAddPanel(handler) {
+  setHandlerForAddPanelOpenButton(handler) {
     this.openButtonForAddPanel = handler;
 
     this.getElement().querySelector('.js-open-add-panel').addEventListener('click', handler);
   }
 
-  setHandlerForOpenButtonEditPanel(handler) {
+  setHandlerForEditPanelOpenButton(handler) {
     this.openButtonForEditPanel = handler;
 
     const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
@@ -64,8 +64,8 @@ export class EmployeeListPanel extends Component {
 
   recoveryEventListeners() {
     this.setCloseButtonHandler(this.closeButtonHandler);
-    this.setHandlerForOpenButtonAddPanel(this.openButtonForAddPanel);
-    this.setHandlerForOpenButtonEditPanel(this.openButtonForEditPanel);
+    this.setHandlerForAddPanelOpenButton(this.openButtonForAddPanel);
+    this.setHandlerForEditPanelOpenButton(this.openButtonForEditPanel);
   }
 
   getIndexForNextEmployee() {

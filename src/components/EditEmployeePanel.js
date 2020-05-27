@@ -93,7 +93,7 @@ export class EditEmployeePanel extends Component {
     this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
   }
 
-  clearFormHandler() {
+  clearForm() {
     const form = this.getElement().querySelector('.js-edit-employee-form');
     form.reset();
   }
