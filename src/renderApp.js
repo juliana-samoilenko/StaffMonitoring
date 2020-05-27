@@ -114,10 +114,11 @@ export const renderApp = () => {
   });
 
   addEmployeePanel.setAddEmployeeButtonHandler(() => {
-    const newEmployee = addEmployeePanel.getInformationOfForm();
-    const newEmployeesList = { employeesList: [newEmployee]}
-    addEmployeePanel.clearFormHandler();
-    employeeListPanel.setState(newEmployeesList);
+    if (addEmployeePanel.checkRequiredFields()) {
+      const newEmployee = addEmployeePanel.getInformationOfForm();
+      addEmployeePanel.clearFormHandler();
+      employeeListPanel.setState(newEmployee);
+    }
   });
 
   //handlers for edit employee panel
