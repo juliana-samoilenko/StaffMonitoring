@@ -36,9 +36,9 @@ export const renderApp = () => {
     { id: 3, name: 'Терёхин У.Л.' }
   ];
   const tracks = [
-    { id: 1, name: 1, points: [ {}, {}] },
-    { id: 3, name: 3, points: [ {}, {}] },
-    { id: 4, name: 4, points: [ {}, {}] }
+    { id: 1, name: 1, points: [{},{}] },
+    { id: 3, name: 3, points: [{},{}] },
+    { id: 4, name: 4, points: [{},{}] }
   ];
   const zones = [
     { id: 1, name: 'Цех 1' },
