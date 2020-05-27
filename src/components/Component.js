@@ -11,6 +11,33 @@ export class Component {
     this.data = data;
   }
 
+  setState(nextData) {
+    const previousData = this.data;
+    this.data = { ...previousData, ...nextData };
+
+    this.rerender();
+  }
+
+  rerender() {
+    const oldElement = this.getElement();
+    const container = oldElement.parentElement;
+    
+    this.removeElement();
+
+    const newElement = this.getElement();
+    container.replaceChild(newElement, oldElement);
+    
+    this.recoveryEventListeners();
+  }
+  
+  removeElement() {
+    this.element = null;
+  }
+
+  recoveryEventListeners() {
+    throw new Error('Implement in the derived class');
+  }
+
   getElement() {
     if (this.element === null) {
       this.element = createElement(this.getTemplate());
@@ -18,7 +45,11 @@ export class Component {
     return this.element;
   }
 
-  render() {
-    return this.getElement().outerHTML;
+  hide() {
+    this.getElement().classList.add('u-hidden');
+  }
+
+  show() {
+    this.getElement().classList.remove('u-hidden');
   }
 }
