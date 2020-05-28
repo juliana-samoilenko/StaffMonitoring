@@ -11,9 +11,11 @@ export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
 
 export const EMPLOYEE_TRACKS = [
-  { id: 1, name: 1, points: [[100, 100], [200, 200], [300, 300]] },
-  { id: 2, name: 2, points: [[100, 200], [100, 300], [100, 400]] },
-  { id: 3, name: 3, points: [[700, 100], [700, 200], [700, 300]] },
+  { id: 1, name: 1, points: [[100, 100], [200, 200], [300, 300]], empty: true },
+  { id: 2, name: 2, points: [[100, 200], [100, 300], [100, 400]], empty: true },
+  { id: 3, name: 3, points: [[700, 100], [700, 200], [700, 300]], empty: true },
+  { id: 4, name: 4, points: [[700, 100], [700, 200], [700, 300]], empty: true },
+  { id: 5, name: 5, points: [[700, 100], [700, 200], [700, 300]], empty: true }
 ];
 
 export const ZONES = [
@@ -24,9 +26,9 @@ export const ZONES = [
 ];
 
 export const EMPLOYEE = [
-  { id: 1, name: 'Петров С.М.', position: 'engineer', permittedZones: [1, 2] },
-  { id: 2, name: 'Щербаков Д.Д.', position: 'working', permittedZones: [2, 4] },
-  { id: 3, name: 'Пугало Р.К.', position: 'programmer', permittedZones: [1, 3, 4] }
+  { id: 1, name: 'Петров С.М.', position: 'engineer', trackId: 1, permittedZones: [1, 2] },
+  { id: 2, name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZones: [2, 4] },
+  { id: 3, name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZones: [1, 3, 4] }
 ];
 
 const zoneEntity1 = new ZoneEntity (ZONES[0]);
