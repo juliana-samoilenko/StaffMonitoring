@@ -67,9 +67,4 @@ export class EmployeeListPanel extends Component {
     this.setHandlerForAddPanelOpenButton(this.openButtonForAddPanel);
     this.setHandlerForEditPanelOpenButton(this.openButtonForEditPanel);
   }
-
-  getIndexForNextEmployee() {
-    const employees = this.getElement().querySelectorAll('.js-employees-list__item');
-    return employees.length + 1;
-  }
 }

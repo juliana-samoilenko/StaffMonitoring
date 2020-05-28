@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
@@ -131,7 +132,7 @@ export const renderApp = () => {
 
   addEmployeePanel.setAddEmployeeButtonHandler(() => {
     if (addEmployeePanel.checkRequiredFields()) {
-      const nextId = employeeListPanel.getIndexForNextEmployee();
+      const nextId = uuidv4();
       const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
       addEmployeePanel.clearForm();
       const previousData = employeeListPanel.data.employeeList;

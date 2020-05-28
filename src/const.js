@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { ZoneEntity } from './Core/entity/ZoneEntity';
 
 const WALL_COLOR = '#000000';
@@ -26,9 +27,9 @@ export const ZONES = [
 ];
 
 export const EMPLOYEE = [
-  { id: 1, name: 'Петров С.М.', position: 'engineer', trackId: 1, permittedZones: [1, 2] },
-  { id: 2, name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZones: [2, 4] },
-  { id: 3, name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZones: [1, 3, 4] }
+  { id: uuidv4(), name: 'Петров С.М.', position: 'engineer', trackId: 'Нет пути', permittedZones: [1, 2] },
+  { id: uuidv4(), name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZones: [2, 4] },
+  { id: uuidv4(), name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZones: [1, 3, 4] }
 ];
 
 const zoneEntity1 = new ZoneEntity (ZONES[0]);
