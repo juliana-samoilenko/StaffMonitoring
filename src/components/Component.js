@@ -53,7 +53,7 @@ export class Component {
     this.getElement().classList.remove('u-hidden');
   }
 
-  isComponentShow() {
+  isComponentShown() {
     return !this.getElement().classList.contains('u-hidden');
   }
 }

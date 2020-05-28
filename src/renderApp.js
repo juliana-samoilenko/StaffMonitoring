@@ -80,11 +80,11 @@ export const renderApp = () => {
 
   //handlers for employee list panel
   employeeListPanel.setCloseButtonHandler(() => {
-    if (addEmployeePanel.isComponentShow) {
+    if (addEmployeePanel.isComponentShown) {
       addEmployeePanel.hide();
     }
 
-    if (editEmployeePanel.isComponentShow) {
+    if (editEmployeePanel.isComponentShown) {
       editEmployeePanel.hide();
     }
     employeeListPanel.hide();
@@ -92,7 +92,7 @@ export const renderApp = () => {
   });
 
   employeeListPanel.setHandlerForAddPanelOpenButton(() => {
-    if (editEmployeePanel.isComponentShow) {
+    if (editEmployeePanel.isComponentShown) {
       editEmployeePanel.hide();
     }
 
@@ -100,7 +100,7 @@ export const renderApp = () => {
   });
 
   employeeListPanel.setHandlerForEditPanelOpenButton(() => {
-    if (addEmployeePanel.isComponentShow) {
+    if (addEmployeePanel.isComponentShown) {
       addEmployeePanel.hide();
     }
 
