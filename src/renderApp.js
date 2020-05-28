@@ -11,6 +11,22 @@ import {
   EMPLOYEE,
 } from './const';
 
+const markOccupiedTracks = (employeeList, tracks) => {
+  employeeList.forEach((employee) => {
+    if (employee.trackId !== "Нет пути") {
+  
+      tracks.forEach((track)=> {
+        if (track.id == employee.trackId) {
+          track.empty = false;
+        }
+      });
+  
+    }
+  });
+
+  return tracks;
+}
+
 const renderComponent = (container, component, position = 'beforeend') => {
   switch(position) {
     case 'afterbegin': {
@@ -39,7 +55,7 @@ export const renderApp = () => {
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
   const employeeList = Object.assign(EMPLOYEE);
-  const tracks = Object.assign(EMPLOYEE_TRACKS);
+  const tracks = markOccupiedTracks(employeeList, Object.assign(EMPLOYEE_TRACKS));
   const zones = Object.assign(ZONES);
   const employee = {
     id: 4,
