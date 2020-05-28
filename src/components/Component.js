@@ -12,8 +12,7 @@ export class Component {
   }
 
   setState(nextData) {
-    const previousData = this.data.employeeList;
-    this.data = { employeeList: [...previousData, nextData] };
+    this.data = nextData;
     
     this.rerender();
   }

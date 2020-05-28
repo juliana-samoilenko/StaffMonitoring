@@ -134,7 +134,8 @@ export const renderApp = () => {
       const nextId = employeeListPanel.getIndexForNextEmployee();
       const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
       addEmployeePanel.clearForm();
-      employeeListPanel.setState(newEmployee);
+      const previousData = employeeListPanel.data.employeeList;
+      employeeListPanel.setState({ employeeList: [...previousData, newEmployee] });
     }
   });
 
