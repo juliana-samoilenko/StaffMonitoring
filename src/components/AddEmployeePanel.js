@@ -119,4 +119,9 @@ export class AddEmployeePanel extends Component {
     const form = this.getElement().querySelector('.js-add-employee-form');
     form.reset();
   }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler);
+    this.setAddEmployeeButtonHandler(this.addEmployeeButtonHandler);
+  }
 }
