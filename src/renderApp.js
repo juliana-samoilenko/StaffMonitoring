@@ -56,7 +56,7 @@ export const renderApp = () => {
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
   const employeeList = Object.assign(EMPLOYEE);
-  const tracks = markOccupiedTracks(employeeList, Object.assign(EMPLOYEE_TRACKS));
+  const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = Object.assign(ZONES);
   const employee = {
     id: 4,
@@ -137,6 +137,8 @@ export const renderApp = () => {
       addEmployeePanel.clearForm();
       const previousData = employeeListPanel.data.employeeList;
       employeeListPanel.setState({ employeeList: [...previousData, newEmployee] });
+      const occupiedTrack = markOccupiedTracks(employeeListPanel.data.employeeList, EMPLOYEE_TRACKS);
+      addEmployeePanel.setState({ tracks: occupiedTrack, zones });
     }
   });
 
