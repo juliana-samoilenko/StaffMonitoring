@@ -61,7 +61,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     </div>
     
     <footer class="employee-add-panel__footer footer-add">
-      <button type="button" class="footer-add__button-add-employee js-button-add-employee" title="Добавить работника">Добавить сотрудника</button>
+      <button type="submit" class="footer-add__button-add-employee js-button-add-employee" title="Добавить работника">Добавить сотрудника</button>
     </footer>
     </div>
     </form>
@@ -83,7 +83,8 @@ export class AddEmployeePanel extends Component {
   setAddEmployeeButtonHandler(handler) {
     this.addEmployeeButtonHandler = handler;
 
-    this.getElement().querySelector('.js-button-add-employee').addEventListener('click', handler);
+    const form = this.getElement().querySelector('.js-add-employee-form');
+    form.addEventListener('submit', (event) => handler(event));
   }
 
   checkRequiredFields() {
