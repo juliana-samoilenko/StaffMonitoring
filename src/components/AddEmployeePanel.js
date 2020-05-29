@@ -105,10 +105,11 @@ export class AddEmployeePanel extends Component {
         permittedZones.push(zone.id);
       }
     });
+    const convertedTrackNumber = +form.employeeTrack.value;
 
     return {
       id: nextId,
-      trackId: form.employeeTrack.value,
+      trackId: (form.employeeTrack.value === "Нет пути") ? null : convertedTrackNumber,
       name: form.employeeName.value,
       position: form.employeePosition.value,
       permittedZones: permittedZones,
