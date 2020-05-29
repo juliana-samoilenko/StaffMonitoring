@@ -7,8 +7,8 @@ const createTemplateForTrackOption = (track) => `
 
 const createTemplateForZoneCheckbox = (zone) => `
 <div>
-  <input name="employeeZones" type="checkbox" value="${zone.name}" id="zone${zone.id}">
-  <label for="zone${zone.id}">${zone.name}</label>
+  <input name="employeeZones" type="checkbox" value="${zone.id}" id="${zone.id}">
+  <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
@@ -102,7 +102,7 @@ export class AddEmployeePanel extends Component {
     const zones = form.elements.employeeZones;
     zones.forEach(zone => {
       if (zone.checked) {
-        permittedZones.push({ name: zone.value });
+        permittedZones.push(zone.id);
       }
     });
 
