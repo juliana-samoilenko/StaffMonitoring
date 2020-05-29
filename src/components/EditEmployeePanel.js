@@ -41,8 +41,8 @@ const createTemplateForFormFooter = (isChecked) => {
 };
 
 const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) => {
-  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
-  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
+  const trackList = tracks.map((track) => createTemplateForTrackOption(track)).join('');
+  const zonesList = zones.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">

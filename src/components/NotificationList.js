@@ -15,7 +15,7 @@ const createNotificationItemTemplate = (violation) => `
 `;
 
 const createNotificationListTemplate = ({ violationsList }) => {
-  const notificationItemTemplates = violationsList.map((e) => createNotificationItemTemplate(e)).join('');
+  const notificationItemTemplates = violationsList.map((violation) => createNotificationItemTemplate(violation)).join('');
 
   return `<div class="notification-list">${notificationItemTemplates}</div>`;
 };
