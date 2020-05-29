@@ -30,7 +30,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
   
     <div class="employee-add-panel__body">
 
-    <form class="employee-add-panel__form add-employee-form js-add-employee-form" action="" name="add-emp" method="GET">
+    <form id="add-form" class="employee-add-panel__form add-employee-form" action="" name="add-emp" method="GET">
     
     <div class="add-employee-form__name add-name-container">
       <label class="add-name-container__label" for="add-name">ФИО:<span class="required-field">*</span></label>
@@ -83,12 +83,12 @@ export class AddEmployeePanel extends Component {
   setAddEmployeeButtonHandler(handler) {
     this.addEmployeeButtonHandler = handler;
 
-    const form = this.getElement().querySelector('.js-add-employee-form');
+    const form = this.getForm();
     form.addEventListener('submit', (event) => handler(event));
   }
 
   checkRequiredFields() {
-    const form = this.getElement().querySelector('.js-add-employee-form');
+    const form = this.getForm();
     if (form.employeeName.value !== '' && form.employeePosition.value !== '') {
       return true;
     }
@@ -96,8 +96,12 @@ export class AddEmployeePanel extends Component {
     return false;
   }
 
+  getForm() {
+    return this.getElement().querySelector('#add-form');
+  }
+
   getInformationOfForm(nextId) {
-    const form = this.getElement().querySelector('.js-add-employee-form');
+    const form = this.getForm();
 
     const permittedZones = [];
     const zones = form.elements.employeeZones;
@@ -118,7 +122,7 @@ export class AddEmployeePanel extends Component {
   }
 
   clearForm() {
-    const form = this.getElement().querySelector('.js-add-employee-form');
+    const form = this.getForm();
     form.reset();
   }
 
