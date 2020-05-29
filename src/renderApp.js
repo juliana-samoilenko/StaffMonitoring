@@ -55,9 +55,9 @@ export const renderApp = () => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeeList = Object.assign(EMPLOYEE);
+  const employeeList = JSON.parse(JSON.stringify(EMPLOYEE));
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
-  const zones = Object.assign(ZONES);
+  const zones = JSON.parse(JSON.stringify(ZONES));
   const employee = {
     id: 4,
     trackId: 2,
