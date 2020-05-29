@@ -12,7 +12,8 @@ export class Component {
   }
 
   setState(nextData) {
-    this.data = nextData;
+    const previousData = this.data;
+    this.data = {...previousData, ...nextData};
     
     this.rerender();
   }

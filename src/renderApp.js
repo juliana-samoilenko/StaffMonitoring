@@ -134,9 +134,12 @@ export const renderApp = () => {
     if (addEmployeePanel.checkRequiredFields()) {
       const nextId = uuidv4();
       const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
+      
       addEmployeePanel.clearForm();
+
       const previousData = employeeListPanel.data.employeeList;
       employeeListPanel.setState({ employeeList: [...previousData, newEmployee] });
+
       const occupiedTrack = markOccupiedTracks(employeeListPanel.data.employeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: occupiedTrack, zones });
     }
