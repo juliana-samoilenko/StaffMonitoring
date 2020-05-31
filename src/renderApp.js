@@ -58,13 +58,7 @@ export const renderApp = () => {
   const employeeList = JSON.parse(JSON.stringify(EMPLOYEE));
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = JSON.parse(JSON.stringify(ZONES));
-  const employee = {
-    id: 4,
-    trackId: 2,
-    name: 'Пиратов В.К.',
-    position: 'engineer',
-    permittedZones: [{ id: 1, name: 'Цех 1' }, { id: 4, name: 'Напряжение' }],
-  };
+  const employee = { trackId: null, permittedZones: []};
   
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
