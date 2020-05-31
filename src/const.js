@@ -20,10 +20,10 @@ export const EMPLOYEE_TRACKS = [
 ];
 
 export const ZONES = [
-  {id: 1, name: 'Высотные работы' },
-  {id: 2, name: 'Цех 1'},
-  {id: 3, name: 'Высокое напряжение'},
-  {id: 4, name: 'Спец оборудование'}
+  { id: 1, name: 'Высотные работы', permitted: false },
+  { id: 2, name: 'Цех 1', permitted: false },
+  { id: 3, name: 'Высокое напряжение', permitted: false },
+  { id: 4, name: 'Спец оборудование', permitted: false }
 ];
 
 export const EMPLOYEE = [
