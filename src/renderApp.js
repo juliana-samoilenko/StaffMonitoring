@@ -110,11 +110,21 @@ export const renderApp = () => {
     addEmployeePanel.show();
   });
 
-  employeeListPanel.setHandlerForEditPanelOpenButton(() => {
+  employeeListPanel.setHandlerForEditPanelOpenButton((event) => {
     if (addEmployeePanel.isComponentShown) {
       addEmployeePanel.hide();
     }
 
+    let pointEmployee = {};
+    const employeeId = event.target.id;
+    employeeList.forEach((employee) => {
+      if (employee.id === employeeId) {
+        pointEmployee = JSON.parse(JSON.stringify(employee));
+      }
+    });
+
+    const occupiedTrack = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    editEmployeePanel.setState({ employee: pointEmployee, tracks: occupiedTrack });
     editEmployeePanel.show();
   })
 

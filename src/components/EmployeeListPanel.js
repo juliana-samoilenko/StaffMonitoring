@@ -5,7 +5,7 @@ const createTemplateForEmployeeListItem = (employee, listNumber) => `
 <li class="employees-list__item employee js-employees-list__item">
   <div class="employee__container">
     <span class="employee__name">${listNumber}) ${employee.name}</span>
-    <button class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
+    <button id="${employee.id}" class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
     </button>
   </div>
 </li>`;
@@ -40,6 +40,10 @@ export class EmployeeListPanel extends Component {
     return createTemplateForEmployeePanel(this.data);
   }
 
+  getCurrentEmployeeList() {
+    return this.data.employeeList;
+  }
+
   setCloseButtonHandler(handler) {
     this.closeButtonHandler = handler;
 
@@ -58,7 +62,7 @@ export class EmployeeListPanel extends Component {
     const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
     
     editButtons.forEach((button) => {
-      button.addEventListener('click', handler);
+      button.addEventListener('click', event => handler(event));
     }) 
   }
 
