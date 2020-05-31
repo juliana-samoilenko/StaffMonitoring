@@ -12,6 +12,8 @@ import {
   EMPLOYEE,
 } from './const';
 
+let employeeIdForEdit = null;
+
 const markOccupiedTracks = (employeeList, tracks) => {
   employeeList.forEach((employee) => {
     if (employee.trackId !== "Нет пути") {
@@ -116,9 +118,9 @@ export const renderApp = () => {
     }
 
     let pointEmployee = {};
-    const employeeId = event.target.id;
+    const employeeIdForEdit = event.target.id;
     employeeList.forEach((employee) => {
-      if (employee.id === employeeId) {
+      if (employee.id === employeeIdForEdit) {
         pointEmployee = JSON.parse(JSON.stringify(employee));
       }
     });
