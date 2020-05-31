@@ -137,18 +137,18 @@ export const renderApp = () => {
   });
 
   addEmployeePanel.setAddEmployeeButtonHandler((event) => {
+    event.preventDefault();
+
     const nextId = uuidv4();
     const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
 
     addEmployeePanel.clearForm();
 
-    const previousData = employeeListPanel.data.employeeList;
-    employeeListPanel.setState({ employeeList: [...previousData, newEmployee] });
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    employeeListPanel.setState({ employeeList: [...currentEmployeeList, newEmployee] });
 
-    const occupiedTrack = markOccupiedTracks(employeeListPanel.data.employeeList, EMPLOYEE_TRACKS);
-    addEmployeePanel.setState({ tracks: occupiedTrack, zones });
-
-    event.preventDefault();
+    const newTrackList = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    addEmployeePanel.setState({ tracks: newTrackList, zones });
   });
 
   //handlers for edit employee panel
