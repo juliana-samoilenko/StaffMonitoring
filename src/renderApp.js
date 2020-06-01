@@ -206,7 +206,31 @@ export const renderApp = () => {
     editEmployeePanel.changeState(true);
   })
 
-  editEmployeePanel.setRejectRemovalButton(() => {
+  editEmployeePanel.setAcceptRemovalButtonHandler(() => {
+    const currentEmployeeId = employeeIdForEdit;
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const employeeToRemove = [];
+    let employeeTrack = null;
+    currentEmployeeList.map((employee) => {
+      if (employee.id == currentEmployeeId) {
+        employeeTrack = employee.trackId;
+        employeeToRemove.push(employee);
+      }
+    })
+    const newEmployeeList = currentEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
+
+    const sortedTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makeThePreviousPathUnoccupied(employeeTrack, sortedTrackList);
+
+    employeeListPanel.setState({ employeeList: newEmployeeList });
+    addEmployeePanel.setState({ tracks: newTrackList });
+    editEmployeePanel.setState({ tracks: newTrackList });
+    
+    editEmployeePanel.hide();
+    addEmployeePanel.hide();
+  })
+
+  editEmployeePanel.setRejectRemovalButtonHandler(() => {
     editEmployeePanel.changeState(false);
   })
 }
