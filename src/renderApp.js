@@ -30,6 +30,16 @@ const markOccupiedTracks = (employeeList, tracks) => {
   return tracks;
 }
 
+const makeThePreviousPathUnoccupied = (currentTrackId, sortedTrackList) => {
+  sortedTrackList.map((track) => {
+    if (track.id == currentTrackId) {
+      track.empty = true;
+    }
+  })
+
+  return sortedTrackList;
+}
+
 const renderComponent = (container, component, position = 'beforeend') => {
   switch(position) {
     case 'afterbegin': {
