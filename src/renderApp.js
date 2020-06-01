@@ -91,7 +91,7 @@ export const renderApp = () => {
   addEmployeePanel.hide();
   renderComponent(employeeInformationPanel, addEmployeePanel);
 
-  const editEmployeePanel = new EditEmployeePanel({employee, tracks, zones, isChecked: false});
+  const editEmployeePanel = new EditEmployeePanel({ employee, tracks, zones });
   editEmployeePanel.hide();
   renderComponent(employeeInformationPanel, editEmployeePanel);
 
@@ -128,8 +128,8 @@ export const renderApp = () => {
     }
 
     let pointEmployee = {};
-    const employeeIdForEdit = event.target.id;
-    employeeList.forEach((employee) => {
+    employeeIdForEdit = event.target.id;
+    employeeListPanel.getCurrentEmployeeList().forEach((employee) => {
       if (employee.id === employeeIdForEdit) {
         pointEmployee = JSON.parse(JSON.stringify(employee));
       }
