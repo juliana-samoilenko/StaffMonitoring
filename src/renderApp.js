@@ -191,4 +191,12 @@ export const renderApp = () => {
     editEmployeePanel.hide();
     addEmployeePanel.hide();
   });
+
+  editEmployeePanel.setConfirmationButtonRemoveEmployeeHandler(() => {
+    editEmployeePanel.changeState(true);
+  })
+
+  editEmployeePanel.setRejectRemovalButton(() => {
+    editEmployeePanel.changeState(false);
+  })
 }
