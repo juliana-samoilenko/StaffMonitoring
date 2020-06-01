@@ -131,11 +131,85 @@ export class EditEmployeePanel extends Component {
   }
 
   setCloseButtonHandler(handler) {
+    this.closeButtonHandler = handler;
+
     this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
   }
 
+  setSaveChangeButtonHandler(handler) {
+    this.saveChangeButtonHandler = handler;
+
+    const form = this.getForm();
+    form.addEventListener('submit', (event) => handler(event));
+  }
+
+  setConfirmationButtonRemoveEmployeeHandler(handler) {
+    this.removeEmployeeButtonHandler = handler;
+
+    this.getElement().querySelector('.js-button-remove-emp').addEventListener('click', handler);
+  }
+
+  setAcceptRemovalButtonHandler(handler) {
+    this.acceptRemovalButton = handler;
+
+    this.getElement().querySelector('.js-button-remove-yes').addEventListener('click', handler);
+  }
+
+  setRejectRemovalButtonHandler(handler) {
+    this.rejectRemovalButton = handler;
+
+    this.getElement().querySelector('.js-button-remove-no').addEventListener('click', handler);
+  }
+
+  getForm() {
+    return this.getElement().querySelector('#edit-form');
+  }
+
+  getInformationOfForm(employeeId) {
+    const form = this.getForm();
+    
+    const permittedZones = [];
+    const zones = form.elements.employeeZones;
+    zones.forEach(zone => {
+      if (zone.checked) {
+        permittedZones.push(zone.id);
+      }
+    });
+    const convertedTrackNumber = +form.employeeTrack.value;
+
+    return {
+      id: employeeId,
+      trackId: (form.employeeTrack.value === "Нет пути") ? null : convertedTrackNumber,
+      name: form.employeeName.value,
+      position: form.employeePosition.value,
+      permittedZones: permittedZones,
+    };
+  }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler);
+    this.setSaveChangeButtonHandler(this.saveChangeButtonHandler);
+    this.setConfirmationButtonRemoveEmployeeHandler(this.removeEmployeeButtonHandler);
+    this.setRejectRemovalButton(this.rejectRemovalButton);
+    this.setAcceptRemovalButton(this.acceptRemovalButton);
+  }
+
   clearForm() {
-    const form = this.getElement().querySelector('.js-edit-employee-form');
+    const form = this.getForm();
     form.reset();
   }
+
+  changeState(isChecked) {
+    const removalButtonGroup = document.querySelector('.js-removal-buttons');
+    const defaultButtonGroup = document.querySelector('.js-default-buttons');
+  
+    if (isChecked) {
+      removalButtonGroup.classList.add('u-hidden');
+      defaultButtonGroup.classList.remove('u-hidden');
+    }
+    else {
+      defaultButtonGroup.classList.add('u-hidden');
+      removalButtonGroup.classList.remove('u-hidden');
+    }
+  };
 }
