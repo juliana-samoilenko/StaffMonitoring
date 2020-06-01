@@ -404,7 +404,8 @@ html {
 
 .employee-edit-panel__footer {
   @include flex-col;
-  margin-left: 50px;
+  margin-left: 25px;
+  margin-top: 20px;
   width: 200px;
   justify-content: center;
 }
@@ -417,9 +418,25 @@ html {
 }
 
 .footer-edit__edit-button-group {
+  height: 30px;
+}
+
+.removal-сonfirmation-container {
+  @include flex-col();
+}
+
+.default-action-container {
+  @include flex-col();
+}
+
+.removal-button-group {
   @include flex-row;
   justify-content: space-around;
-  height: 30px;
+}
+
+.default-button-group {
+  @include flex-row;
+  justify-content: space-around;
 }
 
 .button-remove-yes {

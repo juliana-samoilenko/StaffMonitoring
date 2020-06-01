@@ -75,11 +75,33 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
           <div class="edit-employee-form__zone">
             ${zonesList}
           </div>
-          </div>
       <div class="employee-edit-panel__footer footer-edit">
-          ${createTemplateForFormFooter(isChecked)}
+      <footer class="footer-edit__edit-button-group">
+        <div class="removal-сonfirmation-container js-removal-buttons">
+          <div class="removal-button-group">
+            <button class="button button-save-change" type="submit" title="Сохранить изменения">
+              Сохранить изменения
+            </button>
+            <button class="button button-remove-emp js-button-remove-emp" type="button" title="Удалить сотрудника">
+              Удалить сотрудника
+            </button>
+          </div>
+        </div>
+        <div class="default-action-container js-default-buttons u-hidden">
+          <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
+          <div class="default-button-group">
+            <button class="button button-remove-yes js-button-remove-yes" type="button" title="Да">
+              Да
+            </button>
+            <button class="button button-remove-no js-button-remove-no" type="button" title="Нет">
+              Нет
+            </button>
+          </div>
+        </div>
+      </footer>
       </div> 
     </form>
+    </div>
   </div>
 `;
 }
