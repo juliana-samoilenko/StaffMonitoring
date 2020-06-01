@@ -1,48 +1,69 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
-const createTemplateForTrackOption = (track) => `
+const markPermittedZones = (employee, zones) => {
+  const permittedZones = employee.permittedZones;
+  const sortedZones = JSON.parse(JSON.stringify(zones));
+  permittedZones.map((permittedZone) => {
+    sortedZones.map((sortedZone)=> {
+      if (permittedZone == sortedZone.id) {
+        sortedZone.permitted = true;
+      }
+    })
+  })
+  return sortedZones;
+}
+
+const createTemplateForUnoccupiedTrackOptions = (track) => `
 <option value="${track.id}">${track.id}</option>
 `;
 
-const createTemplateForZoneCheckbox = (zone) => `
+const createTemplateForOccupiedTrackOption = (trackName) => `
+<option value="${trackName}">${trackName}</option>
+`;
+
+const createTemplateForPermittedZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
-  <input type="checkbox" id="${zone.id}">
+  <input name="employeeZones" type="checkbox" id="${zone.id}" checked>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
-const removalConfirmationButtons = () => `
-<footer class="footer-edit__edit-button-group"> 
-  <button class="button button-save-change" type="button" title="Сохранить изменения">
-    Сохранить изменения
-  </button>
-  <button class="button button-remove-emp" type="button" title="Удалить сотрудника">
-    Удалить сотрудника
-  </button>
-</footer>
+const createTemplateForUnpermittedZoneCheckbox = (zone) => `
+<div class="edit-zone-container">
+  <input name="employeeZones" type="checkbox" id="${zone.id}">
+  <label for="${zone.id}">${zone.name}</label>
+</div>
 `;
 
-const defaultActionButtons = () => `
-  <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
-  <footer class="footer-edit__edit-button-group">
-    <button class="button button-remove-yes" type="button" title="Да">
-      Да
-    </button>
-    <button class="button button-remove-no" type="button" title="Нет">
-      Нет
-    </button>
-  </footer>
-`;
+const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
+  const trackList = [];
+  if (employee.trackId === null)  {
+    trackList.push(createTemplateForOccupiedTrackOption('Нет пути'));
+   }
+   else {
+    trackList.push(createTemplateForOccupiedTrackOption(employee.trackId));
+    trackList.push(createTemplateForOccupiedTrackOption('Нет пути'));
+   }
 
-// eslint-disable-next-line arrow-body-style
-const createTemplateForFormFooter = (isChecked) => {
-  return isChecked ? defaultActionButtons() : removalConfirmationButtons();
-};
+  tracks.map((track) => {
+    if (track.empty) {
+      trackList.push(createTemplateForUnoccupiedTrackOptions(track));
+    }
+    return trackList;
+  });
 
-const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) => {
-  const trackList = tracks.map((track) => createTemplateForTrackOption(track)).join('');
-  const zonesList = zones.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
+  const zonesList = [];
+  const sortedZones = markPermittedZones(employee, zones);
+  sortedZones.map((zone) => {
+    if (zone.permitted) {
+      zonesList.push(createTemplateForPermittedZoneCheckbox(zone));
+    }
+    else {
+      zonesList.push(createTemplateForUnpermittedZoneCheckbox(zone));
+    }
+  })
+
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
@@ -50,30 +71,28 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
     </header>
   
     <div class="employee-edit-panel__body">
-      <form class="employee-edit-panel__form edit-employee-form js-edit-employee-form" action="" name="edit-emp" method="GET">
+      <form id="edit-form" class="employee-edit-panel__form edit-employee-form js-edit-employee-form" action="" name="edit-emp" method="GET">
         
       <div class="edit-employee-form__name edit-name-container">
         <label class="edit-name-container__label" for="add-name">ФИО:</label>
-        <input value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
+        <input name="employeeName" value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
       </div>
       
       <div class="edit-employee-form__position edit-positision-container">
         <label class="edit-positision-container__label" for="edit-name">Должность:</label>
-        <input class="edit-positision-container__input" type="text" value=${employee.position} required>
+        <input name="employeePosition" class="edit-positision-container__input" type="text" value=${employee.position} required>
       </div>
       
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
-        <select name="track" class="edit-track-container__select" required>
-          <option>${employee.trackId}</option>
-          <option value="Нет пути">Нет пути</option>
-          ${trackList}
+        <select name="employeeTrack" class="edit-track-container__select" required>
+          ${trackList.join('')}
         </select>
       </div>
       
         <label>Доступные зоны:</label>
           <div class="edit-employee-form__zone">
-            ${zonesList}
+            ${zonesList.join('')}
           </div>
       <div class="employee-edit-panel__footer footer-edit">
       <footer class="footer-edit__edit-button-group">
