@@ -156,4 +156,39 @@ export const renderApp = () => {
     editEmployeePanel.clearForm();
     editEmployeePanel.hide();
   });
+
+  editEmployeePanel.setSaveChangeButtonHandler((event) => {
+    event.preventDefault();
+
+    const currentEmployeeId = employeeIdForEdit;
+    let currentTrackId = null;
+    employeeListPanel.getCurrentEmployeeList().map((employee) => {
+      if (employee.id === currentEmployeeId) {
+        currentTrackId = employee.trackId;
+      }
+    })
+    const employeeChanges = editEmployeePanel.getInformationOfForm(currentEmployeeId);
+
+    const previousData = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = [];
+    previousData.map((employee) => {
+      if (employee.id === employeeChanges.id) {
+        newEmployeeList.push(employeeChanges);
+      }
+
+      else {
+        newEmployeeList.push(employee);
+      }
+    });
+
+    employeeListPanel.setState({ employeeList: newEmployeeList });
+
+    const sortedTrackList = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    const newTrackList = makeThePreviousPathUnoccupied(currentTrackId, sortedTrackList);
+    addEmployeePanel.setState({ tracks: newTrackList });
+    editEmployeePanel.setState({ employee: employeeChanges, tracks: newTrackList });
+
+    editEmployeePanel.hide();
+    addEmployeePanel.hide();
+  });
 }
