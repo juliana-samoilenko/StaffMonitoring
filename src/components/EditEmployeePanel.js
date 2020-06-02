@@ -175,7 +175,7 @@ export class EditEmployeePanel extends Component {
         permittedZones.push(zone.id);
       }
     });
-    const convertedTrackNumber = +form.employeeTrack.value;
+    const convertedTrackNumber = Number(form.employeeTrack.value);
 
     return {
       id: employeeId,
