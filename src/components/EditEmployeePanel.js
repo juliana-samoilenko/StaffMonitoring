@@ -51,14 +51,13 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
 
   const trackList = [baseTracks, upoccupiedTrackList];
 
-  const zonesList = [];
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
-  zonesWithPermittedStatus.map((zone) => {
+  const zonesList = zonesWithPermittedStatus.map((zone) => {
     if (zone.permitted) {
-      zonesList.push(createTemplateForPermittedZoneCheckbox(zone));
+      return createTemplateForPermittedZoneCheckbox(zone);
     }
     else {
-      zonesList.push(createTemplateForUnpermittedZoneCheckbox(zone));
+      return createTemplateForUnpermittedZoneCheckbox(zone);
     }
   })
 
