@@ -37,21 +37,19 @@ const createTemplateForUnpermittedZoneCheckbox = (zone) => `
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
-  const trackList = [];
-  if (employee.trackId === null)  {
-    trackList.push(createTemplateForOccupiedTrackOption('Нет пути'));
-   }
-   else {
-    trackList.push(createTemplateForOccupiedTrackOption(employee.trackId));
-    trackList.push(createTemplateForOccupiedTrackOption('Нет пути'));
-   }
-
-  tracks.map((track) => {
+  const trackList = tracks.map((track) => {
     if (track.empty) {
-      trackList.push(createTemplateForUnoccupiedTrackOptions(track));
+      return createTemplateForUnoccupiedTrackOptions(track);
     }
-    return trackList;
   });
+
+  if (employee.trackId === null) {
+    trackList.unshift(createTemplateForOccupiedTrackOption('Нет пути'));
+   }
+  else {
+    trackList.unshift(createTemplateForOccupiedTrackOption('Нет пути'));
+    trackList.unshift(createTemplateForOccupiedTrackOption(employee.trackId));
+   }
 
   const zonesList = [];
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
