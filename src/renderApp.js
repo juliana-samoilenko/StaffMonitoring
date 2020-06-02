@@ -135,8 +135,8 @@ export const renderApp = () => {
       }
     });
 
-    const occupiedTrack = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    editEmployeePanel.setState({ employee: pointEmployee, tracks: occupiedTrack });
+    const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    editEmployeePanel.setState({ employee: pointEmployee, tracks: tracksWithOccupiedStatus });
     editEmployeePanel.show();
   })
 
