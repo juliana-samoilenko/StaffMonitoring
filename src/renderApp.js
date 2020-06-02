@@ -28,14 +28,14 @@ const markOccupiedTracks = (employeeList, tracks) => {
   return tracks;
 };
 
-const makeThePreviousPathUnoccupied = (currentTrackId, sortedTrackList) => {
-  sortedTrackList.map((track) => {
+const makeThePreviousPathUnoccupied = (currentTrackId, tracks) => {
+  tracks.map((track) => {
     if (track.id == currentTrackId) {
       track.empty = true;
     }
   })
 
-  return sortedTrackList;
+  return tracks;
 }
 
 const renderComponent = (container, component, position = 'beforeend') => {
