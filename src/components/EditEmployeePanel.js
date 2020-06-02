@@ -1,9 +1,10 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
+import { cloneDeep } from '../renderApp';
 
 const markPermittedZones = (employee, zones) => {
   const permittedZones = employee.permittedZones;
-  const sortedZones = JSON.parse(JSON.stringify(zones));
+  const sortedZones = cloneDeep(zones);
   permittedZones.map((permittedZone) => {
     sortedZones.map((sortedZone)=> {
       if (permittedZone == sortedZone.id) {

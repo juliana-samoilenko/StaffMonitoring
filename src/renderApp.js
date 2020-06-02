@@ -58,6 +58,8 @@ const renderComponent = (container, component, position = 'beforeend') => {
   }
 };
 
+export const cloneDeep = (array => JSON.parse(JSON.stringify(array)));
+
 export const renderApp = () => {
   const canvasContainer = document.querySelector('.display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
@@ -67,9 +69,9 @@ export const renderApp = () => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeeList = JSON.parse(JSON.stringify(EMPLOYEE));
+  const employeeList = cloneDeep(EMPLOYEE);
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
-  const zones = JSON.parse(JSON.stringify(ZONES));
+  const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZones: []};
   
   const canvas = new Canvas();
@@ -131,7 +133,7 @@ export const renderApp = () => {
     employeeIdForEdit = event.target.id;
     employeeListPanel.getCurrentEmployeeList().forEach((employee) => {
       if (employee.id === employeeIdForEdit) {
-        pointEmployee = JSON.parse(JSON.stringify(employee));
+        pointEmployee = cloneDeep(employee);
       }
     });
 
