@@ -4,15 +4,15 @@ import { cloneDeep } from '../renderApp';
 
 const markPermittedZones = (employee, zones) => {
   const permittedZones = employee.permittedZones;
-  const sortedZones = cloneDeep(zones);
+  const zonesWithPermittedStatus = cloneDeep(zones);
   permittedZones.map((permittedZone) => {
-    sortedZones.map((sortedZone)=> {
-      if (permittedZone == sortedZone.id) {
-        sortedZone.permitted = true;
+    zonesWithPermittedStatus.map((zoneWithPermittedStatus)=> {
+      if (permittedZone == zoneWithPermittedStatus.id) {
+        zoneWithPermittedStatus.permitted = true;
       }
     })
   })
-  return sortedZones;
+  return zonesWithPermittedStatus;
 }
 
 const createTemplateForUnoccupiedTrackOptions = (track) => `
@@ -55,8 +55,8 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
   });
 
   const zonesList = [];
-  const sortedZones = markPermittedZones(employee, zones);
-  sortedZones.map((zone) => {
+  const zonesWithPermittedStatus = markPermittedZones(employee, zones);
+  zonesWithPermittedStatus.map((zone) => {
     if (zone.permitted) {
       zonesList.push(createTemplateForPermittedZoneCheckbox(zone));
     }
