@@ -4,14 +4,13 @@ import { cloneDeep } from '../renderApp';
 
 const markPermittedZones = (employee, zones) => {
   const permittedZones = employee.permittedZones;
-  const zonesWithPermittedStatus = cloneDeep(zones);
-  permittedZones.map((permittedZone) => {
-    zonesWithPermittedStatus.map((zoneWithPermittedStatus)=> {
-      if (permittedZone == zoneWithPermittedStatus.id) {
-        zoneWithPermittedStatus.permitted = true;
-      }
-    })
-  })
+  console.log(permittedZones);
+  const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
+    zone.permitted = permittedZones.includes(zone.id);
+
+    return zone;
+  });
+
   return zonesWithPermittedStatus;
 }
 
