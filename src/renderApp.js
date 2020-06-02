@@ -209,14 +209,10 @@ export const renderApp = () => {
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
     const currentEmployeeId = employeeIdForEdit;
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const employeeToRemove = [];
-    let employeeTrack = null;
-    currentEmployeeList.map((employee) => {
-      if (employee.id == currentEmployeeId) {
-        employeeTrack = employee.trackId;
-        employeeToRemove.push(employee);
-      }
-    })
+
+    const employeeToRemove = currentEmployeeList.find(employee => employee.id == currentEmployeeId);
+    const employeeTrack = employeeToRemove.trackId;
+
     const newEmployeeList = currentEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
 
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
