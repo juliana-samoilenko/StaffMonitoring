@@ -190,8 +190,8 @@ export class EditEmployeePanel extends Component {
     this.setCloseButtonHandler(this.closeButtonHandler);
     this.setSaveChangeButtonHandler(this.saveChangeButtonHandler);
     this.setConfirmationButtonRemoveEmployeeHandler(this.removeEmployeeButtonHandler);
-    this.setRejectRemovalButton(this.rejectRemovalButton);
-    this.setAcceptRemovalButton(this.acceptRemovalButton);
+    this.setRejectRemovalButtonHandler(this.rejectRemovalButton);
+    this.setAcceptRemovalButtonHandler(this.acceptRemovalButton);
   }
 
   clearForm() {
