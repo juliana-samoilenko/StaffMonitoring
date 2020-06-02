@@ -140,7 +140,7 @@ export class EditEmployeePanel extends Component {
     this.saveChangeButtonHandler = handler;
 
     const form = this.getForm();
-    form.addEventListener('submit', (event) => handler(event));
+    form.addEventListener('submit', handler);
   }
 
   setConfirmationButtonRemoveEmployeeHandler(handler) {

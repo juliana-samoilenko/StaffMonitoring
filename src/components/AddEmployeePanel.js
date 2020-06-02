@@ -78,7 +78,7 @@ export class AddEmployeePanel extends Component {
     this.addEmployeeButtonHandler = handler;
 
     const form = this.getForm();
-    form.addEventListener('submit', (event) => handler(event));
+    form.addEventListener('submit', handler);
   }
 
   checkRequiredFields() {
