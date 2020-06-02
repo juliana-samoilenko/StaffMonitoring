@@ -193,8 +193,8 @@ export const renderApp = () => {
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
 
-    const sortedTrackList = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    const newTrackList = makeThePreviousPathUnoccupied(currentTrackId, sortedTrackList);
+    const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    const newTrackList = makeThePreviousPathUnoccupied(currentTrackId, tracksWithOccupiedStatus);
     addEmployeePanel.setState({ tracks: newTrackList });
     editEmployeePanel.setState({ employee: employeeChanges, tracks: newTrackList });
 
@@ -219,8 +219,8 @@ export const renderApp = () => {
     })
     const newEmployeeList = currentEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
 
-    const sortedTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeThePreviousPathUnoccupied(employeeTrack, sortedTrackList);
+    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makeThePreviousPathUnoccupied(employeeTrack, tracksWithOccupiedStatus);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
     addEmployeePanel.setState({ tracks: newTrackList });
