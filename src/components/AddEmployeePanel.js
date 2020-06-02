@@ -13,13 +13,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 `;
 
 const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
-  const trackList = tracks.map((track) => {
-    const unoccupiedTracks = [];
-    if (track.empty) {
-      unoccupiedTracks.push(createTemplateForTrackOption(track));
-    }
-    return unoccupiedTracks.join('');
-  })
+  const trackList = tracks.filter(track => track.empty).map(createTemplateForTrackOption).join('');
   const zonesList = zones.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
