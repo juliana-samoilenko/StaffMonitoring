@@ -85,7 +85,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
       
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
-        <select name="employeeTrack" class="edit-track-container__select" required>
+        <select name="employeeTrack" class="edit-track-container__select">
           ${trackList.join('')}
         </select>
       </div>

@@ -41,7 +41,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     
     <div class="add-employee-form__track add-track-container">
       <label class="add-track-container__label" for="add-track">Путь:</label>
-      <select name="employeeTrack" class="add-track-container__select" id="add-track" required>
+      <select name="employeeTrack" class="add-track-container__select" id="add-track">
         <option class="js-add-tracks" value="">Нет пути</option>
         ${trackList}
       </select>
