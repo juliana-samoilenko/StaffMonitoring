@@ -14,21 +14,19 @@ import {
 
 let employeeIdForEdit = null;
 
-const markOccupiedTracks = (employeeList, tracks) => {
-  employeeList.forEach((employee) => {
-    if (employee.trackId !== "Нет пути") {
-  
-      tracks.forEach((track)=> {
-        if (track.id == employee.trackId) {
-          track.empty = false;
-        }
-      });
-  
+const markOccupiedTracks = (employeeList, tracks) => { 
+  const unoccupiedTracks = employeeList.map((employee) => {
+    if (employee.trackId !== null) {
+      return employee.trackId;
     }
   });
 
+  tracks.map((track) => {
+    track.empty = !unoccupiedTracks.includes(track.id);
+  })
+
   return tracks;
-}
+};
 
 const makeThePreviousPathUnoccupied = (currentTrackId, sortedTrackList) => {
   sortedTrackList.map((track) => {
