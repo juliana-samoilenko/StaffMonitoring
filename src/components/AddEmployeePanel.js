@@ -42,7 +42,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     <div class="add-employee-form__track add-track-container">
       <label class="add-track-container__label" for="add-track">Путь:</label>
       <select name="employeeTrack" class="add-track-container__select" id="add-track" required>
-        <option class="js-add-tracks">Нет пути</option>
+        <option class="js-add-tracks" value="">Нет пути</option>
         ${trackList}
       </select>
     </div>
@@ -108,7 +108,7 @@ export class AddEmployeePanel extends Component {
     
     return {
       id: nextId,
-      trackId: (form.employeeTrack.value === "Нет пути") ? null : convertedTrackNumber,
+      trackId: form.employeeTrack.value ? convertedTrackNumber : null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
       permittedZones: permittedZones,
