@@ -147,13 +147,13 @@ export class EditEmployeePanel extends Component {
   }
 
   setAcceptRemovalButtonHandler(handler) {
-    this.acceptRemovalButton = handler;
+    this.acceptRemovalButtonHandler = handler;
 
     this.getElement().querySelector('.js-button-remove-yes').addEventListener('click', handler);
   }
 
   setRejectRemovalButtonHandler(handler) {
-    this.rejectRemovalButton = handler;
+    this.rejectRemovalButtonHandler = handler;
 
     this.getElement().querySelector('.js-button-remove-no').addEventListener('click', handler);
   }
@@ -182,8 +182,8 @@ export class EditEmployeePanel extends Component {
     this.setCloseButtonHandler(this.closeButtonHandler);
     this.setSaveChangeButtonHandler(this.saveChangeButtonHandler);
     this.setConfirmationButtonRemoveEmployeeHandler(this.removeEmployeeButtonHandler);
-    this.setRejectRemovalButtonHandler(this.rejectRemovalButton);
-    this.setAcceptRemovalButtonHandler(this.acceptRemovalButton);
+    this.setRejectRemovalButtonHandler(this.rejectRemovalButtonHandler);
+    this.setAcceptRemovalButtonHandler(this.acceptRemovalButtonHandler);
   }
 
   clearForm() {
