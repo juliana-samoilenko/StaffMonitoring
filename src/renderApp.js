@@ -21,11 +21,12 @@ const markOccupiedTracks = (employeeList, tracks) => {
     }
   });
 
-  tracks.map((track) => {
+  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
     track.empty = !unoccupiedTracks.includes(track.id);
+    return track;
   })
 
-  return tracks;
+  return tracksWithEmptyStatus;
 };
 
 const makeThePreviousPathUnoccupied = (currentTrackId, tracks) => {
