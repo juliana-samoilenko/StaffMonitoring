@@ -36,11 +36,11 @@ const createTemplateForUnpermittedZoneCheckbox = (zone) => `
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
-  const upoccupiedTrackList = tracks.map((track) => {
-    if (track.empty) {
-      return createTemplateForUnoccupiedTrackOptions(track);
+  const upoccupiedTrackList = tracks.filter((track) => {
+    if (track.empty && track.empty !== undefined) {
+      return track;
     }
-  });
+  }).map(createTemplateForUnoccupiedTrackOptions);
 
   const baseTracks = employee.trackId ? [
     createTemplateForOccupiedTrackOption(employee.trackId),
@@ -83,7 +83,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
         <select name="employeeTrack" class="edit-track-container__select">
-          ${trackList.join('')}
+          ${trackList}
         </select>
       </div>
       
