@@ -127,16 +127,16 @@ export const renderApp = () => {
       addEmployeePanel.hide();
     }
 
-    let pointEmployee = {};
+    let employeeForEdit = {};
     employeeIdForEdit = event.target.id;
     employeeListPanel.getCurrentEmployeeList().forEach((employee) => {
       if (employee.id === employeeIdForEdit) {
-        pointEmployee = cloneDeep(employee);
+        employeeForEdit = cloneDeep(employee);
       }
     });
 
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    editEmployeePanel.setState({ employee: pointEmployee, tracks: tracksWithOccupiedStatus });
+    editEmployeePanel.setState({ employee: employeeForEdit, tracks: tracksWithOccupiedStatus });
     editEmployeePanel.show();
   })
 
