@@ -1,7 +1,7 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
-const createTemplateForUnoccupiedTrackOption = (track) => `
+const createTemplateForTrackOption = (track) => `
 <option value="${track.name}">${track.name}</option>
 `;
 
@@ -17,7 +17,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     if (track.empty && track.empty !== undefined) {
       return track;
     }
-    }).map(createTemplateForUnoccupiedTrackOption);
+    }).map(createTemplateForTrackOption);
   const zonesList = zones.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
