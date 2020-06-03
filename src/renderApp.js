@@ -58,7 +58,7 @@ const renderComponent = (container, component, position = 'beforeend') => {
   }
 };
 
-export const cloneDeep = (array => JSON.parse(JSON.stringify(array)));
+export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
 export const renderApp = () => {
   const canvasContainer = document.querySelector('.display-building');
