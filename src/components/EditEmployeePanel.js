@@ -13,12 +13,8 @@ const markPermittedZones = (employee, zones) => {
   return zonesWithPermittedStatus;
 }
 
-const createTemplateForUnoccupiedTrackOptions = (track) => `
-<option value="${track.id}">${track.id}</option>
-`;
-
-const createTemplateForOccupiedTrackOption = (trackName) => `
-<option value="${trackName}">${trackName}</option>
+const createTemplateForTrackOption = (track = undefined) => `
+<option value="${track ? track.id : ''}">${track ? track.name : 'Нет пути'}</option>
 `;
 
 const createTemplateForPermittedZoneCheckbox = (zone) => `
@@ -36,20 +32,19 @@ const createTemplateForUnpermittedZoneCheckbox = (zone) => `
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
-  const upoccupiedTrackList = tracks.filter((track) => {
+  const upoccupiedTrackList = cloneDeep(tracks).filter(track => {
     if (track.empty && track.empty !== undefined) {
       return track;
     }
-  }).map(createTemplateForUnoccupiedTrackOptions);
-
-  const baseTracks = employee.trackId ? [
-    createTemplateForOccupiedTrackOption(employee.trackId),
-    createTemplateForOccupiedTrackOption('Нет пути'),
-  ] : [
-    createTemplateForOccupiedTrackOption('Нет пути'),
-  ];
-
-  const trackList = [...baseTracks, ...upoccupiedTrackList];
+  }).map(createTemplateForTrackOption);
+  const currentTrack = cloneDeep(tracks).filter(track => {
+    if (track.id == employee.trackId) {
+      return track;
+    }
+  }).map(createTemplateForTrackOption);
+  const emptyTrack = currentTrack ? createTemplateForTrackOption() : null;
+  
+  const trackList = [currentTrack, emptyTrack, ...upoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
   const zonesList = zonesWithPermittedStatus.map(zone => 
