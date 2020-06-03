@@ -29,14 +29,15 @@ const markOccupiedTracks = (employeeList, tracks) => {
   return tracksWithEmptyStatus;
 };
 
-const makeThePreviousPathUnoccupied = (currentTrackId, tracks) => {
-  tracks.map((track) => {
+const makePreviousTrackUnoccupied = (currentTrackId, tracks) => {
+  const tracksWithUpdateEmptyStatus = cloneDeep(tracks).map((track) => {
     if (track.id == currentTrackId) {
       track.empty = true;
     }
+    return track;
   })
 
-  return tracks;
+  return tracksWithUpdateEmptyStatus;
 }
 
 const renderComponent = (container, component, position = 'beforeend') => {
@@ -195,7 +196,7 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: newEmployeeList });
 
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    const newTrackList = makeThePreviousPathUnoccupied(currentTrackId, tracksWithOccupiedStatus);
+    const newTrackList = makePreviousTrackUnoccupied(currentTrackId, tracksWithOccupiedStatus);
     
     addEmployeePanel.setState({ tracks: newTrackList });
     addEmployeePanel.hide();
@@ -218,7 +219,7 @@ export const renderApp = () => {
     const newEmployeeList = currentEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
 
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeThePreviousPathUnoccupied(employeeTrack, tracksWithOccupiedStatus);
+    const newTrackList = makePreviousTrackUnoccupied(employeeTrack, tracksWithOccupiedStatus);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
     addEmployeePanel.setState({ tracks: newTrackList });
