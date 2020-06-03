@@ -30,14 +30,18 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
       return track;
     }
   }).map(createTemplateForTrackOption);
-  const currentTrack = cloneDeep(tracks).filter(track => {
-    if (track.id == employee.trackId) {
-      return track;
-    }
-  }).map(createTemplateForTrackOption);
-  const emptyTrack = currentTrack ? createTemplateForTrackOption() : null;
-  
-  const trackList = [currentTrack, emptyTrack, ...upoccupiedTrackList];
+
+  const currentTrack = cloneDeep(tracks).find(track => track.id == employee.trackId);
+  const emptyTrack = createTemplateForTrackOption();
+
+  const baseTrack = currentTrack ? [
+    createTemplateForTrackOption(currentTrack), 
+    emptyTrack
+  ] : [
+    emptyTrack
+  ];
+
+  const trackList = [...baseTrack, ...upoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
   const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
