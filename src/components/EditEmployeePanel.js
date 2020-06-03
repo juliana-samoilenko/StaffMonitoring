@@ -167,12 +167,11 @@ export class EditEmployeePanel extends Component {
     
     const zones = Array.from(form.elements.employeeZones);
     const permittedZoneIds = zones.filter(zone => zone.checked).map(zone => zone.id);
-
-    const convertedTrackNumber = Number(form.employeeTrack.value);
+    const trackId = Number(form.employeeTrack.value);
 
     return {
       id: employeeId,
-      trackId: (form.employeeTrack.value === "Нет пути") ? null : convertedTrackNumber,
+      trackId: trackId ? trackId : null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
       permittedZoneIds: permittedZoneIds,
