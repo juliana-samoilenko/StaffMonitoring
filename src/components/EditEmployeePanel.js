@@ -17,16 +17,9 @@ const createTemplateForTrackOption = (track = undefined) => `
 <option value="${track ? track.id : ''}">${track ? track.name : 'Нет пути'}</option>
 `;
 
-const createTemplateForPermittedZoneCheckbox = (zone) => `
+const createTemplateForZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
-  <input name="employeeZones" type="checkbox" id="${zone.id}" checked>
-  <label for="${zone.id}">${zone.name}</label>
-</div>
-`;
-
-const createTemplateForUnpermittedZoneCheckbox = (zone) => `
-<div class="edit-zone-container">
-  <input name="employeeZones" type="checkbox" id="${zone.id}">
+  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.permitted ? 'checked' : ''}>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
@@ -47,11 +40,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
   const trackList = [currentTrack, emptyTrack, ...upoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
-  const zonesList = zonesWithPermittedStatus.map(zone => 
-    zone.permitted ?
-      createTemplateForPermittedZoneCheckbox(zone) :
-      createTemplateForUnpermittedZoneCheckbox(zone)
-  ).join('');
+  const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
   <div class="employee-edit-panel">
