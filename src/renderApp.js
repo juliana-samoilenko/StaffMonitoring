@@ -70,7 +70,7 @@ export const renderApp = () => {
   const employeeList = cloneDeep(EMPLOYEE);
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
-  const employee = { trackId: null, permittedZones: []};
+  const employee = { trackId: null, permittedZoneIds: []};
   
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);

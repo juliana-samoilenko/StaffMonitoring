@@ -4,6 +4,6 @@ export class EmployeeEntity {
     this.name= name;
     this.position = position;
     this.trackId = trackId;
-    this.permittedZones = zones;
+    this.permittedZoneIds = zones;
   }
 }

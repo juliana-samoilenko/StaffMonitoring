@@ -27,9 +27,9 @@ export const ZONES = [
 ];
 
 export const EMPLOYEE = [
-  { id: uuidv4(), name: 'Петров С.М.', position: 'engineer', trackId: null, permittedZones: [1, 2] },
-  { id: uuidv4(), name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZones: [2, 4] },
-  { id: uuidv4(), name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZones: [1, 3, 4] }
+  { id: uuidv4(), name: 'Петров С.М.', position: 'engineer', trackId: null, permittedZoneIds: [1, 2] },
+  { id: uuidv4(), name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZoneIds: [2, 4] },
+  { id: uuidv4(), name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZoneIds: [1, 3, 4] }
 ];
 
 const zoneEntity1 = new ZoneEntity (ZONES[0]);

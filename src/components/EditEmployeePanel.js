@@ -3,7 +3,7 @@ import { createTemplateForCloseButton } from './CloseButton';
 import { cloneDeep } from '../renderApp';
 
 const markPermittedZones = (employee, zones) => {
-  const permittedZones = employee.permittedZones.map(zone => Number(zone));
+  const permittedZones = employee.permittedZoneIds.map(zone => Number(zone));
   const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
     zone.permitted = permittedZones.includes(zone.id);
 
@@ -166,7 +166,7 @@ export class EditEmployeePanel extends Component {
     const form = this.getForm();
     
     const zones = Array.from(form.elements.employeeZones);
-    const permittedZones = zones.filter(zone => zone.checked).map(zone => zone.id);
+    const permittedZoneIds = zones.filter(zone => zone.checked).map(zone => zone.id);
 
     const convertedTrackNumber = Number(form.employeeTrack.value);
 
@@ -175,7 +175,7 @@ export class EditEmployeePanel extends Component {
       trackId: (form.employeeTrack.value === "Нет пути") ? null : convertedTrackNumber,
       name: form.employeeName.value,
       position: form.employeePosition.value,
-      permittedZones: permittedZones,
+      permittedZoneIds: permittedZoneIds,
     };
   }
 
