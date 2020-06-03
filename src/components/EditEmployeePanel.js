@@ -49,7 +49,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
     createTemplateForOccupiedTrackOption('Нет пути'),
   ];
 
-  const trackList = [baseTracks, upoccupiedTrackList];
+  const trackList = [...baseTracks, ...upoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
   const zonesList = zonesWithPermittedStatus.map((zone) => {
