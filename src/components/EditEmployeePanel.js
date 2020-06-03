@@ -3,7 +3,7 @@ import { createTemplateForCloseButton } from './CloseButton';
 import { cloneDeep } from '../renderApp';
 
 const markPermittedZones = (employee, zones) => {
-  const permittedZones = employee.permittedZones;
+  const permittedZones = employee.permittedZones.map(zone => Number(zone));
   const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
     zone.permitted = permittedZones.includes(zone.id);
 

@@ -195,11 +195,12 @@ export const renderApp = () => {
 
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
     const newTrackList = makeThePreviousPathUnoccupied(currentTrackId, tracksWithOccupiedStatus);
+    
     addEmployeePanel.setState({ tracks: newTrackList });
-    editEmployeePanel.setState({ employee: employeeChanges, tracks: newTrackList });
-
-    editEmployeePanel.hide();
     addEmployeePanel.hide();
+
+    editEmployeePanel.setState({ employee: employeeChanges, tracks: newTrackList });
+    editEmployeePanel.hide();
   });
 
   editEmployeePanel.setConfirmationButtonRemoveEmployeeHandler(() => {
