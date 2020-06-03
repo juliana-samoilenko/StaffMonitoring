@@ -52,14 +52,11 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
   const trackList = [...baseTracks, ...upoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
-  const zonesList = zonesWithPermittedStatus.map((zone) => {
-    if (zone.permitted) {
-      return createTemplateForPermittedZoneCheckbox(zone);
-    }
-    else {
-      return createTemplateForUnpermittedZoneCheckbox(zone);
-    }
-  })
+  const zonesList = zonesWithPermittedStatus.map(zone => 
+    zone.permitted ?
+      createTemplateForPermittedZoneCheckbox(zone) :
+      createTemplateForUnpermittedZoneCheckbox(zone)
+  ).join('');
 
   return `
   <div class="employee-edit-panel">
@@ -89,7 +86,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
       
         <label>Доступные зоны:</label>
           <div class="edit-employee-form__zone">
-            ${zonesList.join('')}
+            ${zonesList}
           </div>
       <div class="employee-edit-panel__footer footer-edit">
       <footer class="footer-edit__edit-button-group">
