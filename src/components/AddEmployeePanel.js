@@ -14,7 +14,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 
 const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
   const trackList = tracks.filter(track => {
-    if (track.empty && track.empty !== undefined) {
+    if (track.empty) {
       return track;
     }
     }).map(createTemplateForTrackOption);
