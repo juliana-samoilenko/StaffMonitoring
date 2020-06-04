@@ -176,11 +176,11 @@ export class EditEmployeePanel extends Component {
     form.reset();
   }
 
-  changeState(isChecked) {
+  toggleConfirmationButtons(isAwaitingConfirmation) {
     const removalButtonGroup = document.querySelector('.js-removal-buttons');
     const defaultButtonGroup = document.querySelector('.js-default-buttons');
   
-    if (isChecked) {
+    if (isAwaitingConfirmation) {
       removalButtonGroup.classList.add('u-hidden');
       defaultButtonGroup.classList.remove('u-hidden');
     }

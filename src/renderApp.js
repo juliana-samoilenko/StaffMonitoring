@@ -206,7 +206,7 @@ export const renderApp = () => {
   });
 
   editEmployeePanel.setConfirmationButtonRemoveEmployeeHandler(() => {
-    editEmployeePanel.changeState(true);
+    editEmployeePanel.toggleConfirmationButtons(true);
   })
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
@@ -230,6 +230,6 @@ export const renderApp = () => {
   })
 
   editEmployeePanel.setRejectRemovalButtonHandler(() => {
-    editEmployeePanel.changeState(false);
+    editEmployeePanel.toggleConfirmationButtons(false);
   })
 }
