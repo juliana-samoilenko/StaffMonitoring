@@ -30,14 +30,14 @@ const markOccupiedTracks = (employeeList, tracks) => {
 };
 
 const makePreviousTrackUnoccupied = (currentTrackId, tracks) => {
-  const tracksWithUpdateEmptyStatus = cloneDeep(tracks).map((track) => {
+  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
     if (track.id == currentTrackId) {
       track.empty = true;
     }
     return track;
   })
 
-  return tracksWithUpdateEmptyStatus;
+  return tracksWithEmptyStatus;
 }
 
 const renderComponent = (container, component, position = 'beforeend') => {
