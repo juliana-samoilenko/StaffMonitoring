@@ -149,9 +149,7 @@ export const renderApp = () => {
   addEmployeePanel.setAddEmployeeButtonHandler((event) => {
     event.preventDefault();
 
-    const nextId = uuidv4();
-    const newEmployee = addEmployeePanel.getInformationOfForm(nextId);
-
+    const newEmployee = addEmployeePanel.getInformationOfForm();
     addEmployeePanel.clearForm();
 
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();

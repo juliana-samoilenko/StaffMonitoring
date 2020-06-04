@@ -1,5 +1,6 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
+import { createEmployeeEntity } from '../Core/entity/EmployeeEntity';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.id}">${track.name}</option>
@@ -98,20 +99,19 @@ export class AddEmployeePanel extends Component {
     return this.getElement().querySelector('#add-form');
   }
 
-  getInformationOfForm(nextId) {
+  getInformationOfForm() {
     const form = this.getForm();
 
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
     const permittedZoneIds = zoneCheckboxes.filter(zoneCheckbox => zoneCheckbox.checked).map(zoneCheckbox => Number(zoneCheckbox.id));
     const trackId = Number(form.employeeTrack.value);
     
-    return {
-      id: nextId,
+    return createEmployeeEntity({
       trackId: trackId ? trackId : null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
       permittedZoneIds: permittedZoneIds,
-    };
+    });
   }
 
   clearForm() {
