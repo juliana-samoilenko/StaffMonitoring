@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ZoneEntity } from './Core/entity/ZoneEntity';
+import { createZoneEntity } from './Core/entity/ZoneEntity';
 
 const WALL_COLOR = '#000000';
 const DOOR_COLOR = '#A63600';
@@ -32,10 +32,10 @@ export const EMPLOYEE = [
   { id: uuidv4(), name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZoneIds: [1, 3, 4] }
 ];
 
-const zoneEntity1 = new ZoneEntity (ZONES[0]);
-const zoneEntity2 = new ZoneEntity (ZONES[1]);
-const zoneEntity3 = new ZoneEntity (ZONES[2]);
-const zoneEntity4 = new ZoneEntity (ZONES[3]);
+const zoneEntity1 = createZoneEntity(ZONES[0]);
+const zoneEntity2 = createZoneEntity(ZONES[1]);
+const zoneEntity3 = createZoneEntity(ZONES[2]);
+const zoneEntity4 = createZoneEntity(ZONES[3]);
 
 export const ELEMENTS_BUILDING = {
   walls: [
