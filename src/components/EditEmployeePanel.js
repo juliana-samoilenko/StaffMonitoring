@@ -24,7 +24,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 </div>
 `;
 
-const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
+const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
   const upoccupiedTrackList = cloneDeep(tracks).filter(track => {
     if (track.empty) {
       return track;
@@ -78,17 +78,8 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
           </div>
       <div class="employee-edit-panel__footer footer-edit">
       <footer class="footer-edit__edit-button-group">
-        <div class="removal-сonfirmation-container js-removal-buttons">
-          <div class="removal-button-group">
-            <button class="button button-save-change" type="submit" title="Сохранить изменения">
-              Сохранить изменения
-            </button>
-            <button class="button button-remove-emp js-button-remove-emp" type="button" title="Удалить сотрудника">
-              Удалить сотрудника
-            </button>
-          </div>
-        </div>
-        <div class="default-action-container js-default-buttons u-hidden">
+        ${isAwaitingConfirmation ? (`
+        <div class="default-action-container js-default-buttons">
           <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
           <div class="default-button-group">
             <button class="button button-remove-yes js-button-remove-yes" type="button" title="Да">
@@ -99,6 +90,18 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones }) => {
             </button>
           </div>
         </div>
+        `) : (`
+        <div class="removal-сonfirmation-container js-removal-buttons">
+          <div class="removal-button-group">
+            <button class="button button-save-change" type="submit" title="Сохранить изменения">
+              Сохранить изменения
+            </button>
+            <button class="button button-remove-emp js-button-remove-emp" type="button" title="Удалить сотрудника">
+              Удалить сотрудника
+            </button>
+          </div>
+        </div>
+        `)}
       </footer>
       </div> 
     </form>
@@ -128,17 +131,29 @@ export class EditEmployeePanel extends Component {
   setConfirmationButtonRemoveEmployeeHandler(handler) {
     this.removeEmployeeButtonHandler = handler;
 
+    if (!this.getElement().querySelector('.js-button-remove-emp')) {
+      return;
+    }
+
     this.getElement().querySelector('.js-button-remove-emp').addEventListener('click', handler);
   }
 
   setAcceptRemovalButtonHandler(handler) {
     this.acceptRemovalButtonHandler = handler;
 
+    if (!this.getElement().querySelector('.js-button-remove-yes')) {
+      return;
+    }
+
     this.getElement().querySelector('.js-button-remove-yes').addEventListener('click', handler);
   }
 
   setRejectRemovalButtonHandler(handler) {
     this.rejectRemovalButtonHandler = handler;
+
+    if (!this.getElement().querySelector('.js-button-remove-no')) {
+      return;
+    }
 
     this.getElement().querySelector('.js-button-remove-no').addEventListener('click', handler);
   }
@@ -175,18 +190,4 @@ export class EditEmployeePanel extends Component {
     const form = this.getForm();
     form.reset();
   }
-
-  toggleConfirmationButtons(isAwaitingConfirmation) {
-    const removalButtonGroup = document.querySelector('.js-removal-buttons');
-    const defaultButtonGroup = document.querySelector('.js-default-buttons');
-  
-    if (isAwaitingConfirmation) {
-      removalButtonGroup.classList.add('u-hidden');
-      defaultButtonGroup.classList.remove('u-hidden');
-    }
-    else {
-      defaultButtonGroup.classList.add('u-hidden');
-      removalButtonGroup.classList.remove('u-hidden');
-    }
-  };
 }

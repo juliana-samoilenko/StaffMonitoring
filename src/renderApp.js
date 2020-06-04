@@ -165,6 +165,7 @@ export const renderApp = () => {
 
   //handlers for edit employee panel
   editEmployeePanel.setCloseButtonHandler(() => {
+    editEmployeePanel.setState({ isAwaitingConfirmation: false });
     editEmployeePanel.clearForm();
     editEmployeePanel.hide();
   });
@@ -196,7 +197,7 @@ export const renderApp = () => {
   });
 
   editEmployeePanel.setConfirmationButtonRemoveEmployeeHandler(() => {
-    editEmployeePanel.toggleConfirmationButtons(true);
+    editEmployeePanel.setState({ isAwaitingConfirmation: true });
   })
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
@@ -214,12 +215,13 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: newEmployeeList });
     addEmployeePanel.setState({ tracks: newTrackList });
     editEmployeePanel.setState({ tracks: newTrackList });
+    editEmployeePanel.setState({ isAwaitingConfirmation: false });
     
     editEmployeePanel.hide();
     addEmployeePanel.hide();
   })
 
   editEmployeePanel.setRejectRemovalButtonHandler(() => {
-    editEmployeePanel.toggleConfirmationButtons(false);
+    editEmployeePanel.setState({ isAwaitingConfirmation: false });
   })
 }
