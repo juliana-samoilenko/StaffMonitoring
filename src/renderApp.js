@@ -172,13 +172,11 @@ export const renderApp = () => {
   editEmployeePanel.setSaveChangeButtonHandler((event) => {
     event.preventDefault();
 
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const currentEmployeeId = employeeIdForEdit;
-    let currentTrackId = null;
-    employeeListPanel.getCurrentEmployeeList().map((employee) => {
-      if (employee.id === currentEmployeeId) {
-        currentTrackId = employee.trackId;
-      }
-    })
+    const currentEmployee = currentEmployeeList.find(employee => employee.id == currentEmployeeId);
+    const currentTrackId = currentEmployee.trackId;
+
     const employeeChanges = editEmployeePanel.getInformationOfForm(currentEmployeeId);
 
     const previousData = employeeListPanel.getCurrentEmployeeList();
