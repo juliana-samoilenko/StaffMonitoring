@@ -1,9 +1,14 @@
-export class EmployeeEntity {
-  constructor({ id, name, position, trackId, zones }) {
-    this.id = id;
-    this.name= name;
-    this.position = position;
-    this.trackId = trackId;
-    this.permittedZoneIds = zones;
-  }
-}
+import { v4 as uuidv4 } from 'uuid';
+
+export const createEmployeeEntity = ({
+  name,
+  position,
+  trackId,
+  permittedZoneIds,
+}) => ({
+  id: uuidv4(),
+  name,
+  position,
+  trackId,
+  permittedZoneIds,
+});
