@@ -13,7 +13,7 @@ export class Component {
 
   setState(nextData) {
     const previousData = this.data;
-    this.data = {...previousData, ...nextData};
+    this.data = { ...previousData, ...nextData };
     
     this.rerender();
   }
