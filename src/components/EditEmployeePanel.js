@@ -151,7 +151,7 @@ export class EditEmployeePanel extends Component {
     const form = this.getForm();
     
     const zones = Array.from(form.elements.employeeZones);
-    const permittedZoneIds = zones.filter(zone => zone.checked).map(zone => zone.id);
+    const permittedZoneIds = zones.filter(zone => zone.checked).map(zone => Number(zone.id));
     const trackId = Number(form.employeeTrack.value);
 
     return {
