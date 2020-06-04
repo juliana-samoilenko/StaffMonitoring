@@ -180,16 +180,8 @@ export const renderApp = () => {
     const changedEmployee = editEmployeePanel.getInformationOfForm(currentEmployeeId);
 
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = [];
-    oldEmployeeList.map((employee) => {
-      if (employee.id === changedEmployee.id) {
-        newEmployeeList.push(changedEmployee);
-      }
-
-      else {
-        newEmployeeList.push(employee);
-      }
-    });
+    const newEmployeeList = oldEmployeeList.map((employee) => 
+      employee.id === changedEmployee.id ? changedEmployee : employee);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
 
