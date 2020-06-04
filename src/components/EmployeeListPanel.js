@@ -62,7 +62,7 @@ export class EmployeeListPanel extends Component {
     const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
     
     editButtons.forEach((button) => {
-      button.addEventListener('click', event => handler(event));
+      button.addEventListener('click', handler);
     }) 
   }
 
