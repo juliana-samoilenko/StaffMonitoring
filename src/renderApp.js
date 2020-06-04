@@ -12,8 +12,6 @@ import {
   EMPLOYEE,
 } from './const';
 
-let employeeIdForEdit = null;
-
 const markOccupiedTracks = (employeeList, tracks) => { 
   const unoccupiedTracks = employeeList.map((employee) => {
     if (employee.trackId !== null) {
@@ -130,7 +128,7 @@ export const renderApp = () => {
     }
 
     let employeeForEdit = {};
-    employeeIdForEdit = event.target.id;
+    const employeeIdForEdit = event.target.id;
     employeeListPanel.getCurrentEmployeeList().forEach((employee) => {
       if (employee.id === employeeIdForEdit) {
         employeeForEdit = cloneDeep(employee);
@@ -173,9 +171,9 @@ export const renderApp = () => {
   editEmployeePanel.setSaveChangeButtonHandler((event) => {
     event.preventDefault();
 
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const currentEmployeeId = employeeIdForEdit;
-    const currentEmployee = currentEmployeeList.find(employee => employee.id == currentEmployeeId);
+    const formData = editEmployeePanel.getData();
+    const currentEmployee = cloneDeep(formData.employee);
+    const currentEmployeeId = currentEmployee.id;
     const currentTrackId = currentEmployee.trackId;
 
     const changedEmployee = editEmployeePanel.getInformationOfForm(currentEmployeeId);
@@ -201,16 +199,16 @@ export const renderApp = () => {
   })
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
-    const currentEmployeeId = employeeIdForEdit;
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const formData = editEmployeePanel.getData();
+    const employeeToRemove = cloneDeep(formData.employee);
+    const currentEmployeeId = employeeToRemove.id;
+    const employeeTrackId = employeeToRemove.trackId;
 
-    const employeeToRemove = currentEmployeeList.find(employee => employee.id == currentEmployeeId);
-    const employeeTrack = employeeToRemove.trackId;
+    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
 
-    const newEmployeeList = currentEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
-
-    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(employeeTrack, tracksWithOccupiedStatus);
+    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makePreviousTrackUnoccupied(employeeTrackId, tracksWithOccupiedStatus);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
     addEmployeePanel.setState({ tracks: newTrackList });
