@@ -177,13 +177,13 @@ export const renderApp = () => {
     const currentEmployee = currentEmployeeList.find(employee => employee.id == currentEmployeeId);
     const currentTrackId = currentEmployee.trackId;
 
-    const employeeChanges = editEmployeePanel.getInformationOfForm(currentEmployeeId);
+    const changedEmployee = editEmployeePanel.getInformationOfForm(currentEmployeeId);
 
     const previousData = employeeListPanel.getCurrentEmployeeList();
     const newEmployeeList = [];
     previousData.map((employee) => {
-      if (employee.id === employeeChanges.id) {
-        newEmployeeList.push(employeeChanges);
+      if (employee.id === changedEmployee.id) {
+        newEmployeeList.push(changedEmployee);
       }
 
       else {
@@ -199,7 +199,7 @@ export const renderApp = () => {
     addEmployeePanel.setState({ tracks: newTrackList });
     addEmployeePanel.hide();
 
-    editEmployeePanel.setState({ employee: employeeChanges, tracks: newTrackList });
+    editEmployeePanel.setState({ employee: changedEmployee, tracks: newTrackList });
     editEmployeePanel.hide();
   });
 
