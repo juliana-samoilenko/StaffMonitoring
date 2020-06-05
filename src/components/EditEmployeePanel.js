@@ -1,48 +1,51 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
+import { cloneDeep } from '../renderApp';
 
-const createTemplateForTrackOption = (track) => `
-<option value="${track.id}">${track.id}</option>
+const markPermittedZones = (employee, zones) => {
+  const { permittedZoneIds } = employee;
+  const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
+    zone.permitted = permittedZoneIds.includes(zone.id);
+
+    return zone;
+  });
+
+  return zonesWithPermittedStatus;
+}
+
+const createTemplateForTrackOption = (track = undefined) => `
+<option value="${track ? track.id : ''}">${track ? track.name : 'Нет пути'}</option>
 `;
 
 const createTemplateForZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
-  <input type="checkbox" id="${zone.id}">
+  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.permitted ? 'checked' : ''}>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
-const removalConfirmationButtons = () => `
-<footer class="footer-edit__edit-button-group"> 
-  <button class="button button-save-change" type="button" title="Сохранить изменения">
-    Сохранить изменения
-  </button>
-  <button class="button button-remove-emp" type="button" title="Удалить сотрудника">
-    Удалить сотрудника
-  </button>
-</footer>
-`;
+const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
+  const upoccupiedTrackList = cloneDeep(tracks).filter(track => {
+    if (track.empty) {
+      return track;
+    }
+  }).map(createTemplateForTrackOption);
 
-const defaultActionButtons = () => `
-  <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
-  <footer class="footer-edit__edit-button-group">
-    <button class="button button-remove-yes" type="button" title="Да">
-      Да
-    </button>
-    <button class="button button-remove-no" type="button" title="Нет">
-      Нет
-    </button>
-  </footer>
-`;
+  const currentTrack = cloneDeep(tracks).find(track => track.id == employee.trackId);
+  const emptyTrack = createTemplateForTrackOption();
 
-// eslint-disable-next-line arrow-body-style
-const createTemplateForFormFooter = (isChecked) => {
-  return isChecked ? defaultActionButtons() : removalConfirmationButtons();
-};
+  const baseTrack = currentTrack ? [
+    createTemplateForTrackOption(currentTrack), 
+    emptyTrack
+  ] : [
+    emptyTrack
+  ];
 
-const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) => {
-  const trackList = tracks.map((e) => createTemplateForTrackOption(e)).join('');
-  const zonesList = zones.map((e) => createTemplateForZoneCheckbox(e)).join('');
+  const trackList = [...baseTrack, ...upoccupiedTrackList];
+
+  const zonesWithPermittedStatus = markPermittedZones(employee, zones);
+  const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
+
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
@@ -50,23 +53,21 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
     </header>
   
     <div class="employee-edit-panel__body">
-      <form class="employee-edit-panel__form edit-employee-form" action="" name="edit-emp" method="GET">
+      <form id="edit-form" class="employee-edit-panel__form edit-employee-form js-edit-employee-form" action="" name="edit-emp" method="GET">
         
       <div class="edit-employee-form__name edit-name-container">
         <label class="edit-name-container__label" for="add-name">ФИО:</label>
-        <input value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
+        <input name="employeeName" value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
       </div>
       
       <div class="edit-employee-form__position edit-positision-container">
         <label class="edit-positision-container__label" for="edit-name">Должность:</label>
-        <input class="edit-positision-container__input" type="text" value=${employee.position} required>
+        <input name="employeePosition" class="edit-positision-container__input" type="text" value=${employee.position} required>
       </div>
       
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
-        <select name="track" class="edit-track-container__select" required>
-          <option>${employee.trackId}</option>
-          <option value="Нет пути">Нет пути</option>
+        <select name="employeeTrack" class="edit-track-container__select">
           ${trackList}
         </select>
       </div>
@@ -75,11 +76,36 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
           <div class="edit-employee-form__zone">
             ${zonesList}
           </div>
-          </div>
       <div class="employee-edit-panel__footer footer-edit">
-          ${createTemplateForFormFooter(isChecked)}
+      <footer class="footer-edit__edit-button-group">
+        ${isAwaitingConfirmation ? (`
+        <div class="default-action-container js-default-buttons">
+          <p class="footer-edit__question">Вы уверены, что хотите удалить сотрудника?</p>
+          <div class="default-button-group">
+            <button class="button button-remove-yes js-button-remove-yes" type="button" title="Да">
+              Да
+            </button>
+            <button class="button button-remove-no js-button-remove-no" type="button" title="Нет">
+              Нет
+            </button>
+          </div>
+        </div>
+        `) : (`
+        <div class="removal-сonfirmation-container js-removal-buttons">
+          <div class="removal-button-group">
+            <button class="button button-save-change" type="submit" title="Сохранить изменения">
+              Сохранить изменения
+            </button>
+            <button class="button button-remove-emp js-button-remove-emp" type="button" title="Удалить сотрудника">
+              Удалить сотрудника
+            </button>
+          </div>
+        </div>
+        `)}
+      </footer>
       </div> 
     </form>
+    </div>
   </div>
 `;
 }
@@ -87,5 +113,85 @@ const createEditEmployeePanelTemplate = ({employee, tracks, zones, isChecked}) =
 export class EditEmployeePanel extends Component {
   getTemplate() {
     return createEditEmployeePanelTemplate(this.data);
+  }
+
+  setCloseButtonHandler(handler) {
+    this.closeButtonHandler = handler;
+
+    this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
+  }
+
+  setSaveChangeButtonHandler(handler) {
+    this.saveChangeButtonHandler = handler;
+
+    const form = this.getForm();
+    form.addEventListener('submit', handler);
+  }
+
+  setConfirmationButtonRemoveEmployeeHandler(handler) {
+    this.removeEmployeeButtonHandler = handler;
+
+    if (!this.getElement().querySelector('.js-button-remove-emp')) {
+      return;
+    }
+
+    this.getElement().querySelector('.js-button-remove-emp').addEventListener('click', handler);
+  }
+
+  setAcceptRemovalButtonHandler(handler) {
+    this.acceptRemovalButtonHandler = handler;
+
+    if (!this.getElement().querySelector('.js-button-remove-yes')) {
+      return;
+    }
+
+    this.getElement().querySelector('.js-button-remove-yes').addEventListener('click', handler);
+  }
+
+  setRejectRemovalButtonHandler(handler) {
+    this.rejectRemovalButtonHandler = handler;
+
+    if (!this.getElement().querySelector('.js-button-remove-no')) {
+      return;
+    }
+
+    this.getElement().querySelector('.js-button-remove-no').addEventListener('click', handler);
+  }
+
+  getForm() {
+    return this.getElement().querySelector('#edit-form');
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  getInformationOfForm(employeeId) {
+    const form = this.getForm();
+    
+    const zoneCheckboxes = Array.from(form.elements.employeeZones);
+    const permittedZoneIds = zoneCheckboxes.filter(zoneCheckbox => zoneCheckbox.checked).map(zoneCheckbox => Number(zoneCheckbox.id));
+    const trackId = Number(form.employeeTrack.value);
+
+    return {
+      id: employeeId,
+      trackId: trackId ? trackId : null,
+      name: form.employeeName.value,
+      position: form.employeePosition.value,
+      permittedZoneIds: permittedZoneIds,
+    };
+  }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler);
+    this.setSaveChangeButtonHandler(this.saveChangeButtonHandler);
+    this.setConfirmationButtonRemoveEmployeeHandler(this.removeEmployeeButtonHandler);
+    this.setRejectRemovalButtonHandler(this.rejectRemovalButtonHandler);
+    this.setAcceptRemovalButtonHandler(this.acceptRemovalButtonHandler);
+  }
+
+  clearForm() {
+    const form = this.getForm();
+    form.reset();
   }
 }

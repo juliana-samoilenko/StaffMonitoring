@@ -1,6 +1,7 @@
-export class ZoneEntity {
-  constructor ({ id, name }) {
-    this.id = id;
-    this.name = name;
-  }
-}
+export const createZoneEntity = ({
+  id,
+  name,
+}) => ({
+  id,
+  name,
+});

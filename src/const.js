@@ -1,4 +1,5 @@
-import { ZoneEntity } from './Core/entity/ZoneEntity';
+import { v4 as uuidv4 } from 'uuid';
+import { createZoneEntity } from './Core/entity/ZoneEntity';
 
 const WALL_COLOR = '#000000';
 const DOOR_COLOR = '#A63600';
@@ -10,10 +11,31 @@ const EXTERNAL_WALL_THICKNESS = 15;
 export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
 
-const zoneEntity1 = new ZoneEntity ({id: 1, name: 'Высотные работы' });
-const zoneEntity2 = new ZoneEntity ({id: 2, name: 'Цех 1'});
-const zoneEntity3 = new ZoneEntity ({id: 3, name: 'Высокое напряжение'});
-const zoneEntity4 = new ZoneEntity ({id: 4, name: 'Спец оборудование'});
+export const EMPLOYEE_TRACKS = [
+  { id: 1, name: 1, points: [[100, 100], [200, 200], [300, 300]], empty: true },
+  { id: 2, name: 2, points: [[100, 200], [100, 300], [100, 400]], empty: true },
+  { id: 3, name: 3, points: [[700, 100], [700, 200], [700, 300]], empty: true },
+  { id: 4, name: 4, points: [[700, 100], [700, 200], [700, 300]], empty: true },
+  { id: 5, name: 5, points: [[700, 100], [700, 200], [700, 300]], empty: true }
+];
+
+export const ZONES = [
+  { id: 1, name: 'Высотные работы', permitted: false },
+  { id: 2, name: 'Цех 1', permitted: false },
+  { id: 3, name: 'Высокое напряжение', permitted: false },
+  { id: 4, name: 'Спец оборудование', permitted: false }
+];
+
+export const EMPLOYEE = [
+  { id: uuidv4(), name: 'Петров С.М.', position: 'engineer', trackId: null, permittedZoneIds: [1, 2] },
+  { id: uuidv4(), name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZoneIds: [2, 4] },
+  { id: uuidv4(), name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZoneIds: [1, 3, 4] }
+];
+
+const zoneEntity1 = createZoneEntity(ZONES[0]);
+const zoneEntity2 = createZoneEntity(ZONES[1]);
+const zoneEntity3 = createZoneEntity(ZONES[2]);
+const zoneEntity4 = createZoneEntity(ZONES[3]);
 
 export const ELEMENTS_BUILDING = {
   walls: [
@@ -88,9 +110,3 @@ export const ELEMENTS_BUILDING = {
     },
   ],
 };
-
-export const EMPLOYEE_TRACKS = [
-  { id: 1, points: [[100, 100], [200, 200], [300, 300]] },
-  { id: 2, points: [[100, 200], [100, 300], [100, 400]] },
-  { id: 3, points: [[700, 100], [700, 200], [700, 300]] },
-];

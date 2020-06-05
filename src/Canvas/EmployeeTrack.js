@@ -1,6 +1,7 @@
 export class EmployeeTrack {
-  constructor({ id, points }) {
+  constructor({ id, name, points }) {
     this.id = id;
+    this.name = name;
     this._points = points;
   }
 

@@ -1,20 +1,19 @@
 import { Component } from './Component';
 import { createTemplateForCloseButton } from './CloseButton';
 
-const createTemplateForEmployeeListItem = (employee) => `
-<li class="employees-list__item employee">
+const createTemplateForEmployeeListItem = (employee, listNumber) => `
+<li class="employees-list__item employee js-employees-list__item">
   <div class="employee__container">
-    <span class="employee__name">${employee.id}) ${employee.name}</span>
-    <button class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
+    <span class="employee__name">${listNumber}) ${employee.name}</span>
+    <button id="${employee.id}" class="employee__button-open-edit js-open-edit-panel" type="button" title="Редактировать">
     </button>
   </div>
 </li>`;
 
 const createTemplateForEmployeePanel = ({ employeeList }) => {
-  const employeeListItemTemplates = employeeList.map((e) => createTemplateForEmployeeListItem(e)).join('');
+  const employeeListItemTemplates = employeeList.map((e, index) => createTemplateForEmployeeListItem(e, index + 1)).join('');
 
   return `
-  <section class="employee-information-panel js-employee-information-panel">
   <div class="employees-panel">
   
     <header class="employees-panel__header list-header">
@@ -23,7 +22,7 @@ const createTemplateForEmployeePanel = ({ employeeList }) => {
     </header>
   
     <div class="employees-panel__body employees-list">
-      <ul class="employees-list__container js-employees-list__container">
+      <ul class="employees-list__container">
         ${employeeListItemTemplates}
       </ul>
     </div>
@@ -33,12 +32,43 @@ const createTemplateForEmployeePanel = ({ employeeList }) => {
       </button>
     </footer>
   </div>
-  </section>
   `;
 };
 
 export class EmployeeListPanel extends Component {
   getTemplate() {
     return createTemplateForEmployeePanel(this.data);
+  }
+
+  getCurrentEmployeeList() {
+    return this.data.employeeList;
+  }
+
+  setCloseButtonHandler(handler) {
+    this.closeButtonHandler = handler;
+
+    this.getElement().querySelector('.js-btn-close').addEventListener('click', handler);
+  }
+
+  setHandlerForAddPanelOpenButton(handler) {
+    this.openButtonForAddPanel = handler;
+
+    this.getElement().querySelector('.js-open-add-panel').addEventListener('click', handler);
+  }
+
+  setHandlerForEditPanelOpenButton(handler) {
+    this.openButtonForEditPanel = handler;
+
+    const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
+    
+    editButtons.forEach((button) => {
+      button.addEventListener('click', handler);
+    }) 
+  }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler);
+    this.setHandlerForAddPanelOpenButton(this.openButtonForAddPanel);
+    this.setHandlerForEditPanelOpenButton(this.openButtonForEditPanel);
   }
 }

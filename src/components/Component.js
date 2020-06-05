@@ -21,15 +21,15 @@ export class Component {
   rerender() {
     const oldElement = this.getElement();
     const container = oldElement.parentElement;
-    
+
     this.removeElement();
 
     const newElement = this.getElement();
     container.replaceChild(newElement, oldElement);
-    
+
     this.recoveryEventListeners();
   }
-  
+
   removeElement() {
     this.element = null;
   }
@@ -51,5 +51,9 @@ export class Component {
 
   show() {
     this.getElement().classList.remove('u-hidden');
+  }
+
+  isComponentShown() {
+    return !this.getElement().classList.contains('u-hidden');
   }
 }
