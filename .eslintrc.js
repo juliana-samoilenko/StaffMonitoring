@@ -12,7 +12,6 @@ module.exports = {
       "class-methods-use-this": "off",
       "no-underscore-dangle": "off",
       "import/prefer-default-export": "off",
-      "no-trailing-spaces": "off"
     }, 
     "settings": {
       "import/resolver": "parcel"

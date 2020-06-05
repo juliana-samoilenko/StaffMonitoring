@@ -1,7 +1,7 @@
 export const createZoneEntity = ({
-   id, 
-   name 
-  }) => ({
   id,
-  name
+  name,
+}) => ({
+  id,
+  name,
 });

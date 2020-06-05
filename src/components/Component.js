@@ -14,22 +14,22 @@ export class Component {
   setState(nextData) {
     const previousData = this.data;
     this.data = { ...previousData, ...nextData };
-    
+
     this.rerender();
   }
 
   rerender() {
     const oldElement = this.getElement();
     const container = oldElement.parentElement;
-    
+
     this.removeElement();
 
     const newElement = this.getElement();
     container.replaceChild(newElement, oldElement);
-    
+
     this.recoveryEventListeners();
   }
-  
+
   removeElement() {
     this.element = null;
   }
