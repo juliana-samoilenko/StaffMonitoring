@@ -111,6 +111,30 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
   });
 
+  eventManager.subscribe('EDIT_EMPLOYEE', ((payload) => {
+    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = oldEmployeeList.map((employee) => 
+      employee.id === payload.changedEmployee.id ? payload.changedEmployee : employee);
+    
+    employeeListPanel.setState({ employeeList: newEmployeeList });
+  }));
+
+  eventManager.subscribe('EDIT_EMPLOYEE', ((payload) => {
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
+
+    addEmployeePanel.setState({ tracks: newTrackList });
+  }));
+
+  eventManager.subscribe('EDIT_EMPLOYEE', ((payload) => {
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
+
+    editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
+  }));
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
@@ -188,23 +212,16 @@ export const renderApp = () => {
     const formData = editEmployeePanel.getData();
     const currentEmployee = cloneDeep(formData.employee);
     const currentEmployeeId = currentEmployee.id;
-    const currentTrackId = currentEmployee.trackId;
 
-    const changedEmployee = editEmployeePanel.getInformationOfForm(currentEmployeeId);
+    eventManager.publish({
+      type: 'EDIT_EMPLOYEE',
+      payload: {
+        changedEmployee: editEmployeePanel.getInformationOfForm(currentEmployeeId),
+        currentTrackId: currentEmployee.trackId,
+      }
+    });
 
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.map((employee) => 
-      employee.id === changedEmployee.id ? changedEmployee : employee);
-
-    employeeListPanel.setState({ employeeList: newEmployeeList });
-
-    const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(currentTrackId, tracksWithOccupiedStatus);
-    
-    addEmployeePanel.setState({ tracks: newTrackList });
     addEmployeePanel.hide();
-
-    editEmployeePanel.setState({ employee: changedEmployee, tracks: newTrackList });
     editEmployeePanel.hide();
   });
 
