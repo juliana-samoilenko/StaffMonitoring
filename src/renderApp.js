@@ -222,7 +222,7 @@ export const renderApp = () => {
     eventManager.publish({
       type: EMPLOYEE_ADDED,
       payload : {
-        newEmployee: addEmployeePanel.getInformationOfForm(),
+        newEmployee: addEmployeePanel.getNewEmployee(),
       }
     });
     
