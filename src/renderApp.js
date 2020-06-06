@@ -98,20 +98,20 @@ export const renderApp = () => {
 
   const eventManager = new EventManager();
 
-  eventManager.subscribe('ADD_EMPLOYEE', () => {
+  eventManager.subscribe('EMPLOYEE_ADDED', () => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const newTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
 
     addEmployeePanel.setState({ tracks: newTrackList, zones });
   });
 
-  eventManager.subscribe('ADD_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_ADDED', (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
 
     employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
   });
 
-  eventManager.subscribe('EDIT_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_EDITED', (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const newEmployeeList = oldEmployeeList.map((employee) => 
       employee.id === payload.changedEmployee.id ? payload.changedEmployee : employee);
@@ -119,7 +119,7 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
 
-  eventManager.subscribe('EDIT_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_EDITED', (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
     const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
@@ -127,7 +127,7 @@ export const renderApp = () => {
     addEmployeePanel.setState({ tracks: newTrackList });
   });
 
-  eventManager.subscribe('EDIT_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_EDITED', (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
     const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
@@ -135,14 +135,14 @@ export const renderApp = () => {
     editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
   });
 
-  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_REMOVED', (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
 
-  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_REMOVED', (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
     const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
@@ -150,7 +150,7 @@ export const renderApp = () => {
     addEmployeePanel.setState({ tracks: newTrackList });
   });
 
-  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+  eventManager.subscribe('EMPLOYEE_REMOVED', (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
     const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
@@ -214,7 +214,7 @@ export const renderApp = () => {
     event.preventDefault();
 
     eventManager.publish({
-      type: 'ADD_EMPLOYEE',
+      type: 'EMPLOYEE_ADDED',
       payload : {
         newEmployee: addEmployeePanel.getInformationOfForm(),
       }
@@ -238,7 +238,7 @@ export const renderApp = () => {
     const currentEmployeeId = currentEmployee.id;
 
     eventManager.publish({
-      type: 'EDIT_EMPLOYEE',
+      type: 'EMPLOYEE_EDITED',
       payload: {
         changedEmployee: editEmployeePanel.getInformationOfForm(currentEmployeeId),
         currentTrackId: currentEmployee.trackId,
@@ -258,7 +258,7 @@ export const renderApp = () => {
     const employeeToRemove = cloneDeep(formData.employee);
 
     eventManager.publish({
-      type: 'ACCEPT_REMOVAL_EMPLOYEE',
+      type: 'EMPLOYEE_REMOVED',
       payload: {
         currentEmployeeId: employeeToRemove.id,
         employeeTrackId: employeeToRemove.trackId,
