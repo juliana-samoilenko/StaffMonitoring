@@ -246,7 +246,7 @@ export const renderApp = () => {
     eventManager.publish({
       type: EMPLOYEE_EDITED,
       payload: {
-        changedEmployee: editEmployeePanel.getInformationOfForm(currentEmployeeId),
+        changedEmployee: editEmployeePanel.getEditableEmployeeInformation(currentEmployeeId),
         currentTrackId: currentEmployee.trackId,
       }
     });
