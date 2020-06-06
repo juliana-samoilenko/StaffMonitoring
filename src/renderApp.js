@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
 import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelButton';
@@ -95,6 +96,21 @@ export const renderApp = () => {
   editEmployeePanel.hide();
   renderComponent(employeeInformationPanel, editEmployeePanel);
 
+  const eventManager = new EventManager();
+
+  eventManager.subscribe('ADD_EMPLOYEE', () => {
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
+
+    addEmployeePanel.setState({ tracks: newTrackList, zones });
+  });
+
+  eventManager.subscribe('ADD_EMPLOYEE', (payload) => {
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+
+    employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
+  });
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
@@ -149,14 +165,14 @@ export const renderApp = () => {
   addEmployeePanel.setAddEmployeeButtonHandler((event) => {
     event.preventDefault();
 
-    const newEmployee = addEmployeePanel.getInformationOfForm();
+    eventManager.publish({
+      type: 'ADD_EMPLOYEE',
+      payload : {
+        newEmployee: addEmployeePanel.getInformationOfForm(),
+      }
+    });
+    
     addEmployeePanel.clearForm();
-
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    employeeListPanel.setState({ employeeList: [...currentEmployeeList, newEmployee] });
-
-    const newTrackList = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    addEmployeePanel.setState({ tracks: newTrackList, zones });
   });
 
   //handlers for edit employee panel
