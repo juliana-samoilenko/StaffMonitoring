@@ -135,6 +135,30 @@ export const renderApp = () => {
     editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
   }));
 
+  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
+
+    employeeListPanel.setState({ employeeList: newEmployeeList });
+  })
+
+  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+
+    addEmployeePanel.setState({ tracks: newTrackList });
+  })
+
+  eventManager.subscribe('ACCEPT_REMOVAL_EMPLOYEE', (payload) => {
+    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
+    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+
+    editEmployeePanel.setState({ tracks: newTrackList });
+    editEmployeePanel.setState({ isAwaitingConfirmation: false });
+  })
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
@@ -232,19 +256,14 @@ export const renderApp = () => {
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
     const formData = editEmployeePanel.getData();
     const employeeToRemove = cloneDeep(formData.employee);
-    const currentEmployeeId = employeeToRemove.id;
-    const employeeTrackId = employeeToRemove.trackId;
 
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== currentEmployeeId);
-
-    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(employeeTrackId, tracksWithOccupiedStatus);
-
-    employeeListPanel.setState({ employeeList: newEmployeeList });
-    addEmployeePanel.setState({ tracks: newTrackList });
-    editEmployeePanel.setState({ tracks: newTrackList });
-    editEmployeePanel.setState({ isAwaitingConfirmation: false });
+    eventManager.publish({
+      type: 'ACCEPT_REMOVAL_EMPLOYEE',
+      payload: {
+        currentEmployeeId: employeeToRemove.id,
+        employeeTrackId: employeeToRemove.trackId,
+      }
+    });
     
     editEmployeePanel.hide();
     addEmployeePanel.hide();
