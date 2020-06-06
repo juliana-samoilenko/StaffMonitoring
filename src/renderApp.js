@@ -195,14 +195,10 @@ export const renderApp = () => {
     if (addEmployeePanel.isComponentShown) {
       addEmployeePanel.hide();
     }
-
-    let employeeForEdit = {};
     const employeeIdForEdit = event.target.id;
-    employeeListPanel.getCurrentEmployeeList().forEach((employee) => {
-      if (employee.id === employeeIdForEdit) {
-        employeeForEdit = cloneDeep(employee);
-      }
-    });
+    const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
+
+    console.log(employeeForEdit);
 
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
     editEmployeePanel.setState({ employee: employeeForEdit, tracks: tracksWithOccupiedStatus });
