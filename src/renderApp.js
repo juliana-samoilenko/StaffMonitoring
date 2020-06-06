@@ -161,8 +161,7 @@ export const renderApp = () => {
     const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
     const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
 
-    editEmployeePanel.setState({ tracks: newTrackList });
-    editEmployeePanel.setState({ isAwaitingConfirmation: false });
+    editEmployeePanel.setState({ tracks: newTrackList, isAwaitingConfirmation: false });
   });
 
   //handler for open employee list button
