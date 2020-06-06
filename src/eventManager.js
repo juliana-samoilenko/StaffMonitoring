@@ -5,10 +5,6 @@ export class EventManager {
     this.subscribers = [];
   }
 
-  getSubscribers() {
-    return this.subscribers;
-  }
-
   subscribe(eventType, subscriberCallback) {
     this.subscribers = [
       ...this.subscribers,
