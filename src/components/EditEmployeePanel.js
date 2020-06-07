@@ -166,7 +166,7 @@ export class EditEmployeePanel extends Component {
     return this.data;
   }
 
-  getInformationOfForm(employeeId) {
+  getEditableEmployeeInformation(employeeId) {
     const form = this.getForm();
     
     const zoneCheckboxes = Array.from(form.elements.employeeZones);

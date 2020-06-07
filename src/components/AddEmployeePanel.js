@@ -99,7 +99,7 @@ export class AddEmployeePanel extends Component {
     return this.getElement().querySelector('#add-form');
   }
 
-  getInformationOfForm() {
+  getNewEmployee() {
     const form = this.getForm();
 
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
