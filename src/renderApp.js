@@ -198,8 +198,6 @@ export const renderApp = () => {
     const employeeIdForEdit = event.target.id;
     const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
 
-    console.log(employeeForEdit);
-
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
     editEmployeePanel.setState({ employee: employeeForEdit, tracks: tracksWithOccupiedStatus });
     editEmployeePanel.show();
