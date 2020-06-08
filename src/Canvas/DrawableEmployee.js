@@ -40,4 +40,9 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.yCenter = y;
     this.draw();
   }
+
+  remove() {
+    this.stopMoveAlong();
+    this.clear();
+  }
 }
