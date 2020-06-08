@@ -80,6 +80,9 @@ export const renderApp = () => {
   
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
+  canvas.bindCanvasTwo();
+  canvas.drawElementsBuilding();
+  canvas.drawEmployeeList(employeeList, EMPLOYEE_TRACKS);
 
   const notifications = new NotificationList({ violationsList });
   notifications.hide();
