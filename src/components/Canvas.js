@@ -51,6 +51,16 @@ export class Canvas extends Component {
     drawableObject.draw();
     });
   }
+  
+  drawNewEmployee(newEmployee, tracks) {
+    if (newEmployee.trackId) {
+      const employeeTrack = tracks.find(track => track.id === newEmployee.trackId);
+      this._drawEmployeeWithTrack(newEmployee, employeeTrack);
+    } else {
+      const employeeTrack = null;
+      this._drawEmployeeWithoutTrack(newEmployee, employeeTrack);
+    }
+  }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
     const startPointsOfTrack = employeeTrack.getPoint(0);
