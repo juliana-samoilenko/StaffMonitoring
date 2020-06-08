@@ -147,6 +147,10 @@ export const renderApp = () => {
     editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
   });
 
+  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => { 
+    canvas.drawEditedEmployee(payload.changedEmployee, EMPLOYEE_TRACKS);
+  });
+
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
