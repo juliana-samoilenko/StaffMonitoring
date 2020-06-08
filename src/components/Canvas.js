@@ -51,7 +51,13 @@ export class Canvas extends Component {
     drawableObject.draw();
     });
   }
-  
+
+  drawEmployeeList(employeeList, tracks) {
+    employeeList.forEach(employee => {
+      this.drawNewEmployee(employee, tracks);
+    })
+  }
+
   drawNewEmployee(newEmployee, tracks) {
     if (newEmployee.trackId) {
       const employeeTrack = tracks.find(track => track.id === newEmployee.trackId);
