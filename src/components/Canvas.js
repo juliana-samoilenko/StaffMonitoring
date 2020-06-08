@@ -13,6 +13,12 @@ import {
   EMPLOYEE_RADUIS,
 } from '../const';
 
+const buildingObjectsByTypes = {
+  wall: Wall,
+  door: Door,
+  zone: DrawableZone,
+};
+
 const createCanvasTemplate = () =>`
   <canvas class="work-display__plan js-building-canvas">
   </canvas>
@@ -32,5 +38,17 @@ export class Canvas extends Component {
   bindCanvasTwo() {
     const canvasElement = document.querySelector('.js-building-canvas');
     this.two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement });
+  }
+
+  drawElementsBuilding() {
+    const elementForDrawing = Object.values(ELEMENTS_BUILDING).flat();
+
+    elementForDrawing.forEach((buildingObjectConfigWithType) => {
+    const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
+    const Drawable = buildingObjectsByTypes[buildingObjectType];
+
+    const drawableObject = new Drawable(buildingObjectConfig, this.two);
+    drawableObject.draw();
+    });
   }
 }
