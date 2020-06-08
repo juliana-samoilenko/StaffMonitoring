@@ -19,6 +19,12 @@ const createCanvasTemplate = () =>`
 `;
 
 export class Canvas extends Component {
+  constructor(data) {
+    super(data);
+    this.two = null;
+    this.employeeListForDrawing = [];
+  }
+  
   getTemplate() {
     return createCanvasTemplate(this.data);
   }
