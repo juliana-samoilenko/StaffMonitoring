@@ -174,6 +174,10 @@ export const renderApp = () => {
     editEmployeePanel.setState({ tracks: newTrackList, isAwaitingConfirmation: false });
   });
 
+  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => { 
+    canvas.removeEmployee(payload.currentEmployeeId);
+  });
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
