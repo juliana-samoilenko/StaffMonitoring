@@ -106,6 +106,12 @@ export const renderApp = () => {
 
   const eventManager = new EventManager();
 
+  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
+    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
+
+    employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
+  });
+
   eventManager.subscribe(EMPLOYEE_ADDED, () => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const newTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
@@ -113,10 +119,8 @@ export const renderApp = () => {
     addEmployeePanel.setState({ tracks: newTrackList, zones });
   });
 
-  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-
-    employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
+  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => { 
+    canvas.drawNewEmployee(payload.newEmployee, EMPLOYEE_TRACKS);
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
