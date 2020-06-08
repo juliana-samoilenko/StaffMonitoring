@@ -28,4 +28,9 @@ export class Canvas extends Component {
   getTemplate() {
     return createCanvasTemplate(this.data);
   }
+
+  bindCanvasTwo() {
+    const canvasElement = document.querySelector('.js-building-canvas');
+    this.two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement });
+  }
 }
