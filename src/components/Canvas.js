@@ -51,4 +51,34 @@ export class Canvas extends Component {
     drawableObject.draw();
     });
   }
+
+  _drawEmployeeWithTrack(employee, employeeTrack) {
+    const startPointsOfTrack = employeeTrack.getPoint(0);
+    const drawingOfEmployee = new DrawableEmployee({
+      employee: employee,
+      xCurrent: startPointsOfTrack[0],
+      yCurrent: startPointsOfTrack[1],
+      radius: EMPLOYEE_RADUIS,
+      color: EMPLOYEE_COLOR,
+      track: employeeTrack,
+    }, this.two);
+
+    this.employeeListForDrawing.push(drawingOfEmployee); 
+
+    drawingOfEmployee.draw();
+    drawingOfEmployee.moveAlong();
+  }
+
+  _drawEmployeeWithoutTrack(employee, employeeTrack) {
+    const drawingOfEmployee = new DrawableEmployee({
+      employee: employee,
+      xCurrent: -100,
+      yCurrent: -100,
+      radius: EMPLOYEE_RADUIS,
+      color: EMPLOYEE_COLOR,
+      track: employeeTrack,
+    }, this.two);
+
+    this.employeeListForDrawing.push(drawingOfEmployee); 
+  }
 }
