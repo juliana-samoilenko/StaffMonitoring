@@ -5,6 +5,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
 
     this.track = track;
     this._currentPointIndex = 0;
+    this.interval = null;
   }
 
   move() {
@@ -23,6 +24,10 @@ export const Moveable = (superClass) => class Moveable extends superClass {
   getNextPoint() {
     this._currentPointIndex = this._getIndexNextPoint();
     return this.track.getPoint(this._currentPointIndex);
+  }
+
+  stopMoveAlong() {
+    clearInterval(this.interval);
   }
 
   _getIndexNextPoint() {
