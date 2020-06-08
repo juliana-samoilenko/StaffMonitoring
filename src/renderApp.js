@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
@@ -66,7 +65,7 @@ const renderComponent = (container, component, position = 'beforeend') => {
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
 export const renderApp = () => {
-  const canvasContainer = document.querySelector('.display-building');
+  const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
   const violationsList = [
