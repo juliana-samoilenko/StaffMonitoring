@@ -68,6 +68,12 @@ export class Canvas extends Component {
     }
   }
 
+  removeEmployee(employeeIdToRemove) {
+    const employeeToRemove = this.employeeListForDrawing.find(employee => employee.getId() === employeeIdToRemove);
+    employeeToRemove.remove();
+    this.employeeListForDrawing = this.employeeListForDrawing.filter(employee => employee.getId() !== employeeIdToRemove);
+  }
+
   _drawEmployeeWithTrack(employee, employeeTrack) {
     const startPointsOfTrack = employeeTrack.getPoint(0);
     const drawingOfEmployee = new DrawableEmployee({
