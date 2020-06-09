@@ -82,7 +82,7 @@ export class Canvas extends Component {
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
     const {pointX, pointY} = employeeTrack.getPoint(0);
-    const drawingOfEmployee = new DrawableEmployee({
+    const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: pointX,
       yCurrent: pointY,
@@ -91,14 +91,14 @@ export class Canvas extends Component {
       track: employeeTrack,
     }, this.two);
 
-    this.employeeListForDrawing.push(drawingOfEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee); 
 
-    drawingOfEmployee.draw();
-    drawingOfEmployee.startMovingAlongTrack();
+    drawableEmployee.draw();
+    drawableEmployee.startMovingAlongTrack();
   }
 
   _drawEmployeeWithoutTrack(employee, employeeTrack) {
-    const drawingOfEmployee = new DrawableEmployee({
+    const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: -100,
       yCurrent: -100,
@@ -107,6 +107,6 @@ export class Canvas extends Component {
       track: employeeTrack,
     }, this.two);
 
-    this.employeeListForDrawing.push(drawingOfEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee); 
   }
 }
