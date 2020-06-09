@@ -46,7 +46,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
   }
 
   remove() {
-    this.stopMoveAlong();
+    this.stopMovingAlongTrack();
     this.clear();
   }
 }

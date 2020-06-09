@@ -26,7 +26,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     return this.track.getPoint(this._currentPointIndex);
   }
 
-  stopMoveAlong() {
+  stopMovingAlongTrack() {
     clearInterval(this.interval);
   }
 
