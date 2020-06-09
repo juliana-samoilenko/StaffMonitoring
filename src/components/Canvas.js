@@ -1,7 +1,7 @@
 import Two from 'two.js';
 import { Component } from './Component';
 import { DrawableWall } from '../Canvas/DrawableWall';
-import { Door } from '../Canvas/Door';
+import { DrawableDoor } from '../Canvas/DrawableDoor';
 import { DrawableZone } from '../Canvas/DrawableZone';
 import { DrawableEmployee } from '../Canvas/DrawableEmployee';
 
@@ -15,7 +15,7 @@ import {
 
 const buildingObjectsByTypes = {
   wall: DrawableWall,
-  door: Door,
+  door: DrawableDoor,
   zone: DrawableZone,
 };
 
