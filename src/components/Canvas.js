@@ -94,7 +94,7 @@ export class Canvas extends Component {
     this.employeeListForDrawing.push(drawingOfEmployee); 
 
     drawingOfEmployee.draw();
-    drawingOfEmployee.moveAlong();
+    drawingOfEmployee.startMovingAlongTrack();
   }
 
   _drawEmployeeWithoutTrack(employee, employeeTrack) {

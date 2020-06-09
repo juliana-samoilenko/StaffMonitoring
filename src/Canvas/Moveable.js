@@ -12,7 +12,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     throw new Error('Implement method \'move\' in your derived class!');
   }
 
-  moveAlong() {
+  startMovingAlongTrack() {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);

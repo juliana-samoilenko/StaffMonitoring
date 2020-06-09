@@ -132,8 +132,8 @@ describe('Emloyee class', () => {
     });
   });
 
-  describe('Check work moveAlong() method', () => {
-    it('numberOfEmployeeMoves(=1) minutes later, when used moveAlong() method, employee will be in point2', () => {
+  describe('Check work startMovingAlongTrack() method', () => {
+    it('numberOfEmployeeMoves(=1) minutes later, when used startMovingAlongTrack() method, employee will be in point2', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
@@ -161,7 +161,7 @@ describe('Emloyee class', () => {
       jest.useFakeTimers();
 
       // Act
-      employee.moveAlong();
+      employee.startMovingAlongTrack();
       jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert
@@ -169,7 +169,7 @@ describe('Emloyee class', () => {
       expect(employee.yCenter).toEqual(point2.y);
     });
 
-    it('numberOfEmployeeMoves(=3) minutes later, when used moveAlong() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
+    it('numberOfEmployeeMoves(=3) minutes later, when used startMovingAlongTrack() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
@@ -197,7 +197,7 @@ describe('Emloyee class', () => {
       jest.useFakeTimers();
 
       // Act
-      employee.moveAlong();
+      employee.startMovingAlongTrack();
       jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert
