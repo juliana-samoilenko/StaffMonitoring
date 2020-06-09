@@ -7,6 +7,7 @@ const DOOR_COLOR = '#A63600';
 const ZONE_COLOR = '#FFD173';
 const INTERNAL_WALL_THICKNESS = 5;
 const DOOR_THICKNESS = 5;
+const FRONT_DOOR_THICKNESS = 7;
 const EXTERNAL_WALL_THICKNESS = 15;
 
 export const EMPLOYEE_COLOR = '#3A19A4';
@@ -61,7 +62,10 @@ export const ELEMENTS_BUILDING = {
       type: 'wall', xStart: 0, yStart: 0, xEnd: WIDTH_CANVAS, yEnd: 0, thickness: EXTERNAL_WALL_THICKNESS, color: WALL_COLOR,
     },
     {
-      type: 'wall', xStart: 0, yStart: HEIGHT_CANVAS, xEnd: WIDTH_CANVAS, yEnd: HEIGHT_CANVAS, thickness: EXTERNAL_WALL_THICKNESS, color: WALL_COLOR,
+      type: 'wall', xStart: 0, yStart: HEIGHT_CANVAS, xEnd: (WIDTH_CANVAS - 110) / 2, yEnd: HEIGHT_CANVAS, thickness: EXTERNAL_WALL_THICKNESS, color: WALL_COLOR,
+    },
+    {
+      type: 'wall', xStart: (WIDTH_CANVAS + 40) / 2, yStart: HEIGHT_CANVAS, xEnd: WIDTH_CANVAS, yEnd: HEIGHT_CANVAS, thickness: EXTERNAL_WALL_THICKNESS, color: WALL_COLOR,
     },
     {
       type: 'wall', xStart: WIDTH_CANVAS, yStart: HEIGHT_CANVAS, xEnd: WIDTH_CANVAS, yEnd: 0, thickness: EXTERNAL_WALL_THICKNESS, color: WALL_COLOR,
@@ -95,6 +99,9 @@ export const ELEMENTS_BUILDING = {
   ],
 
   doors: [
+    {
+      type: 'door', xStart: 468, yStart: 595, xEnd: 400, yEnd: 565, thickness: FRONT_DOOR_THICKNESS, color: DOOR_COLOR,
+    },
     {
       type: 'door', xStart: 570, yStart: 189, xEnd: 635, yEnd: 235, thickness: DOOR_THICKNESS, color: DOOR_COLOR,
     },
