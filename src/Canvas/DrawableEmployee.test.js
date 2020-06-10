@@ -169,7 +169,7 @@ describe('Emloyee class', () => {
       expect(employee.yCenter).toEqual(point2.y);
     });
 
-    it('numberOfEmployeeMoves(=3) minutes later, when used startMovingAlongTrack() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
+    it('numberOfEmployeeMoves equals 3 seconds later, when used startMovingAlongTrack() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
