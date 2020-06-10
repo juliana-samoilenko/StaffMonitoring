@@ -80,7 +80,6 @@ export const renderApp = () => {
   
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
-  canvas.initCanvas();
   canvas.drawElementsBuilding();
   canvas.drawEmployeeList(employeeList, EMPLOYEE_TRACKS);
 

@@ -27,17 +27,16 @@ const createCanvasTemplate = () =>`
 export class Canvas extends Component {
   constructor(data) {
     super(data);
-    this.two = null;
+    this.two = new Two({
+      width: WIDTH_CANVAS,
+      height: HEIGHT_CANVAS,
+      domElement: this.getElement() 
+    });
     this.employeeListForDrawing = [];
   }
   
   getTemplate() {
     return createCanvasTemplate(this.data);
-  }
-
-  initCanvas() {
-    const canvasElement = document.querySelector('.js-building-canvas');
-    this.two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvasElement });
   }
 
   drawElementsBuilding() {
