@@ -90,6 +90,16 @@ export class AddEmployeePanel extends Component {
     return this.getElement().querySelector('#add-form');
   }
 
+  getTracksWithEmptyStatus(tracks) {
+    const tracksWithEmptyStatus = tracks.filter(track => {
+      if (track.empty) {
+        return track;
+      }
+    })
+
+    return tracksWithEmptyStatus;
+  }
+
   getNewEmployee() {
     const form = this.getForm();
 
