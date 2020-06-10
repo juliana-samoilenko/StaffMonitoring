@@ -68,8 +68,8 @@ export class Canvas extends Component {
   }
 
   drawEditedEmployee(editedEmployee, tracks) {
-    const employeeIdToEdit = editedEmployee.id;
-    this.removeEmployee(employeeIdToEdit);
+    const editedEmployeeId = editedEmployee.id;
+    this.removeEmployee(editedEmployeeId);
     this.drawNewEmployee(editedEmployee, tracks);
   }
 
