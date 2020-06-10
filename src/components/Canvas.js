@@ -80,7 +80,7 @@ export class Canvas extends Component {
   }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
-    const {pointX, pointY} = employeeTrack.getPoint(0);
+    const { x: pointX, y: pointY} = employeeTrack.getPoint(0);
     const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: pointX,
