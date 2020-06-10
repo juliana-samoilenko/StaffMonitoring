@@ -43,7 +43,7 @@ const makeTrackOccupied = (currentTrackId, tracks) => {
   return tracksWithEmptyStatus;
 }
 
-const makePreviousTrackUnoccupied = (currentTrackId, tracks) => {
+const makeTrackUnoccupied = (currentTrackId, tracks) => {
   const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
     if (track.id == currentTrackId) {
       track.empty = true;
@@ -138,7 +138,7 @@ export const renderApp = () => {
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
+    const newTrackList = makeTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
 
     addEmployeePanel.setState({ tracks: newTrackList });
   });
@@ -146,7 +146,7 @@ export const renderApp = () => {
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
+    const newTrackList = makeTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
 
     editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
   });
@@ -166,7 +166,7 @@ export const renderApp = () => {
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+    const newTrackList = makeTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
 
     addEmployeePanel.setState({ tracks: newTrackList });
   });
@@ -174,7 +174,7 @@ export const renderApp = () => {
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
     const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+    const newTrackList = makeTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
 
     editEmployeePanel.setState({ tracks: newTrackList, isAwaitingConfirmation: false });
   });
