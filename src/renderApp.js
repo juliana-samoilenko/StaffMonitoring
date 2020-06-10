@@ -203,6 +203,10 @@ export const renderApp = () => {
 
   eventManager.subscribe(OPEN_EDIT_PANEL, (payload) => {
     editEmployeePanel.show();
+    editEmployeePanel.setState({
+      employee: payload.employeeForEdit,
+      tracks: payload.tracksWithOccupiedStatus 
+    });
   })
 
   eventManager.subscribe(OPEN_EDIT_PANEL, () => {
@@ -250,6 +254,10 @@ export const renderApp = () => {
 
     eventManager.publish({
       type: OPEN_EDIT_PANEL,
+      payload: {
+        employeeForEdit: employeeForEdit, 
+        tracksWithOccupiedStatus: tracksWithOccupiedStatus,
+      }
     });
   });
 
