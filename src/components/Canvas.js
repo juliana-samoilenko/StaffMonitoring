@@ -63,8 +63,7 @@ export class Canvas extends Component {
       const employeeTrack = tracks.find(track => track.id === newEmployee.trackId);
       this._drawEmployeeWithTrack(newEmployee, employeeTrack);
     } else {
-      const employeeTrack = null;
-      this._drawEmployeeWithoutTrack(newEmployee, employeeTrack);
+      this._drawEmployeeWithoutTrack(newEmployee);
     }
   }
 
@@ -97,14 +96,13 @@ export class Canvas extends Component {
     drawableEmployee.startMovingAlongTrack();
   }
 
-  _drawEmployeeWithoutTrack(employee, employeeTrack) {
+  _drawEmployeeWithoutTrack(employee) {
     const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: -100,
       yCurrent: -100,
       radius: EMPLOYEE_RADUIS,
       color: EMPLOYEE_COLOR,
-      track: employeeTrack,
     }, this.two);
 
     this.employeeListForDrawing.push(drawableEmployee); 
