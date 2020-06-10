@@ -86,15 +86,6 @@ export class AddEmployeePanel extends Component {
     form.addEventListener('submit', handler);
   }
 
-  checkRequiredFields() {
-    const form = this.getForm();
-    if (form.employeeName.value !== '' && form.employeePosition.value !== '') {
-      return true;
-    }
-
-    return false;
-  }
-
   getForm() {
     return this.getElement().querySelector('#add-form');
   }
