@@ -15,7 +15,11 @@ import {
 import {
   EMPLOYEE_ADDED,
   EMPLOYEE_EDITED,
-  EMPLOYEE_REMOVED, 
+  EMPLOYEE_REMOVED,
+  HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
+  HIDE_EMPLOYEE_LIST_PANEL,
+  OPEN_EDIT_PANEL,
+  OPEN_ADD_PANEL,
 } from './eventConstants';
 
 const markOccupiedTracks = (employeeList, tracks) => { 
@@ -177,43 +181,76 @@ export const renderApp = () => {
     canvas.removeEmployee(payload.currentEmployeeId);
   });
 
+  eventManager.subscribe(HIDE_OPEN_EMPLOYEE_LIST_BUTTON, () => {
+    employeeListPanel.show();
+  })
+
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    if (addEmployeePanel.isComponentShown) {
+      addEmployeePanel.hide();
+    }
+  })
+
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    if (editEmployeePanel.isComponentShown) {
+      editEmployeePanel.hide();
+    }
+  })
+
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    openEmployeeListPanelButton.show();
+  })
+
+  eventManager.subscribe(OPEN_EDIT_PANEL, (payload) => {
+    editEmployeePanel.show();
+  })
+
+  eventManager.subscribe(OPEN_EDIT_PANEL, () => {
+    if (addEmployeePanel.isComponentShown) {
+      addEmployeePanel.hide();
+    }
+  })
+
+  eventManager.subscribe(OPEN_ADD_PANEL, () => {
+    addEmployeePanel.show();
+  })
+
+  eventManager.subscribe(OPEN_ADD_PANEL, () => {
+    if (editEmployeePanel.isComponentShown) {
+      editEmployeePanel.hide();
+    }
+  })
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
-    employeeListPanel.show();
+    eventManager.publish({
+      type: HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
+    });
   });
 
   //handlers for employee list panel
   employeeListPanel.setCloseButtonHandler(() => {
-    if (addEmployeePanel.isComponentShown) {
-      addEmployeePanel.hide();
-    }
-
-    if (editEmployeePanel.isComponentShown) {
-      editEmployeePanel.hide();
-    }
     employeeListPanel.hide();
-    openEmployeeListPanelButton.show();
+    eventManager.publish({
+      type: HIDE_EMPLOYEE_LIST_PANEL,
+    });
   });
 
   employeeListPanel.setHandlerForAddPanelOpenButton(() => {
-    if (editEmployeePanel.isComponentShown) {
-      editEmployeePanel.hide();
-    }
-
-    addEmployeePanel.show();
+    eventManager.publish({
+      type: OPEN_ADD_PANEL,
+    });
   });
 
   employeeListPanel.setHandlerForEditPanelOpenButton((event) => {
-    if (addEmployeePanel.isComponentShown) {
-      addEmployeePanel.hide();
-    }
     const employeeIdForEdit = event.target.id;
     const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
-
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    editEmployeePanel.setState({ employee: employeeForEdit, tracks: tracksWithOccupiedStatus });
-    editEmployeePanel.show();
+
+    eventManager.publish({
+      type: OPEN_EDIT_PANEL,
+    });
   });
 
   //handlers for add employee panel
