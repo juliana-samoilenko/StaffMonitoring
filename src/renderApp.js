@@ -268,7 +268,7 @@ export const renderApp = () => {
       }
     });
 
-    const newTrackList = tracks.map((track) => {
+    const tracksWithoutAddedEmployeeTrack = tracks.map((track) => {
       if (track.id === newEmployee.trackId) {
         track.isEmpty = !track.isEmpty;
       }
@@ -276,7 +276,7 @@ export const renderApp = () => {
       return track;
     });
 
-    addEmployeePanel.setState({ tracks: newTrackList, zones });
+    addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
     addEmployeePanel.clearForm();
   });
 
