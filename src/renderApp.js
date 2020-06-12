@@ -192,7 +192,7 @@ export const renderApp = () => {
     editEmployeePanel.show();
     editEmployeePanel.setState({
       employee: payload.employeeForEdit,
-      tracks: payload.tracksWithOccupiedStatus 
+      tracks: payload.tracksWithOccupiedStatus
     });
   })
 
