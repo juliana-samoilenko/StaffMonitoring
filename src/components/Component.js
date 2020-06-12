@@ -18,6 +18,10 @@ export class Component {
     this.rerender();
   }
 
+  getState() {
+    return this.data;
+  }
+
   rerender() {
     const oldElement = this.getElement();
     const container = oldElement.parentElement;

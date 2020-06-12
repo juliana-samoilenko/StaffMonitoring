@@ -5,7 +5,7 @@ import { cloneDeep } from '../renderApp';
 const markPermittedZones = (employee, zones) => {
   const { permittedZoneIds } = employee;
   const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
-    zone.permitted = permittedZoneIds.includes(zone.id);
+    zone.isPermitted = permittedZoneIds.includes(zone.id);
 
     return zone;
   });
@@ -19,14 +19,14 @@ const createTemplateForTrackOption = (track = undefined) => `
 
 const createTemplateForZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
-  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.permitted ? 'checked' : ''}>
+  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.isPermitted ? 'checked' : ''}>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
-  const upoccupiedTrackList = cloneDeep(tracks).filter(track => {
-    if (track.empty) {
+  const unoccupiedTrackList = cloneDeep(tracks).filter(track => {
+    if (!track.isOccupied) {
       return track;
     }
   }).map(createTemplateForTrackOption);
@@ -41,7 +41,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingCo
     emptyTrack
   ];
 
-  const trackList = [...baseTrack, ...upoccupiedTrackList];
+  const trackList = [...baseTrack, ...unoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
   const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
@@ -160,10 +160,6 @@ export class EditEmployeePanel extends Component {
 
   getForm() {
     return this.getElement().querySelector('#edit-form');
-  }
-
-  getData() {
-    return this.data;
   }
 
   getEditableEmployeeInformation(employeeId) {

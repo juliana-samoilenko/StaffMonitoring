@@ -82,6 +82,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
 
       const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
@@ -111,6 +112,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
 
       const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
@@ -132,11 +134,12 @@ describe('Emloyee class', () => {
     });
   });
 
-  describe('Check work moveAlong() method', () => {
-    it('numberOfEmployeeMoves(=1) minutes later, when used moveAlong() method, employee will be in point2', () => {
+  describe('Check work startMovingAlongTrack() method', () => {
+    it('1 seconds later numberOfEmployeeMoves equals 1, when used startMovingAlongTrack() method, employee will be in point2', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
       const numberOfEmployeeMoves = 1;
 
@@ -161,7 +164,7 @@ describe('Emloyee class', () => {
       jest.useFakeTimers();
 
       // Act
-      employee.moveAlong();
+      employee.startMovingAlongTrack();
       jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert
@@ -169,10 +172,11 @@ describe('Emloyee class', () => {
       expect(employee.yCenter).toEqual(point2.y);
     });
 
-    it('numberOfEmployeeMoves(=3) minutes later, when used moveAlong() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
+    it('3 seconds later numberOfEmployeeMoves equals 3, when used startMovingAlongTrack() method, employee will be in point1 (after the last point, the employee returns to the first point)', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
       const numberOfEmployeeMoves = 3;
 
@@ -197,7 +201,7 @@ describe('Emloyee class', () => {
       jest.useFakeTimers();
 
       // Act
-      employee.moveAlong();
+      employee.startMovingAlongTrack();
       jest.advanceTimersByTime(numberOfEmployeeMoves * 1000);
 
       // Assert

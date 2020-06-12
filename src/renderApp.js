@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
@@ -16,10 +15,14 @@ import {
 import {
   EMPLOYEE_ADDED,
   EMPLOYEE_EDITED,
-  EMPLOYEE_REMOVED, 
+  EMPLOYEE_REMOVED,
+  HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
+  HIDE_EMPLOYEE_LIST_PANEL,
+  OPEN_EDIT_PANEL,
+  OPEN_ADD_PANEL,
 } from './eventConstants';
 
-const markOccupiedTracks = (employeeList, tracks) => { 
+const markOccupiedTracks = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
     if (employee.trackId !== null) {
       return employee.trackId;
@@ -27,23 +30,12 @@ const markOccupiedTracks = (employeeList, tracks) => {
   });
 
   const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    track.empty = !unoccupiedTracks.includes(track.id);
+    track.isOccupied = unoccupiedTracks.includes(track.id);
     return track;
   })
 
   return tracksWithEmptyStatus;
 };
-
-const makePreviousTrackUnoccupied = (currentTrackId, tracks) => {
-  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    if (track.id == currentTrackId) {
-      track.empty = true;
-    }
-    return track;
-  })
-
-  return tracksWithEmptyStatus;
-}
 
 const renderComponent = (container, component, position = 'beforeend') => {
   switch(position) {
@@ -66,7 +58,7 @@ const renderComponent = (container, component, position = 'beforeend') => {
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
 export const renderApp = () => {
-  const canvasContainer = document.querySelector('.display-building');
+  const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
   const violationsList = [
@@ -75,12 +67,14 @@ export const renderApp = () => {
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
   const employeeList = cloneDeep(EMPLOYEE);
-  const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
+  const tracks = cloneDeep(EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
-  
+
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
+  canvas.drawElementsBuilding();
+  canvas.drawEmployeeList(employeeList, EMPLOYEE_TRACKS);
 
   const notifications = new NotificationList({ violationsList });
   notifications.hide();
@@ -104,105 +98,156 @@ export const renderApp = () => {
 
   const eventManager = new EventManager();
 
-  eventManager.subscribe(EMPLOYEE_ADDED, () => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newTrackList = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-
-    addEmployeePanel.setState({ tracks: newTrackList, zones });
-  });
-
+  //EMPLOYEE_ADDED
   eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
     const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
 
     employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
   });
 
+  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
+    canvas.drawNewEmployee(payload.newEmployee, EMPLOYEE_TRACKS);
+  });
+
+  //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.map((employee) => 
+    const originEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = originEmployeeList.map((employee) =>
       employee.id === payload.changedEmployee.id ? payload.changedEmployee : employee);
-    
-    employeeListPanel.setState({ employeeList: newEmployeeList });
-  });
-
-  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
-
-    addEmployeePanel.setState({ tracks: newTrackList });
-  });
-
-  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
-
-    editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
-  });
-
-  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
 
-  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
+    const stateAddEmployeePanel = addEmployeePanel.getState();
+    const { tracks } = stateAddEmployeePanel;
+    const { originalEmployee, changedEmployee } = payload;
+    const { trackId: originalEmployeeTrackId = undefined } = originalEmployee;
+    const { trackId: changedEmployeeTrackId = undefined } = changedEmployee;
+    const newTrackList = tracks.map((track) => {
+      if (track.id === originalEmployeeTrackId || track.id === changedEmployeeTrackId) {
+        track.isOccupied = !track.isOccupied;
+      }
+
+      return track;
+    });
 
     addEmployeePanel.setState({ tracks: newTrackList });
+    addEmployeePanel.hide();
+  });
+
+  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
+    canvas.drawEditedEmployee(payload.changedEmployee, EMPLOYEE_TRACKS);
+  });
+
+  //EMPLOYEE_REMOVED
+  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
+    const originEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = originEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
+
+    employeeListPanel.setState({ employeeList: newEmployeeList });
+  });
+
+  eventManager.subscribe(EMPLOYEE_REMOVED, ({ employeeTrackId }) => {
+    const { tracks } = addEmployeePanel.data;
+    const tracksWithoutRemovedEmployeeTrack = cloneDeep(tracks).map(track => {
+      if (track.id === employeeTrackId) {
+        track.isOccupied = true;
+      }
+
+      return track;
+    });
+
+    addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
+    addEmployeePanel.hide();
   });
 
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makePreviousTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
-
-    editEmployeePanel.setState({ tracks: newTrackList, isAwaitingConfirmation: false });
+    canvas.removeEmployee(payload.currentEmployeeId);
   });
+
+  //HIDE_OPEN_EMPLOYEE_LIST_BUTTON
+  eventManager.subscribe(HIDE_OPEN_EMPLOYEE_LIST_BUTTON, () => {
+    employeeListPanel.show();
+  })
+
+  //HIDE_EMPLOYEE_LIST_PANEL
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    if (addEmployeePanel.isComponentShown) {
+      addEmployeePanel.hide();
+    }
+  })
+
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    if (editEmployeePanel.isComponentShown) {
+      editEmployeePanel.hide();
+    }
+  })
+
+  eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
+    openEmployeeListPanelButton.show();
+  })
+
+  //OPEN_EDIT_PANEL
+  eventManager.subscribe(OPEN_EDIT_PANEL, (payload) => {
+    editEmployeePanel.show();
+    editEmployeePanel.setState({
+      employee: payload.employeeForEdit,
+      tracks: payload.tracksWithOccupiedStatus
+    });
+  })
+
+  eventManager.subscribe(OPEN_EDIT_PANEL, () => {
+    if (addEmployeePanel.isComponentShown) {
+      addEmployeePanel.hide();
+    }
+  })
+
+  //OPEN_ADD_PANEL
+  eventManager.subscribe(OPEN_ADD_PANEL, () => {
+    addEmployeePanel.show();
+  })
+
+  eventManager.subscribe(OPEN_ADD_PANEL, () => {
+    if (editEmployeePanel.isComponentShown) {
+      editEmployeePanel.hide();
+    }
+  })
 
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
-    employeeListPanel.show();
+    eventManager.publish({
+      type: HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
+    });
   });
 
   //handlers for employee list panel
   employeeListPanel.setCloseButtonHandler(() => {
-    if (addEmployeePanel.isComponentShown) {
-      addEmployeePanel.hide();
-    }
-
-    if (editEmployeePanel.isComponentShown) {
-      editEmployeePanel.hide();
-    }
     employeeListPanel.hide();
-    openEmployeeListPanelButton.show();
+    eventManager.publish({
+      type: HIDE_EMPLOYEE_LIST_PANEL,
+    });
   });
 
   employeeListPanel.setHandlerForAddPanelOpenButton(() => {
-    if (editEmployeePanel.isComponentShown) {
-      editEmployeePanel.hide();
-    }
-
-    addEmployeePanel.show();
+    eventManager.publish({
+      type: OPEN_ADD_PANEL,
+    });
   });
 
   employeeListPanel.setHandlerForEditPanelOpenButton((event) => {
-    if (addEmployeePanel.isComponentShown) {
-      addEmployeePanel.hide();
-    }
     const employeeIdForEdit = event.target.id;
     const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
-
-    console.log(employeeForEdit);
-
     const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-    editEmployeePanel.setState({ employee: employeeForEdit, tracks: tracksWithOccupiedStatus });
-    editEmployeePanel.show();
+
+    eventManager.publish({
+      type: OPEN_EDIT_PANEL,
+      payload: {
+        employeeForEdit: employeeForEdit,
+        tracksWithOccupiedStatus: tracksWithOccupiedStatus,
+      }
+    });
   });
 
   //handlers for add employee panel
@@ -214,13 +259,26 @@ export const renderApp = () => {
   addEmployeePanel.setAddEmployeeButtonHandler((event) => {
     event.preventDefault();
 
+    const newEmployee = addEmployeePanel.getNewEmployee();
+    const stateAddEmployeePanel = addEmployeePanel.getState();
+    const { tracks } = stateAddEmployeePanel;
+
     eventManager.publish({
       type: EMPLOYEE_ADDED,
       payload : {
-        newEmployee: addEmployeePanel.getNewEmployee(),
+        newEmployee,
       }
     });
-    
+
+    const tracksWithoutAddedEmployeeTrack = tracks.map((track) => {
+      if (track.id === newEmployee.trackId) {
+        track.isOccupied = !track.isOccupied;
+      }
+
+      return track;
+    });
+
+    addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
     addEmployeePanel.clearForm();
   });
 
@@ -234,19 +292,20 @@ export const renderApp = () => {
   editEmployeePanel.setSaveChangeButtonHandler((event) => {
     event.preventDefault();
 
-    const formData = editEmployeePanel.getData();
-    const currentEmployee = cloneDeep(formData.employee);
-    const currentEmployeeId = currentEmployee.id;
+    const stateEditEmployeePanel = editEmployeePanel.getState();
+    const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
+    const originalEmployeeId = originalEmployee.id;
+    const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
 
     eventManager.publish({
       type: EMPLOYEE_EDITED,
       payload: {
-        changedEmployee: editEmployeePanel.getEditableEmployeeInformation(currentEmployeeId),
-        currentTrackId: currentEmployee.trackId,
+        originalEmployee,
+        changedEmployee,
       }
     });
 
-    addEmployeePanel.hide();
+    editEmployeePanel.clearForm();
     editEmployeePanel.hide();
   });
 
@@ -255,8 +314,8 @@ export const renderApp = () => {
   });
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
-    const formData = editEmployeePanel.getData();
-    const employeeToRemove = cloneDeep(formData.employee);
+    const stateEditEmployeePanel = editEmployeePanel.getState();
+    const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
 
     eventManager.publish({
       type: EMPLOYEE_REMOVED,
@@ -265,9 +324,8 @@ export const renderApp = () => {
         employeeTrackId: employeeToRemove.trackId,
       }
     });
-    
+
     editEmployeePanel.hide();
-    addEmployeePanel.hide();
   });
 
   editEmployeePanel.setRejectRemovalButtonHandler(() => {

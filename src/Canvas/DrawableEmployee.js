@@ -18,11 +18,15 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
       radius,
       color,
       drawPoint,
-      track,
       currentPointIndex,
     }, two);
+    this.track = track ? track : null;
     this.id = employee.id;
     this.name = employee.name;
+  }
+
+  getId() {
+    return this.id;
   }
 
   draw() {
@@ -32,6 +36,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
 
   clear() {
     this.two.remove(this.drawPoint);
+    this.update();
   }
 
   move(x, y) {
@@ -39,5 +44,10 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.xCenter = x;
     this.yCenter = y;
     this.draw();
+  }
+
+  remove() {
+    this.stopMovingAlongTrack();
+    this.clear();
   }
 }

@@ -5,13 +5,14 @@ export const Moveable = (superClass) => class Moveable extends superClass {
 
     this.track = track;
     this._currentPointIndex = 0;
+    this.interval = null;
   }
 
   move() {
     throw new Error('Implement method \'move\' in your derived class!');
   }
 
-  moveAlong() {
+  startMovingAlongTrack() {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);
@@ -23,6 +24,10 @@ export const Moveable = (superClass) => class Moveable extends superClass {
   getNextPoint() {
     this._currentPointIndex = this._getIndexNextPoint();
     return this.track.getPoint(this._currentPointIndex);
+  }
+
+  stopMovingAlongTrack() {
+    clearInterval(this.interval);
   }
 
   _getIndexNextPoint() {
