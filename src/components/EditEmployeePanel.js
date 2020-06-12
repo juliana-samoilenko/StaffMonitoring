@@ -162,10 +162,6 @@ export class EditEmployeePanel extends Component {
     return this.getElement().querySelector('#edit-form');
   }
 
-  getFormData() {
-    return this.data;
-  }
-
   getEditableEmployeeInformation(employeeId) {
     const form = this.getForm();
     

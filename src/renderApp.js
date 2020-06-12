@@ -119,7 +119,8 @@ export const renderApp = () => {
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const tracks  = addEmployeePanel.getDataOnTracks();
+    const stateAddEmployeePanel = addEmployeePanel.getState();
+    const { tracks } = stateAddEmployeePanel;
     const { originalEmployee, changedEmployee } = payload;
     const { trackId: originalEmployeeTrackId = undefined } = originalEmployee;
     const { trackId: changedEmployeeTrackId = undefined } = changedEmployee;
@@ -259,7 +260,8 @@ export const renderApp = () => {
     event.preventDefault();
 
     const newEmployee = addEmployeePanel.getNewEmployee();
-    const tracks = addEmployeePanel.getDataOnTracks();
+    const stateAddEmployeePanel = addEmployeePanel.getState();
+    const { tracks } = stateAddEmployeePanel;
 
     eventManager.publish({
       type: EMPLOYEE_ADDED,
@@ -290,8 +292,8 @@ export const renderApp = () => {
   editEmployeePanel.setSaveChangeButtonHandler((event) => {
     event.preventDefault();
 
-    const formData = editEmployeePanel.getFormData();
-    const originalEmployee = cloneDeep(formData.employee);
+    const stateEditEmployeePanel = editEmployeePanel.getState();
+    const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
     const originalEmployeeId = originalEmployee.id;
     const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
 
@@ -312,8 +314,8 @@ export const renderApp = () => {
   });
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
-    const formData = editEmployeePanel.getFormData();
-    const employeeToRemove = cloneDeep(formData.employee);
+    const stateEditEmployeePanel = editEmployeePanel.getState();
+    const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
 
     eventManager.publish({
       type: EMPLOYEE_REMOVED,
