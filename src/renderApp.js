@@ -122,36 +122,37 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: [...currentEmployeeList, payload.newEmployee] });
   });
 
-  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => { 
+  eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
     canvas.drawNewEmployee(payload.newEmployee, EMPLOYEE_TRACKS);
   });
 
   //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
     const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.map((employee) => 
+    const newEmployeeList = oldEmployeeList.map((employee) =>
       employee.id === payload.changedEmployee.id ? payload.changedEmployee : employee);
-    
+
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
+    const tracks  = addEmployeePanel.getData();
+    const { originalEmployee, changedEmployee } = payload;
+    const { trackId: originalEmployeeTrackId = undefined } = originalEmployee;
+    const { trackId: changedEmployeeTrackId = undefined } = changedEmployee;
+    const newTrackList = tracks.map((track) => {
+      if (track.id === originalEmployeeTrackId || track.id === changedEmployeeTrackId) {
+        track.empty = !track.empty;
+      }
+
+      return track;
+    });
 
     addEmployeePanel.setState({ tracks: newTrackList });
+    addEmployeePanel.hide();
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const currentEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(currentEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeTrackUnoccupied(payload.currentTrackId, tracksWithOccupiedStatus);
-
-    editEmployeePanel.setState({ employee: payload.changedEmployee, tracks: newTrackList });
-  });
-
-  eventManager.subscribe(EMPLOYEE_EDITED, (payload) => { 
     canvas.drawEditedEmployee(payload.changedEmployee, EMPLOYEE_TRACKS);
   });
 
@@ -304,19 +305,20 @@ export const renderApp = () => {
   editEmployeePanel.setSaveChangeButtonHandler((event) => {
     event.preventDefault();
 
-    const formData = editEmployeePanel.getData();
-    const currentEmployee = cloneDeep(formData.employee);
-    const currentEmployeeId = currentEmployee.id;
+    const formData = editEmployeePanel.getFormData();
+    const originalEmployee = cloneDeep(formData.employee);
+    const originalEmployeeId = originalEmployee.id;
+    const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
 
     eventManager.publish({
       type: EMPLOYEE_EDITED,
       payload: {
-        changedEmployee: editEmployeePanel.getEditableEmployeeInformation(currentEmployeeId),
-        currentTrackId: currentEmployee.trackId,
+        originalEmployee,
+        changedEmployee,
       }
     });
 
-    addEmployeePanel.hide();
+    editEmployeePanel.clearForm();
     editEmployeePanel.hide();
   });
 
