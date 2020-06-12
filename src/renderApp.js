@@ -37,23 +37,6 @@ const markOccupiedTracksInEmployeeList = (employeeList, tracks) => {
   return tracksWithEmptyStatus;
 };
 
-const makeTrackOccupied = (currentTrackId, tracks) => {
-  const tracksWithEmptyStatus = cloneDeep(tracks).filter(track => track.id !== currentTrackId);
-
-  return tracksWithEmptyStatus;
-}
-
-const makeTrackUnoccupied = (currentTrackId, tracks) => {
-  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    if (track.id == currentTrackId) {
-      track.empty = true;
-    }
-    return track;
-  })
-
-  return tracksWithEmptyStatus;
-}
-
 const renderComponent = (container, component, position = 'beforeend') => {
   switch(position) {
     case 'afterbegin': {
