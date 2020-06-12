@@ -111,8 +111,8 @@ export const renderApp = () => {
 
   //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.map((employee) =>
+    const originEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = originEmployeeList.map((employee) =>
       employee.id === payload.changedEmployee.id ? payload.changedEmployee : employee);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
@@ -141,8 +141,8 @@ export const renderApp = () => {
 
   //EMPLOYEE_REMOVED
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const newEmployeeList = oldEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
+    const originEmployeeList = employeeListPanel.getCurrentEmployeeList();
+    const newEmployeeList = originEmployeeList.filter((employee) => employee.id !== payload.currentEmployeeId);
 
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
