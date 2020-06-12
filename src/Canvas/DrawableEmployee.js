@@ -36,6 +36,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
 
   clear() {
     this.two.remove(this.drawPoint);
+    this.update();
   }
 
   move(x, y) {

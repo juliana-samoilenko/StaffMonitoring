@@ -82,6 +82,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
 
       const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
@@ -111,6 +112,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
 
       const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
@@ -137,6 +139,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
       const numberOfEmployeeMoves = 1;
 
@@ -173,6 +176,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {
         remove: jest.fn(),
+        update: jest.fn(),
       };
       const numberOfEmployeeMoves = 3;
 
