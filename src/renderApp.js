@@ -22,7 +22,7 @@ import {
   OPEN_ADD_PANEL,
 } from './eventConstants';
 
-const markOccupiedTracks = (employeeList, tracks) => { 
+const markOccupiedTracksInEmployeeList = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
     if (employee.trackId !== null) {
       return employee.trackId;
@@ -164,23 +164,21 @@ export const renderApp = () => {
     employeeListPanel.setState({ employeeList: newEmployeeList });
   });
 
-  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
+  eventManager.subscribe(EMPLOYEE_REMOVED, ({ employeeTrackId }) => {
+    const { tracks } = addEmployeePanel.data;
+    const tracksWithoutRemovedEmployeeTrack = cloneDeep(tracks).map(track => {
+      if (track.id === employeeTrackId) {
+        track.empty = true;
+      }
 
-    addEmployeePanel.setState({ tracks: newTrackList });
+      return track;
+    });
+
+    addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
+    addEmployeePanel.hide();
   });
 
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-    const oldEmployeeList = employeeListPanel.getCurrentEmployeeList();
-    const tracksWithOccupiedStatus = markOccupiedTracks(oldEmployeeList, EMPLOYEE_TRACKS);
-    const newTrackList = makeTrackUnoccupied(payload.employeeTrackId, tracksWithOccupiedStatus);
-
-    editEmployeePanel.setState({ tracks: newTrackList, isAwaitingConfirmation: false });
-  });
-
-  eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => { 
     canvas.removeEmployee(payload.currentEmployeeId);
   });
 
@@ -257,12 +255,12 @@ export const renderApp = () => {
   employeeListPanel.setHandlerForEditPanelOpenButton((event) => {
     const employeeIdForEdit = event.target.id;
     const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
-    const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    const tracksWithOccupiedStatus = markOccupiedTracksInEmployeeList(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
 
     eventManager.publish({
       type: OPEN_EDIT_PANEL,
       payload: {
-        employeeForEdit: employeeForEdit, 
+        employeeForEdit: employeeForEdit,
         tracksWithOccupiedStatus: tracksWithOccupiedStatus,
       }
     });
@@ -337,9 +335,8 @@ export const renderApp = () => {
         employeeTrackId: employeeToRemove.trackId,
       }
     });
-    
+
     editEmployeePanel.hide();
-    addEmployeePanel.hide();
   });
 
   editEmployeePanel.setRejectRemovalButtonHandler(() => {
