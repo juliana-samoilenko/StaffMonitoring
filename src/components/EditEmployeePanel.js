@@ -25,7 +25,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
-  const upoccupiedTrackList = cloneDeep(tracks).filter(track => {
+  const unoccupiedTrackList = cloneDeep(tracks).filter(track => {
     if (track.empty) {
       return track;
     }
@@ -41,7 +41,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingCo
     emptyTrack
   ];
 
-  const trackList = [...baseTrack, ...upoccupiedTrackList];
+  const trackList = [...baseTrack, ...unoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
   const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
