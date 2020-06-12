@@ -22,7 +22,7 @@ import {
   OPEN_ADD_PANEL,
 } from './eventConstants';
 
-const markOccupiedTracksInEmployeeList = (employeeList, tracks) => {
+const markOccupiedTracks = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
     if (employee.trackId !== null) {
       return employee.trackId;
@@ -238,7 +238,7 @@ export const renderApp = () => {
   employeeListPanel.setHandlerForEditPanelOpenButton((event) => {
     const employeeIdForEdit = event.target.id;
     const employeeForEdit = cloneDeep(employeeListPanel.getCurrentEmployeeList().find(employee => employee.id === employeeIdForEdit));
-    const tracksWithOccupiedStatus = markOccupiedTracksInEmployeeList(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
+    const tracksWithOccupiedStatus = markOccupiedTracks(employeeListPanel.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
 
     eventManager.publish({
       type: OPEN_EDIT_PANEL,
