@@ -5,7 +5,7 @@ import { cloneDeep } from '../renderApp';
 const markPermittedZones = (employee, zones) => {
   const { permittedZoneIds } = employee;
   const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
-    zone.permitted = permittedZoneIds.includes(zone.id);
+    zone.isPermitted = permittedZoneIds.includes(zone.id);
 
     return zone;
   });
@@ -19,7 +19,7 @@ const createTemplateForTrackOption = (track = undefined) => `
 
 const createTemplateForZoneCheckbox = (zone) => `
 <div class="edit-zone-container">
-  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.permitted ? 'checked' : ''}>
+  <input name="employeeZones" type="checkbox" id="${zone.id}" ${zone.isPermitted ? 'checked' : ''}>
   <label for="${zone.id}">${zone.name}</label>
 </div>
 `;

@@ -15,10 +15,10 @@ export const WIDTH_CANVAS = 1045;
 export const HEIGHT_CANVAS = 600;
 
 export const ZONES = [
-  { id: 1, name: 'Высотные работы', permitted: false },
-  { id: 2, name: 'Цех 1', permitted: false },
-  { id: 3, name: 'Высокое напряжение', permitted: false },
-  { id: 4, name: 'Спец оборудование', permitted: false }
+  { id: 1, name: 'Высотные работы', isPermitted: false },
+  { id: 2, name: 'Цех 1', isPermitted: false },
+  { id: 3, name: 'Высокое напряжение', isPermitted: false },
+  { id: 4, name: 'Спец оборудование', isPermitted: false }
 ];
 
 const points1 = [{ x: 400, y: 560 }, { x: 400, y: 510 }, { x: 400, y: 460 }, { x: 400, y: 430 }, { x: 350, y: 430 }, { x: 300, y: 430 }, { x: 250, y: 430 }, { x: 250, y: 400 }, { x: 250, y: 350 }, { x: 250, y: 300 }, { x: 250, y: 250 }, { x: 200, y: 250 }, { x: 150, y: 250 }, { x: 100, y: 250 }, { x: 100, y: 280 }, { x: 150, y: 280 }, { x: 200, y: 280 }, { x: 240, y: 320 }, { x: 240, y: 370 }, { x: 240, y: 430 }, { x: 300, y: 430 }, { x: 350, y: 430 }, { x: 400, y: 460 }, { x: 400, y: 510 }, { x: 400, y: 560 }];
