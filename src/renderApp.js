@@ -30,7 +30,7 @@ const markOccupiedTracks = (employeeList, tracks) => {
   });
 
   const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    track.isEmpty = !unoccupiedTracks.includes(track.id);
+    track.isOccupied = unoccupiedTracks.includes(track.id);
     return track;
   })
 
@@ -125,7 +125,7 @@ export const renderApp = () => {
     const { trackId: changedEmployeeTrackId = undefined } = changedEmployee;
     const newTrackList = tracks.map((track) => {
       if (track.id === originalEmployeeTrackId || track.id === changedEmployeeTrackId) {
-        track.isEmpty = !track.isEmpty;
+        track.isOccupied = !track.isOccupied;
       }
 
       return track;
@@ -151,7 +151,7 @@ export const renderApp = () => {
     const { tracks } = addEmployeePanel.data;
     const tracksWithoutRemovedEmployeeTrack = cloneDeep(tracks).map(track => {
       if (track.id === employeeTrackId) {
-        track.isEmpty = true;
+        track.isOccupied = true;
       }
 
       return track;
@@ -270,7 +270,7 @@ export const renderApp = () => {
 
     const tracksWithoutAddedEmployeeTrack = tracks.map((track) => {
       if (track.id === newEmployee.trackId) {
-        track.isEmpty = !track.isEmpty;
+        track.isOccupied = !track.isOccupied;
       }
 
       return track;
