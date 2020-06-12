@@ -67,10 +67,10 @@ export const renderApp = () => {
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
   const employeeList = cloneDeep(EMPLOYEE);
-  const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
+  const tracks = cloneDeep(EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
-  
+
   const canvas = new Canvas();
   renderComponent(canvasContainer, canvas);
   canvas.drawElementsBuilding();
