@@ -136,7 +136,7 @@ export const renderApp = () => {
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-    const tracks  = addEmployeePanel.getData();
+    const tracks  = addEmployeePanel.getDataOnTracks();
     const { originalEmployee, changedEmployee } = payload;
     const { trackId: originalEmployeeTrackId = undefined } = originalEmployee;
     const { trackId: changedEmployeeTrackId = undefined } = changedEmployee;
@@ -274,20 +274,24 @@ export const renderApp = () => {
 
   addEmployeePanel.setAddEmployeeButtonHandler((event) => {
     event.preventDefault();
-    
+
     const newEmployee = addEmployeePanel.getNewEmployee();
-    const tracksWithEmptyStatus = addEmployeePanel.getTracksWithEmptyStatus(tracks);
+    const tracks = addEmployeePanel.getDataOnTracks();
 
     eventManager.publish({
       type: EMPLOYEE_ADDED,
       payload : {
         newEmployee,
-        tracksWithEmptyStatus,
       }
     });
-    
-    const employeeTrackId = newEmployee.trackId;
-    const newTrackList = makeTrackOccupied(employeeTrackId, tracksWithEmptyStatus);
+
+    const newTrackList = tracks.map((track) => {
+      if (track.id === newEmployee.trackId) {
+        track.empty = !track.empty;
+      }
+
+      return track;
+    });
 
     addEmployeePanel.setState({ tracks: newTrackList, zones });
     addEmployeePanel.clearForm();

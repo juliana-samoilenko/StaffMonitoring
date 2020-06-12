@@ -91,7 +91,7 @@ export class AddEmployeePanel extends Component {
     return this.getElement().querySelector('#add-form');
   }
 
-  getData() {
+  getDataOnTracks() {
     return this.data.tracks;
   }
 
