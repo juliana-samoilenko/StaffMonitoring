@@ -95,16 +95,6 @@ export class AddEmployeePanel extends Component {
     return this.data.tracks;
   }
 
-  getTracksWithEmptyStatus(tracks) {
-    const tracksWithEmptyStatus = tracks.filter(track => {
-      if (track.isEmpty) {
-        return track;
-      }
-    })
-
-    return tracksWithEmptyStatus;
-  }
-
   getNewEmployee() {
     const form = this.getForm();
 
