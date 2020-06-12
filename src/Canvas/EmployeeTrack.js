@@ -1,9 +1,9 @@
 export class EmployeeTrack {
-  constructor({ id, name, points, empty }) {
+  constructor({ id, name, points, isEmpty }) {
     this.id = id;
     this.name = name;
     this._points = points;
-    this.empty = empty;
+    this.isEmpty = isEmpty;
   }
 
   getPoint(index) {

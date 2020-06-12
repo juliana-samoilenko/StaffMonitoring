@@ -15,7 +15,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 
 const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
   const trackList = tracks.filter(track => {
-    if (track.empty) {
+    if (track.isEmpty) {
       return track;
     }
   }).map(createTemplateForTrackOption);
@@ -97,7 +97,7 @@ export class AddEmployeePanel extends Component {
 
   getTracksWithEmptyStatus(tracks) {
     const tracksWithEmptyStatus = tracks.filter(track => {
-      if (track.empty) {
+      if (track.isEmpty) {
         return track;
       }
     })

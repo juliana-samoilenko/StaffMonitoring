@@ -26,7 +26,7 @@ const createTemplateForZoneCheckbox = (zone) => `
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
   const unoccupiedTrackList = cloneDeep(tracks).filter(track => {
-    if (track.empty) {
+    if (track.isEmpty) {
       return track;
     }
   }).map(createTemplateForTrackOption);
