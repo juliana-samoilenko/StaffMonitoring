@@ -329,7 +329,7 @@ export const renderApp = () => {
   });
 
   editEmployeePanel.setAcceptRemovalButtonHandler(() => {
-    const formData = editEmployeePanel.getData();
+    const formData = editEmployeePanel.getFormData();
     const employeeToRemove = cloneDeep(formData.employee);
 
     eventManager.publish({
