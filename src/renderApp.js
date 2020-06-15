@@ -56,6 +56,7 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
+const database = firebase.firestore();
 const getEmployees = async() => {
   try {
     const snapshot = await database.collection("employees").get();
