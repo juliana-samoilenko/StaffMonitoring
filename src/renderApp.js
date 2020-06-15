@@ -9,7 +9,6 @@ import { EditEmployeePanel } from './components/EditEmployeePanel';
 import {
   EMPLOYEE_TRACKS,
   ZONES,
-  EMPLOYEE,
 } from './const';
 
 import {
@@ -57,7 +56,31 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
-export const renderApp = () => {
+const getEmployees = async() => {
+  try {
+    const snapshot = await database.collection("employees").get();
+    const employees = snapshot.docs.map(employee => employee.data());
+
+    return employees;
+  } 
+  catch(error) {
+    console.error(error);
+  }
+}
+
+const getEmployeeIds = async() => {
+  try {
+    const snapshot = await database.collection("employees").get();
+    const employeeIds = snapshot.docs.map(employee => employee.id);
+
+    return employeeIds;
+  } 
+  catch(error) {
+    console.error(error);
+  }
+}
+
+export const renderApp = async() => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
@@ -66,7 +89,12 @@ export const renderApp = () => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeeList = cloneDeep(EMPLOYEE);
+  const employees = await getEmployees();
+  const employeeIds = await getEmployeeIds();
+  for (let i = 0; i < employees.length; i++) {
+    employees[i].id = employeeIds[i];
+  }
+  const employeeList = cloneDeep(employees)
   const tracks = cloneDeep(EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
