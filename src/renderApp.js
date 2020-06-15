@@ -60,21 +60,12 @@ const database = firebase.firestore();
 const getEmployees = async() => {
   try {
     const snapshot = await database.collection("employees").get();
-    const employees = snapshot.docs.map(employee => employee.data());
+    const employees = snapshot.docs.map(employeeDoc => ({
+      id: employeeDoc.id,
+      ...employeeDoc.data(),
+    }));
 
     return employees;
-  } 
-  catch(error) {
-    console.error(error);
-  }
-}
-
-const getEmployeeIds = async() => {
-  try {
-    const snapshot = await database.collection("employees").get();
-    const employeeIds = snapshot.docs.map(employee => employee.id);
-
-    return employeeIds;
   } 
   catch(error) {
     console.error(error);
@@ -90,12 +81,7 @@ export const renderApp = async() => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employees = await getEmployees();
-  const employeeIds = await getEmployeeIds();
-  for (let i = 0; i < employees.length; i++) {
-    employees[i].id = employeeIds[i];
-  }
-  const employeeList = cloneDeep(employees)
+  const employeeList = await getEmployees();
   const tracks = cloneDeep(EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
