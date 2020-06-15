@@ -18,6 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/Lyashka/StaffMonitoring.git"
   },
+  "browserslist": [
+    "since 2017-06"
+  ],
   "author": "lyashka",
   "license": "ISC",
   "bugs": {
