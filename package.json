@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
   "dependencies": {
+    "firebase": "^7.15.1",
     "two.js": "^0.7.0-stable.1"
   },
   "devDependencies": {
