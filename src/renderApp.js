@@ -74,8 +74,8 @@ export const renderApp = async() => {
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
 
-  const database = new EmployeeApiService();
-  const employeeList = await database.getEmployees();
+  const employeeApiService = new EmployeeApiService();
+  const employeeList = await employeeApiService.getEmployees();
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
@@ -110,7 +110,7 @@ export const renderApp = async() => {
   //EMPLOYEE_ADDED
   eventManager.subscribe(EMPLOYEE_ADDED, async() => {
     try {
-      const employeeListWithNewEmployee = await database.getEmployees();
+      const employeeListWithNewEmployee = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
     } 
     catch (error) {
@@ -125,7 +125,7 @@ export const renderApp = async() => {
   //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
     try {
-      const newEmployeeList = await database.getEmployees();
+      const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
     } 
     catch(error) {
@@ -135,7 +135,7 @@ export const renderApp = async() => {
 
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
     try {
-      const newEmployeeList = await database.getEmployees();
+      const newEmployeeList = await employeeApiService.getEmployees();
       const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: newTrackList });
       addEmployeePanel.hide();
@@ -152,7 +152,7 @@ export const renderApp = async() => {
   //EMPLOYEE_REMOVED
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
     try {
-      const newEmployeeList = await database.getEmployees();
+      const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
     } 
     catch(error) {
@@ -162,7 +162,7 @@ export const renderApp = async() => {
 
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
     try {
-      const newEmployeeList = await database.getEmployees();
+      const newEmployeeList = await employeeApiService.getEmployees();
       const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
       addEmployeePanel.hide();
@@ -271,7 +271,7 @@ export const renderApp = async() => {
       event.preventDefault();
 
       const newEmployee = addEmployeePanel.getNewEmployee();
-      await database.createEmployee(newEmployee);
+      await employeeApiService.createEmployee(newEmployee);
 
     eventManager.publish({
       type: EMPLOYEE_ADDED,
@@ -280,7 +280,7 @@ export const renderApp = async() => {
       }
     });
 
-    const employeeList = await database.getEmployees();
+    const employeeList = await employeeApiService.getEmployees();
     const tracksWithoutAddedEmployeeTrack = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
 
     addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
@@ -307,7 +307,7 @@ export const renderApp = async() => {
       const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
       const originalEmployeeId = originalEmployee.id;
       const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
-      await database.updateEmployee(changedEmployee, originalEmployeeId);
+      await employeeApiService.updateEmployee(changedEmployee, originalEmployeeId);
 
       eventManager.publish({
         type: EMPLOYEE_EDITED,
@@ -333,7 +333,7 @@ export const renderApp = async() => {
     try {
       const stateEditEmployeePanel = editEmployeePanel.getState();
       const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
-      await database.removeEmployee(employeeToRemove);
+      await employeeApiService.removeEmployee(employeeToRemove);
 
       eventManager.publish({
         type: EMPLOYEE_REMOVED,
