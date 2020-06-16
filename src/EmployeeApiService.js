@@ -1,6 +1,12 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 
+firebase.initializeApp({
+  apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
+  authDomain: 'graduate-work-7c99e.firebaseapp.com',
+  projectId: 'graduate-work-7c99e'
+});
+
 export class EmployeeApiService {
   constructor() {
     this.database = firebase.firestore();

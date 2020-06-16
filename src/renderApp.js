@@ -1,4 +1,3 @@
-import * as firebase from "firebase/app";
 import { EmployeeApiService } from './EmployeeApiService';
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
@@ -22,12 +21,6 @@ import {
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
 } from './eventConstants';
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
-  authDomain: 'graduate-work-7c99e.firebaseapp.com',
-  projectId: 'graduate-work-7c99e'
-});
 
 const markOccupiedTracks = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
