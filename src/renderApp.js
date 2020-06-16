@@ -123,9 +123,13 @@ export const renderApp = async() => {
 
   //EMPLOYEE_ADDED
   eventManager.subscribe(EMPLOYEE_ADDED, async() => {
-    const employeeListWithNewEmployee = await getEmployees();
-
-    employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
+    try {
+      const employeeListWithNewEmployee = await getEmployees();
+      employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
+    } 
+    catch (error) {
+      console.error(error);
+    }
   });
 
   eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
@@ -134,17 +138,25 @@ export const renderApp = async() => {
 
   //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
-    const newEmployeeList = await getEmployees();
-
-    employeeListPanel.setState({ employeeList: newEmployeeList });
+    try {
+      const newEmployeeList = await getEmployees();
+      employeeListPanel.setState({ employeeList: newEmployeeList });
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
-    const newEmployeeList = await getEmployees();
-    const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
-
-    addEmployeePanel.setState({ tracks: newTrackList });
-    addEmployeePanel.hide();
+    try {
+      const newEmployeeList = await getEmployees();
+      const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
+      addEmployeePanel.setState({ tracks: newTrackList });
+      addEmployeePanel.hide();
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
@@ -153,17 +165,25 @@ export const renderApp = async() => {
 
   //EMPLOYEE_REMOVED
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
-    const newEmployeeList = await getEmployees();
-
-    employeeListPanel.setState({ employeeList: newEmployeeList });
+    try {
+      const newEmployeeList = await getEmployees();
+      employeeListPanel.setState({ employeeList: newEmployeeList });
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
-    const newEmployeeList = await getEmployees();
-    const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
-
-    addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
-    addEmployeePanel.hide();
+    try {
+      const newEmployeeList = await getEmployees();
+      const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
+      addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
+      addEmployeePanel.hide();
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
@@ -261,10 +281,11 @@ export const renderApp = async() => {
   });
 
   addEmployeePanel.setAddEmployeeButtonHandler(async(event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const newEmployee = addEmployeePanel.getNewEmployee();
-    await database.collection("employees").doc(newEmployee.id).set({
+      const newEmployee = addEmployeePanel.getNewEmployee();
+      await database.collection("employees").doc(newEmployee.id).set({
       name: newEmployee.name,
       position: newEmployee.position,
       trackId: newEmployee.trackId,
@@ -283,6 +304,11 @@ export const renderApp = async() => {
 
     addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
     addEmployeePanel.clearForm();
+
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   //handlers for edit employee panel
@@ -293,29 +319,34 @@ export const renderApp = async() => {
   });
 
   editEmployeePanel.setSaveChangeButtonHandler(async(event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const stateEditEmployeePanel = editEmployeePanel.getState();
-    const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
-    const originalEmployeeId = originalEmployee.id;
-    const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
-    await database.collection("employees").doc(originalEmployeeId).update({
-      name: changedEmployee.name,
-      position: changedEmployee.position,
-      trackId: changedEmployee.trackId,
-      permittedZoneIds: changedEmployee.permittedZoneIds,
-    });
+      const stateEditEmployeePanel = editEmployeePanel.getState();
+      const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
+      const originalEmployeeId = originalEmployee.id;
+      const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
+      await database.collection("employees").doc(originalEmployeeId).update({
+        name: changedEmployee.name,
+        position: changedEmployee.position,
+        trackId: changedEmployee.trackId,
+        permittedZoneIds: changedEmployee.permittedZoneIds,
+      });
 
-    eventManager.publish({
-      type: EMPLOYEE_EDITED,
-      payload: {
-        originalEmployee,
-        changedEmployee,
-      }
-    });
+      eventManager.publish({
+        type: EMPLOYEE_EDITED,
+        payload: {
+          originalEmployee,
+          changedEmployee,
+        }
+      });
 
-    editEmployeePanel.clearForm();
-    editEmployeePanel.hide();
+      editEmployeePanel.clearForm();
+      editEmployeePanel.hide();
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   editEmployeePanel.setConfirmationButtonRemoveEmployeeHandler(() => {
@@ -323,19 +354,24 @@ export const renderApp = async() => {
   });
 
   editEmployeePanel.setAcceptRemovalButtonHandler(async() => {
-    const stateEditEmployeePanel = editEmployeePanel.getState();
-    const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
-    await database.collection("employees").doc(employeeToRemove.id).delete();
+    try {
+      const stateEditEmployeePanel = editEmployeePanel.getState();
+      const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
+      await database.collection("employees").doc(employeeToRemove.id).delete();
 
-    eventManager.publish({
-      type: EMPLOYEE_REMOVED,
-      payload: {
-        currentEmployeeId: employeeToRemove.id,
-        employeeTrackId: employeeToRemove.trackId,
-      }
-    });
+      eventManager.publish({
+        type: EMPLOYEE_REMOVED,
+        payload: {
+          currentEmployeeId: employeeToRemove.id,
+          employeeTrackId: employeeToRemove.trackId,
+        }
+      });
 
-    editEmployeePanel.hide();
+      editEmployeePanel.hide();
+    } 
+    catch(error) {
+      console.error(error);   
+    }
   });
 
   editEmployeePanel.setRejectRemovalButtonHandler(() => {
