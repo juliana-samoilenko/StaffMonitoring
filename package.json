@@ -18,6 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/Lyashka/StaffMonitoring.git"
   },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "author": "lyashka",
   "license": "ISC",
   "bugs": {
@@ -25,6 +28,7 @@
   },
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
   "dependencies": {
+    "firebase": "^7.15.1",
     "two.js": "^0.7.0-stable.1"
   },
   "devDependencies": {

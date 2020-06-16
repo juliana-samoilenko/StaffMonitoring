@@ -1,5 +1,4 @@
 import { createZoneEntity } from './Core/entity/ZoneEntity';
-import { createEmployeeEntity } from './Core/entity/EmployeeEntity';
 import { EmployeeTrack } from './Canvas/EmployeeTrack';
 
 const WALL_COLOR = '#000000';
@@ -39,12 +38,6 @@ export const EMPLOYEE_TRACKS = [
   new EmployeeTrack ({ id: 3, name: 3, points: points3, isOccupied: false }),
   new EmployeeTrack ({ id: 4, name: 4, points: points4, isOccupied: true }),
   new EmployeeTrack ({ id: 5, name: 5, points: points5, isOccupied: true })
-];
-
-export const EMPLOYEE = [
-  createEmployeeEntity({ name: 'Петров С.М.', position: 'engineer', trackId: null, permittedZoneIds: [1, 2] }),
-  createEmployeeEntity({ name: 'Щербаков Д.Д.', position: 'working', trackId: 2, permittedZoneIds: [2, 4] }),
-  createEmployeeEntity({ name: 'Пугало Р.К.', position: 'programmer', trackId: 3, permittedZoneIds: [1, 3, 4] })
 ];
 
 const zoneEntity1 = createZoneEntity(ZONES[0]);

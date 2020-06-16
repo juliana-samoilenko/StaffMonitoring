@@ -9,7 +9,6 @@ import { EditEmployeePanel } from './components/EditEmployeePanel';
 import {
   EMPLOYEE_TRACKS,
   ZONES,
-  EMPLOYEE,
 } from './const';
 
 import {
@@ -57,7 +56,23 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
-export const renderApp = () => {
+const database = firebase.firestore();
+const getEmployees = async() => {
+  try {
+    const snapshot = await database.collection("employees").get();
+    const employees = snapshot.docs.map(employeeDoc => ({
+      id: employeeDoc.id,
+      ...employeeDoc.data(),
+    }));
+
+    return employees;
+  } 
+  catch(error) {
+    console.error(error);
+  }
+}
+
+export const renderApp = async() => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
@@ -66,7 +81,7 @@ export const renderApp = () => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeeList = cloneDeep(EMPLOYEE);
+  const employeeList = await getEmployees();
   const tracks = cloneDeep(EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
