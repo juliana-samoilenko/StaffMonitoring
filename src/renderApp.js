@@ -303,8 +303,8 @@ export const renderApp = async() => {
     try {
       event.preventDefault();
 
-      const stateEditEmployeePanel = editEmployeePanel.getState();
-      const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
+      const editEmployeePanelState = editEmployeePanel.getState();
+      const originalEmployee = cloneDeep(editEmployeePanelState.employee);
       const originalEmployeeId = originalEmployee.id;
       const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
       await employeeApiService.updateEmployee(changedEmployee, originalEmployeeId);
@@ -331,8 +331,8 @@ export const renderApp = async() => {
 
   editEmployeePanel.setAcceptRemovalButtonHandler(async() => {
     try {
-      const stateEditEmployeePanel = editEmployeePanel.getState();
-      const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
+      const editEmployeePanelState = editEmployeePanel.getState();
+      const employeeToRemove = cloneDeep(editEmployeePanelState.employee);
       await employeeApiService.removeEmployee(employeeToRemove);
 
       eventManager.publish({
