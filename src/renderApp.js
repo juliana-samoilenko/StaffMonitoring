@@ -1,5 +1,5 @@
 import * as firebase from "firebase/app";
-import "firebase/firestore";
+import { EmployeeApiService } from './EmployeeApiService';
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
@@ -22,6 +22,12 @@ import {
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
 } from './eventConstants';
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
+  authDomain: 'graduate-work-7c99e.firebaseapp.com',
+  projectId: 'graduate-work-7c99e'
+});
 
 const markOccupiedTracks = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
@@ -58,28 +64,6 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
-firebase.initializeApp({
-  apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
-  authDomain: 'graduate-work-7c99e.firebaseapp.com',
-  projectId: 'graduate-work-7c99e'
-});
-
-const database = firebase.firestore();
-const getEmployees = async() => {
-  try {
-    const snapshot = await database.collection("employees").get();
-    const employees = snapshot.docs.map(employeeDoc => ({
-      id: employeeDoc.id,
-      ...employeeDoc.data(),
-    }));
-
-    return employees;
-  } 
-  catch(error) {
-    console.error(error);
-  }
-}
-
 export const renderApp = async() => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
@@ -89,7 +73,9 @@ export const renderApp = async() => {
     { name: 'Петухов В.П.', zone: 'Высотные работы' },
     { name: 'Лукин В.Р', zone: 'Цех 1' }
   ];
-  const employeeList = await getEmployees();
+
+  const database = new EmployeeApiService();
+  const employeeList = await database.getEmployees();
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
   const employee = { trackId: null, permittedZoneIds: []};
@@ -124,7 +110,7 @@ export const renderApp = async() => {
   //EMPLOYEE_ADDED
   eventManager.subscribe(EMPLOYEE_ADDED, async() => {
     try {
-      const employeeListWithNewEmployee = await getEmployees();
+      const employeeListWithNewEmployee = await database.getEmployees();
       employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
     } 
     catch (error) {
@@ -139,7 +125,7 @@ export const renderApp = async() => {
   //EMPLOYEE_EDITED
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
     try {
-      const newEmployeeList = await getEmployees();
+      const newEmployeeList = await database.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
     } 
     catch(error) {
@@ -149,7 +135,7 @@ export const renderApp = async() => {
 
   eventManager.subscribe(EMPLOYEE_EDITED, async() => {
     try {
-      const newEmployeeList = await getEmployees();
+      const newEmployeeList = await database.getEmployees();
       const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: newTrackList });
       addEmployeePanel.hide();
@@ -166,7 +152,7 @@ export const renderApp = async() => {
   //EMPLOYEE_REMOVED
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
     try {
-      const newEmployeeList = await getEmployees();
+      const newEmployeeList = await database.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
     } 
     catch(error) {
@@ -176,7 +162,7 @@ export const renderApp = async() => {
 
   eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
     try {
-      const newEmployeeList = await getEmployees();
+      const newEmployeeList = await database.getEmployees();
       const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
       addEmployeePanel.hide();
@@ -285,12 +271,7 @@ export const renderApp = async() => {
       event.preventDefault();
 
       const newEmployee = addEmployeePanel.getNewEmployee();
-      await database.collection("employees").doc(newEmployee.id).set({
-      name: newEmployee.name,
-      position: newEmployee.position,
-      trackId: newEmployee.trackId,
-      permittedZoneIds: newEmployee.permittedZoneIds,
-    });
+      await database.createEmployee(newEmployee);
 
     eventManager.publish({
       type: EMPLOYEE_ADDED,
@@ -299,7 +280,7 @@ export const renderApp = async() => {
       }
     });
 
-    const employeeList = await getEmployees();
+    const employeeList = await database.getEmployees();
     const tracksWithoutAddedEmployeeTrack = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
 
     addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
@@ -326,12 +307,7 @@ export const renderApp = async() => {
       const originalEmployee = cloneDeep(stateEditEmployeePanel.employee);
       const originalEmployeeId = originalEmployee.id;
       const changedEmployee = editEmployeePanel.getEditableEmployeeInformation(originalEmployeeId);
-      await database.collection("employees").doc(originalEmployeeId).update({
-        name: changedEmployee.name,
-        position: changedEmployee.position,
-        trackId: changedEmployee.trackId,
-        permittedZoneIds: changedEmployee.permittedZoneIds,
-      });
+      await database.updateEmployee(changedEmployee, originalEmployeeId);
 
       eventManager.publish({
         type: EMPLOYEE_EDITED,
@@ -357,7 +333,7 @@ export const renderApp = async() => {
     try {
       const stateEditEmployeePanel = editEmployeePanel.getState();
       const employeeToRemove = cloneDeep(stateEditEmployeePanel.employee);
-      await database.collection("employees").doc(employeeToRemove.id).delete();
+      await database.removeEmployee(employeeToRemove);
 
       eventManager.publish({
         type: EMPLOYEE_REMOVED,
@@ -367,6 +343,7 @@ export const renderApp = async() => {
         }
       });
 
+      editEmployeePanel.setState({ isAwaitingConfirmation: false });
       editEmployeePanel.hide();
     } 
     catch(error) {
