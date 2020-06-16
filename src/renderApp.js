@@ -1,3 +1,5 @@
+import * as firebase from "firebase/app";
+import "firebase/firestore";
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
@@ -55,6 +57,12 @@ const renderComponent = (container, component, position = 'beforeend') => {
 };
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
+  authDomain: 'graduate-work-7c99e.firebaseapp.com',
+  projectId: 'graduate-work-7c99e'
+});
 
 const database = firebase.firestore();
 const getEmployees = async() => {
