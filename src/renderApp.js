@@ -64,7 +64,7 @@ const renderComponent = (container, component, position = 'beforeend') => {
 
 export const cloneDeep = array => JSON.parse(JSON.stringify(array));
 
-export const renderApp = async() => {
+export const renderApp = async () => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
@@ -108,7 +108,7 @@ export const renderApp = async() => {
   const eventManager = new EventManager();
 
   //EMPLOYEE_ADDED
-  eventManager.subscribe(EMPLOYEE_ADDED, async() => {
+  eventManager.subscribe(EMPLOYEE_ADDED, async () => {
     try {
       const employeeListWithNewEmployee = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
@@ -123,7 +123,7 @@ export const renderApp = async() => {
   });
 
   //EMPLOYEE_EDITED
-  eventManager.subscribe(EMPLOYEE_EDITED, async() => {
+  eventManager.subscribe(EMPLOYEE_EDITED, async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
@@ -133,7 +133,7 @@ export const renderApp = async() => {
     }
   });
 
-  eventManager.subscribe(EMPLOYEE_EDITED, async() => {
+  eventManager.subscribe(EMPLOYEE_EDITED, async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
@@ -150,7 +150,7 @@ export const renderApp = async() => {
   });
 
   //EMPLOYEE_REMOVED
-  eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
+  eventManager.subscribe(EMPLOYEE_REMOVED, async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
@@ -160,7 +160,7 @@ export const renderApp = async() => {
     }
   });
 
-  eventManager.subscribe(EMPLOYEE_REMOVED, async() => {
+  eventManager.subscribe(EMPLOYEE_REMOVED, async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
@@ -266,7 +266,7 @@ export const renderApp = async() => {
     addEmployeePanel.hide();
   });
 
-  addEmployeePanel.setAddEmployeeButtonHandler(async(event) => {
+  addEmployeePanel.setAddEmployeeButtonHandler(async (event) => {
     try {
       event.preventDefault();
 
@@ -299,7 +299,7 @@ export const renderApp = async() => {
     editEmployeePanel.hide();
   });
 
-  editEmployeePanel.setSaveChangeButtonHandler(async(event) => {
+  editEmployeePanel.setSaveChangeButtonHandler(async (event) => {
     try {
       event.preventDefault();
 
@@ -328,7 +328,7 @@ export const renderApp = async() => {
     editEmployeePanel.setState({ isAwaitingConfirmation: true });
   });
 
-  editEmployeePanel.setAcceptRemovalButtonHandler(async() => {
+  editEmployeePanel.setAcceptRemovalButtonHandler(async () => {
     try {
       const { employee: employeeToRemove } = cloneDeep(editEmployeePanel.getState());
       await employeeApiService.removeEmployee(employeeToRemove);
