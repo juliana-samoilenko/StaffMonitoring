@@ -20,6 +20,7 @@ import {
   HIDE_EMPLOYEE_LIST_PANEL,
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
+  EMPLOYEE_OVERLAP
 } from './eventConstants';
 
 const markOccupiedTracks = (employeeList, tracks) => {
@@ -215,6 +216,17 @@ export const renderApp = async () => {
     if (editEmployeePanel.isComponentShown) {
       editEmployeePanel.hide();
     }
+  })
+
+  //VIOLATION
+  canvas.setOverlapHandler(() => {
+    eventManager.publish({
+      type: EMPLOYEE_OVERLAP,
+    });
+  })
+
+  eventManager.subscribe(EMPLOYEE_OVERLAP, () => {
+    console.log('Перекрытие было!');
   })
 
   //handler for open employee list button
