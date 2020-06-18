@@ -30,11 +30,12 @@ export class Canvas extends Component {
     this.two = new Two({
       width: WIDTH_CANVAS,
       height: HEIGHT_CANVAS,
-      domElement: this.getElement() 
+      domElement: this.getElement()
     });
     this.employeeListForDrawing = [];
+    this.drawableZones = [];
   }
-  
+
   getTemplate() {
     return createCanvasTemplate(this.data);
   }
@@ -43,11 +44,16 @@ export class Canvas extends Component {
     const elementForDrawing = Object.values(ELEMENTS_BUILDING).flat();
 
     elementForDrawing.forEach((buildingObjectConfigWithType) => {
-    const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
-    const Drawable = buildingObjectsByTypes[buildingObjectType];
+      const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
+      const Drawable = buildingObjectsByTypes[buildingObjectType];
 
-    const drawableObject = new Drawable(buildingObjectConfig, this.two);
-    drawableObject.draw();
+      const drawableObject = new Drawable(buildingObjectConfig, this.two);
+      
+      if (buildingObjectType === 'zone') {
+        this.drawableZones.push(drawableObject);
+      }
+
+      drawableObject.draw();
     });
   }
 
