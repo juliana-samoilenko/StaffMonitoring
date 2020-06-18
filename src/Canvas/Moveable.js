@@ -1,11 +1,15 @@
+import eventManager from '../renderApp';
+import EMPLOYEE_OVERLAP from '../eventConstants';
+
 // eslint-disable-next-line no-shadow
 export const Moveable = (superClass) => class Moveable extends superClass {
-  constructor({ track, currentPointIndex, ...objectProperties }, ...dependencies) {
+  constructor({ track, currentPointIndex, afterMove, ...objectProperties }, ...dependencies) {
     super(objectProperties, ...dependencies);
 
     this.track = track;
     this._currentPointIndex = 0;
     this.interval = null;
+    this.overlaps = new Map();
   }
 
   move() {
@@ -16,6 +20,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);
+      this.afterMove(this.drawableEmployee);
     };
 
     this.interval = setInterval(moveEmployeeToNextPoint, 1000);

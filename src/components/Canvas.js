@@ -84,8 +84,29 @@ export class Canvas extends Component {
     this.employeeListForDrawing = this.employeeListForDrawing.filter(employee => employee.getId() !== employeeId);
   }
 
+  setOverlapHandler(handler) {
+    const checkNewOverlap = () => {
+      this.employeeListForDrawing.forEach(employee => {
+        if(employee.getOverlaps().has(employee.name)) {
+          handler();
+        }
+      })
+    } 
+    
+    this.interval = setInterval(checkNewOverlap, 1000);
+  }
+
+  checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
+    this.drawableZones.forEach(zone => {
+      if (zone.contains(drawableEmployee)) {
+        this.overlaps.set(this.drawableEmployee.getName(), zone.name );
+        console.log(this.overlaps);
+      }
+    });
+  }
+
   _drawEmployeeWithTrack(employee, employeeTrack) {
-    const { x: pointX, y: pointY} = employeeTrack.getPoint(0);
+    const { x: pointX, y: pointY } = employeeTrack.getPoint(0);
     const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: pointX,
@@ -93,9 +114,11 @@ export class Canvas extends Component {
       radius: EMPLOYEE_RADUIS,
       color: EMPLOYEE_COLOR,
       track: employeeTrack,
+      afterMove: this.checkOverlapBetweeenEmployeeAndZone,
     }, this.two);
+    drawableEmployee.addArgumentsForCheckOverlap(this.drawableZones, drawableEmployee);
 
-    this.employeeListForDrawing.push(drawableEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee);
 
     drawableEmployee.draw();
     drawableEmployee.startMovingAlongTrack();
@@ -110,6 +133,6 @@ export class Canvas extends Component {
       color: EMPLOYEE_COLOR,
     }, this.two);
 
-    this.employeeListForDrawing.push(drawableEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee);
   }
 }
