@@ -87,7 +87,7 @@ export class Canvas extends Component {
   setOverlapHandler(handler) {
     const checkNewOverlap = () => {
       this.employeeListForDrawing.forEach(employee => {
-        if(employee.getOverlaps().has(employee.name)) {
+        if(employee.getOverlaps().has(employee.getName())) {
           handler();
         }
       })
@@ -98,9 +98,16 @@ export class Canvas extends Component {
 
   checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
     this.drawableZones.forEach(zone => {
-      if (zone.contains(drawableEmployee)) {
+      //проверка, что зона содержит сотрудника
+      if (zone.contains(drawableEmployee) && this.overlaps.size === 0) {
         this.overlaps.set(this.drawableEmployee.getName(), zone.name );
-        console.log(this.overlaps);
+      }
+ 
+      //проверка, что зона не содержит сотрудника
+      else if (!zone.contains(drawableEmployee)) {
+        if (this._checkNameOfOverlappedZoneWithNameCurrentZone(zone.name)) {
+          this.overlaps.clear();
+        }
       }
     });
   }
