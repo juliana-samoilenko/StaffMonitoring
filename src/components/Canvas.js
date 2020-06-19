@@ -34,6 +34,7 @@ export class Canvas extends Component {
     });
     this.employeeListForDrawing = [];
     this.drawableZones = [];
+    this.overlaps = new Map();
   }
 
   getTemplate() {
@@ -87,7 +88,7 @@ export class Canvas extends Component {
   setOverlapHandler(handler) {
     const checkNewOverlap = () => {
       this.employeeListForDrawing.forEach(employee => {
-        if(employee.getOverlaps().has(employee.getId())) {
+        if(this.overlaps.has(employee.getId())) {
           handler();
         }
       })
@@ -97,20 +98,30 @@ export class Canvas extends Component {
   }
 
   checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
+    const drawableEmployeeId = drawableEmployee.id;
     this.drawableZones.forEach(zone => {
       const isEmployeeInZone = zone.contains(drawableEmployee.xCenter, drawableEmployee.yCenter);
-      const wasEmployeeInZoneBefore = drawableEmployee.overlaps.size !== 0;
+      const isEmployeeInOverlapList = this.isEmployeeInOverlapList(drawableEmployeeId);
 
-      if (isEmployeeInZone && !wasEmployeeInZoneBefore) {
-        drawableEmployee.overlaps.set(drawableEmployee.id, {name: drawableEmployee.name, zone: zone.name });
+      if (isEmployeeInZone && !isEmployeeInOverlapList) {
+        this.overlaps.set(
+          drawableEmployeeId,
+          { name: drawableEmployee.name, zone: zone.name }
+        );
       }
- 
-      else if (!isEmployeeInZone && wasEmployeeInZoneBefore) {
-        if (drawableEmployee._isEmployeeInsideZone(zone) ) {
-          drawableEmployee.overlaps.clear();
-        }
-      }
+      else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(zone, drawableEmployeeId)) {
+        this.overlaps.delete(drawableEmployeeId);
+      } 
     });
+  }
+
+  isEmployeeInOverlapList(employeeId) {
+    return this.overlaps.has(employeeId);
+  }
+
+  isEmployeeZone(zone, drawableEmployeeId) {
+    const employeeOverlap = this.overlaps.get(drawableEmployeeId);
+    return employeeOverlap.zone === zone.name ? true : false;
   }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {

@@ -6,7 +6,6 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     this.track = track;
     this._currentPointIndex = 0;
     this.interval = null;
-    this.overlaps = new Map();
   }
 
   move() {
@@ -34,12 +33,5 @@ export const Moveable = (superClass) => class Moveable extends superClass {
 
   _getIndexNextPoint() {
     return (this._currentPointIndex + 1) % this.track.getLength();
-  }
-
-  _isEmployeeInsideZone(zone) {
-    const informationAboutOverlap = this.overlaps.get(this.id);
-    return zone.name === 
-    informationAboutOverlap.zone ?
-    true : false;
   }
 };
