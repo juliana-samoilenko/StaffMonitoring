@@ -36,8 +36,8 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     return (this._currentPointIndex + 1) % this.track.getLength();
   }
 
-  _checkNameOfOverlappedZoneWithNameCurrentZone(nameCurrentZone) {
-    return nameCurrentZone === 
+  _isEmployeeInsideZone(zone) {
+    return zone.name === 
     this.overlaps.get(this.name) ?
     true : false;
   }

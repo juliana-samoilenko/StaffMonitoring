@@ -105,7 +105,7 @@ export class Canvas extends Component {
  
       //проверка, что зона не содержит сотрудника
       else if (!zone.contains(this.xCenter, this.yCenter)) {
-        if (this._checkNameOfOverlappedZoneWithNameCurrentZone(zone.name)) {
+        if (this._isEmployeeInsideZone(zone)) {
           this.overlaps.clear();
         }
       }
