@@ -12,6 +12,7 @@ export class DrawableRectangle {
     this.height = height;
     this.color = color;
     this.two = two;
+    this.rectangle = null;
   }
 
   draw() {
@@ -19,9 +20,9 @@ export class DrawableRectangle {
   }
 
   _makeRectangle() {
-    const rectangle = this.two.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
-    rectangle.fill = this.color;
-    rectangle.noStroke();
+    this.rectangle = this.two.makeRectangle(this.xCenter, this.yCenter, this.width, this.height);
+    this.rectangle.fill = this.color;
+    this.rectangle.noStroke();
   }
 
   update() {
