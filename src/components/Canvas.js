@@ -98,11 +98,14 @@ export class Canvas extends Component {
 
   checkOverlapBetweeenEmployeeAndZone() {
     this.drawableZones.forEach(zone => {
-      if (zone.contains(this.xCenter, this.yCenter) && this.overlaps.size === 0) {
+      const isEmployeeInZone = zone.contains(this.xCenter, this.yCenter);
+      const wasEmployeeInZoneBefore = this.overlaps.size !== 0;
+
+      if (isEmployeeInZone && !wasEmployeeInZoneBefore) {
         this.overlaps.set(this.id, {name: this.name, zone: zone.name });
       }
  
-      else if (this.overlaps.size !== 0 && !zone.contains(this.xCenter, this.yCenter)) {
+      else if (!isEmployeeInZone && wasEmployeeInZoneBefore) {
         if (this._isEmployeeInsideZone(zone) ) {
           this.overlaps.clear();
         }
