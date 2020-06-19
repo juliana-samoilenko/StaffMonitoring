@@ -17,7 +17,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);
-      this.afterMove();
+      this.afterMove(this);
     };
 
     this.interval = setInterval(moveEmployeeToNextPoint, 1000);

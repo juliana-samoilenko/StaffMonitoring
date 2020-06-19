@@ -24,7 +24,6 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.track = track ? track : null;
     this.id = employee.id;
     this.name = employee.name;
-    this.drawableZones = null;
     this.afterMove = afterMove;
   }
 
@@ -52,10 +51,6 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
   remove() {
     this.stopMovingAlongTrack();
     this.clear();
-  }
-
-  addArgumentsForCheckOverlap(drawableZones) {
-    this.drawableZones = drawableZones;
   }
 
   getOverlaps() {
