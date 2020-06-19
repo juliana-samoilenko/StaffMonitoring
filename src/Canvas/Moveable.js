@@ -37,8 +37,9 @@ export const Moveable = (superClass) => class Moveable extends superClass {
   }
 
   _isEmployeeInsideZone(zone) {
+    const informationAboutOverlap = this.overlaps.get(this.id);
     return zone.name === 
-    this.overlaps.get(this.name) ?
+    informationAboutOverlap.zone ?
     true : false;
   }
 };

@@ -32,10 +32,6 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     return this.id;
   }
 
-  getName() {
-    return this.name;
-  }
-
   draw() {
     super.draw();
     this.update();
