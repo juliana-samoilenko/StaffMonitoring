@@ -1,6 +1,3 @@
-import eventManager from '../renderApp';
-import EMPLOYEE_OVERLAP from '../eventConstants';
-
 // eslint-disable-next-line no-shadow
 export const Moveable = (superClass) => class Moveable extends superClass {
   constructor({ track, currentPointIndex, afterMove, ...objectProperties }, ...dependencies) {
@@ -37,5 +34,11 @@ export const Moveable = (superClass) => class Moveable extends superClass {
 
   _getIndexNextPoint() {
     return (this._currentPointIndex + 1) % this.track.getLength();
+  }
+
+  _checkNameOfOverlappedZoneWithNameCurrentZone(nameCurrentZone) {
+    return nameCurrentZone === 
+    this.overlaps.get(this.drawableEmployee.getName()) ?
+    true : false;
   }
 };
