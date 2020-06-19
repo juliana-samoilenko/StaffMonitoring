@@ -96,15 +96,15 @@ export class Canvas extends Component {
     this.interval = setInterval(checkNewOverlap, 1000);
   }
 
-  checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
+  checkOverlapBetweeenEmployeeAndZone() {
     this.drawableZones.forEach(zone => {
       //проверка, что зона содержит сотрудника
-      if (zone.contains(drawableEmployee) && this.overlaps.size === 0) {
-        this.overlaps.set(this.drawableEmployee.getName(), zone.name );
+      if (zone.contains(this.xCenter, this.yCenter) && this.overlaps.size === 0) {
+        this.overlaps.set(this.getName(), zone.name);
       }
  
       //проверка, что зона не содержит сотрудника
-      else if (!zone.contains(drawableEmployee)) {
+      else if (!zone.contains(this.xCenter, this.yCenter)) {
         if (this._checkNameOfOverlappedZoneWithNameCurrentZone(zone.name)) {
           this.overlaps.clear();
         }
@@ -123,7 +123,7 @@ export class Canvas extends Component {
       track: employeeTrack,
       afterMove: this.checkOverlapBetweeenEmployeeAndZone,
     }, this.two);
-    drawableEmployee.addArgumentsForCheckOverlap(this.drawableZones, drawableEmployee);
+    drawableEmployee.addArgumentsForCheckOverlap(this.drawableZones);
 
     this.employeeListForDrawing.push(drawableEmployee);
 

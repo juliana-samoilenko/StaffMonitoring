@@ -17,7 +17,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);
-      this.afterMove(this.drawableEmployee);
+      this.afterMove();
     };
 
     this.interval = setInterval(moveEmployeeToNextPoint, 1000);
@@ -38,7 +38,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
 
   _checkNameOfOverlappedZoneWithNameCurrentZone(nameCurrentZone) {
     return nameCurrentZone === 
-    this.overlaps.get(this.drawableEmployee.getName()) ?
+    this.overlaps.get(this.name) ?
     true : false;
   }
 };

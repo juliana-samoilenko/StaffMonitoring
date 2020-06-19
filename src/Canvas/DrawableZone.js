@@ -31,10 +31,10 @@ export class DrawableZone extends DrawableRectangle {
     text.size = 14;
   }
 
-  contains(drawableEmployee) {
+  contains(xCenter, yCenter) {
     const { left: xMin, right: xMax, top: yMin, bottom: yMax } = this.rectangle.getBoundingClientRect();
-    const currentXEmployee = drawableEmployee.xCenter;
-    const currentYEmployee = drawableEmployee.yCenter;
+    const currentXEmployee = xCenter;
+    const currentYEmployee = yCenter;
     
     return this._isWithinRange(currentXEmployee, xMin, xMax) && this._isWithinRange(currentYEmployee, yMin, yMax);
   }
