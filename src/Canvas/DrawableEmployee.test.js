@@ -159,6 +159,7 @@ describe('Emloyee class', () => {
         radius: 15,
         color: '#3A19A4',
         track,
+        afterMove: () => {}
       }, two);
       employee.draw = jest.fn();
       jest.useFakeTimers();
@@ -196,6 +197,7 @@ describe('Emloyee class', () => {
         radius: 15,
         color: '#3A19A4',
         track,
+        afterMove: () => {}
       }, two);
       employee.draw = jest.fn();
       jest.useFakeTimers();
