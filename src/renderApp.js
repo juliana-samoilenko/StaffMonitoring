@@ -219,15 +219,16 @@ export const renderApp = async () => {
   })
 
   //VIOLATION
-  canvas.setOverlapHandler(() => {
+  canvas.setOverlapHandler((employee, zone) => {
     eventManager.publish({
       type: EMPLOYEE_OVERLAP,
+      payload: { employee, zone },
     });
   })
 
-  eventManager.subscribe(EMPLOYEE_OVERLAP, () => {
-    console.log('Перекрытие было!');
-  })
+  eventManager.subscribe(EMPLOYEE_OVERLAP, ({ employee, zone }) => {
+    console.log('Перекрытие было!', employee, zone);
+  });
 
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
@@ -263,6 +264,12 @@ export const renderApp = async () => {
         tracksWithOccupiedStatus: tracksWithOccupiedStatus,
       }
     });
+  });
+
+  notifications.setCloseButtonHandler((event) => {
+    const notification = event.target;
+    notification.parentNode.parentNode.classList.add('u-hidden');
+    //удалить нарушение из списка (id?)
   });
 
   //handlers for add employee panel

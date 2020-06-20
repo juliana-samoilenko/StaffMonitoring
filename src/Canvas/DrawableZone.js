@@ -18,6 +18,7 @@ export class DrawableZone extends DrawableRectangle {
     }, two);
     this.id = zone.id;
     this.name = zone.name;
+    this.zone = zone;
   }
 
   draw() {

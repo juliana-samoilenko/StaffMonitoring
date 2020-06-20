@@ -25,6 +25,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.id = employee.id;
     this.name = employee.name;
     this.afterMove = afterMove;
+    this.employee = employee;
   }
 
   getId() {

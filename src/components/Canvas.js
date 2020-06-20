@@ -86,30 +86,28 @@ export class Canvas extends Component {
   }
 
   setOverlapHandler(handler) {
-    const checkNewOverlap = () => {
-      this.employeeListForDrawing.forEach(employee => {
-        if(this.overlaps.has(employee.getId())) {
-          handler();
-        }
-      })
-    } 
-    
-    this.interval = setInterval(checkNewOverlap, 1000);
+    this.handleOverlap = handler;
   }
 
   checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
     const drawableEmployeeId = drawableEmployee.id;
-    this.drawableZones.forEach(zone => {
-      const isEmployeeInZone = zone.contains(drawableEmployee.xCenter, drawableEmployee.yCenter);
+
+    this.drawableZones.forEach(drawableZone => {
+      const isEmployeeInZone = drawableZone.contains(
+        drawableEmployee.xCenter,
+        drawableEmployee.yCenter
+      );
       const isEmployeeInOverlapList = this.isEmployeeInAnyZone(drawableEmployeeId);
 
       if (isEmployeeInZone && !isEmployeeInOverlapList) {
         this.overlaps.set(
           drawableEmployeeId,
-          { name: drawableEmployee.name, zone: zone.name }
+          { name: drawableEmployee.name, zone: drawableZone.name }
         );
+
+        this.handleOverlap(drawableEmployee.employee, drawableZone.zone);
       }
-      else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(zone, drawableEmployeeId)) {
+      else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
         this.overlaps.delete(drawableEmployeeId);
       } 
     });
