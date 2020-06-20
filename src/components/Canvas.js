@@ -30,11 +30,13 @@ export class Canvas extends Component {
     this.two = new Two({
       width: WIDTH_CANVAS,
       height: HEIGHT_CANVAS,
-      domElement: this.getElement() 
+      domElement: this.getElement()
     });
     this.employeeListForDrawing = [];
+    this.drawableZones = [];
+    this.overlaps = new Map();
   }
-  
+
   getTemplate() {
     return createCanvasTemplate(this.data);
   }
@@ -43,11 +45,16 @@ export class Canvas extends Component {
     const elementForDrawing = Object.values(ELEMENTS_BUILDING).flat();
 
     elementForDrawing.forEach((buildingObjectConfigWithType) => {
-    const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
-    const Drawable = buildingObjectsByTypes[buildingObjectType];
+      const { type: buildingObjectType, ...buildingObjectConfig } = buildingObjectConfigWithType;
+      const Drawable = buildingObjectsByTypes[buildingObjectType];
 
-    const drawableObject = new Drawable(buildingObjectConfig, this.two);
-    drawableObject.draw();
+      const drawableObject = new Drawable(buildingObjectConfig, this.two);
+
+      if (buildingObjectType === 'zone') {
+        this.drawableZones.push(drawableObject);
+      }
+
+      drawableObject.draw();
     });
   }
 
@@ -68,18 +75,67 @@ export class Canvas extends Component {
 
   drawEditedEmployee(editedEmployee, tracks) {
     const editedEmployeeId = editedEmployee.id;
+
     this.removeEmployee(editedEmployeeId);
     this.drawNewEmployee(editedEmployee, tracks);
+
+    console.log('Список перекрытий: ', this.overlaps);
   }
 
   removeEmployee(employeeId) {
-    const employeeToRemove = this.employeeListForDrawing.find(employee => employee.getId() === employeeId);
+    const employeeToRemove = this.employeeListForDrawing.find(
+      employee => employee.getId() === employeeId
+    );
     employeeToRemove.remove();
-    this.employeeListForDrawing = this.employeeListForDrawing.filter(employee => employee.getId() !== employeeId);
+
+    if (this.isEmployeeInAnyZone(employeeId)) {
+      this.overlaps.delete(employeeId);
+    }
+
+    this.employeeListForDrawing = this.employeeListForDrawing.filter(
+      employee => employee.getId() !== employeeId
+    );
+  }
+
+  setOverlapHandler(handler) {
+    this.handleOverlap = handler;
+  }
+
+  checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
+    const drawableEmployeeId = drawableEmployee.id;
+
+    this.drawableZones.forEach(drawableZone => {
+      const isEmployeeInZone = drawableZone.contains(
+        drawableEmployee.xCenter,
+        drawableEmployee.yCenter
+      );
+      const isEmployeeInOverlapList = this.isEmployeeInAnyZone(drawableEmployeeId);
+
+      if (isEmployeeInZone && !isEmployeeInOverlapList) {
+        this.overlaps.set(
+          drawableEmployeeId,
+          { zoneId: drawableZone.id }
+        );
+
+        this.handleOverlap(drawableEmployee.employee, drawableZone.zone);
+      }
+      else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
+        this.overlaps.delete(drawableEmployeeId);
+      }
+    });
+  }
+
+  isEmployeeInAnyZone(employeeId) {
+    return this.overlaps.has(employeeId);
+  }
+
+  isEmployeeZone(zone, drawableEmployeeId) {
+    const employeeOverlap = this.overlaps.get(drawableEmployeeId);
+    return employeeOverlap.zoneId === zone.id ? true : false;
   }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
-    const { x: pointX, y: pointY} = employeeTrack.getPoint(0);
+    const { x: pointX, y: pointY } = employeeTrack.getPoint(0);
     const drawableEmployee = new DrawableEmployee({
       employee: employee,
       xCurrent: pointX,
@@ -87,9 +143,10 @@ export class Canvas extends Component {
       radius: EMPLOYEE_RADUIS,
       color: EMPLOYEE_COLOR,
       track: employeeTrack,
+      afterMove: this.checkOverlapBetweeenEmployeeAndZone.bind(this),
     }, this.two);
 
-    this.employeeListForDrawing.push(drawableEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee);
 
     drawableEmployee.draw();
     drawableEmployee.startMovingAlongTrack();
@@ -104,6 +161,6 @@ export class Canvas extends Component {
       color: EMPLOYEE_COLOR,
     }, this.two);
 
-    this.employeeListForDrawing.push(drawableEmployee); 
+    this.employeeListForDrawing.push(drawableEmployee);
   }
 }

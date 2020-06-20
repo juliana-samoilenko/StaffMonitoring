@@ -11,6 +11,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     drawPoint,
     track,
     currentPointIndex,
+    afterMove
   }, two) {
     super({
       xCurrent,
@@ -23,6 +24,8 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.track = track ? track : null;
     this.id = employee.id;
     this.name = employee.name;
+    this.afterMove = afterMove;
+    this.employee = employee;
   }
 
   getId() {

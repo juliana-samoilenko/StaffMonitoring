@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-shadow
 export const Moveable = (superClass) => class Moveable extends superClass {
-  constructor({ track, currentPointIndex, ...objectProperties }, ...dependencies) {
+  constructor({ track, currentPointIndex, afterMove, ...objectProperties }, ...dependencies) {
     super(objectProperties, ...dependencies);
 
     this.track = track;
@@ -16,6 +16,7 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     const moveEmployeeToNextPoint = () => {
       const { x: xNext, y: yNext } = this.getNextPoint();
       this.move(xNext, yNext);
+      this.afterMove(this);
     };
 
     this.interval = setInterval(moveEmployeeToNextPoint, 1000);

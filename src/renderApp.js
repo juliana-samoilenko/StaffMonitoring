@@ -20,6 +20,7 @@ import {
   HIDE_EMPLOYEE_LIST_PANEL,
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
+  EMPLOYEE_OVERLAP
 } from './eventConstants';
 
 const markOccupiedTracks = (employeeList, tracks) => {
@@ -217,6 +218,18 @@ export const renderApp = async () => {
     }
   })
 
+  //VIOLATION
+  canvas.setOverlapHandler((employee, zone) => {
+    eventManager.publish({
+      type: EMPLOYEE_OVERLAP,
+      payload: { employee, zone },
+    });
+  })
+
+  eventManager.subscribe(EMPLOYEE_OVERLAP, ({ employee, zone }) => {
+    console.log('Перекрытие было!', employee, zone);
+  });
+
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
     openEmployeeListPanelButton.hide();
@@ -251,6 +264,12 @@ export const renderApp = async () => {
         tracksWithOccupiedStatus: tracksWithOccupiedStatus,
       }
     });
+  });
+
+  notifications.setCloseButtonHandler((event) => {
+    const notification = event.target;
+    notification.parentNode.parentNode.classList.add('u-hidden');
+    //удалить нарушение из списка (id?)
   });
 
   //handlers for add employee panel

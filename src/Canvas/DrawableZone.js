@@ -18,6 +18,7 @@ export class DrawableZone extends DrawableRectangle {
     }, two);
     this.id = zone.id;
     this.name = zone.name;
+    this.zone = zone;
   }
 
   draw() {
@@ -29,5 +30,17 @@ export class DrawableZone extends DrawableRectangle {
   _writeText() {
     const text = this.two.makeText(this.name, this.xCenter, this.yCenter);
     text.size = 14;
+  }
+
+  contains(xCenter, yCenter) {
+    const { left: xMin, right: xMax, top: yMin, bottom: yMax } = this.rectangle.getBoundingClientRect();
+    const currentXEmployee = xCenter;
+    const currentYEmployee = yCenter;
+    
+    return this._isWithinRange(currentXEmployee, xMin, xMax) && this._isWithinRange(currentYEmployee, yMin, yMax);
+  }
+
+  _isWithinRange(checkedPoint, minValue, maxValue) {
+    return checkedPoint >= minValue && checkedPoint <= maxValue ? true : false;
   }
 }
