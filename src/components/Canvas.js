@@ -78,8 +78,6 @@ export class Canvas extends Component {
 
     this.removeEmployee(editedEmployeeId);
     this.drawNewEmployee(editedEmployee, tracks);
-
-    console.log('Список перекрытий: ', this.overlaps);
   }
 
   removeEmployee(employeeId) {
