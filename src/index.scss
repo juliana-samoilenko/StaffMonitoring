@@ -209,9 +209,12 @@ html {
   @include flex-row;
   width: 220px;
   justify-content: space-between;
+  align-items: center;
 }
 
-.employee__name {}
+.employee__name {
+  width: 170px;
+}
 
 .employee__button-open-edit {
   @include button-reset;
@@ -219,6 +222,7 @@ html {
   height: 15px;
   margin-right: 20px;
   background-image: url(./img/pencil.min.svg);
+  background-repeat: no-repeat;
 
   &:hover {
   background-image: url(./img/pencil-hover.min.svg);
