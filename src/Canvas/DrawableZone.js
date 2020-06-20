@@ -36,7 +36,7 @@ export class DrawableZone extends DrawableRectangle {
     const { left: xMin, right: xMax, top: yMin, bottom: yMax } = this.rectangle.getBoundingClientRect();
     const currentXEmployee = xCenter;
     const currentYEmployee = yCenter;
-    
+
     return this._isWithinRange(currentXEmployee, xMin, xMax) && this._isWithinRange(currentYEmployee, yMin, yMax);
   }
 

@@ -6,6 +6,7 @@ import { OpenEmployeeListPanelButton } from './components/OpenEmployeeListPanelB
 import { EmployeeListPanel } from './components/EmployeeListPanel';
 import { AddEmployeePanel } from './components/AddEmployeePanel';
 import { EditEmployeePanel } from './components/EditEmployeePanel';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   EMPLOYEE_TRACKS,
@@ -20,7 +21,7 @@ import {
   HIDE_EMPLOYEE_LIST_PANEL,
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
-  EMPLOYEE_OVERLAP
+  EMPLOYEE_PERMISSION_VIOLATION
 } from './eventConstants';
 
 const markOccupiedTracks = (employeeList, tracks) => {
@@ -62,11 +63,7 @@ export const renderApp = async () => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
 
-  const violationsList = [
-    { name: 'Миронов И.А', zone: 'Цех 1' },
-    { name: 'Петухов В.П.', zone: 'Высотные работы' },
-    { name: 'Лукин В.Р', zone: 'Цех 1' }
-  ];
+  const violationsList = [];
 
   const employeeApiService = new EmployeeApiService();
   const employeeList = await employeeApiService.getEmployees();
@@ -80,7 +77,7 @@ export const renderApp = async () => {
   canvas.drawEmployeeList(employeeList, EMPLOYEE_TRACKS);
 
   const notifications = new NotificationList({ violationsList });
-  notifications.hide();
+  notifications.show();
   renderComponent(canvasContainer, notifications);
 
   const openEmployeeListPanelButton = new OpenEmployeeListPanelButton();
@@ -106,7 +103,7 @@ export const renderApp = async () => {
     try {
       const employeeListWithNewEmployee = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: employeeListWithNewEmployee });
-    } 
+    }
     catch (error) {
       console.error(error);
     }
@@ -121,9 +118,9 @@ export const renderApp = async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -133,9 +130,9 @@ export const renderApp = async () => {
       const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: newTrackList });
       addEmployeePanel.hide();
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -148,9 +145,9 @@ export const renderApp = async () => {
     try {
       const newEmployeeList = await employeeApiService.getEmployees();
       employeeListPanel.setState({ employeeList: newEmployeeList });
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -160,9 +157,9 @@ export const renderApp = async () => {
       const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
       addEmployeePanel.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
       addEmployeePanel.hide();
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -220,15 +217,20 @@ export const renderApp = async () => {
 
   //VIOLATION
   canvas.setOverlapHandler((employee, zone) => {
-    eventManager.publish({
-      type: EMPLOYEE_OVERLAP,
-      payload: { employee, zone },
-    });
-  })
-
-  eventManager.subscribe(EMPLOYEE_OVERLAP, ({ employee, zone }) => {
-    console.log('Перекрытие было!', employee, zone);
+    if (!employee.permittedZoneIds.includes(zone.id)) {
+      eventManager.publish({
+        type: EMPLOYEE_PERMISSION_VIOLATION,
+        payload: { employee, zone }
+      });
+    }
   });
+
+  eventManager.subscribe(EMPLOYEE_PERMISSION_VIOLATION, (payload) => {
+    const data = new Date();
+    const newViolation = { id: uuidv4(), employeeName: payload.employee.name, zoneName: payload.zone.name, time: data.toLocaleTimeString('ru-RU') };
+    const { violationsList: oldViolations } = notifications.getState();
+    notifications.setState({ violationsList: [...oldViolations, newViolation ] });
+  })
 
   //handler for open employee list button
   openEmployeeListPanelButton.setClickHandler(() => {
@@ -267,9 +269,12 @@ export const renderApp = async () => {
   });
 
   notifications.setCloseButtonHandler((event) => {
-    const notification = event.target;
-    notification.parentNode.parentNode.classList.add('u-hidden');
-    //удалить нарушение из списка (id?)
+    const notificationId = event.target.id;
+    const { violationsList: currentViolations } = notifications.getState();
+
+    const violationListWithoutClosedViolation = currentViolations.filter(violation => violation.id !== notificationId);
+
+    notifications.setState({ violationsList: violationListWithoutClosedViolation });
   });
 
   //handlers for add employee panel
@@ -298,9 +303,9 @@ export const renderApp = async () => {
     addEmployeePanel.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
     addEmployeePanel.clearForm();
 
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -330,9 +335,9 @@ export const renderApp = async () => {
 
       editEmployeePanel.clearForm();
       editEmployeePanel.hide();
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
@@ -355,9 +360,9 @@ export const renderApp = async () => {
 
       editEmployeePanel.setState({ isAwaitingConfirmation: false });
       editEmployeePanel.hide();
-    } 
+    }
     catch(error) {
-      console.error(error);   
+      console.error(error);
     }
   });
 
