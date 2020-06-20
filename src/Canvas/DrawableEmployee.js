@@ -52,8 +52,4 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     this.stopMovingAlongTrack();
     this.clear();
   }
-
-  getOverlaps() {
-    return this.overlaps;
-  }
 }
