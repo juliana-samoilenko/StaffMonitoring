@@ -101,7 +101,7 @@ export class Canvas extends Component {
     const drawableEmployeeId = drawableEmployee.id;
     this.drawableZones.forEach(zone => {
       const isEmployeeInZone = zone.contains(drawableEmployee.xCenter, drawableEmployee.yCenter);
-      const isEmployeeInOverlapList = this.isEmployeeInOverlapList(drawableEmployeeId);
+      const isEmployeeInOverlapList = this.isEmployeeInAnyZone(drawableEmployeeId);
 
       if (isEmployeeInZone && !isEmployeeInOverlapList) {
         this.overlaps.set(
@@ -115,7 +115,7 @@ export class Canvas extends Component {
     });
   }
 
-  isEmployeeInOverlapList(employeeId) {
+  isEmployeeInAnyZone(employeeId) {
     return this.overlaps.has(employeeId);
   }
 
