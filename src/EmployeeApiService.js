@@ -20,9 +20,9 @@ export class EmployeeApiService {
         id: employeeDoc.id,
         ...employeeDoc.data(),
       }));
-  
+
       return employees;
-    } 
+    }
     catch(error) {
       console.error(error);
     }

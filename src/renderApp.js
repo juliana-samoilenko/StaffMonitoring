@@ -1,4 +1,5 @@
 import { EmployeeApiService } from './EmployeeApiService';
+import { TelegramApiService } from './TelegramApiService';
 import { EventManager } from './eventManager';
 import { Canvas } from './components/Canvas';
 import { NotificationList } from './components/NotificationList';
@@ -66,6 +67,7 @@ export const renderApp = async () => {
   const violationsList = [];
 
   const employeeApiService = new EmployeeApiService();
+  const telegramApiService = new TelegramApiService();
   const employeeList = await employeeApiService.getEmployees();
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
@@ -226,9 +228,14 @@ export const renderApp = async () => {
   });
 
   eventManager.subscribe(EMPLOYEE_PERMISSION_VIOLATION, (payload) => {
-    const data = new Date();
-    const newViolation = { id: uuidv4(), employeeName: payload.employee.name, zoneName: payload.zone.name, time: data.toLocaleTimeString('ru-RU') };
+    const time = new Date().toLocaleTimeString('ru-RU');
+    const employeeName = payload.employee.name;
+    const zoneName = payload.zone.name;
+    const newViolation = { id: uuidv4(), employeeName, zoneName, time };
     const { violationsList: oldViolations } = notifications.getState();
+
+    telegramApiService.sendMessage(employeeName, zoneName, time);
+
     notifications.setState({ violationsList: [...oldViolations, newViolation ] });
   })
 
