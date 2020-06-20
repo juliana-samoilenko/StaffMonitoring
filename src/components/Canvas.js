@@ -49,7 +49,7 @@ export class Canvas extends Component {
       const Drawable = buildingObjectsByTypes[buildingObjectType];
 
       const drawableObject = new Drawable(buildingObjectConfig, this.two);
-      
+
       if (buildingObjectType === 'zone') {
         this.drawableZones.push(drawableObject);
       }
@@ -102,14 +102,14 @@ export class Canvas extends Component {
       if (isEmployeeInZone && !isEmployeeInOverlapList) {
         this.overlaps.set(
           drawableEmployeeId,
-          { name: drawableEmployee.name, zone: drawableZone.name }
+          { zoneId: drawableZone.id }
         );
 
         this.handleOverlap(drawableEmployee.employee, drawableZone.zone);
       }
       else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
         this.overlaps.delete(drawableEmployeeId);
-      } 
+      }
     });
   }
 
@@ -119,7 +119,7 @@ export class Canvas extends Component {
 
   isEmployeeZone(zone, drawableEmployeeId) {
     const employeeOverlap = this.overlaps.get(drawableEmployeeId);
-    return employeeOverlap.zone === zone.name ? true : false;
+    return employeeOverlap.zoneId === zone.id ? true : false;
   }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
