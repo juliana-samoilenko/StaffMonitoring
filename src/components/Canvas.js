@@ -75,14 +75,26 @@ export class Canvas extends Component {
 
   drawEditedEmployee(editedEmployee, tracks) {
     const editedEmployeeId = editedEmployee.id;
+
     this.removeEmployee(editedEmployeeId);
     this.drawNewEmployee(editedEmployee, tracks);
+
+    console.log('Список перекрытий: ', this.overlaps);
   }
 
   removeEmployee(employeeId) {
-    const employeeToRemove = this.employeeListForDrawing.find(employee => employee.getId() === employeeId);
+    const employeeToRemove = this.employeeListForDrawing.find(
+      employee => employee.getId() === employeeId
+    );
     employeeToRemove.remove();
-    this.employeeListForDrawing = this.employeeListForDrawing.filter(employee => employee.getId() !== employeeId);
+
+    if (this.isEmployeeInAnyZone(employeeId)) {
+      this.overlaps.delete(employeeId);
+    }
+
+    this.employeeListForDrawing = this.employeeListForDrawing.filter(
+      employee => employee.getId() !== employeeId
+    );
   }
 
   setOverlapHandler(handler) {
