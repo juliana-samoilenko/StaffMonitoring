@@ -6,10 +6,10 @@ const createNotificationItemTemplate = (violation) => `
   <header class="notification__header">
     <img class="notification__img" src="${warningSvg}" arial-role="presentation">
     <p class="notification__text">Внимание!</p>
-    <button class="notification__button-close" type="button" title="Закрыть">&#10006;</button>
+    <button id="${violation.id}" class="notification__button-close js-button-close" type="button" title="Закрыть">&#10006;</button>
   </header>
   <div class="notification__message">
-    ${violation.name} зашёл в зону ${violation.zone}
+    ${violation.employeeName} зашёл в зону ${violation.zoneName} в ${violation.time}
   </div>
 </article>
 `;
@@ -23,5 +23,18 @@ const createNotificationListTemplate = ({ violationsList }) => {
 export class NotificationList extends Component {
   getTemplate() {
     return createNotificationListTemplate(this.data);
+  }
+
+  setCloseButtonHandler(handler) {
+    this.closeButtonHandler = handler;
+    const closeButtons = this.getElement().querySelectorAll('.js-button-close');
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', handler);
+    })
+  }
+
+  recoveryEventListeners() {
+    this.setCloseButtonHandler(this.closeButtonHandler)
   }
 }
