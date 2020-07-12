@@ -8,7 +8,7 @@ describe('Emloyee class', () => {
       // Arrange
       const two = {};
       const track = new EmployeeTrack({ id: 2, points: [] });
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
 
       // Act
       const employee = new DrawableEmployee({
@@ -33,7 +33,7 @@ describe('Emloyee class', () => {
         id: 1,
         points: [{ x: 60, y: 100 }, { x: 700, y: 600 }],
       });
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
       const employee = new DrawableEmployee({
         employee: employeeEntity,
         xCurrent: 50,
@@ -59,7 +59,7 @@ describe('Emloyee class', () => {
       const two = {};
       const x = 300;
       const y = 400;
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
 
       // Act
       const employee = new DrawableEmployee({
@@ -85,7 +85,7 @@ describe('Emloyee class', () => {
         update: jest.fn(),
       };
 
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
       const employee = new DrawableEmployee({
         employee: employeeEntity,
         xCurrent: 50,
@@ -115,7 +115,7 @@ describe('Emloyee class', () => {
         update: jest.fn(),
       };
 
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
       const employee = new DrawableEmployee({
         employee: employeeEntity,
         xCurrent: 50,
@@ -151,7 +151,7 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
       const employee = new DrawableEmployee({
         employee: employeeEntity,
         xCurrent: 50,
@@ -159,7 +159,7 @@ describe('Emloyee class', () => {
         radius: 15,
         color: '#3A19A4',
         track,
-        afterMove: () => {}
+        afterMove: () => {},
       }, two);
       employee.draw = jest.fn();
       jest.useFakeTimers();
@@ -189,7 +189,7 @@ describe('Emloyee class', () => {
         points: [point1, point2, point3],
       });
 
-      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.'});
+      const employeeEntity = createEmployeeEntity({ name: 'Петров С.М.' });
       const employee = new DrawableEmployee({
         employee: employeeEntity,
         xCurrent: 50,
@@ -197,7 +197,7 @@ describe('Emloyee class', () => {
         radius: 15,
         color: '#3A19A4',
         track,
-        afterMove: () => {}
+        afterMove: () => {},
       }, two);
       employee.draw = jest.fn();
       jest.useFakeTimers();

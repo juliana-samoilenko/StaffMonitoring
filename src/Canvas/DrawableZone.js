@@ -10,11 +10,11 @@ export class DrawableZone extends DrawableRectangle {
     color,
   }, two) {
     super({
-    xCenter,
-    yCenter,
-    width,
-    height,
-    color,
+      xCenter,
+      yCenter,
+      width,
+      height,
+      color,
     }, two);
     this.id = zone.id;
     this.name = zone.name;
@@ -33,7 +33,12 @@ export class DrawableZone extends DrawableRectangle {
   }
 
   contains(xCenter, yCenter) {
-    const { left: xMin, right: xMax, top: yMin, bottom: yMax } = this.rectangle.getBoundingClientRect();
+    const {
+      left: xMin,
+      right: xMax,
+      top: yMin,
+      bottom: yMax,
+    } = this.rectangle.getBoundingClientRect();
     const currentXEmployee = xCenter;
     const currentYEmployee = yCenter;
 
@@ -41,6 +46,6 @@ export class DrawableZone extends DrawableRectangle {
   }
 
   _isWithinRange(checkedPoint, minValue, maxValue) {
-    return checkedPoint >= minValue && checkedPoint <= maxValue ? true : false;
+    return checkedPoint >= minValue && checkedPoint <= maxValue;
   }
 }

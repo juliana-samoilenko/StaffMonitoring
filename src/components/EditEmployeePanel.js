@@ -25,26 +25,26 @@ const createTemplateForZoneCheckbox = (zone) => `
 `;
 
 const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
-  const unoccupiedTrackList = cloneDeep(tracks).filter(track => {
+  const unoccupiedTrackList = cloneDeep(tracks).filter((track) => {
     if (!track.isOccupied) {
       return track;
     }
   }).map(createTemplateForTrackOption);
 
-  const currentTrack = cloneDeep(tracks).find(track => track.id == employee.trackId);
+  const currentTrack = cloneDeep(tracks).find((track) => track.id == employee.trackId);
   const emptyTrack = createTemplateForTrackOption();
 
   const baseTrack = currentTrack ? [
-    createTemplateForTrackOption(currentTrack), 
-    emptyTrack
+    createTemplateForTrackOption(currentTrack),
+    emptyTrack,
   ] : [
-    emptyTrack
+    emptyTrack,
   ];
 
   const trackList = [...baseTrack, ...unoccupiedTrackList];
 
   const zonesWithPermittedStatus = markPermittedZones(employee, zones);
-  const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
+  const zonesList = zonesWithPermittedStatus.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
   <div class="employee-edit-panel">
@@ -108,7 +108,7 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingCo
     </div>
   </div>
 `;
-}
+};
 
 export class EditEmployeePanel extends Component {
   getTemplate() {
@@ -164,17 +164,17 @@ export class EditEmployeePanel extends Component {
 
   getEditableEmployeeInformation(employeeId) {
     const form = this.getForm();
-    
+
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
-    const permittedZoneIds = zoneCheckboxes.filter(zoneCheckbox => zoneCheckbox.checked).map(zoneCheckbox => Number(zoneCheckbox.id));
+    const permittedZoneIds = zoneCheckboxes.filter((zoneCheckbox) => zoneCheckbox.checked).map((zoneCheckbox) => Number(zoneCheckbox.id));
     const trackId = Number(form.employeeTrack.value);
 
     return {
       id: employeeId,
-      trackId: trackId ? trackId : null,
+      trackId: trackId || null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
-      permittedZoneIds: permittedZoneIds,
+      permittedZoneIds,
     };
   }
 

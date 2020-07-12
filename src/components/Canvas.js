@@ -19,7 +19,7 @@ const buildingObjectsByTypes = {
   zone: DrawableZone,
 };
 
-const createCanvasTemplate = () =>`
+const createCanvasTemplate = () => `
   <canvas class="work-display__plan js-building-canvas">
   </canvas>
 `;
@@ -30,7 +30,7 @@ export class Canvas extends Component {
     this.two = new Two({
       width: WIDTH_CANVAS,
       height: HEIGHT_CANVAS,
-      domElement: this.getElement()
+      domElement: this.getElement(),
     });
     this.employeeListForDrawing = [];
     this.drawableZones = [];
@@ -59,14 +59,14 @@ export class Canvas extends Component {
   }
 
   drawEmployeeList(employeeList, tracks) {
-    employeeList.forEach(employee => {
+    employeeList.forEach((employee) => {
       this.drawNewEmployee(employee, tracks);
-    })
+    });
   }
 
   drawNewEmployee(newEmployee, tracks) {
     if (newEmployee.trackId) {
-      const employeeTrack = tracks.find(track => track.id === newEmployee.trackId);
+      const employeeTrack = tracks.find((track) => track.id === newEmployee.trackId);
       this._drawEmployeeWithTrack(newEmployee, employeeTrack);
     } else {
       this._drawEmployeeWithoutTrack(newEmployee);
@@ -81,18 +81,14 @@ export class Canvas extends Component {
   }
 
   removeEmployee(employeeId) {
-    const employeeToRemove = this.employeeListForDrawing.find(
-      employee => employee.getId() === employeeId
-    );
+    const employeeToRemove = this.employeeListForDrawing.find((employee) => employee.getId() === employeeId);
     employeeToRemove.remove();
 
     if (this.isEmployeeInAnyZone(employeeId)) {
       this.overlaps.delete(employeeId);
     }
 
-    this.employeeListForDrawing = this.employeeListForDrawing.filter(
-      employee => employee.getId() !== employeeId
-    );
+    this.employeeListForDrawing = this.employeeListForDrawing.filter((employee) => employee.getId() !== employeeId);
   }
 
   setOverlapHandler(handler) {
@@ -102,22 +98,21 @@ export class Canvas extends Component {
   checkOverlapBetweeenEmployeeAndZone(drawableEmployee) {
     const drawableEmployeeId = drawableEmployee.id;
 
-    this.drawableZones.forEach(drawableZone => {
+    this.drawableZones.forEach((drawableZone) => {
       const isEmployeeInZone = drawableZone.contains(
         drawableEmployee.xCenter,
-        drawableEmployee.yCenter
+        drawableEmployee.yCenter,
       );
       const isEmployeeInOverlapList = this.isEmployeeInAnyZone(drawableEmployeeId);
 
       if (isEmployeeInZone && !isEmployeeInOverlapList) {
         this.overlaps.set(
           drawableEmployeeId,
-          { zoneId: drawableZone.id }
+          { zoneId: drawableZone.id },
         );
 
         this.handleOverlap(drawableEmployee.employee, drawableZone.zone);
-      }
-      else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
+      } else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
         this.overlaps.delete(drawableEmployeeId);
       }
     });
@@ -129,13 +124,13 @@ export class Canvas extends Component {
 
   isEmployeeZone(zone, drawableEmployeeId) {
     const employeeOverlap = this.overlaps.get(drawableEmployeeId);
-    return employeeOverlap.zoneId === zone.id ? true : false;
+    return employeeOverlap.zoneId === zone.id;
   }
 
   _drawEmployeeWithTrack(employee, employeeTrack) {
     const { x: pointX, y: pointY } = employeeTrack.getPoint(0);
     const drawableEmployee = new DrawableEmployee({
-      employee: employee,
+      employee,
       xCurrent: pointX,
       yCurrent: pointY,
       radius: EMPLOYEE_RADUIS,
@@ -152,7 +147,7 @@ export class Canvas extends Component {
 
   _drawEmployeeWithoutTrack(employee) {
     const drawableEmployee = new DrawableEmployee({
-      employee: employee,
+      employee,
       xCurrent: -100,
       yCurrent: -100,
       radius: EMPLOYEE_RADUIS,

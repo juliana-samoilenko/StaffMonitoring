@@ -1,6 +1,12 @@
 // eslint-disable-next-line no-shadow
 export const Moveable = (superClass) => class Moveable extends superClass {
-  constructor({ track, currentPointIndex, afterMove, ...objectProperties }, ...dependencies) {
+  constructor({
+    track,
+    currentPointIndex,
+    afterMove,
+    ...objectProperties
+  },
+  ...dependencies) {
     super(objectProperties, ...dependencies);
 
     this.track = track;

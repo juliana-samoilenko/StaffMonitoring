@@ -10,23 +10,22 @@ firebase.initializeApp({
 export class EmployeeApiService {
   constructor() {
     this.database = firebase.firestore();
-    this.employeeCollection = this.database.collection("employees");
+    this.employeeCollection = this.database.collection('employees');
   }
 
   async getEmployees() {
     try {
       const snapshot = await this.employeeCollection.get();
-      const employees = snapshot.docs.map(employeeDoc => ({
+      const employees = snapshot.docs.map((employeeDoc) => ({
         id: employeeDoc.id,
         ...employeeDoc.data(),
       }));
 
       return employees;
-    }
-    catch(error) {
+    } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   async updateEmployee(changedEmployee, originalEmployeeId) {
     await this.employeeCollection.doc(originalEmployeeId).update({
@@ -35,7 +34,7 @@ export class EmployeeApiService {
       trackId: changedEmployee.trackId,
       permittedZoneIds: changedEmployee.permittedZoneIds,
     });
-  };
+  }
 
   async createEmployee(newEmployee) {
     await this.employeeCollection.doc(newEmployee.id).set({
@@ -44,9 +43,9 @@ export class EmployeeApiService {
       trackId: newEmployee.trackId,
       permittedZoneIds: newEmployee.permittedZoneIds,
     });
-  };
+  }
 
   async removeEmployee(employeeToRemove) {
     await this.employeeCollection.doc(employeeToRemove.id).delete();
-  };
+  }
 }

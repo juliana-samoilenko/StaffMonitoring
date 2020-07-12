@@ -9,7 +9,7 @@ export class OpenEmployeeListPanelButton extends Component {
   getTemplate() {
     return createTemplateForOpenEmployeeListButton(this.data);
   }
-  
+
   setClickHandler(handler) {
     this.getElement().addEventListener('click', handler);
   }

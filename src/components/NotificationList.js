@@ -31,10 +31,10 @@ export class NotificationList extends Component {
 
     closeButtons.forEach((button) => {
       button.addEventListener('click', handler);
-    })
+    });
   }
 
   recoveryEventListeners() {
-    this.setCloseButtonHandler(this.closeButtonHandler)
+    this.setCloseButtonHandler(this.closeButtonHandler);
   }
 }
