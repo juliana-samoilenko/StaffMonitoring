@@ -7,46 +7,14 @@ import { OpenEmployeeListPanelButtonContainer } from './components/OpenEmployeeL
 import { EmployeeListPanelContainer } from './components/EmployeeListPanel';
 import { EditEmployeePanelContainer } from './components/EditEmployeePanel';
 import { AddEmployeePanelContainer } from './components/AddEmployeePanel';
+import { cloneDeep } from './Common/utils/cloneDeep';
+import { markOccupiedTracks } from './Common/utils/markOccupiedTracks';
+import { renderComponent } from './Common/utils/renderComponent';
 
 import {
   EMPLOYEE_TRACKS,
   ZONES,
 } from './const';
-
-export const cloneDeep = (array) => JSON.parse(JSON.stringify(array));
-
-export const markOccupiedTracks = (employeeList, tracks) => {
-  const unoccupiedTracks = employeeList.map((employee) => {
-    if (employee.trackId !== null) {
-      return employee.trackId;
-    }
-  });
-
-  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    track.isOccupied = unoccupiedTracks.includes(track.id);
-    return track;
-  });
-
-  return tracksWithEmptyStatus;
-};
-
-const renderComponent = (container, component, position = 'beforeend') => {
-  switch (position) {
-    case 'afterbegin': {
-      container.prepend(component.getElement());
-      break;
-    }
-
-    case 'beforeend': {
-      container.append(component.getElement());
-      break;
-    }
-
-    default: {
-      throw new Error(`Unknown position given ${position}`);
-    }
-  }
-};
 
 export const renderApp = async () => {
   const canvasContainer = document.querySelector('.js-display-building');
@@ -65,7 +33,11 @@ export const renderApp = async () => {
   const canvas = new CanvasContainer({ eventManager, employeeList });
   renderComponent(canvasContainer, canvas);
 
-  const notifications = new NotificationListContainer({ violationsList, eventManager, telegramApiService });
+  const notifications = new NotificationListContainer({
+    violationsList,
+    eventManager,
+    telegramApiService,
+  });
   notifications.show();
   renderComponent(canvasContainer, notifications);
 
