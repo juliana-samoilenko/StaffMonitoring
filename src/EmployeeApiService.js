@@ -1,10 +1,11 @@
-import * as firebase from "firebase/app";
-import "firebase/firestore";
+/* eslint-disable */
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyD-VuCYQOiC6IM1KdOV5wh0EkkWIqNiqzM',
   authDomain: 'graduate-work-7c99e.firebaseapp.com',
-  projectId: 'graduate-work-7c99e'
+  projectId: 'graduate-work-7c99e',
 });
 
 export class EmployeeApiService {
@@ -25,6 +26,7 @@ export class EmployeeApiService {
     } catch (error) {
       console.error(error);
     }
+    return [];
   }
 
   async updateEmployee(changedEmployee, originalEmployeeId) {
@@ -49,3 +51,4 @@ export class EmployeeApiService {
     await this.employeeCollection.doc(employeeToRemove.id).delete();
   }
 }
+

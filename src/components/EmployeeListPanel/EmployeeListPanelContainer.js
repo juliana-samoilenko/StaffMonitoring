@@ -1,6 +1,7 @@
 import { Container } from '../Container';
 import { EmployeeListPanelView } from './EmployeeListPanelView';
-import { markOccupiedTracks, cloneDeep } from '../../renderApp';
+import { markOccupiedTracks } from '../../Common/utils/markOccupiedTracks';
+import { cloneDeep } from '../../Common/utils/cloneDeep';
 
 import {
   HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
@@ -73,9 +74,16 @@ export class EmployeeListPanelContainer extends Container {
 
     this.component.setHandlerForEditPanelOpenButton((event) => {
       const employeeIdForEdit = event.target.id;
-      const employeeForEdit = cloneDeep(this.component.getCurrentEmployeeList().find((employee) => employee.id === employeeIdForEdit));
-      const tracksWithOccupiedStatus = markOccupiedTracks(this.component.getCurrentEmployeeList(), EMPLOYEE_TRACKS);
-  
+      const employeeForEdit = cloneDeep(
+        this.component.getCurrentEmployeeList().find(
+          (employee) => employee.id === employeeIdForEdit,
+        ),
+      );
+      const tracksWithOccupiedStatus = markOccupiedTracks(
+        this.component.getCurrentEmployeeList(),
+        EMPLOYEE_TRACKS,
+      );
+
       eventManager.publish({
         type: OPEN_EDIT_PANEL,
         payload: {
@@ -101,24 +109,4 @@ export class EmployeeListPanelContainer extends Container {
   hide() {
     this.component.hide();
   }
-
-  /*setState(nextData) {
-    this.component.setState(nextData);
-  }
-
-  rerender() {
-    this.component.rerender();
-  }
-
-  removeElement() {
-    this.component.removeElement();
-  }
-
-  isComponentShow() {
-    this.component.isComponentShow();
-  }
-
-  recoveryEventListeners() {
-    this.component.recoveryEventListeners();
-  }*/
 }

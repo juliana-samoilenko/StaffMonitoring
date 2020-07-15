@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Container } from '../Container';
 import { NotificationListView } from './NotificationListView';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   EMPLOYEE_PERMISSION_VIOLATION,
@@ -16,7 +16,9 @@ export class NotificationListContainer extends Container {
       const notificationId = event.target.id;
       const { violationsList: currentViolations } = this.component.getState();
 
-      const violationListWithoutClosedViolation = currentViolations.filter((violation) => violation.id !== notificationId);
+      const violationListWithoutClosedViolation = currentViolations.filter(
+        (violation) => violation.id !== notificationId,
+      );
 
       this.component.setState({ violationsList: violationListWithoutClosedViolation });
     });

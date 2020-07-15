@@ -1,6 +1,6 @@
 import { Container } from '../Container';
 import { EditEmployeePanelView } from './EditEmployeePanelView';
-import { cloneDeep } from '../../renderApp';
+import { cloneDeep } from '../../Common/utils/cloneDeep';
 
 import {
   EMPLOYEE_EDITED,

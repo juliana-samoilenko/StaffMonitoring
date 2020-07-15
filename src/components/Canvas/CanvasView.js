@@ -81,14 +81,18 @@ export class CanvasView extends Component {
   }
 
   removeEmployee(employeeId) {
-    const employeeToRemove = this.employeeListForDrawing.find((employee) => employee.getId() === employeeId);
+    const employeeToRemove = this.employeeListForDrawing.find(
+      (employee) => employee.getId() === employeeId,
+    );
     employeeToRemove.remove();
 
     if (this.isEmployeeInAnyZone(employeeId)) {
       this.overlaps.delete(employeeId);
     }
 
-    this.employeeListForDrawing = this.employeeListForDrawing.filter((employee) => employee.getId() !== employeeId);
+    this.employeeListForDrawing = this.employeeListForDrawing.filter(
+      (employee) => employee.getId() !== employeeId,
+    );
   }
 
   setOverlapHandler(handler) {
@@ -112,7 +116,11 @@ export class CanvasView extends Component {
         );
 
         this.handleOverlap(drawableEmployee.employee, drawableZone.zone);
-      } else if (!isEmployeeInZone && isEmployeeInOverlapList && this.isEmployeeZone(drawableZone, drawableEmployeeId)) {
+      } else if (
+        !isEmployeeInZone
+        && isEmployeeInOverlapList
+        && this.isEmployeeZone(drawableZone, drawableEmployeeId)
+      ) {
         this.overlaps.delete(drawableEmployeeId);
       }
     });

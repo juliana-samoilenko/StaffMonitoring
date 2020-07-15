@@ -42,7 +42,8 @@ export class DrawableZone extends DrawableRectangle {
     const currentXEmployee = xCenter;
     const currentYEmployee = yCenter;
 
-    return this._isWithinRange(currentXEmployee, xMin, xMax) && this._isWithinRange(currentYEmployee, yMin, yMax);
+    return this._isWithinRange(currentXEmployee, xMin, xMax)
+    && this._isWithinRange(currentYEmployee, yMin, yMax);
   }
 
   _isWithinRange(checkedPoint, minValue, maxValue) {

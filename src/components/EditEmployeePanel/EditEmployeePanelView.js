@@ -1,6 +1,6 @@
 import { Component } from '../Component';
 import { createTemplateForCloseButton } from '../CloseButton';
-import { cloneDeep } from '../../renderApp';
+import { cloneDeep } from '../../Common/utils/cloneDeep';
 
 const markPermittedZones = (employee, zones) => {
   const { permittedZoneIds } = employee;
@@ -171,7 +171,9 @@ export class EditEmployeePanelView extends Component {
     const form = this.getForm();
 
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
-    const permittedZoneIds = zoneCheckboxes.filter((zoneCheckbox) => zoneCheckbox.checked).map((zoneCheckbox) => Number(zoneCheckbox.id));
+    const permittedZoneIds = zoneCheckboxes.filter(
+      (zoneCheckbox) => zoneCheckbox.checked,
+    ).map((zoneCheckbox) => Number(zoneCheckbox.id));
     const trackId = Number(form.employeeTrack.value);
 
     return {

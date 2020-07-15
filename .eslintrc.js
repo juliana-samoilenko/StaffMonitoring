@@ -12,6 +12,7 @@ module.exports = {
       "class-methods-use-this": "off",
       "no-underscore-dangle": "off",
       "import/prefer-default-export": "off",
+      "no-param-reassign": "off",
     }, 
     "settings": {
       "import/resolver": "parcel"

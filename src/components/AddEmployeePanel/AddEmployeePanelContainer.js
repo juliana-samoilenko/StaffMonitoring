@@ -81,7 +81,10 @@ export class AddEmployeePanelContainer extends Container {
     this.eventManager.subscribe(EMPLOYEE_REMOVED, async () => {
       try {
         const newEmployeeList = await this.employeeApiService.getEmployees();
-        const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
+        const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(
+          newEmployeeList,
+          EMPLOYEE_TRACKS,
+        );
         this.component.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
         this.component.hide();
       } catch (error) {

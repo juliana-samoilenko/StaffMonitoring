@@ -2,7 +2,7 @@ import Two from 'two.js';
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
-} from 'const';
+} from '../../const';
 import { DrawableRectangle } from './DrawableRectangle';
 
 describe('Check the rendering DrawableRectangle', () => {

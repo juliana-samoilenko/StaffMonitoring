@@ -14,6 +14,10 @@ export const Moveable = (superClass) => class Moveable extends superClass {
     this.interval = null;
   }
 
+  afterMove() {
+    throw new Error('Implement method \'afterMove\' in your derived class!');
+  }
+
   move() {
     throw new Error('Implement method \'move\' in your derived class!');
   }
