@@ -1,12 +1,12 @@
-export const renderComponent = (container, component, position = 'beforeend') => {
+export const renderComponent = (node, component, position = 'beforeend') => {
   switch (position) {
     case 'afterbegin': {
-      container.prepend(component.getElement());
+      node.prepend(component.getElement());
       break;
     }
 
     case 'beforeend': {
-      container.append(component.getElement());
+      node.append(component.getElement());
       break;
     }
 
