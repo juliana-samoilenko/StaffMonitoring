@@ -1,6 +1,6 @@
 import { AddEmployeePanelView } from './AddEmployeePanelView';
 import { Container } from '../Container';
-import { markOccupiedTracks } from '../../renderApp';
+import { markOccupiedTracks } from '../../Common/utils/markOccupiedTracks';
 
 import {
   HIDE_EMPLOYEE_LIST_PANEL,
@@ -93,23 +93,7 @@ export class AddEmployeePanelContainer extends Container {
     });
   }
 
-  getTemplate() {
-    return this.component.getTemplate();
-  }
-
-  getElement() {
-    return this.component.getElement();
-  }
-
-  show() {
-    return this.component.show();
-  }
-
   hide() {
     this.component.hide();
-  }
-
-  isComponentShown() {
-    this.component.isComponentShown();
   }
 }
