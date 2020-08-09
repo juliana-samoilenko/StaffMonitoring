@@ -1,17 +1,7 @@
 import { Component } from '../Component';
 import { createTemplateForCloseButton } from '../CloseButton';
 import { cloneDeep } from '../../Common/utils/cloneDeep';
-
-const markPermittedZones = (employee, zones) => {
-  const { permittedZoneIds } = employee;
-
-  const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => ({
-    ...zone,
-    isPermitted: permittedZoneIds.includes(zone.id),
-  }));
-
-  return zonesWithPermittedStatus;
-};
+import { markPermittedZones } from '../../Core/markPermittedZones';
 
 const createTemplateForTrackOption = (track = undefined) => `
 <option value="${track ? track.id : ''}">${track ? track.name : 'Нет пути'}</option>
