@@ -1,1 +1,1 @@
-export const cloneDeep = (array) => JSON.parse(JSON.stringify(array));
+export const cloneDeep = (serializableObject) => JSON.parse(JSON.stringify(serializableObject));

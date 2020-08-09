@@ -3,7 +3,7 @@ import Two from 'two.js';
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
-} from '../../const';
+} from '../staticCanvasElements';
 
 import { DrawableCircle } from './DrawableCircle';
 

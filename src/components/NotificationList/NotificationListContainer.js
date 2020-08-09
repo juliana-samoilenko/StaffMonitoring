@@ -7,7 +7,7 @@ import {
 } from '../../eventConstants';
 
 export class NotificationListContainer extends Container {
-  constructor({ violationsList, eventManager, telegramApiService }) {
+  constructor({ violationsList }, { eventManager, telegramApiService }) {
     super();
     this.eventManager = eventManager;
     this.telegramApiService = telegramApiService;
@@ -39,17 +39,5 @@ export class NotificationListContainer extends Container {
 
       this.component.setState({ violationsList: [...oldViolations, newViolation] });
     });
-  }
-
-  getTemplate() {
-    return this.component.getTemplate();
-  }
-
-  getElement() {
-    return this.component.getElement();
-  }
-
-  show() {
-    return this.component.show();
   }
 }

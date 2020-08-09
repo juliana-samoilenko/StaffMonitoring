@@ -2,7 +2,7 @@ import Two from 'two.js';
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
-} from '../../const';
+} from '../staticCanvasElements';
 import { DrawableLine } from './DrawableLine';
 
 describe('Check the rendering DrawableLine', () => {

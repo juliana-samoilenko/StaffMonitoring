@@ -3,15 +3,15 @@ export class Container {
     this.component = null;
   }
 
-  setState() {
-    throw new Error();
-  }
-
   getTemplate() {
-    throw new Error();
+    return this.component.getTemplate();
   }
 
   getElement() {
-    throw new Error();
+    return this.component.getElement();
+  }
+
+  show() {
+    return this.component.show();
   }
 }

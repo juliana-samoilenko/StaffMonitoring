@@ -1,5 +1,5 @@
 import { DrawableEmployee } from './DrawableEmployee';
-import { EmployeeTrack } from './EmployeeTrack';
+import { EmployeeTrack } from '../Core/entity/EmployeeTrack';
 import { createEmployeeEntity } from '../Core/entity/EmployeeEntity';
 
 describe('Emloyee class', () => {

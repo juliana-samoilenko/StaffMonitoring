@@ -8,7 +8,7 @@ import {
   HIDE_EMPLOYEE_LIST_PANEL,
   OPEN_EDIT_PANEL,
   OPEN_ADD_PANEL,
-} from '../../eventConstants';
+} from '/eventConstants';
 
 export class EditEmployeePanelContainer extends Container {
   constructor({
@@ -16,9 +16,8 @@ export class EditEmployeePanelContainer extends Container {
     tracks,
     zones,
     isAwaitingConfirmation,
-    eventManager,
-    employeeApiService,
-  }) {
+  },
+  { eventManager, employeeApiService }) {
     super();
     this.eventManager = eventManager;
     this.employeeApiService = employeeApiService;
@@ -106,18 +105,6 @@ export class EditEmployeePanelContainer extends Container {
     this.component.setRejectRemovalButtonHandler(() => {
       this.component.setState({ isAwaitingConfirmation: false });
     });
-  }
-
-  getTemplate() {
-    return this.component.getTemplate();
-  }
-
-  getElement() {
-    return this.component.getElement();
-  }
-
-  show() {
-    return this.component.show();
   }
 
   hide() {

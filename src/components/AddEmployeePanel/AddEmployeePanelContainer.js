@@ -1,6 +1,6 @@
 import { AddEmployeePanelView } from './AddEmployeePanelView';
 import { Container } from '../Container';
-import { markOccupiedTracks } from '../../Common/utils/markOccupiedTracks';
+import { markOccupiedTracks } from '../../Core/markOccupiedTracks';
 
 import {
   HIDE_EMPLOYEE_LIST_PANEL,
@@ -9,27 +9,20 @@ import {
   OPEN_EDIT_PANEL,
   EMPLOYEE_EDITED,
   EMPLOYEE_REMOVED,
-} from '../../eventConstants';
+} from '/eventConstants';
 
 import {
   EMPLOYEE_TRACKS,
-} from '../../const';
+} from '/Canvas/staticCanvasElements';
 
 export class AddEmployeePanelContainer extends Container {
-  constructor({
-    tracks,
-    zones,
-    eventManager,
-    employeeApiService,
-  }) {
+  constructor({ tracks, zones }, { eventManager, employeeApiService }) {
     super();
     this.eventManager = eventManager;
     this.employeeApiService = employeeApiService;
     this.component = new AddEmployeePanelView({ tracks, zones });
-    this.component.setCloseButtonHandler(() => {
-      this.component.clearForm();
-      this.component.hide();
-    });
+
+    this.component.setCloseButtonHandler(this.closePanel);
 
     this.component.setAddEmployeeButtonHandler(async (event) => {
       try {
@@ -95,5 +88,12 @@ export class AddEmployeePanelContainer extends Container {
 
   hide() {
     this.component.hide();
+  }
+
+  closePanel() {
+    console.log(this);
+    console.log(this.component);
+    this.component.clearForm.bind(this);
+    this.component.hide.bind(this);
   }
 }

@@ -1,5 +1,5 @@
 import { createZoneEntity } from '../Core/entity/ZoneEntity';
-import { EmployeeTrack } from './EmployeeTrack';
+import { EmployeeTrack } from '../Core/entity/EmployeeTrack';
 import {
   points1, points2, points3,
   points4, points5,

@@ -9,7 +9,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
     radius,
     color,
     drawPoint,
-    track,
+    track = null,
     currentPointIndex,
     afterMove,
   }, two) {
@@ -21,7 +21,7 @@ export class DrawableEmployee extends Moveable(DrawableCircle) {
       drawPoint,
       currentPointIndex,
     }, two);
-    this.track = track || null;
+    this.track = track;
     this.id = employee.id;
     this.name = employee.name;
     this.afterMove = afterMove;

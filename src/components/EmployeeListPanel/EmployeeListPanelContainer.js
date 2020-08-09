@@ -1,6 +1,6 @@
 import { Container } from '../Container';
 import { EmployeeListPanelView } from './EmployeeListPanelView';
-import { markOccupiedTracks } from '../../Common/utils/markOccupiedTracks';
+import { markOccupiedTracks } from '../../Core/markOccupiedTracks';
 import { cloneDeep } from '../../Common/utils/cloneDeep';
 
 import {
@@ -11,18 +11,14 @@ import {
   EMPLOYEE_ADDED,
   EMPLOYEE_EDITED,
   EMPLOYEE_REMOVED,
-} from '../../eventConstants';
+} from '/eventConstants';
 
 import {
   EMPLOYEE_TRACKS,
-} from '../../const';
+} from '/Canvas/staticCanvasElements';
 
 export class EmployeeListPanelContainer extends Container {
-  constructor({
-    employeeList,
-    eventManager,
-    employeeApiService,
-  }) {
+  constructor({ employeeList }, { eventManager, employeeApiService }) {
     super();
     this.eventManager = eventManager;
     this.employeeApiService = employeeApiService;
@@ -92,18 +88,6 @@ export class EmployeeListPanelContainer extends Container {
         },
       });
     });
-  }
-
-  getTemplate() {
-    return this.component.getTemplate();
-  }
-
-  getElement() {
-    return this.component.getElement();
-  }
-
-  show() {
-    return this.component.show();
   }
 
   hide() {

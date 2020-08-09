@@ -11,7 +11,7 @@ import {
   ELEMENTS_BUILDING,
   EMPLOYEE_COLOR,
   EMPLOYEE_RADUIS,
-} from '../../const';
+} from '/Canvas/staticCanvasElements';
 
 const buildingObjectsByTypes = {
   wall: DrawableWall,

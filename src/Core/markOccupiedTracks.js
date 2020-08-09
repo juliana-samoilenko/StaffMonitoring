@@ -1,4 +1,4 @@
-import { cloneDeep } from './cloneDeep';
+import { cloneDeep } from '../Common/utils/cloneDeep';
 
 export const markOccupiedTracks = (employeeList, tracks) => {
   const unoccupiedTracks = employeeList.map((employee) => {
@@ -7,10 +7,10 @@ export const markOccupiedTracks = (employeeList, tracks) => {
     }
   });
 
-  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => {
-    track.isOccupied = unoccupiedTracks.includes(track.id);
-    return track;
-  });
+  const tracksWithEmptyStatus = cloneDeep(tracks).map((track) => ({
+    ...track,
+    isOccupied: unoccupiedTracks.includes(track.id),
+  }));
 
   return tracksWithEmptyStatus;
 };

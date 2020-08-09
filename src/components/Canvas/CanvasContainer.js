@@ -6,14 +6,14 @@ import {
   EMPLOYEE_ADDED,
   EMPLOYEE_EDITED,
   EMPLOYEE_REMOVED,
-} from '../../eventConstants';
+} from '/eventConstants';
 
 import {
   EMPLOYEE_TRACKS,
-} from '../../const';
+} from '/Canvas/staticCanvasElements';
 
 export class CanvasContainer extends Container {
-  constructor({ eventManager, employeeList }) {
+  constructor({ employeeList }, { eventManager }) {
     super();
     this.eventManager = eventManager;
     this.employeeList = employeeList;
@@ -41,18 +41,6 @@ export class CanvasContainer extends Container {
     this.eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
       this.component.removeEmployee(payload.currentEmployeeId);
     });
-  }
-
-  getTemplate() {
-    return this.component.getTemplate();
-  }
-
-  getElement() {
-    return this.component.getElement();
-  }
-
-  show() {
-    return this.component.show();
   }
 
   drawElementsBuilding() {

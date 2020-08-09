@@ -10,9 +10,9 @@
     "lint:js": "eslint --fix ./src/"
   },
   "jest": {
-    "modulePaths": [
-      "<rootDir>/src"
-    ]
+    "rootDir": "./src/",
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "bower_components", "src"]
   },
   "repository": {
     "type": "git",

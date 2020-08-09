@@ -8,18 +8,17 @@ import { EmployeeListPanelContainer } from './components/EmployeeListPanel';
 import { EditEmployeePanelContainer } from './components/EditEmployeePanel';
 import { AddEmployeePanelContainer } from './components/AddEmployeePanel';
 import { cloneDeep } from './Common/utils/cloneDeep';
-import { markOccupiedTracks } from './Common/utils/markOccupiedTracks';
+import { markOccupiedTracks } from './Core/markOccupiedTracks';
 import { renderComponent } from './Common/utils/renderComponent';
 
 import {
   EMPLOYEE_TRACKS,
   ZONES,
-} from './const';
+} from '/Canvas/staticCanvasElements';
 
 export const renderApp = async () => {
   const canvasContainer = document.querySelector('.js-display-building');
   const employeeInformationPanel = document.querySelector('.js-employee-information-panel');
-
   const violationsList = [];
 
   const employeeApiService = new EmployeeApiService();
@@ -28,16 +27,14 @@ export const renderApp = async () => {
   const employeeList = await employeeApiService.getEmployees();
   const tracks = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
   const zones = cloneDeep(ZONES);
-  const employee = { trackId: null, permittedZoneIds: [] };
 
-  const canvas = new CanvasContainer({ eventManager, employeeList });
+  const canvas = new CanvasContainer({ employeeList }, { eventManager });
   renderComponent(canvasContainer, canvas);
 
-  const notifications = new NotificationListContainer({
-    violationsList,
-    eventManager,
-    telegramApiService,
-  });
+  const notifications = new NotificationListContainer(
+    { violationsList },
+    { eventManager, telegramApiService },
+  );
   notifications.show();
   renderComponent(canvasContainer, notifications);
 
@@ -45,31 +42,28 @@ export const renderApp = async () => {
   openEmployeeListPanelButton.show();
   renderComponent(employeeInformationPanel, openEmployeeListPanelButton);
 
-  const employeeListPanel = new EmployeeListPanelContainer({
-    employeeList,
-    eventManager,
-    employeeApiService,
-  });
+  const employeeListPanel = new EmployeeListPanelContainer(
+    { employeeList },
+    { eventManager, employeeApiService },
+  );
   employeeListPanel.hide();
   renderComponent(employeeInformationPanel, employeeListPanel);
 
-  const addEmployeePanel = new AddEmployeePanelContainer({
-    tracks,
-    zones,
-    eventManager,
-    employeeApiService,
-  });
+  const addEmployeePanel = new AddEmployeePanelContainer(
+    { tracks, zones },
+    { eventManager, employeeApiService },
+  );
   addEmployeePanel.hide();
   renderComponent(employeeInformationPanel, addEmployeePanel);
 
-  const editEmployeePanel = new EditEmployeePanelContainer({
-    employee,
-    tracks,
-    zones,
-    isAwaitingConfirmation: false,
-    eventManager,
-    employeeApiService,
-  });
+  const editEmployeePanel = new EditEmployeePanelContainer(
+    {
+      tracks,
+      zones,
+      isAwaitingConfirmation: false,
+    },
+    { eventManager, employeeApiService },
+  );
   editEmployeePanel.hide();
   renderComponent(employeeInformationPanel, editEmployeePanel);
 };
