@@ -19,70 +19,27 @@ export class AddEmployeePanelContainer extends Container {
   constructor({ tracks, zones }, { eventManager, employeeApiService }) {
     super();
     this.eventManager = eventManager;
+    this.zones = zones;
     this.employeeApiService = employeeApiService;
     this.component = new AddEmployeePanelView({ tracks, zones });
 
-    this.component.setCloseButtonHandler(this.closePanel);
-
-    this.component.setAddEmployeeButtonHandler(async (event) => {
-      try {
-        event.preventDefault();
-        const newEmployee = this.component.getNewEmployee();
-        await this.employeeApiService.createEmployee(newEmployee);
-        eventManager.publish({
-          type: EMPLOYEE_ADDED,
-          payload: {
-            newEmployee,
-          },
-        });
-        const employeeList = await this.employeeApiService.getEmployees();
-        const tracksWithoutAddedEmployeeTrack = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
-        this.component.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones });
-        this.component.clearForm();
-      } catch (error) {
-        console.error(error);
-      }
-    });
+    this.component.setCloseButtonHandler(this.closePanel.bind(this));
+    this.component.setAddEmployeeButtonHandler(this.addEmployee.bind(this));
 
     this.eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
-      if (this.component.isComponentShown()) {
-        this.component.hide();
-      }
+      this.handleHideEmployeeListPanel();
     });
-
     this.eventManager.subscribe(OPEN_ADD_PANEL, () => {
-      this.component.show();
+      this.handleOpenAddPanel();
     });
-
     this.eventManager.subscribe(OPEN_EDIT_PANEL, () => {
-      if (this.component.isComponentShown) {
-        this.component.hide();
-      }
+      this.handleOpenEditPanel();
     });
-
-    this.eventManager.subscribe(EMPLOYEE_EDITED, async () => {
-      try {
-        const newEmployeeList = await this.employeeApiService.getEmployees();
-        const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
-        this.component.setState({ tracks: newTrackList });
-        this.component.hide();
-      } catch (error) {
-        console.error(error);
-      }
+    this.eventManager.subscribe(EMPLOYEE_EDITED, () => {
+      this.handleEditedEmployee();
     });
-
-    this.eventManager.subscribe(EMPLOYEE_REMOVED, async () => {
-      try {
-        const newEmployeeList = await this.employeeApiService.getEmployees();
-        const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(
-          newEmployeeList,
-          EMPLOYEE_TRACKS,
-        );
-        this.component.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
-        this.component.hide();
-      } catch (error) {
-        console.error(error);
-      }
+    this.eventManager.subscribe(EMPLOYEE_REMOVED, () => {
+      this.handleEmployeeRemoved();
     });
   }
 
@@ -91,9 +48,68 @@ export class AddEmployeePanelContainer extends Container {
   }
 
   closePanel() {
-    console.log(this);
-    console.log(this.component);
-    this.component.clearForm.bind(this);
-    this.component.hide.bind(this);
+    this.component.clearForm();
+    this.component.hide();
+  }
+
+  async addEmployee(event) {
+    try {
+      event.preventDefault();
+      const newEmployee = this.component.getNewEmployee();
+      await this.employeeApiService.createEmployee(newEmployee);
+      this.eventManager.publish({
+        type: EMPLOYEE_ADDED,
+        payload: {
+          newEmployee,
+        },
+      });
+      const employeeList = await this.employeeApiService.getEmployees();
+      const tracksWithoutAddedEmployeeTrack = markOccupiedTracks(employeeList, EMPLOYEE_TRACKS);
+      this.component.setState({ tracks: tracksWithoutAddedEmployeeTrack, zones: this.zones });
+      this.component.clearForm();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  handleHideEmployeeListPanel() {
+    if (this.component.isComponentShown()) {
+      this.component.hide();
+    }
+  }
+
+  handleOpenAddPanel() {
+    this.component.show();
+  }
+
+  handleOpenEditPanel() {
+    if (this.component.isComponentShown) {
+      this.component.hide();
+    }
+  }
+
+  async handleEditedEmployee() {
+    try {
+      const newEmployeeList = await this.employeeApiService.getEmployees();
+      const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
+      this.component.setState({ tracks: newTrackList });
+      this.component.hide();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handleEmployeeRemoved() {
+    try {
+      const newEmployeeList = await this.employeeApiService.getEmployees();
+      const tracksWithoutRemovedEmployeeTrack = markOccupiedTracks(
+        newEmployeeList,
+        EMPLOYEE_TRACKS,
+      );
+      this.component.setState({ tracks: tracksWithoutRemovedEmployeeTrack });
+      this.component.hide();
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

@@ -24,73 +24,92 @@ export class EmployeeListPanelContainer extends Container {
     this.employeeApiService = employeeApiService;
     this.component = new EmployeeListPanelView({ employeeList });
 
-    this.eventManager.subscribe(HIDE_OPEN_EMPLOYEE_LIST_BUTTON, () => {
-      this.component.show();
-    });
-
-    this.eventManager.subscribe(EMPLOYEE_ADDED, async () => {
-      try {
-        const employeeListWithNewEmployee = await this.employeeApiService.getEmployees();
-        this.component.setState({ employeeList: employeeListWithNewEmployee });
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    this.eventManager.subscribe(EMPLOYEE_EDITED, async () => {
-      try {
-        const newEmployeeList = await this.employeeApiService.getEmployees();
-        this.component.setState({ employeeList: newEmployeeList });
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    this.eventManager.subscribe(EMPLOYEE_REMOVED, async () => {
-      try {
-        const newEmployeeList = await this.employeeApiService.getEmployees();
-        this.component.setState({ employeeList: newEmployeeList });
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    this.component.setCloseButtonHandler(() => {
-      this.component.hide();
-      eventManager.publish({
-        type: HIDE_EMPLOYEE_LIST_PANEL,
-      });
-    });
-
-    this.component.setHandlerForAddPanelOpenButton(() => {
-      eventManager.publish({
-        type: OPEN_ADD_PANEL,
-      });
-    });
-
+    this.component.setCloseButtonHandler(this.closePanel.bind(this));
+    this.component.setHandlerForAddPanelOpenButton(this.openAddPanel.bind(this));
     this.component.setHandlerForEditPanelOpenButton((event) => {
-      const employeeIdForEdit = event.target.id;
-      const employeeForEdit = cloneDeep(
-        this.component.getCurrentEmployeeList().find(
-          (employee) => employee.id === employeeIdForEdit,
-        ),
-      );
-      const tracksWithOccupiedStatus = markOccupiedTracks(
-        this.component.getCurrentEmployeeList(),
-        EMPLOYEE_TRACKS,
-      );
+      this.openEditPanel(event);
+    });
 
-      eventManager.publish({
-        type: OPEN_EDIT_PANEL,
-        payload: {
-          employeeForEdit,
-          tracksWithOccupiedStatus,
-        },
-      });
+    this.eventManager.subscribe(HIDE_OPEN_EMPLOYEE_LIST_BUTTON, () => {
+      this.handlerHideOpenEmployeeListButton();
+    });
+    this.eventManager.subscribe(EMPLOYEE_ADDED, () => {
+      this.handlerEmployeeAdded();
+    });
+    this.eventManager.subscribe(EMPLOYEE_EDITED, () => {
+      this.handlerEmployeeEdited();
+    });
+    this.eventManager.subscribe(EMPLOYEE_REMOVED, () => {
+      this.handlerEmployeeRemoved();
     });
   }
 
   hide() {
     this.component.hide();
+  }
+
+  closePanel() {
+    this.component.hide();
+    this.eventManager.publish({
+      type: HIDE_EMPLOYEE_LIST_PANEL,
+    });
+  }
+
+  openAddPanel() {
+    this.eventManager.publish({
+      type: OPEN_ADD_PANEL,
+    });
+  }
+
+  openEditPanel(event) {
+    const employeeIdForEdit = event.target.id;
+    const employeeForEdit = cloneDeep(
+      this.component.getCurrentEmployeeList().find(
+        (employee) => employee.id === employeeIdForEdit,
+      ),
+    );
+    const tracksWithOccupiedStatus = markOccupiedTracks(
+      this.component.getCurrentEmployeeList(),
+      EMPLOYEE_TRACKS,
+    );
+
+    this.eventManager.publish({
+      type: OPEN_EDIT_PANEL,
+      payload: {
+        employeeForEdit,
+        tracksWithOccupiedStatus,
+      },
+    });
+  }
+
+  handlerHideOpenEmployeeListButton() {
+    this.component.show();
+  }
+
+  async handlerEmployeeAdded() {
+    try {
+      const employeeListWithNewEmployee = await this.employeeApiService.getEmployees();
+      this.component.setState({ employeeList: employeeListWithNewEmployee });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handlerEmployeeEdited() {
+    try {
+      const employeeListWithNewEmployee = await this.employeeApiService.getEmployees();
+      this.component.setState({ employeeList: employeeListWithNewEmployee });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handlerEmployeeRemoved() {
+    try {
+      const newEmployeeList = await this.employeeApiService.getEmployees();
+      this.component.setState({ employeeList: newEmployeeList });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
