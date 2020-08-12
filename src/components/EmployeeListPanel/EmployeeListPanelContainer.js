@@ -31,16 +31,16 @@ export class EmployeeListPanelContainer extends Container {
     });
 
     this.eventManager.subscribe(HIDE_OPEN_EMPLOYEE_LIST_BUTTON, () => {
-      this.handlerHideOpenEmployeeListButton();
+      this.handleHideOpenEmployeeListButton();
     });
     this.eventManager.subscribe(EMPLOYEE_ADDED, () => {
-      this.handlerEmployeeAdded();
+      this.handleEmployeeAdded();
     });
     this.eventManager.subscribe(EMPLOYEE_EDITED, () => {
-      this.handlerEmployeeEdited();
+      this.handleEmployeeEdited();
     });
     this.eventManager.subscribe(EMPLOYEE_REMOVED, () => {
-      this.handlerEmployeeRemoved();
+      this.handleEmployeeRemoved();
     });
   }
 
@@ -82,11 +82,11 @@ export class EmployeeListPanelContainer extends Container {
     });
   }
 
-  handlerHideOpenEmployeeListButton() {
+  handleHideOpenEmployeeListButton() {
     this.component.show();
   }
 
-  async handlerEmployeeAdded() {
+  async handleEmployeeAdded() {
     try {
       const employeeListWithNewEmployee = await this.employeeApiService.getEmployees();
       this.component.setState({ employeeList: employeeListWithNewEmployee });
@@ -95,7 +95,7 @@ export class EmployeeListPanelContainer extends Container {
     }
   }
 
-  async handlerEmployeeEdited() {
+  async handleEmployeeEdited() {
     try {
       const employeeListWithNewEmployee = await this.employeeApiService.getEmployees();
       this.component.setState({ employeeList: employeeListWithNewEmployee });
@@ -104,7 +104,7 @@ export class EmployeeListPanelContainer extends Container {
     }
   }
 
-  async handlerEmployeeRemoved() {
+  async handleEmployeeRemoved() {
     try {
       const newEmployeeList = await this.employeeApiService.getEmployees();
       this.component.setState({ employeeList: newEmployeeList });

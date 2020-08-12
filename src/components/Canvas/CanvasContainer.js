@@ -22,17 +22,17 @@ export class CanvasContainer extends Container {
     this.component.drawEmployeeList(this.employeeList, EMPLOYEE_TRACKS);
 
     this.component.setOverlapHandler((employee, zone) => {
-      this.overlapOfZone(employee, zone);
+      this.handleEmployeeEnteringZone(employee, zone);
     });
 
     this.eventManager.subscribe(EMPLOYEE_ADDED, (payload) => {
-      this.handlerEmployeeAdded(payload);
+      this.handleEmployeeAdded(payload);
     });
     this.eventManager.subscribe(EMPLOYEE_EDITED, (payload) => {
-      this.handlerEmployeeEdited(payload);
+      this.handleEmployeeEdited(payload);
     });
     this.eventManager.subscribe(EMPLOYEE_REMOVED, (payload) => {
-      this.handlerEmloyeeRemoved(payload);
+      this.handleEmloyeeRemoved(payload);
     });
   }
 
@@ -44,7 +44,7 @@ export class CanvasContainer extends Container {
     return this.component.drawEmployeeList(employeeList, EMPLOYEE_TRACKS);
   }
 
-  overlapOfZone(employee, zone) {
+  handleEmployeeEnteringZone(employee, zone) {
     if (!employee.permittedZoneIds.includes(zone.id)) {
       this.eventManager.publish({
         type: EMPLOYEE_PERMISSION_VIOLATION,
@@ -53,15 +53,15 @@ export class CanvasContainer extends Container {
     }
   }
 
-  handlerEmployeeAdded(payload) {
+  handleEmployeeAdded(payload) {
     this.component.drawNewEmployee(payload.newEmployee, EMPLOYEE_TRACKS);
   }
 
-  handlerEmployeeEdited(payload) {
+  handleEmployeeEdited(payload) {
     this.component.drawEditedEmployee(payload.changedEmployee, EMPLOYEE_TRACKS);
   }
 
-  handlerEmloyeeRemoved(payload) {
+  handleEmloyeeRemoved(payload) {
     this.component.removeEmployee(payload.currentEmployeeId);
   }
 }

@@ -34,20 +34,20 @@ export class EditEmployeePanelContainer extends Container {
     });
     this.component.setAcceptRemovalButtonHandler(this.acceptRemovalEmployee.bind(this));
     this.component.setConfirmationButtonRemoveEmployeeHandler(() => {
-      this.confirmationRemoveEmployee();
+      this.confirmRemoveEmployee();
     });
     this.component.setRejectRemovalButtonHandler(() => {
       this.rejectRemoveEmployee();
     });
 
     this.eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
-      this.handlerHideEmployeeListPanel();
+      this.handleHideEmployeeListPanel();
     });
     this.eventManager.subscribe(OPEN_EDIT_PANEL, (payload) => {
-      this.handlereOpenEditPanel(payload);
+      this.handleOpenEditPanel(payload);
     });
     this.eventManager.subscribe(OPEN_ADD_PANEL, () => {
-      this.handlerOpenAddPanel();
+      this.handleOpenAddPanel();
     });
   }
 
@@ -105,7 +105,7 @@ export class EditEmployeePanelContainer extends Container {
     }
   }
 
-  confirmationRemoveEmployee() {
+  confirmRemoveEmployee() {
     this.component.setState({ isAwaitingConfirmation: true });
   }
 
@@ -113,13 +113,13 @@ export class EditEmployeePanelContainer extends Container {
     this.component.setState({ isAwaitingConfirmation: false });
   }
 
-  handlerHideEmployeeListPanel() {
+  handleHideEmployeeListPanel() {
     if (this.component.isComponentShown) {
       this.component.hide();
     }
   }
 
-  handlereOpenEditPanel(payload) {
+  handleOpenEditPanel(payload) {
     this.component.show();
     this.component.setState({
       employee: payload.employeeForEdit,
@@ -127,7 +127,7 @@ export class EditEmployeePanelContainer extends Container {
     });
   }
 
-  handlerOpenAddPanel() {
+  handleOpenAddPanel() {
     if (this.component.isComponentShown) {
       this.component.hide();
     }

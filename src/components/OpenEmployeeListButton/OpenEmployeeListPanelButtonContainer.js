@@ -11,21 +11,21 @@ export class OpenEmployeeListPanelButtonContainer extends Container {
     super();
     this.eventManager = eventManager;
     this.component = new OpenEmployeeListPanelButtonView({ eventManager });
-    this.component.setClickHandler(this.handlerHideOpenEmployeeListButton.bind(this));
+    this.component.setClickHandler(this.handleHideOpenEmployeeListButton.bind(this));
 
     this.eventManager.subscribe(HIDE_EMPLOYEE_LIST_PANEL, () => {
-      this.handlerShowOpenEmployeeListButton();
+      this.handleShowOpenEmployeeListButton();
     });
   }
 
-  handlerHideOpenEmployeeListButton() {
+  handleHideOpenEmployeeListButton() {
     this.component.hide();
     this.eventManager.publish({
       type: HIDE_OPEN_EMPLOYEE_LIST_BUTTON,
     });
   }
 
-  handlerShowOpenEmployeeListButton() {
+  handleShowOpenEmployeeListButton() {
     this.component.show();
   }
 }
