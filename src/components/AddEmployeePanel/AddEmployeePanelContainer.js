@@ -36,7 +36,7 @@ export class AddEmployeePanelContainer extends Container {
       this.handleOpenEditPanel();
     });
     this.eventManager.subscribe(EMPLOYEE_EDITED, () => {
-      this.handleEditedEmployee();
+      this.handleEmployeeEdited();
     });
     this.eventManager.subscribe(EMPLOYEE_REMOVED, () => {
       this.handleEmployeeRemoved();
@@ -88,7 +88,7 @@ export class AddEmployeePanelContainer extends Container {
     }
   }
 
-  async handleEditedEmployee() {
+  async handleEmployeeEdited() {
     try {
       const newEmployeeList = await this.employeeApiService.getEmployees();
       const newTrackList = markOccupiedTracks(newEmployeeList, EMPLOYEE_TRACKS);
