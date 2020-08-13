@@ -1,11 +1,21 @@
 // eslint-disable-next-line no-shadow
 export const Moveable = (superClass) => class Moveable extends superClass {
-  constructor({ track, currentPointIndex, afterMove, ...objectProperties }, ...dependencies) {
+  constructor({
+    track,
+    currentPointIndex,
+    afterMove,
+    ...objectProperties
+  },
+  ...dependencies) {
     super(objectProperties, ...dependencies);
 
     this.track = track;
     this._currentPointIndex = 0;
     this.interval = null;
+  }
+
+  afterMove() {
+    throw new Error('Implement method \'afterMove\' in your derived class!');
   }
 
   move() {

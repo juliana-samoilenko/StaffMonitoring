@@ -1,9 +1,9 @@
 export const createZoneEntity = ({
   id,
   name,
-  isPermitted
+  isPermitted,
 }) => ({
   id,
   name,
-  isPermitted
+  isPermitted,
 });

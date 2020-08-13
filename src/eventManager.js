@@ -8,19 +8,19 @@ export class EventManager {
   subscribe(eventType, subscriberCallback) {
     this.subscribers = [
       ...this.subscribers,
-      { 
+      {
         id: uuidv4(),
         type: eventType,
-        callback: subscriberCallback 
-      }
-    ]
+        callback: subscriberCallback,
+      },
+    ];
   }
 
   publish(event) {
     const { type, payload } = event;
     const singleTypeSubscribers = this.subscribers.filter(
-      subscriber => subscriber.type === type
+      (subscriber) => subscriber.type === type,
     );
-    singleTypeSubscribers.forEach(subscriber => subscriber.callback(payload));
+    singleTypeSubscribers.forEach((subscriber) => subscriber.callback(payload));
   }
 }

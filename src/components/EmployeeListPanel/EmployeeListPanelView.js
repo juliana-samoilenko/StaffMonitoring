@@ -1,5 +1,5 @@
-import { Component } from './Component';
-import { createTemplateForCloseButton } from './CloseButton';
+import { Component } from '../Component';
+import { createTemplateForCloseButton } from '../CloseButton';
 
 const createTemplateForEmployeeListItem = (employee, listNumber) => `
 <li class="employees-list__item employee js-employees-list__item">
@@ -35,7 +35,7 @@ const createTemplateForEmployeePanel = ({ employeeList }) => {
   `;
 };
 
-export class EmployeeListPanel extends Component {
+export class EmployeeListPanelView extends Component {
   getTemplate() {
     return createTemplateForEmployeePanel(this.data);
   }
@@ -60,10 +60,10 @@ export class EmployeeListPanel extends Component {
     this.openButtonForEditPanel = handler;
 
     const editButtons = this.getElement().querySelectorAll('.js-open-edit-panel');
-    
+
     editButtons.forEach((button) => {
       button.addEventListener('click', handler);
-    }) 
+    });
   }
 
   recoveryEventListeners() {

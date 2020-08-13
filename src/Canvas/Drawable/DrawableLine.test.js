@@ -1,13 +1,12 @@
 import Two from 'two.js';
-import { DrawableLine } from './DrawableLine';
 import {
   WIDTH_CANVAS,
   HEIGHT_CANVAS,
-} from 'const';
+} from '../staticCanvasElements';
+import { DrawableLine } from './DrawableLine';
 
 describe('Check the rendering DrawableLine', () => {
   describe('Add a line to canvas', () => {
-
     it('Draw line with xStart = 0, yStart = 0 and xEnd = 100, yEnd = 100 having thickness = 5 and white color', () => {
       const canvas = document.createElement('canvas');
       const two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvas });
@@ -25,7 +24,7 @@ describe('Check the rendering DrawableLine', () => {
 
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
-    
+
     it('Draw line with xStart = 300, yStart = 200 and xEnd = 350, yEnd = 205 having thickness = 15 and red color', () => {
       const canvas = document.createElement('canvas');
       const two = new Two({ width: WIDTH_CANVAS, height: HEIGHT_CANVAS, domElement: canvas });
@@ -37,10 +36,10 @@ describe('Check the rendering DrawableLine', () => {
         thickness: 15,
         color: 'red',
       }, two);
-  
+
       line.draw();
       line.update();
-  
+
       expect(canvas.toDataURL()).toMatchSnapshot();
     });
 

@@ -10,9 +10,9 @@
     "lint:js": "eslint --fix ./src/"
   },
   "jest": {
-    "modulePaths": [
-      "<rootDir>/src"
-    ]
+    "rootDir": "./src/",
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "bower_components", "src"]
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
   "homepage": "https://github.com/Lyashka/StaffMonitoring#readme",
   "dependencies": {
     "firebase": "^7.15.1",
-    "two.js": "^0.7.0-stable.1"
+    "two.js": "^0.7.0-stable.1",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -40,7 +41,6 @@
     "eslint-plugin-import": "^2.20.1",
     "jest": "^26.0.1",
     "parcel-bundler": "^1.12.4",
-    "sass": "^1.26.3",
-    "uuid": "^8.1.0"
+    "sass": "^1.26.3"
   }
 }

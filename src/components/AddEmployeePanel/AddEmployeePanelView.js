@@ -1,6 +1,6 @@
-import { Component } from './Component';
-import { createTemplateForCloseButton } from './CloseButton';
-import { createEmployeeEntity } from '../Core/entity/EmployeeEntity';
+import { Component } from '../Component';
+import { createTemplateForCloseButton } from '../CloseButton';
+import { createEmployeeEntity } from '../../Core/entity/EmployeeEntity';
 
 const createTemplateForTrackOption = (track) => `
 <option value="${track.id}">${track.name}</option>
@@ -14,12 +14,12 @@ const createTemplateForZoneCheckbox = (zone) => `
 `;
 
 const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
-  const trackList = tracks.filter(track => {
+  const trackList = tracks.filter((track) => {
     if (!track.isOccupied) {
       return track;
     }
   }).map(createTemplateForTrackOption);
-  
+
   const zonesList = zones.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
@@ -67,9 +67,9 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
     </form>
   </div>
 `;
-}
+};
 
-export class AddEmployeePanel extends Component {
+export class AddEmployeePanelView extends Component {
   getTemplate() {
     return createAddEmployeePanelTemplate(this.data);
   }
@@ -95,14 +95,16 @@ export class AddEmployeePanel extends Component {
     const form = this.getForm();
 
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
-    const permittedZoneIds = zoneCheckboxes.filter(zoneCheckbox => zoneCheckbox.checked).map(zoneCheckbox => Number(zoneCheckbox.id));
+    const permittedZoneIds = zoneCheckboxes.filter(
+      (zoneCheckbox) => zoneCheckbox.checked,
+    ).map((zoneCheckbox) => Number(zoneCheckbox.id));
     const trackId = Number(form.employeeTrack.value);
 
     return createEmployeeEntity({
-      trackId: trackId ? trackId : null,
+      trackId: trackId || null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
-      permittedZoneIds: permittedZoneIds,
+      permittedZoneIds,
     });
   }
 

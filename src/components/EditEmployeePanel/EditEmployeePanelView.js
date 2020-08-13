@@ -1,17 +1,7 @@
-import { Component } from './Component';
-import { createTemplateForCloseButton } from './CloseButton';
-import { cloneDeep } from '../renderApp';
-
-const markPermittedZones = (employee, zones) => {
-  const { permittedZoneIds } = employee;
-  const zonesWithPermittedStatus = cloneDeep(zones).map((zone) => {
-    zone.isPermitted = permittedZoneIds.includes(zone.id);
-
-    return zone;
-  });
-
-  return zonesWithPermittedStatus;
-}
+import { Component } from '../Component';
+import { createTemplateForCloseButton } from '../CloseButton';
+import { cloneDeep } from '../../Common/utils/cloneDeep';
+import { markPermittedZones } from '../../Core/markPermittedZones';
 
 const createTemplateForTrackOption = (track = undefined) => `
 <option value="${track ? track.id : ''}">${track ? track.name : 'Нет пути'}</option>
@@ -24,54 +14,63 @@ const createTemplateForZoneCheckbox = (zone) => `
 </div>
 `;
 
-const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingConfirmation }) => {
-  const unoccupiedTrackList = cloneDeep(tracks).filter(track => {
+const createEditEmployeePanelTemplate = ({
+  employee = undefined,
+  tracks,
+  zones,
+  isAwaitingConfirmation,
+}) => {
+  const unoccupiedTrackList = cloneDeep(tracks).filter((track) => {
     if (!track.isOccupied) {
       return track;
     }
   }).map(createTemplateForTrackOption);
 
-  const currentTrack = cloneDeep(tracks).find(track => track.id == employee.trackId);
+  const currentTrack = employee
+    ? cloneDeep(tracks).find((track) => track.id === employee.trackId)
+    : null;
   const emptyTrack = createTemplateForTrackOption();
 
   const baseTrack = currentTrack ? [
-    createTemplateForTrackOption(currentTrack), 
-    emptyTrack
+    createTemplateForTrackOption(currentTrack),
+    emptyTrack,
   ] : [
-    emptyTrack
+    emptyTrack,
   ];
 
   const trackList = [...baseTrack, ...unoccupiedTrackList];
 
-  const zonesWithPermittedStatus = markPermittedZones(employee, zones);
-  const zonesList = zonesWithPermittedStatus.map(zone => createTemplateForZoneCheckbox(zone)).join('');
+  const zonesWithPermittedStatus = employee
+    ? markPermittedZones(employee, zones)
+    : cloneDeep(zones).map((zone) => ({ ...zone, isPermitted: false }));
+  const zonesList = zonesWithPermittedStatus.map((zone) => createTemplateForZoneCheckbox(zone)).join('');
 
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
       ${createTemplateForCloseButton()}
     </header>
-  
+
     <div class="employee-edit-panel__body">
       <form id="edit-form" class="employee-edit-panel__form edit-employee-form js-edit-employee-form" action="" name="edit-emp" method="GET">
-        
+
       <div class="edit-employee-form__name edit-name-container">
         <label class="edit-name-container__label" for="add-name">ФИО:</label>
-        <input name="employeeName" value="${employee.name}" class="edit-name-container__input" type="text" autofocus required>
+        <input name="employeeName" value="${employee ? employee.name : ''}" class="edit-name-container__input" type="text" autofocus required>
       </div>
-      
+
       <div class="edit-employee-form__position edit-positision-container">
         <label class="edit-positision-container__label" for="edit-name">Должность:</label>
-        <input name="employeePosition" class="edit-positision-container__input" type="text" value=${employee.position} required>
+        <input name="employeePosition" class="edit-positision-container__input" type="text" value=${employee ? employee.position : ''} required>
       </div>
-      
+
       <div class="edit-employee-form__track edit-track-container">
         <label class="edit-track-container__label" for="edit-track">Путь:</label>
         <select name="employeeTrack" class="edit-track-container__select">
           ${trackList}
         </select>
       </div>
-      
+
         <label>Доступные зоны:</label>
           <div class="edit-employee-form__zone">
             ${zonesList}
@@ -103,14 +102,14 @@ const createEditEmployeePanelTemplate = ({ employee, tracks, zones, isAwaitingCo
         </div>
         `)}
       </footer>
-      </div> 
+      </div>
     </form>
     </div>
   </div>
 `;
-}
+};
 
-export class EditEmployeePanel extends Component {
+export class EditEmployeePanelView extends Component {
   getTemplate() {
     return createEditEmployeePanelTemplate(this.data);
   }
@@ -164,17 +163,19 @@ export class EditEmployeePanel extends Component {
 
   getEditableEmployeeInformation(employeeId) {
     const form = this.getForm();
-    
+
     const zoneCheckboxes = Array.from(form.elements.employeeZones);
-    const permittedZoneIds = zoneCheckboxes.filter(zoneCheckbox => zoneCheckbox.checked).map(zoneCheckbox => Number(zoneCheckbox.id));
+    const permittedZoneIds = zoneCheckboxes.filter(
+      (zoneCheckbox) => zoneCheckbox.checked,
+    ).map((zoneCheckbox) => Number(zoneCheckbox.id));
     const trackId = Number(form.employeeTrack.value);
 
     return {
       id: employeeId,
-      trackId: trackId ? trackId : null,
+      trackId: trackId || null,
       name: form.employeeName.value,
       position: form.employeePosition.value,
-      permittedZoneIds: permittedZoneIds,
+      permittedZoneIds,
     };
   }
 

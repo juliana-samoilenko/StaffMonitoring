@@ -1,5 +1,5 @@
-import { Component } from './Component';
-import warningSvg from '../img/warning.min.svg';
+import { Component } from '../Component';
+import warningSvg from '../../img/warning.min.svg';
 
 const createNotificationItemTemplate = (violation) => `
 <article class="notification-list__notification notification">
@@ -20,7 +20,7 @@ const createNotificationListTemplate = ({ violationsList }) => {
   return `<div class="notification-list">${notificationItemTemplates}</div>`;
 };
 
-export class NotificationList extends Component {
+export class NotificationListView extends Component {
   getTemplate() {
     return createNotificationListTemplate(this.data);
   }
@@ -31,10 +31,10 @@ export class NotificationList extends Component {
 
     closeButtons.forEach((button) => {
       button.addEventListener('click', handler);
-    })
+    });
   }
 
   recoveryEventListeners() {
-    this.setCloseButtonHandler(this.closeButtonHandler)
+    this.setCloseButtonHandler(this.closeButtonHandler);
   }
 }

@@ -1,10 +1,18 @@
+// interface CanvasInterface {
+//   makeCircle() {}
+//   update() {}
+// }
+
+// Rafael -> Adapter { makeCircle(...args) { Rafael.createCircle(...args)}}
+//   createCircle
+
 export class DrawableCircle {
   constructor({
     xCurrent,
     yCurrent,
     radius,
     color,
-  }, two) {
+  }, two /* CanvasInterface */) {
     this.xCenter = xCurrent;
     this.yCenter = yCurrent;
     this.radius = radius;
@@ -15,7 +23,6 @@ export class DrawableCircle {
 
   draw() {
     this._makeCircle();
-    this.two.add(this.drawPoint);
   }
 
   _makeCircle() {

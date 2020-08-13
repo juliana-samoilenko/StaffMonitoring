@@ -18,6 +18,10 @@ export class Component {
     this.rerender();
   }
 
+  getTemplate() {
+    throw new Error();
+  }
+
   getState() {
     return this.data;
   }
@@ -46,6 +50,7 @@ export class Component {
     if (this.element === null) {
       this.element = createElement(this.getTemplate());
     }
+
     return this.element;
   }
 
