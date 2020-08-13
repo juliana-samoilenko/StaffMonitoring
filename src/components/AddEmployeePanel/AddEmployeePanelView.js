@@ -25,6 +25,7 @@ const createAddEmployeePanelTemplate = ({ tracks, zones }) => {
   return `
   <div class="employee-add-panel">
     <header class="employee-add-panel__header">
+      <h2 class="list-header__text">Добавление сотрудника</h2>
       ${createTemplateForCloseButton()}
     </header>
 
