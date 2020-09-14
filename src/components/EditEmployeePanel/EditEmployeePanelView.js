@@ -48,6 +48,7 @@ const createEditEmployeePanelTemplate = ({
   return `
   <div class="employee-edit-panel">
     <header class="employee-edit-panel__header">
+      <h2 class="list-header__text">Редактирование сотрудника</h2>
       ${createTemplateForCloseButton()}
     </header>
 
